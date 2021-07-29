@@ -29,6 +29,18 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 5cb0d4599179f674589a9dd131f843b3
+    m_Address: Assets/Materials/PlaymodeScene/PlaymodeSkybox.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: ea5d96752bda9f148bcfd374f9426073
+    m_Address: Assets/Scenes/Playmode.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9ea93900863fa0149b6d0193265d063c, type: 2}
   m_SchemaSet:

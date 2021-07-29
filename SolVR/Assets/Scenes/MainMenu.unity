@@ -3307,6 +3307,7 @@ MonoBehaviour:
   template: {fileID: 1101244160}
   list:
   - {fileID: 11400000, guid: 4e49a4b4f83188343a60d50841366a8e, type: 2}
+  - {fileID: 11400000, guid: 2246a2dea8217db4b8efc6c2afaad775, type: 2}
 --- !u!114 &1885667452
 MonoBehaviour:
   m_ObjectHideFlags: 0
