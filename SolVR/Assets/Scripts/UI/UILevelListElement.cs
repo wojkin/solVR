@@ -18,8 +18,8 @@ namespace UI
 
         public void Populate(ScriptableObject listElementData)
         {
-            Level levelData = (Level) listElementData;
-            levelName.text = levelData.levelName;
+            Environment levelData = (Environment) listElementData;
+            levelName.text = levelData.environmentName;
             playButton.onClick.AddListener(() =>
                 Addressables.LoadSceneAsync(levelData.scene)
                 );
