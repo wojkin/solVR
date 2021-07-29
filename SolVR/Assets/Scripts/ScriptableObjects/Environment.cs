@@ -1,9 +1,17 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-[CreateAssetMenu(fileName = "Environment", menuName = "ScriptableObjects/Environment", order = 1)]
-public class Environment : ScriptableObject
+namespace ScriptableObjects
 {
-    public string environmentName;
-    public AssetReference scene;
+    /// <summary>
+    /// Stores information about a scene as scriptable object.
+    /// </summary>
+    [CreateAssetMenu(fileName = "Environment", menuName = "ScriptableObjects/Environment", order = 1)]
+    public class Environment : ScriptableObject
+    {
+        // Name of the scene
+        public string environmentName;
+        // Reference to addressable scene
+        public AssetReference scene;
+    }
 }
