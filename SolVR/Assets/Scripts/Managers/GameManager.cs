@@ -4,7 +4,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Managers
 {
-    public class GameManager : Singleton<GameManager>
+    public class GameManager : MonoBehaviour
     {
         public void ExitGame() 
         {

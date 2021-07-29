@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc115c35fb1c30439896e8304cc0a90, type: 3}
   m_Name: PlaymodeLevel
   m_EditorClassIdentifier: 
-  levelName: Playmode
+  environmentName: playmode
   scene:
     m_AssetGUID: ea5d96752bda9f148bcfd374f9426073
     m_SubObjectName: 
