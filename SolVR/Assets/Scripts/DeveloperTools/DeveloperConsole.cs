@@ -29,10 +29,21 @@ namespace DeveloperTools
 
         private void Update()
         {
+            // if the console is visible rotate it to face the player
             if (_isVisible)
                 FaceCamera();
+            
+            // if the primary thumbstick is pressed show or hide the console
+            if(OVRInput.GetUp(OVRInput.Button.PrimaryThumbstick))
+                if(_isVisible)
+                    Hide();
+                else
+                    Show();
         }
-
+        /**
+         * <summary>Rotates the developer console to always face the player. Lerps the rotation in order to make it
+         * smoother.</summary>
+         */
         private void FaceCamera()
         {
             var lookPos = transform.position - _camera.position;
@@ -78,9 +89,13 @@ namespace DeveloperTools
             _isVisible = false;
         }
 
+        /**
+         * <summary>Makes the developer console visible.</summary>
+         */
         public void Show()
         {
             _camera = Camera.main.gameObject.transform;
+            transform.position = _camera.position + _camera.forward * spawnOffset;
             ui.SetActive(true);
             _isVisible = true;
         }
