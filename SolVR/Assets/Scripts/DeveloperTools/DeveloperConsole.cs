@@ -3,6 +3,7 @@ using DeveloperTools.Commands;
 using Managers;
 using Patterns;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,57 +28,27 @@ namespace DeveloperTools
 
         [Tooltip("Canvas of the developer console UI.")] [SerializeField]
         private Canvas worldSpaceCanvas;
-
-        [Header("Settings")] [Tooltip("Offset between the player and the console.")] [SerializeField]
-        private float spawnOffset;
-
+        
         private readonly List<Command> _commands = new List<Command>(); // list of all available commands
-        private Transform _camera; // the camera the console should face
-        private bool _isVisible; // a flag showing whether the console is currently visible or hidden 
+        
+        [Tooltip("UIElement attached to the developer console UI canvas.")] [SerializeField]
+        private UIElement uiElement;
 
         /// <summary>
-        /// Initializes all commands and hides the console.
+        /// Initializes all commands.
         /// </summary>
         public void Awake()
         {
             base.Awake();
             InitializeCommands();
-            Hide();
         }
-
+        
         /// <summary>
-        /// Makes the console face the camera when it's visible and manages hiding and showing the console on a button
-        /// press.
+        /// Hides the console.
         /// </summary>
-        private void Update()
+        public void Start()
         {
-            // if the console is visible rotate it to face the player
-            if (_isVisible)
-                FaceCamera();
-
-            // if the primary thumbstick is pressed show or hide the console
-            if (OVRInput.GetUp(OVRInput.Button.PrimaryThumbstick))
-                if (_isVisible)
-                    Hide();
-                else
-                    Show();
-        }
-
-        /// <summary>
-        /// Rotates the developer console to always face the player. Interpolates the rotation in order to make it
-        /// smoother.
-        /// </summary>
-        private void FaceCamera()
-        {
-            // calculate the direction vector from the camera to the console and ignore the vertical difference.
-            var lookPos = transform.position - _camera.position;
-            lookPos.y = 0;
-
-            // calculate the rotation at which the console would face the camera.
-            var rotation = Quaternion.LookRotation(lookPos);
-
-            // Interpolate between the current console rotation and the desired one.
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 100f);
+            uiElement.Hide();
         }
 
         /// <summary>
@@ -129,37 +100,13 @@ namespace DeveloperTools
         }
 
         /// <summary>
-        /// Makes the developer console not visible. Messages can still be logged and will be visible after the console
-        /// is shown.
-        /// </summary>
-        public void Hide()
-        {
-            ui.SetActive(false);
-            _isVisible = false;
-        }
-
-        /// <summary>
-        /// Makes the developer console visible.
-        /// </summary>
-        private void Show()
-        {
-            _camera = Camera.main.gameObject.transform; // find the main camera object
-
-            // calculate the position for the console in front of the player
-            transform.position = _camera.position + _camera.forward * spawnOffset;
-
-            ui.SetActive(true);
-            _isVisible = true;
-        }
-
-        /// <summary>
         /// This function will be called before a scene is unloaded. The developer console is hidden and the
         /// moved to DDOL scene. This makes the developer console persist between scene loads.
         /// </summary>
         /// <param name="sceneName">Name of the scene which will be unloaded.</param>
         private void BeforeUnloadHandler(string sceneName)
         {
-            Hide();
+            uiElement.Hide();
             DontDestroyOnLoad(gameObject); // move the console to DDOL
         }
 

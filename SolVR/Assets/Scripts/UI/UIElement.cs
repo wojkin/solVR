@@ -5,22 +5,39 @@ namespace UI
     /// <summary>
     /// A class representing a UI element.
     /// </summary>
+    [RequireComponent(typeof(Canvas))]
     public class UIElement : MonoBehaviour
-    {
+    { 
+        private Canvas _canvas; // Canvas attached to the gameObject
+
+        // a flag showing whether the UIElement is currently visible or hidden 
+        public bool IsVisible { get; private set; }
+
         /// <summary>
-        /// Sets UI element as not active (invisible in scene).
+        /// Initialize fields.
+        /// </summary>
+        private void Awake()
+        {
+            _canvas = GetComponent<Canvas>();
+        }
+
+        
+        /// <summary>
+        /// Disables UI canvas (invisible in scene).
         /// </summary>
         public void Hide()
         {
-            gameObject.SetActive(false);
+            _canvas.enabled = false;
+            IsVisible = false;
         }
 
         /// <summary>
-        /// Sets UI element as active (visible in scene).
+        /// Enables UI canvas (visible in scene).
         /// </summary>
         public void Show()
         {
-            gameObject.SetActive(true);
+            _canvas.enabled = true;
+            IsVisible = true;
         }
     }
 }

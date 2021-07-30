@@ -813,8 +813,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5264922568418870659}
-        m_TargetAssemblyTypeName: DeveloperTools.DeveloperConsole, Assembly-CSharp
+      - m_Target: {fileID: 4021246329781215026}
+        m_TargetAssemblyTypeName: UI.UIElement, Assembly-CSharp
         m_MethodName: Hide
         m_Mode: 1
         m_Arguments:
@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8814452477553939104}
   m_HandleRect: {fileID: 6638502341463472448}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1334,7 +1334,7 @@ MonoBehaviour:
   listEntryTemplate: {fileID: 5740147069261916277}
   inputField: {fileID: 9130304932295049989}
   worldSpaceCanvas: {fileID: 8855553337486294386}
-  spawnOffset: 0.75
+  uiElement: {fileID: 4021246329781215026}
 --- !u!1 &5347307243673825738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1683,7 +1683,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &8171572787179744547
@@ -2042,6 +2042,9 @@ GameObject:
   - component: {fileID: 8016029820911935884}
   - component: {fileID: 1379347034023746922}
   - component: {fileID: 6298290628050476904}
+  - component: {fileID: 4021246329781215026}
+  - component: {fileID: 7963737515549947837}
+  - component: {fileID: 4241334410974532563}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -2152,3 +2155,43 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   m_RaycastTriggerInteraction: 1
+--- !u!114 &4021246329781215026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9214110764944794741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450e45367677c9849b334a43089ea0c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7963737515549947837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9214110764944794741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1b2797f703418b90470ccceee67789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+--- !u!114 &4241334410974532563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9214110764944794741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97bad9b51844ed1a0b321431698560f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: 32768
+  spawnOffset: 1
+  camera: {fileID: 0}
