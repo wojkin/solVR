@@ -67,3 +67,6 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /SolVR/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /SolVR/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Oculus generated project files
+/SolVR/[Aa]ssets/[Rr]esources/OVRBuildConfig.asset
