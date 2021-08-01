@@ -4,7 +4,7 @@ namespace Patterns
 {
     /// <summary>
     /// A base class for all classes which need to have only a single instance and be globally accessible. Unlike a
-    /// singleton it doesn't create a new instance no other instance exists.
+    /// singleton it doesn't create a new instance when no other instance exists.
     /// </summary>
     public class SingleGlobalInstance<T> : MonoBehaviour where T : Component
     {

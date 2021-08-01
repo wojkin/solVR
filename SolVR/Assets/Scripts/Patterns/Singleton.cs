@@ -14,9 +14,9 @@ namespace Patterns
 
         /// <summary>
         /// A globally accessible instance of the class. If there is no instance of the class already set,
-        /// the it searches for an existing one. If none is found, it creates a new one. If the game is being closed
-        /// the no instance is returned. This is to avoid memory errors when the instance of a singleton is referenced
-        /// in e.g. other objects OnDisable() methods.
+        /// then it searches for an existing one. If none is found, it creates a new one. If the game is being closed
+        /// then no instance is returned. This is to avoid memory errors when the instance of a singleton is referenced
+        /// in e.g. other objects OnDisable() methods, which are called when closing the application.
         /// </summary>
         public static T Instance
         {
