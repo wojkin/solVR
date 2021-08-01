@@ -212,7 +212,7 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 739c84677cb201046915dd8e9997e0a6, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Environment, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.Environment, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1806,6 +1806,7 @@ GameObject:
   - component: {fileID: 2030548600}
   - component: {fileID: 2030548599}
   - component: {fileID: 2030548603}
+  - component: {fileID: 2030548604}
   m_Layer: 5
   m_Name: EnterWorkspace
   m_TagString: Untagged
@@ -1913,6 +1914,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   m_RaycastTriggerInteraction: 1
+--- !u!114 &2030548604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030548598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450e45367677c9849b334a43089ea0c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2126594408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,7 +1937,6 @@ GameObject:
   - component: {fileID: 2126594409}
   - component: {fileID: 2126594411}
   - component: {fileID: 2126594410}
-  - component: {fileID: 2126594412}
   m_Layer: 5
   m_Name: WorkspacePanel
   m_TagString: Untagged
@@ -1990,15 +2002,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126594408}
   m_CullTransparentMesh: 1
---- !u!114 &2126594412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126594408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 450e45367677c9849b334a43089ea0c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
