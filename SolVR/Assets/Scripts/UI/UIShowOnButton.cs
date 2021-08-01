@@ -21,7 +21,7 @@ namespace UI
 
         [Tooltip("The main camera object in front of which the UI object will be displayed.")] 
         [SerializeField]
-        private Transform camera;
+        private new Transform camera;
 
         /// <summary>
         /// Initialize fields.

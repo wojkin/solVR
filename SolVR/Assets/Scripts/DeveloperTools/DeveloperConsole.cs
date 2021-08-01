@@ -37,7 +37,7 @@ namespace DeveloperTools
         /// <summary>
         /// Initializes all commands.
         /// </summary>
-        public void Awake()
+        public override void Awake()
         {
             base.Awake();
             InitializeCommands();
