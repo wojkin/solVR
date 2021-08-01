@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cc115c35fb1c30439896e8304cc0a90, type: 3}
-  m_Name: PlaymodeLevel
+  m_Name: MainMenu
   m_EditorClassIdentifier: 
-  environmentName: Playmode
+  environmentName: Main Menu
   scene:
-    m_AssetGUID: ea5d96752bda9f148bcfd374f9426073
+    m_AssetGUID: ff1f098a30e1ebe4da4972fbff80f9dd
     m_SubObjectName: 
     m_SubObjectType: 
