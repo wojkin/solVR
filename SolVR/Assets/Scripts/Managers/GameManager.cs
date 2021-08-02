@@ -10,6 +10,8 @@ namespace Managers
     /// </summary>
     public class GameManager : MonoBehaviour
     {
+        public static bool gameIsPaused = false; // flag showing if game is paused
+
         /// <summary>
         /// Quits the application.
         /// </summary>
@@ -26,6 +28,34 @@ namespace Managers
         public void LoadScene(Environment scriptableObject)
         {
             Addressables.LoadSceneAsync(scriptableObject.scene);
+        }
+        
+        /// <summary>
+        /// Manages pausing and resuming the game.
+        /// </summary>
+        public void TogglePauseGame()
+        {
+            if(gameIsPaused)
+                ResumeGame();
+            else
+                PauseGame();
+            gameIsPaused = !gameIsPaused;
+        }
+        
+        /// <summary>
+        /// Pausing the game.
+        /// </summary>
+        private void PauseGame ()
+        {
+            Time.timeScale = 0f;
+        }
+
+        /// <summary>
+        /// Resuming the game.
+        /// </summary>
+        private void ResumeGame ()
+        {
+            Time.timeScale = 1;
         }
     }
 }
