@@ -231,6 +231,63 @@ MonoBehaviour:
   resetTrackerOnLoad: 0
   AllowRecenter: 1
   LateControllerUpdate: 1
+--- !u!1001 &1159484305
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1515730084401284428, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_Name
+      value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053935123934352226, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1f00785cde044bb4a82c23caa16177ba, type: 3}
 --- !u!1001 &2144349829
 PrefabInstance:
   m_ObjectHideFlags: 0

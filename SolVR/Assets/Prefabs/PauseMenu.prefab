@@ -143,6 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4053935123934352226}
   - component: {fileID: 8481415773478667224}
+  - component: {fileID: 6309045266520072230}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -177,6 +178,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f79ca578a44544c9715c1afe3b2112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6309045266520072230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515730084401284428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9223cd53c40c460d9e04773fc747975e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiElement: {fileID: 3582762811522598747}
 --- !u!1 &1985824226903595815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,7 +1110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97bad9b51844ed1a0b321431698560f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: 8388608
   spawnOffset: 1
   camera: {fileID: 0}
 --- !u!114 &9206464635070685743
