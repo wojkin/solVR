@@ -15,11 +15,11 @@ namespace Managers
         /// <summary>
         /// Quits the application.
         /// </summary>
-        public void ExitGame() 
+        public void ExitGame()
         {
             Application.Quit();
         }
-        
+
         /// <summary>
         /// Loads a scene based on scene parameter in provided scriptableObject.
         /// </summary>
@@ -27,7 +27,7 @@ namespace Managers
         /// with specified scene parameter as reference to addressable scene.</param>
         public void LoadScene(Environment scriptableObject)
         {
-            Addressables.LoadSceneAsync(scriptableObject.scene);
+            CustomSceneManager.Instance.QueueLoadScene(scriptableObject.scene);
         }
         
         /// <summary>
