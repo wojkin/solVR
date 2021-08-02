@@ -10,8 +10,8 @@ namespace UI
     { 
         private Canvas _canvas; // Canvas attached to the gameObject
 
-        // a flag showing whether the UIElement is currently visible or hidden 
-        public bool IsVisible { get; private set; }
+        // a flag showing whether the canvas is currently visible or hidden and setting canvas visibility
+        public bool IsVisible { get => _canvas.enabled; private set => _canvas.enabled = value; }
 
         /// <summary>
         /// Initialize fields.
@@ -23,20 +23,18 @@ namespace UI
 
         
         /// <summary>
-        /// Disables UI canvas (invisible in scene).
+        /// Hides UI canvas (invisible in scene).
         /// </summary>
         public void Hide()
         {
-            _canvas.enabled = false;
             IsVisible = false;
         }
 
         /// <summary>
-        /// Enables UI canvas (visible in scene).
+        /// Shows UI canvas (visible in scene).
         /// </summary>
         public void Show()
         {
-            _canvas.enabled = true;
             IsVisible = true;
         }
     }
