@@ -20,7 +20,7 @@ namespace DeveloperTools.Commands
         /// </summary>
         public override void Execute()
         {
-            CustomSceneManager.Instance.QueueLoadScene(SceneManager.GetActiveScene().name);
+            CustomSceneManager.Instance.QueueReloadScene();
         }
     }
 }

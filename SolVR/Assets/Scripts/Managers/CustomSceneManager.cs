@@ -2,9 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Patterns;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 
 namespace Managers
@@ -22,8 +20,10 @@ namespace Managers
         public event SceneChange BeforeUnload; // an event invoked before a scene starts unloading
         private bool _loading; // a flag representing whether a new scene is currently being loaded
         private readonly Queue<Action> _loadQueue = new Queue<Action>(); // a queue of scene load calls
+        private AssetReference _lastLoadedScene;
 
         /// <summary>
+        /// Queues a scene load or loads it immediately if no other scene is being loaded.
         /// Checks if another scene is currently being loaded. If yes, a scene load call is added to a queue,
         /// otherwise the scene starts loading.
         /// </summary>
@@ -41,6 +41,7 @@ namespace Managers
         }
 
         /// <summary>
+        /// Queues a scene load or loads it immediately if no other scene is being loaded.
         /// Checks if another scene is currently being loaded. If yes, an addressable scene load call is added to a
         /// queue, otherwise the scene starts loading.
         /// </summary>
@@ -54,6 +55,23 @@ namespace Managers
             else
             {
                 StartLoadingScene(addressableScene);
+            }
+        }
+        
+        /// <summary>
+        /// Queues reload of the currently loaded scene or reloads it immediately if no other scene is being loaded.
+        /// Checks if another scene is currently being loaded. If yes, an addressable scene load call is added to a
+        /// queue, otherwise the scene starts loading.
+        /// </summary>
+        public void QueueReloadScene()
+        {
+            if (_loading)
+            {
+                _loadQueue.Enqueue(() => { StartLoadingScene(_lastLoadedScene); });
+            }
+            else
+            {
+                StartLoadingScene(_lastLoadedScene);
             }
         }
 
@@ -112,6 +130,7 @@ namespace Managers
                 yield return null;
             }
 
+            _lastLoadedScene = addressableScene;
             FinishLoadingScene(asyncLoadLevel.Result.Scene.name);
         }
 
