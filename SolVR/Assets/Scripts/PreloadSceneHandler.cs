@@ -13,9 +13,9 @@ public class PreloadSceneHandler : MonoBehaviour
     /// <summary>
     /// Changes the name of the object it's attached to to "__app", moves itself to DDOL scene and loads another scene.
     /// </summary>
-    private void Awake()
+    private void Start()
     {
-        this.name = "__app";
+        name = "__app";
         DontDestroyOnLoad(gameObject);
         CustomSceneManager.Instance.QueueLoadScene(sceneToLoad);
     }
