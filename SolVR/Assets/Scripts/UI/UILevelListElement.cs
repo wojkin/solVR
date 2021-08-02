@@ -1,3 +1,4 @@
+using Managers;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -11,12 +12,10 @@ namespace UI
     /// </summary>
     public class UILevelListElement : MonoBehaviour, IUIListElement
     {
-        [Tooltip("Level name text.")]
-        [SerializeField]
+        [Tooltip("Level name text.")] [SerializeField]
         private TextMeshProUGUI levelName;
 
-        [Tooltip("Button to load a level.")]
-        [SerializeField]
+        [Tooltip("Button to load a level.")] [SerializeField]
         private Button playButton;
 
         /// <summary>
@@ -30,8 +29,8 @@ namespace UI
             var levelData = (Environment) listElementData;
             levelName.text = levelData.environmentName;
             playButton.onClick.AddListener(() =>
-                Addressables.LoadSceneAsync(levelData.scene)
-                );
+                CustomSceneManager.Instance.QueueLoadScene(levelData.scene)
+            );
         }
     }
 }
