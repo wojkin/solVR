@@ -65,13 +65,20 @@ namespace Managers
         /// </summary>
         public void QueueReloadScene()
         {
-            if (_loading)
+            if (_lastLoadedScene != null)
             {
-                _loadQueue.Enqueue(() => { StartLoadingScene(_lastLoadedScene); });
+                if (_loading)
+                {
+                    _loadQueue.Enqueue(() => { StartLoadingScene(_lastLoadedScene); });
+                }
+                else
+                {
+                    StartLoadingScene(_lastLoadedScene);
+                }
             }
             else
             {
-                StartLoadingScene(_lastLoadedScene);
+                Logger.OnLog("Cannot reload a scene! No scene was loaded using Addressables yet.");
             }
         }
 
