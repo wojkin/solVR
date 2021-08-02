@@ -5,6 +5,7 @@ using Patterns;
 using TMPro;
 using UI;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 namespace DeveloperTools
@@ -14,9 +15,7 @@ namespace DeveloperTools
     /// </summary>
     public class DeveloperConsole : SingleGlobalInstance<DeveloperConsole>
     {
-        [Header("User Interface")] [Tooltip("UI of the developer console.")] [SerializeField]
-        private GameObject ui;
-
+        [Header("User Interface")] 
         [Tooltip("Content of the console scroll view.")] [SerializeField]
         private Transform content;
 
@@ -28,9 +27,9 @@ namespace DeveloperTools
 
         [Tooltip("Canvas of the developer console UI.")] [SerializeField]
         private Canvas worldSpaceCanvas;
-        
+
         private readonly List<Command> _commands = new List<Command>(); // list of all available commands
-        
+
         [Tooltip("UIElement attached to the developer console UI canvas.")] [SerializeField]
         private UIElement uiElement;
 
@@ -42,7 +41,7 @@ namespace DeveloperTools
             base.Awake();
             InitializeCommands();
         }
-        
+
         /// <summary>
         /// Hides the console.
         /// </summary>
