@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
 using DeveloperTools.Commands;
-using Managers;
 using Patterns;
 using TMPro;
-using UI;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.SceneManagement;
 
 namespace DeveloperTools
 {
@@ -25,13 +21,7 @@ namespace DeveloperTools
         [Tooltip("Input file for the commands.")] [SerializeField]
         private TMP_InputField inputField;
 
-        [Tooltip("Canvas of the developer console UI.")] [SerializeField]
-        private Canvas worldSpaceCanvas;
-
         private readonly List<Command> _commands = new List<Command>(); // list of all available commands
-
-        [Tooltip("UIElement attached to the developer console UI canvas.")] [SerializeField]
-        private UIElement uiElement;
 
         /// <summary>
         /// Initializes all commands.
@@ -43,22 +33,10 @@ namespace DeveloperTools
         }
 
         /// <summary>
-        /// Hides the console.
-        /// </summary>
-        public void Start()
-        {
-            uiElement.Hide();
-        }
-
-        /// <summary>
         /// Subscribes to all needed events.
         /// </summary>
         private void OnEnable()
         {
-            // subscribe to CustomSceneManager events for loading scenes
-            CustomSceneManager.Instance.AfterLoad += AfterLoadHandler;
-            CustomSceneManager.Instance.BeforeUnload += BeforeUnloadHandler;
-
             // subscribe to an message log event
             Logger.LogEvent += Log;
         }
@@ -68,13 +46,6 @@ namespace DeveloperTools
         /// </summary>
         private void OnDisable()
         {
-            // unsubscribe from previously subscribed events
-            if (CustomSceneManager.Instance != null)
-            {
-                CustomSceneManager.Instance.AfterLoad -= AfterLoadHandler;
-                CustomSceneManager.Instance.BeforeUnload -= BeforeUnloadHandler;
-            }
-
             Logger.LogEvent -= Log;
         }
 
@@ -96,29 +67,6 @@ namespace DeveloperTools
             var listEntry = Instantiate(listEntryTemplate, content, false);
             var consoleEntry = listEntry.GetComponent<DeveloperConsoleEntry>();
             consoleEntry.SetText(msg);
-        }
-
-        /// <summary>
-        /// This function will be called before a scene is unloaded. The developer console is hidden and the
-        /// moved to DDOL scene. This makes the developer console persist between scene loads.
-        /// </summary>
-        /// <param name="sceneName">Name of the scene which will be unloaded.</param>
-        private void BeforeUnloadHandler(string sceneName)
-        {
-            uiElement.Hide();
-            DontDestroyOnLoad(gameObject); // move the console to DDOL
-        }
-
-        /// <summary>
-        /// This function will be called after a scene is loaded. The developer console is moved from
-        /// DDOL to the currently loaded scene, so it can be accessed by other scripts.
-        /// </summary>
-        /// <param name="sceneName">Name of the scene, which was loaded.</param>
-        private void AfterLoadHandler(string sceneName)
-        {
-            // move the console to the current scene
-            SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(sceneName));
-            worldSpaceCanvas.worldCamera = Camera.main; // set the UI camera to the main camera in the loaded scene
         }
 
         /// <summary>

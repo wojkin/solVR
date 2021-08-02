@@ -1295,6 +1295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5264922568418870684}
   - component: {fileID: 5264922568418870659}
+  - component: {fileID: 2144349833}
   m_Layer: 0
   m_Name: DeveloperConsole
   m_TagString: Untagged
@@ -1329,11 +1330,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912666db736e9fe46b3c31d5b9026f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 5166990215430870753}
   content: {fileID: 2605179451219041440}
   listEntryTemplate: {fileID: 5740147069261916277}
   inputField: {fileID: 9130304932295049989}
-  worldSpaceCanvas: {fileID: 8855553337486294386}
+--- !u!114 &2144349833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5264922568418870686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9223cd53c40c460d9e04773fc747975e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   uiElement: {fileID: 4021246329781215026}
 --- !u!1 &5347307243673825738
 GameObject:
