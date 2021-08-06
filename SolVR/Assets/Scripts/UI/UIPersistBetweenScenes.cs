@@ -16,11 +16,10 @@ namespace UI
         private Canvas _worldSpaceCanvas; // canvas of the gameObject UI
     
         /// <summary>
-        /// Hides UI Element.
+        /// Initialize fields.
         /// </summary>
-        public void Start()
+        public void Awake()
         {
-            uiElement.Hide();
             _worldSpaceCanvas = uiElement.GetComponent<Canvas>();
         }
     
