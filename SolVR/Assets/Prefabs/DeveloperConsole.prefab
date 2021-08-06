@@ -2057,6 +2057,7 @@ GameObject:
   - component: {fileID: 7963737515549947837}
   - component: {fileID: 4241334410974532563}
   - component: {fileID: 5462710509833250651}
+  - component: {fileID: 238170776320060500}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -2179,6 +2180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450e45367677c9849b334a43089ea0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableOnPause: 1
 --- !u!114 &7963737515549947837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2222,3 +2224,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   button: 32768
+--- !u!225 &238170776320060500
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9214110764944794741}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

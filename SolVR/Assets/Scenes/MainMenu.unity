@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 16566028}
   - component: {fileID: 16566027}
+  - component: {fileID: 16566029}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -169,6 +170,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &16566029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16566026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc90862c66d5477396b67a8f80c26b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &107781843
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,8 +265,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1689819580}
-        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
+      - m_Target: {fileID: 16566029}
+        m_TargetAssemblyTypeName: UI.UIDispatcher, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
@@ -1201,7 +1214,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &576057899
 GameObject:
@@ -1792,6 +1805,7 @@ GameObject:
   - component: {fileID: 884591643}
   - component: {fileID: 884591642}
   - component: {fileID: 884591646}
+  - component: {fileID: 884591647}
   m_Layer: 5
   m_Name: LevelSelectCanvas
   m_TagString: Untagged
@@ -1911,6 +1925,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450e45367677c9849b334a43089ea0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableOnPause: 0
+--- !u!225 &884591647
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884591640}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &915120079
 GameObject:
   m_ObjectHideFlags: 0
@@ -3286,49 +3313,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625320600}
   m_CullTransparentMesh: 1
---- !u!1 &1689819579
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1689819581}
-  - component: {fileID: 1689819580}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1689819580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1689819579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8f79ca578a44544c9715c1afe3b2112, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1689819581
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1689819579}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1855530075
 GameObject:
   m_ObjectHideFlags: 0
@@ -4158,6 +4142,7 @@ GameObject:
   - component: {fileID: 2030548599}
   - component: {fileID: 2030548603}
   - component: {fileID: 2030548604}
+  - component: {fileID: 2030548605}
   m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
@@ -4212,7 +4197,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030548598}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 915120082}
@@ -4277,6 +4262,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450e45367677c9849b334a43089ea0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableOnPause: 0
+--- !u!225 &2030548605
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030548598}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2126594408
 GameObject:
   m_ObjectHideFlags: 0
