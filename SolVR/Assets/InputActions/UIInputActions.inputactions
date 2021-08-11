@@ -1,0 +1,60 @@
+{
+    "name": "UIInputActions",
+    "maps": [
+        {
+            "name": "PauseMenu",
+            "id": "60173227-978e-4821-bf12-a5bb81b3d0f2",
+            "actions": [
+                {
+                    "name": "TogglePauseMenu",
+                    "type": "Button",
+                    "id": "47d35b62-831a-4ffb-8809-14ae0a121079",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "be46ccec-1738-4a9d-9650-cf0356ffe3a7",
+                    "path": "<XRController>{RightHand}/thumbstickClicked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TogglePauseMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "DeveloperConsole",
+            "id": "4af6fdb4-e28e-4163-9cd5-f63048c95c82",
+            "actions": [
+                {
+                    "name": "ToggleDeveloperConsole",
+                    "type": "Button",
+                    "id": "f382c666-1bf2-42c7-8ebe-2e41e893e645",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2e5c4a23-2c9c-461f-be9b-ba290d459f43",
+                    "path": "<XRController>{LeftHand}/thumbstickClicked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleDeveloperConsole",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
