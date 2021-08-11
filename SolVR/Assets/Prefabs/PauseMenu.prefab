@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 4053935123934352226}
   - component: {fileID: 8481415773478667224}
   - component: {fileID: 6309045266520072230}
+  - component: {fileID: 7565464947990100971}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -191,6 +192,68 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiElement: {fileID: 3582762811522598747}
+--- !u!114 &7565464947990100971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515730084401284428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 3727f8ac1770f1e4392831a1d922114b, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8481415773478667224}
+        m_TargetAssemblyTypeName: UI.UIDispatcher, Assembly-CSharp
+        m_MethodName: TogglePauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3431043061510390039}
+        m_TargetAssemblyTypeName: UI.UIShowInFrontOfCamera, Assembly-CSharp
+        m_MethodName: VisibilityToggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 47d35b62-831a-4ffb-8809-14ae0a121079
+    m_ActionName: UI/ShowPauseMenu
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f382c666-1bf2-42c7-8ebe-2e41e893e645
+    m_ActionName: DeveloperConsole/ToggleDeveloperConsole
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PauseMenu
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1985824226903595815
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +1028,6 @@ GameObject:
   - component: {fileID: 3582762811522598747}
   - component: {fileID: 3460406971621106873}
   - component: {fileID: 3431043061510390039}
-  - component: {fileID: 9206464635070685743}
   - component: {fileID: 5587147432508625046}
   m_Layer: 0
   m_Name: UI
@@ -1114,34 +1176,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnOffset: 1
   camera: {fileID: 0}
---- !u!114 &9206464635070685743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8203470872246592900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d58a5e919da3470a8e0063da309156ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  afterInput:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8481415773478667224}
-        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
-        m_MethodName: TogglePauseGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  button: 8388608
 --- !u!225 &5587147432508625046
 CanvasGroup:
   m_ObjectHideFlags: 0
