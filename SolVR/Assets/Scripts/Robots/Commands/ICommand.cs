@@ -1,3 +1,4 @@
+using System.Collections;
 using Robots.Actions;
 
 namespace Robots.Commands
@@ -8,9 +9,10 @@ namespace Robots.Commands
     public interface ICommand
     {
         /// <summary>
-        /// Executes a command on a robot.
+        /// A coroutine which executes a command on a robot.
         /// </summary>
         /// <param name="robot">Robot on which the command will be executed.</param>
-        void Execute(ICommandable robot);
+        /// <returns>IEnumerator required for a coroutine.</returns>
+        IEnumerator Execute(ICommandable robot);
     }
 }

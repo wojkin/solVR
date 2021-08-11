@@ -1,3 +1,4 @@
+using System.Collections;
 using Robots.Actions;
 
 namespace Robots.Commands
@@ -7,30 +8,33 @@ namespace Robots.Commands
     /// </summary>
     public class MoveCommand : Command<IMovable>
     {
-        private readonly float _time; // The number of seconds the robot should move for when the command is executed.
+        private readonly float _time; // the number of seconds the robot should move for when the command is executed.
 
-        private readonly float _speed; // The speed at which the robot should move at, given in meters per second when
-        // the command is executed.
+        private readonly float _torque; // the torque applied to the robots wheels, when the command is executed, given
+        // in Newton metres.
 
         /// <summary>
         /// A constructor for a move command.
         /// </summary>
         /// <param name="time">The number of seconds the robot should move for when the command is executed.</param>
-        /// <param name="speed">The speed at which the robot should move at, given in meters per second when the command
-        /// is executed.</param>
-        public MoveCommand(float time, float speed)
+        /// <param name="torque">The torque applied to the robots wheels, when the command is executed, given in Newton
+        /// metres.</param>
+        public MoveCommand(float time, float torque)
         {
             _time = time;
-            _speed = speed;
+            _torque = torque;
         }
 
         /// <summary>
-        /// A command for moving the robot.
+        /// A coroutine for executing the move command on the robot.
         /// </summary>
-        /// <param name="robot">Robot, which will be moved.</param>
-        protected override void Execute(IMovable robot)
+        /// <param name="robot">The robot, which will be moved.</param>
+        /// <returns>IEnumerator required for a coroutine.</returns>
+        protected override IEnumerator Execute(IMovable robot)
         {
-            robot.Move(_time, _speed);
+            Logger.OnLog($"Started moving for {_time}s at {_torque}N⋅m.");
+            yield return robot.Move(_time, _torque);
+            Logger.OnLog($"Finished moving for {_time}s at {_torque}N⋅m.");
         }
     }
 }

@@ -1,4 +1,6 @@
+using System.Collections;
 using Robots.Actions;
+using Robots.Enums;
 
 namespace Robots.Commands
 {
@@ -7,30 +9,37 @@ namespace Robots.Commands
     /// </summary>
     public class TurnCommand : Command<ITurnable>
     {
-        private readonly float _time; // The number of seconds the robot should turn for when the command is executed.
+        private readonly float _time; // the number of seconds the robot should turn for when the command is executed.
 
-        private readonly float _speed; // The speed at which the robot should turn at, given in radians per second when
-        // the command is executed.
+        private readonly float _torque; // the torque applied to the robots wheels, when the command is executed, given
+        // in Newton metres.
+
+        private readonly TurnDirection _direction; // the direction in which the robot should turn.
 
         /// <summary>
         /// A constructor for a turn command.
         /// </summary>
         /// <param name="time">The number of seconds the robot should turn for when the command is executed.</param>
-        /// <param name="speed">The speed at which the robot should turn at, given in radians per second when the command
-        /// is executed.</param>
-        public TurnCommand(float time, float speed)
+        /// <param name="torque">The torque applied to the robots wheels, when the command is executed, given in Newton
+        /// metres.</param>
+        /// <param name="direction">The direction in which the robot should turn.</param>
+        public TurnCommand(float time, float torque, TurnDirection direction)
         {
             _time = time;
-            _speed = speed;
+            _torque = torque;
+            _direction = direction;
         }
 
         /// <summary>
-        /// A command for turning the robot.
+        /// A coroutine for executing the turn command on the robot.
         /// </summary>
-        /// <param name="robot">Robot, which will be turned.</param>
-        protected override void Execute(ITurnable robot)
+        /// <param name="robot">The robot, which will be turned.</param>
+        /// <returns>IEnumerator required for a coroutine.</returns>
+        protected override IEnumerator Execute(ITurnable robot)
         {
-            robot.Turn(_time, _speed);
+            Logger.OnLog($"Started turning {_direction.ToString()} for {_time}s at {_torque}N⋅m.");
+            yield return robot.Turn(_time, _torque, _direction);
+            Logger.OnLog($"Finished turning {_direction.ToString()} for {_time}s at {_torque}N⋅m.");
         }
     }
 }

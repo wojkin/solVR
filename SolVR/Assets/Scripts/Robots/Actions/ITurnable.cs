@@ -1,3 +1,6 @@
+using System.Collections;
+using Robots.Enums;
+
 namespace Robots.Actions
 {
     /// <summary>
@@ -5,11 +8,13 @@ namespace Robots.Actions
     /// </summary>
     public interface ITurnable : ICommandable
     {
-    /// <summary>
-    /// Turns the robot for a given amount of time with a given speed.
-    /// </summary>
-    /// <param name="time">The number of seconds the robot should turn for.</param>
-    /// <param name="speed">The speed at which the robot should turn at, given in radians per second.</param>
-        void Turn(float time, float speed);
+        /// <summary>
+        /// Turns the robot for a given amount of time with a given torque.
+        /// </summary>
+        /// <param name="time">The number of seconds the robot should turn for.</param>
+        /// <param name="torque">The torque applied to the robots wheels, given in Newton metres.</param>
+        /// <param name="direction">The direction in which the robot should turn.</param>
+        /// <returns>IEnumerator required for a coroutine.</returns>
+        IEnumerator Turn(float time, float torque, TurnDirection direction);
     }
 }
