@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,13 +17,21 @@ namespace UI
         private Canvas _worldSpaceCanvas; // canvas of the gameObject UI
     
         /// <summary>
-        /// Initialize fields.
+        /// Initializes fields.
         /// </summary>
         public void Awake()
         {
             _worldSpaceCanvas = uiElement.GetComponent<Canvas>();
         }
-    
+
+        /// <summary>
+        /// Hides UI element.
+        /// </summary>
+        public void Start()
+        {
+            uiElement.Hide();
+        }
+
         /// <summary>
         /// Subscribes to all needed events.
         /// </summary>
