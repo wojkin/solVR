@@ -3,18 +3,23 @@ using UnityEngine;
 namespace Controls
 {
     /// <summary>
-    /// Class for manipulating an object rotation based on changing hands positions.
+    /// Class for manipulating an object rotation and translation based on changing hands positions.
     /// </summary>
     public class TwoHandedManipulationController : MonoBehaviour
     {
         // difference between hands positions when manipulation started, vector from left to right hand
         private Vector3 _handsInitialPositionDifference; 
         
+        // center point between hands positions when manipulation started
+        private Vector3 _handsInitialCenterPosition; 
+        
         public GameObject objectToRotate; // object that is manipulated
         
         private Quaternion _initialRotation; // object rotation when manipulation started
         
         private Vector3 _initialPosition; // object position when manipulation started
+
+        [Tooltip("Multiplier for translation manipulation")] [SerializeField] private float translationMultiplier; 
 
         /// <summary>
         /// Sets initial state for manipulation.
@@ -25,6 +30,7 @@ namespace Controls
         public void OnManipulationStarted(Vector3 rightHandPosition, Vector3 leftHandPosition)
         {
             _handsInitialPositionDifference = rightHandPosition - leftHandPosition;
+            _handsInitialCenterPosition = (rightHandPosition + leftHandPosition) / 2;
             _initialRotation = objectToRotate.transform.rotation;
             _initialPosition = objectToRotate.transform.position;
         }
@@ -47,6 +53,18 @@ namespace Controls
             // center point between right and left hands positions
             var center = (rightHandPosition + leftHandPosition) / 2;
             RotateAroundByQuaternion(center, rotation);
+        }
+        
+        /// <summary>
+        /// Translates specified object based on new hands position.
+        /// </summary>
+        /// <param name="rightHandPosition">Position of player's right hand.</param>
+        /// <param name="leftHandPosition">Position of player's left hand.</param>
+        public void TranslateObject(Vector3 rightHandPosition, Vector3 leftHandPosition)
+        {
+            var handsCenter = (rightHandPosition + leftHandPosition) / 2;
+            var translation = handsCenter - _handsInitialCenterPosition;
+            objectToRotate.transform.position = _initialPosition + translation * translationMultiplier;
         }
         
         /// <summary>
