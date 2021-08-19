@@ -1,4 +1,5 @@
 using InputActions;
+using Managers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -25,8 +26,7 @@ namespace Controls
         // flag showing if two handed manipulation is in progress, set to true after input action is started, until
         // it's canceled
         private bool _isManipulated;
-
-
+        
         /// <summary>
         /// Initialize fields.
         /// </summary>
@@ -46,7 +46,13 @@ namespace Controls
             _playerInputActions.Player.TwoHandedManipulation.Enable();
             _playerInputActions.Player.TwoHandedManipulation.started += OnTwoHandedManipulationStarted;
             _playerInputActions.Player.TwoHandedManipulation.canceled += OnTwoHandedManipulationCanceled;
+            GameManager.OnPause += OnPause;
         }
+
+        /// <summary>
+        /// Handler for after pause event.
+        /// </summary>
+        private void OnPause() => _isManipulated = false;
 
         /// <summary>
         /// Handler for started event of TwoHandedManipulation input action.
@@ -55,6 +61,8 @@ namespace Controls
         /// <param name="context">Input action event callback context, require by input action event</param>
         private void OnTwoHandedManipulationStarted(InputAction.CallbackContext context)
         {
+            if (GameManager.gameIsPaused)
+                return;
             var rightHandPosition = _xriInputActions.XRIRightHand.Position.ReadValue<Vector3>();
             var leftHandPosition = _xriInputActions.XRILeftHand.Position.ReadValue<Vector3>();
             _isManipulated = true;
@@ -87,6 +95,7 @@ namespace Controls
         /// </summary>
         private void OnDisable()
         {
+            GameManager.OnPause -= OnPause;
             _playerInputActions.Player.TwoHandedManipulation.started -= OnTwoHandedManipulationStarted;
             _playerInputActions.Player.TwoHandedManipulation.canceled -= OnTwoHandedManipulationCanceled;
             _xriInputActions.XRIRightHand.Position.Disable();

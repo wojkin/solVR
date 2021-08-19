@@ -39,8 +39,8 @@ namespace UI
         {
             if (!interactableOnPause) // if should be not interactable on pausing the game subscribe to events
             {
-                GameManager.AfterPause += SetNotInteractive;
-                GameManager.AfterResume += SetInteractable;
+                GameManager.OnPause += SetNotInteractive;
+                GameManager.OnResume += SetInteractable;
             }
         }
 
@@ -51,8 +51,8 @@ namespace UI
         {
             if (!interactableOnPause) // if should be not interactable on pausing the game unsubscribe from events
             {
-                GameManager.AfterPause -= SetNotInteractive;
-                GameManager.AfterResume -= SetInteractable;
+                GameManager.OnPause -= SetNotInteractive;
+                GameManager.OnResume -= SetInteractable;
             }
         }
 

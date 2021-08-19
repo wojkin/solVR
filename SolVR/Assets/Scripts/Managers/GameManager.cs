@@ -7,13 +7,13 @@ namespace Managers
     /// </summary>
     public static class GameManager
     {
-        public static bool gameIsPaused = false; // flag showing if game is paused
+        public static bool gameIsPaused; // flag showing if game is paused
 
         public delegate void PauseChange(); // a delegate for a pausing change (pause or resume)
         
-        public static event PauseChange AfterPause; // an event invoked after the game is paused
+        public static event PauseChange OnPause; // an event invoked after the game is paused
 
-        public static event PauseChange AfterResume; // an event invoked after the game is resumed
+        public static event PauseChange OnResume; // an event invoked after the game is resumed
 
         /// <summary>
         /// Subscribes to all needed events.
@@ -43,7 +43,7 @@ namespace Managers
         {
             Time.timeScale = 0f;
             gameIsPaused = true;
-            AfterPause?.Invoke();
+            OnPause?.Invoke();
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Managers
         {
             Time.timeScale = 1;
             gameIsPaused = false;
-            AfterResume?.Invoke();
+            OnResume?.Invoke();
         }
     }
 }
