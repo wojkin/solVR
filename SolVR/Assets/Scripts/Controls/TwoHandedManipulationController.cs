@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Controls
 {
     /// <summary>
-    /// Class for manipulating an object rotation and translation based on changing hands positions.
+    /// Class for manipulating an object rotation, translation and scaling based on changing hands positions.
     /// </summary>
     public class TwoHandedManipulationController : MonoBehaviour
     {
@@ -13,9 +13,12 @@ namespace Controls
         // center point between hand positions from the previous translation event
         private Vector3 _handsPreviousCenterPosition;  
         
+        private float _handsPreviousDistance; // distance between hands from the previous scaling event
+        
         public GameObject objectToRotate; // object that is manipulated
 
-        [Tooltip("Multiplier for translation manipulation")] [SerializeField] private float translationMultiplier; 
+        [Tooltip("Multiplier for translation manipulation")] [SerializeField] private float translationMultiplier;
+        
 
         /// <summary>
         /// Sets initial state for manipulation.
@@ -27,6 +30,7 @@ namespace Controls
         {
             _handsPreviousPositionDifference = rightHandPosition - leftHandPosition;
             _handsPreviousCenterPosition = (rightHandPosition + leftHandPosition) / 2;
+            _handsPreviousDistance = Vector3.Distance(rightHandPosition,leftHandPosition);
         }
         
         /// <summary>
@@ -60,7 +64,20 @@ namespace Controls
             var handsCenter = (rightHandPosition + leftHandPosition) / 2;
             var translation = handsCenter - _handsPreviousCenterPosition;
             objectToRotate.transform.position += translation * translationMultiplier;
-            _handsPreviousCenterPosition = handsCenter; // update last center between two hand positions.
+            _handsPreviousCenterPosition = handsCenter; // update last center between two hand positions
+        }
+        
+        /// <summary>
+        /// Scales specified object based on new hand positions.
+        /// </summary>
+        /// <param name="rightHandPosition">Position of player's right hand.</param>
+        /// <param name="leftHandPosition">Position of player's left hand.</param>
+        public void ScaleObject(Vector3 rightHandPosition, Vector3 leftHandPosition)
+        {
+            var handsDistance = Vector3.Distance(rightHandPosition,leftHandPosition);
+            var scale = handsDistance/_handsPreviousDistance;
+            objectToRotate.transform.localScale *= scale;
+            _handsPreviousDistance = handsDistance; // update last distance between two hand positions
         }
         
         /// <summary>
