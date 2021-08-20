@@ -7,64 +7,60 @@ namespace Controls
     /// </summary>
     public class TwoHandedManipulationController : MonoBehaviour
     {
-        // difference between hands positions when manipulation started, vector from left to right hand
-        private Vector3 _handsInitialPositionDifference; 
+        // difference between hand positions (vector from left to right hand) from the previous rotation event
+        private Vector3 _handsPreviousPositionDifference; 
         
-        // center point between hands positions when manipulation started
-        private Vector3 _handsInitialCenterPosition; 
+        // center point between hand positions from the previous translation event
+        private Vector3 _handsPreviousCenterPosition;  
         
         public GameObject objectToRotate; // object that is manipulated
-        
-        private Quaternion _initialRotation; // object rotation when manipulation started
-        
-        private Vector3 _initialPosition; // object position when manipulation started
 
         [Tooltip("Multiplier for translation manipulation")] [SerializeField] private float translationMultiplier; 
 
         /// <summary>
         /// Sets initial state for manipulation.
-        /// Sets position and rotation of an object and calculates difference between hands positions.
+        /// Calculates difference and center point between hand positions.
         /// </summary>
         /// <param name="rightHandPosition">Position of player's right hand.</param>
         /// <param name="leftHandPosition">Position of player's left hand.</param>
         public void OnManipulationStarted(Vector3 rightHandPosition, Vector3 leftHandPosition)
         {
-            _handsInitialPositionDifference = rightHandPosition - leftHandPosition;
-            _handsInitialCenterPosition = (rightHandPosition + leftHandPosition) / 2;
-            _initialRotation = objectToRotate.transform.rotation;
-            _initialPosition = objectToRotate.transform.position;
+            _handsPreviousPositionDifference = rightHandPosition - leftHandPosition;
+            _handsPreviousCenterPosition = (rightHandPosition + leftHandPosition) / 2;
         }
         
         /// <summary>
-        /// Rotates specified object based on new hands position.
+        /// Rotates specified object based on new hand positions.
         /// </summary>
         /// <param name="rightHandPosition">Position of player's right hand.</param>
         /// <param name="leftHandPosition">Position of player's left hand.</param>
         public void RotateObject(Vector3 rightHandPosition, Vector3 leftHandPosition)
         {
+            var handsPreviousPositionDifference = _handsPreviousPositionDifference;
+            handsPreviousPositionDifference.y = 0; // ignore rotation on y axis
+            
             var handsPositionDifference = rightHandPosition - leftHandPosition;
+            _handsPreviousPositionDifference = handsPositionDifference; // update last hands position difference
             handsPositionDifference.y = 0; // ignore rotation on y axis
-            
-            var handsInitialPositionDifference = _handsInitialPositionDifference;
-            handsInitialPositionDifference.y = 0; // ignore rotation on y axis
-            
-            // rotation matrix from initial to new hands position difference
-            var rotation = Quaternion.FromToRotation(handsInitialPositionDifference, handsPositionDifference);
-            // center point between right and left hands positions
+
+            // rotation matrix from last to new hands position difference
+            var rotation = Quaternion.FromToRotation(handsPreviousPositionDifference, handsPositionDifference);
+            // center point between right and left hand positions
             var center = (rightHandPosition + leftHandPosition) / 2;
             RotateAroundByQuaternion(center, rotation);
         }
         
         /// <summary>
-        /// Translates specified object based on new hands position.
+        /// Translates specified object based on new hand positions.
         /// </summary>
         /// <param name="rightHandPosition">Position of player's right hand.</param>
         /// <param name="leftHandPosition">Position of player's left hand.</param>
         public void TranslateObject(Vector3 rightHandPosition, Vector3 leftHandPosition)
         {
             var handsCenter = (rightHandPosition + leftHandPosition) / 2;
-            var translation = handsCenter - _handsInitialCenterPosition;
-            objectToRotate.transform.position = _initialPosition + translation * translationMultiplier;
+            var translation = handsCenter - _handsPreviousCenterPosition;
+            objectToRotate.transform.position += translation * translationMultiplier;
+            _handsPreviousCenterPosition = handsCenter; // update last center between two hand positions.
         }
         
         /// <summary>
@@ -74,8 +70,8 @@ namespace Controls
         /// <param name="rotation">Quaternion by which object will be rotated.</param>
         private void RotateAroundByQuaternion(Vector3 pivot, Quaternion rotation)
         {
-            objectToRotate.transform.rotation = _initialRotation * rotation;
-            objectToRotate.transform.position = rotation * (_initialPosition - pivot) + pivot;
+            objectToRotate.transform.rotation *= rotation;
+            objectToRotate.transform.position = rotation * (objectToRotate.transform.position - pivot) + pivot;
         }
         
     }

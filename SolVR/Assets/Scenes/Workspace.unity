@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToRotate: {fileID: 1333565884}
-  translationMultiplier: 5
+  translationMultiplier: 1
 --- !u!1 &1602490764
 GameObject:
   m_ObjectHideFlags: 0
