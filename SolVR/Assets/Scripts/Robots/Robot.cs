@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +18,10 @@ namespace Robots
         /// <summary>
         /// A class for independently executing commands on a robot.
         /// </summary>
-        private class RobotThread
+        private class RobotThread : IDisposable
         {
-            public delegate void ThreadStateChange(); // a delegate for a thread state change
-
-            // event called when a thread starts executing a command on a robot
-            public event ThreadStateChange StartedExecuting;
-
-            // event called when a thread finishes executing a command on a robot
-            public event ThreadStateChange FinishedExecuting;
-
-            // event called when execution of a command is blocked by another thread
-            public event ThreadStateChange ExecutionBlocked;
+            // event called when a thread changes its state
+            public event ThreadStateChange ThreadStateChanged;
 
             private readonly Robot _robot; // robot on which the thread should execute commands
             private ThreadState _state; // state the thread is currently in
@@ -38,34 +31,37 @@ namespace Robots
             public bool CanExecuteCommands => _state == ThreadState.Idle;
 
             /// <summary>
-            /// Initializes a new thread.
+            /// Initializes a new thread and sets a handler for its state change event.
             /// </summary>
             /// <param name="robot">Robot on which the thread should operate on.</param>
-            public RobotThread(Robot robot)
+            /// <param name="stateChangeHandler">Handler for the state change event of this thread.</param>
+            public RobotThread(Robot robot, ThreadStateChange stateChangeHandler)
             {
                 _robot = robot;
                 _state = ThreadState.Idle;
                 CurrentlyExecuting = null;
+                ThreadStateChanged += stateChangeHandler;
             }
 
             /// <summary>
-            /// Changes the threads' state and calls an appropriate event.
+            /// Implementation of the IDisposable interface.
+            /// Removes all delegates registered to the thread change event.
+            /// </summary>
+            public void Dispose()
+            {
+                if (ThreadStateChanged != null)
+                    foreach (var d in ThreadStateChanged.GetInvocationList())
+                        ThreadStateChanged -= (d as ThreadStateChange);
+            }
+
+            /// <summary>
+            /// Changes the threads' state and calls an event.
             /// </summary>
             /// <param name="state">The state to which the threads' state will be changed to.</param>
             private void ChangeStateTo(ThreadState state)
             {
-                switch (state)
-                {
-                    case ThreadState.Idle:
-                        FinishedExecuting?.Invoke();
-                        break;
-                    case ThreadState.Executing:
-                        StartedExecuting?.Invoke();
-                        break;
-                    case ThreadState.Blocked:
-                        ExecutionBlocked?.Invoke();
-                        break;
-                }
+                _state = state;
+                ThreadStateChanged?.Invoke(state);
             }
 
             /// <summary>
@@ -93,16 +89,20 @@ namespace Robots
                 else
                 {
                     // handler which will be called when the other thread finishes execution
-                    void FinishedExecutingHandler()
+                    void FinishedExecutingHandler(ThreadState state)
                     {
-                        _state = ThreadState.Idle; // don't invoke state change events
+                        // check if the thread has finished execution
+                        if (state != ThreadState.Idle)
+                            return;
+
+                        _state = ThreadState.Idle; // set state without invoking a state change event
                         ExecuteCommand(command);
                         // unsubscribe itself from the event - this handler should be called only once
-                        thread.FinishedExecuting -= FinishedExecutingHandler;
+                        thread.ThreadStateChanged -= FinishedExecutingHandler;
                     }
 
                     // subscribe the handler to an event which will be called when the other thread finishes execution
-                    thread.FinishedExecuting += FinishedExecutingHandler;
+                    thread.ThreadStateChanged += FinishedExecutingHandler;
                     ChangeStateTo(ThreadState.Blocked);
                 }
             }
@@ -117,13 +117,15 @@ namespace Robots
             {
                 CurrentlyExecuting = command;
                 ChangeStateTo(ThreadState.Executing);
-                
+
                 yield return command.Execute(_robot);
-                
+
                 CurrentlyExecuting = null;
                 ChangeStateTo(ThreadState.Idle);
             }
         }
+
+        public delegate void ThreadStateChange(ThreadState changedTo); // a delegate for a thread state change
 
         // dictionary containing threads created for this robot, uses thread IDs as keys
         private readonly Dictionary<int, RobotThread> _threads = new Dictionary<int, RobotThread>();
@@ -148,7 +150,7 @@ namespace Robots
         /// there are no threads, then the id of the new one is set to 0.
         /// </summary>
         /// <returns>The ID of the thread which was created.</returns>
-        public int CreateThread()
+        public int CreateThread(ThreadStateChange stateChangeHandler)
         {
             int lowestIndex = 0;
 
@@ -165,13 +167,14 @@ namespace Robots
                 }
             }
 
-            _threads.Add(lowestIndex, new RobotThread(this));
+            _threads.Add(lowestIndex, new RobotThread(this, stateChangeHandler));
             return lowestIndex;
         }
 
         /// <summary>
         /// Deletes a thread.
-        /// Checks if a thread can be deleted and if yes, deletes it. If the thread is busy an exception is thrown.
+        /// Checks if a thread can be deleted and if yes, disposes of it and removes it from the dictionary. If the
+        /// thread is busy an exception is thrown.
         /// </summary>
         /// <param name="threadId">ID of the thread to be deleted.</param>
         /// <exception cref="ThreadUnavailableException">Exception thrown when the thread to be deleted is executing a
@@ -182,6 +185,7 @@ namespace Robots
             if (!_threads[threadId].CanExecuteCommands)
                 throw new ThreadUnavailableException("Cannot delete a busy/blocked thread!");
 
+            _threads[threadId].Dispose();
             _threads.Remove(threadId);
         }
 
