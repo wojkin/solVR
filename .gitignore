@@ -70,3 +70,4 @@ crashlytics-build.properties
 
 # Oculus generated project files
 /SolVR/[Aa]ssets/[Rr]esources/OVRBuildConfig.asset
+/SolVR/[Aa]ssets/[Rr]esources/OVRBuildConfig.asset.meta
