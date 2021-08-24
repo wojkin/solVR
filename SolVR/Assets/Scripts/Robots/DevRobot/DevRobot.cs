@@ -4,7 +4,7 @@ using Robots.Actions;
 using Robots.Enums;
 using UnityEngine;
 
-namespace Robots
+namespace Robots.DevRobot
 {
     /// <summary>
     /// A class representing a development robot, which has four wheels and can move and turn.
