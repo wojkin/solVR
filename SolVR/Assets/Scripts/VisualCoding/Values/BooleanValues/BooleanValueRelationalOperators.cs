@@ -1,12 +1,11 @@
 using System;
-using VisualCoding.ConditionExpression.Values;
 
-namespace VisualCoding.ConditionExpression.Conditions
+namespace VisualCoding.Values.BooleanValues
 {
     /// <summary>
-    /// Class representing condition as a result of a relational operation on two conditions.
+    /// Class representing boolean value as a result of a relational operation on two conditions.
     /// </summary>
-    public class ConditionRelationalOperators : Condition
+    public class BooleanValueRelationalOperators : BooleanValue
     {
         public Value leftValue; // condition that is on the left of the relational operand
         
@@ -17,9 +16,9 @@ namespace VisualCoding.ConditionExpression.Conditions
         /// <summary>
         /// Check and returns boolean that is a result of relational operation.
         /// </summary>
-        /// <returns>A boolean result of relational operation on left and right result of checked condition.</returns>
+        /// <returns>A result of relational operation on left and right result of checked condition.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Throws exception when <c>Operation</c> is not handled.</exception>
-        public override bool Check()
+        public override dynamic GetValue()
         {
             return Operation switch
             {

@@ -1,4 +1,4 @@
-using VisualCoding.ConditionExpression.Conditions;
+using VisualCoding.Values.BooleanValues;
 
 namespace VisualCoding.Blocks.LogicBlocks.Loop
 {
@@ -7,7 +7,7 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
     /// </summary>
     public class WhileBlock : LoopBlock
     {
-        public Condition Condition { get; set; } // condition that is checked to determine the next block
+        public BooleanValue Condition { get; set; } // condition that is checked to determine the next block
 
         /// <summary>
         /// Determines the next block by checking a condition.
@@ -16,7 +16,7 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
         /// <returns><inheritdoc /> <c>Block</c> is determine by checking the condition.</returns>
         public override Block NextBlock()
         {
-            return  Condition.Check() ? Next : EndBlock.Next;
+            return  Condition.GetValue() ? Next : EndBlock.Next;
         }
     }
 }

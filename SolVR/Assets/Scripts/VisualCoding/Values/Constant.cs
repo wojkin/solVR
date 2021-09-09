@@ -1,7 +1,7 @@
-namespace VisualCoding.ConditionExpression.Values
+namespace VisualCoding.Values
 {
     /// <summary>
-    /// Class representing a constant value.
+    /// Class representing a constant value with dynamically matched type.
     /// </summary>
     public class Constant: Value
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace VisualCoding.ConditionExpression.Values
+namespace VisualCoding.Values
 {
     /// <summary>
     /// Class representing value as a result of a arithmetic operation on two values.

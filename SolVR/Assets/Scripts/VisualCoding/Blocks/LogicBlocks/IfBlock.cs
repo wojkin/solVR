@@ -1,4 +1,4 @@
-using VisualCoding.ConditionExpression.Conditions;
+using VisualCoding.Values.BooleanValues;
 
 namespace VisualCoding.Blocks.LogicBlocks
 {
@@ -9,7 +9,7 @@ namespace VisualCoding.Blocks.LogicBlocks
     {
         public Block Else { private get; set; } // block that will be returned if condition is not met
 
-        public Condition Condition { get; set; } // condition that is checked to determine the next block
+        public BooleanValue Condition { get; set; } // condition that is checked to determine the next block
         
         /// <summary>
         /// Determines and returns the next block by checking a condition.
@@ -17,7 +17,7 @@ namespace VisualCoding.Blocks.LogicBlocks
         /// <returns><inheritdoc /> <c>Block</c> is determine by checking the condition.</returns>
         public override Block NextBlock()
         {
-            return Condition.Check() ?  Next : Else;
+            return Condition.GetValue() ?  Next : Else;
         }
     }
 }

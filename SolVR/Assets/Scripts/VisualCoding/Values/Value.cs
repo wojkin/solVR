@@ -1,16 +1,16 @@
 using UnityEngine;
 
-namespace VisualCoding.ConditionExpression.Values
+namespace VisualCoding.Values
 {
     /// <summary>
-    /// Class representing value of dynamic.
+    /// Class representing value of dynamically matched type.
     /// </summary>
     public abstract class Value : MonoBehaviour
     {
         /// <summary>
         /// Returns a value.
         /// </summary>
-        /// <returns>A value of dynamic type.</returns>
+        /// <returns>A value of a type that dynamically matches the given value.</returns>
         public abstract dynamic GetValue();
         
         /// <summary>
