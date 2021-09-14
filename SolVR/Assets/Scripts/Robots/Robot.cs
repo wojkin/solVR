@@ -7,6 +7,7 @@ using Robots.Actions;
 using Robots.Commands;
 using Robots.Enums;
 using UnityEngine;
+using Utils;
 
 namespace Robots
 {
@@ -24,11 +25,11 @@ namespace Robots
             public event ThreadStateChange ThreadStateChanged;
 
             private readonly Robot _robot; // robot on which the thread should execute commands
-            private ThreadState _state; // state the thread is currently in
+            internal ThreadState State; // state the thread is currently in
             public ICommand CurrentlyExecuting { get; private set; } // command which is currently being executed
 
             // a property showing whether the thread is currently busy
-            public bool CanExecuteCommands => _state == ThreadState.Idle;
+            public bool CanExecuteCommands => State == ThreadState.Idle;
 
             /// <summary>
             /// Initializes a new thread and sets a handler for its state change event.
@@ -38,7 +39,7 @@ namespace Robots
             public RobotThread(Robot robot, ThreadStateChange stateChangeHandler)
             {
                 _robot = robot;
-                _state = ThreadState.Idle;
+                State = ThreadState.Idle;
                 CurrentlyExecuting = null;
                 ThreadStateChanged += stateChangeHandler;
             }
@@ -60,7 +61,7 @@ namespace Robots
             /// <param name="state">The state to which the threads' state will be changed to.</param>
             private void ChangeStateTo(ThreadState state)
             {
-                _state = state;
+                State = state;
                 ThreadStateChanged?.Invoke(state);
             }
 
@@ -95,7 +96,7 @@ namespace Robots
                         if (state != ThreadState.Idle)
                             return;
 
-                        _state = ThreadState.Idle; // set state without invoking a state change event
+                        State = ThreadState.Idle; // set state without invoking a state change event
                         ExecuteCommand(command);
                         // unsubscribe itself from the event - this handler should be called only once
                         thread.ThreadStateChanged -= FinishedExecutingHandler;
@@ -129,6 +130,25 @@ namespace Robots
 
         // dictionary containing threads created for this robot, uses thread IDs as keys
         private readonly Dictionary<int, RobotThread> _threads = new Dictionary<int, RobotThread>();
+
+        // a flag (bool wrapped in an object) showing whether command execution should be paused
+        protected readonly Wrapper<bool> IsPaused = new Wrapper<bool>(false);
+
+        /// <summary>
+        /// Pauses command execution by setting the pause flag to true.
+        /// </summary>
+        public void Pause()
+        {
+            IsPaused.Value = true;
+        }
+
+        /// <summary>
+        /// Resumes command execution by setting the pause flag to false.
+        /// </summary>
+        public void Resume()
+        {
+            IsPaused.Value = false;
+        }
 
         /// <summary>
         /// Returns a thread which executes a given command type or null if the command is not being executed.
@@ -187,6 +207,16 @@ namespace Robots
 
             _threads[threadId].Dispose();
             _threads.Remove(threadId);
+        }
+
+        /// <summary>
+        /// Returns the state of a thread.
+        /// </summary>
+        /// <param name="threadId">ID of the thread which state should be returned.</param>
+        /// <returns>State of a thread.</returns>
+        public ThreadState GetThreadState(int threadId)
+        {
+            return _threads[threadId].State;
         }
 
         /// <summary>
