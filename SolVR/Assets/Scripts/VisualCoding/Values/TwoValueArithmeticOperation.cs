@@ -1,4 +1,5 @@
 using System;
+using VisualCoding.Values.Enums;
 
 namespace VisualCoding.Values
 {
@@ -10,7 +11,6 @@ namespace VisualCoding.Values
         public Value left; // value that is on the left of the operand
         
         public Value right; // value that is on the right of the operand
-        
         public ArithmeticOperation Operation { get; set; } // arithmetic operation performed on right and left values
         
         /// <summary>
@@ -29,13 +29,5 @@ namespace VisualCoding.Values
                 _ => throw new ArgumentOutOfRangeException("Operation","This operation is not handled.")
             };
         }
-    }
-
-    /// <summary>
-    /// Enum that represents an arithmetic operation type. 
-    /// </summary>
-    public enum ArithmeticOperation
-    {
-        Addition, Difference, Multiplication
     }
 }

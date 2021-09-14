@@ -1,4 +1,5 @@
 using System;
+using VisualCoding.Values.Enums;
 
 namespace VisualCoding.Values.BooleanValues
 {
@@ -27,13 +28,5 @@ namespace VisualCoding.Values.BooleanValues
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-    }
-
-    /// <summary>
-    /// Enum that represents a logic operation type. 
-    /// </summary>
-    public enum LogicOperation
-    {
-        And, Or
     }
 }
