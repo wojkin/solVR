@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Robots.Actions;
+using Robots.Commands.Helpers;
 using Robots.Enums;
 using UnityEngine;
 
@@ -35,7 +36,8 @@ namespace Robots.DevRobot
                 wheelCollider.motorTorque = torque;
             }
 
-            yield return new WaitForSeconds(time); // wait for a given amount of seconds
+            // wait for a given amount of seconds
+            yield return new PausableWaitForSeconds(time, IsPaused);
 
             // restore previous motor torque values
             foreach (var wheelCollider in rearWheels)
