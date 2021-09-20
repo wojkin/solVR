@@ -17,7 +17,13 @@ namespace Controls
         
         public GameObject objectToRotate; // object that is manipulated
 
-        [Tooltip("Multiplier for translation manipulation")] [SerializeField] private float translationMultiplier;
+        [Tooltip("Multiplier for translation manipulation")] [SerializeField] private float translationMultiplier = 1;
+
+        [Tooltip("Multiplier for scaling manipulation")] [SerializeField]
+        private float scalingMultiplier = 1;
+        
+        [Tooltip("Multiplier for rotation manipulation")] [SerializeField]
+        private float rotationMultiplier = 1;
         
 
         /// <summary>
@@ -48,10 +54,10 @@ namespace Controls
             handsPositionDifference.y = 0; // ignore rotation on y axis
 
             // rotation matrix from last to new hands position difference
-            var rotation = Quaternion.FromToRotation(handsPreviousPositionDifference, handsPositionDifference);
-            // center point between right and left hand positions
-            var center = (rightHandPosition + leftHandPosition) / 2;
-            RotateAroundByQuaternion(center, rotation);
+            var fromToRotation = Quaternion.FromToRotation(handsPreviousPositionDifference, handsPositionDifference);
+            var rotation = objectToRotate.transform.rotation;
+            var rotated = rotation * fromToRotation;
+            objectToRotate.transform.rotation = Quaternion.SlerpUnclamped(rotation, rotated, rotationMultiplier);
         }
         
         /// <summary>
@@ -63,7 +69,12 @@ namespace Controls
         {
             var handsCenter = (rightHandPosition + leftHandPosition) / 2;
             var translation = handsCenter - _handsPreviousCenterPosition;
-            objectToRotate.transform.position += translation * translationMultiplier;
+            var position = objectToRotate.transform.position;
+            var distance = (position - handsCenter).magnitude; // distance between rotated objects and hands
+            // multiplier based on distance from object and translation multiplier
+            var multiplier = (1 + distance) * translationMultiplier; 
+            position += translation * multiplier;
+            objectToRotate.transform.position = position;
             _handsPreviousCenterPosition = handsCenter; // update last center between two hand positions
         }
         
@@ -75,20 +86,9 @@ namespace Controls
         public void ScaleObject(Vector3 rightHandPosition, Vector3 leftHandPosition)
         {
             var handsDistance = Vector3.Distance(rightHandPosition,leftHandPosition);
-            var scale = handsDistance/_handsPreviousDistance;
+            var scale = (handsDistance/_handsPreviousDistance - 1) * scalingMultiplier + 1;
             objectToRotate.transform.localScale *= scale;
             _handsPreviousDistance = handsDistance; // update last distance between two hand positions
-        }
-        
-        /// <summary>
-        /// Rotates specified object around a pivot by a rotation quaternion.
-        /// </summary>
-        /// <param name="pivot">Point to rotate around.</param>
-        /// <param name="rotation">Quaternion by which object will be rotated.</param>
-        private void RotateAroundByQuaternion(Vector3 pivot, Quaternion rotation)
-        {
-            objectToRotate.transform.rotation *= rotation;
-            objectToRotate.transform.position = rotation * (objectToRotate.transform.position - pivot) + pivot;
         }
         
     }
