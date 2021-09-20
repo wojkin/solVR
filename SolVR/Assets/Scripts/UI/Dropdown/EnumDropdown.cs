@@ -21,17 +21,24 @@ namespace UI.Dropdown
         /// <summary>
         /// Initialize dropdown options.
         /// </summary>
-        public void Awake()
+        protected void Awake()
         {
             dropdown = GetComponent<TMP_Dropdown>();
             PopulateDropdown();
+        }
+
+        /// <summary>
+        /// Initialize dropdown selected value.
+        /// </summary>
+        protected void Start()
+        {
             HandleDropdownChangedValue(dropdown.value); // initial selected dropdown value
         }
 
         /// <summary>
         /// Subscribes to event. 
         /// </summary>
-        private void OnEnable()
+        protected void OnEnable()
         {
             dropdown.onValueChanged.AddListener(HandleDropdownChangedValue);
         }
@@ -58,7 +65,7 @@ namespace UI.Dropdown
         /// <summary>
         /// Unsubscribes from event. 
         /// </summary>
-        public void OnDisable()
+        protected void OnDisable()
         {
             dropdown.onValueChanged.RemoveListener(HandleDropdownChangedValue);
         }
