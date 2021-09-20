@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c85937bf164a0cb445582d6f08df17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uEvent:
+  onInputValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7521379595741843034}
@@ -492,7 +492,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  allowNegative: 0
+  allowNegativeValues: 0
 --- !u!1 &2220855923982813392
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c85937bf164a0cb445582d6f08df17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uEvent:
+  onInputValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7521379595741843034}
@@ -947,7 +947,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  allowNegative: 0
+  allowNegativeValues: 0
 --- !u!1 &3737395368879972644
 GameObject:
   m_ObjectHideFlags: 0

@@ -322,8 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0745d9d2dd405fa1c68fa3e3587704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowNegative: 0
-  uEvent:
+  onInputValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 319658754335977978}
@@ -339,6 +338,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  allowNegativeValues: 0
 --- !u!1 &3076205385340145276
 GameObject:
   m_ObjectHideFlags: 0

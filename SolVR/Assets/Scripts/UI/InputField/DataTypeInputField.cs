@@ -14,52 +14,31 @@ namespace UI.InputField
     {
         protected TMP_InputField inputField; // an input field that is validated
 
-        [Tooltip("Event that invokes on value changed in input field.")]
-        [SerializeField] private UnityEvent<T> onInputValueChanged;
-        
-        [Tooltip("Flag for setting if negative values should be allowed.")]
-        [SerializeField] private bool allowNegativeValues;
+        [Tooltip("Event that invokes on value changed in input field.")] [SerializeField]
+        protected UnityEvent<T> onInputValueChanged;
 
         /// <summary>
         /// Initializes fields.
         /// </summary>
-        private void Awake()
+        protected void Awake()
         {
             inputField = GetComponent<TMP_InputField>();
         }
-        
+
         /// <summary>
-        /// Subscribes to events. 
+        /// Subscribes to event. 
         /// </summary>
-        private void OnEnable()
+        protected void OnEnable()
         {
-            inputField.onValueChanged.AddListener(ParseOnInputValueChanged);
-            inputField.onValidateInput += NegativeValidate;
+            inputField.onValueChanged.AddListener(ParseInputValueOnChange);
         }
 
         /// <summary>
-        /// Validates and returns char based on <c>allowNegativeValues</c> flag.
+        /// Unsubscribes from event. 
         /// </summary>
-        /// <param name="input">Provided input string before added char.</param>
-        /// <param name="charIndex">An index in the string that char will be on in the string.</param>
-        /// <param name="addedChar">A character that is validated.</param>
-        /// <returns>Not changed char if it passes the validation or empty char if it's not.</returns>
-        private char NegativeValidate(string input, int charIndex, char addedChar)
+        protected void OnDisable()
         {
-            if (!allowNegativeValues && addedChar=='-') // negative values are not allowed and char is a minus
-            {
-                addedChar = '\0';  // change it to an empty character
-            }
-            return addedChar;
-        }
-        
-        /// <summary>
-        /// Unsubscribes from all events. 
-        /// </summary>
-        private void OnDisable()
-        {
-            inputField.onValidateInput -= NegativeValidate;
-            inputField.onValueChanged.RemoveListener(ParseOnInputValueChanged);
+            inputField.onValueChanged.RemoveListener(ParseInputValueOnChange);
         }
 
         /// <summary>
@@ -74,15 +53,20 @@ namespace UI.InputField
         /// Changes color of the input field based of a result of parsing input value.
         /// </summary>
         /// <param name="value">A string value that will be parsed.</param>
-        private void ParseOnInputValueChanged(string value)
+        protected void ParseInputValueOnChange(string value)
         {
+            if (value == "")
+            {
+                inputField.image.color = Color.white;
+                return;
+            }
             try
             {
                 var parsedValue = Parse(value);
                 onInputValueChanged.Invoke(parsedValue);
                 inputField.image.color = Color.white;
             }
-            catch (FormatException e)
+            catch (FormatException)
             {
                 inputField.image.color = Color.red;
             }
