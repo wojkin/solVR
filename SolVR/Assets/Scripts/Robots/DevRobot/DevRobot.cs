@@ -14,7 +14,7 @@ namespace Robots.DevRobot
     {
         [SerializeField] private WheelCollider[] frontWheels; // array containing robots' front wheels
         [SerializeField] private WheelCollider[] rearWheels; // array containing robots' rear wheels
-        
+
         [SerializeField] private float turnAngle; // angle at which the robots' wheels should turn
 
         /// <summary>
@@ -47,36 +47,24 @@ namespace Robots.DevRobot
         }
 
         /// <summary>
-        /// A coroutine for turning a robot by applying torque to its' wheels and rotating them.
-        /// Sets front wheels steer angle to a given value and moves the robot. Stops moving and changes back the steer
-        /// angle to the previous values after a given amount of seconds.
+        /// A coroutine for turning the robots wheels in a direction to an angle around the local vertical axis.
+        /// Sets front wheels steer angle to a given value and wait for the next fixed update (so the wheel collider
+        /// updates itself based on the new value).
         /// </summary>
-        /// <param name="time">The number of seconds the robot should turn for.</param>
-        /// <param name="torque">The torque applied to the robots wheels, given in Newton metres.</param>
         /// <param name="direction">The direction in which the robot should turn.</param>
+        /// <param name="angle">The steer angle of the wheel colliders around the local vertical axis.</param>
         /// <returns>IEnumerator required for a coroutine.</returns>
-        public IEnumerator Turn(float time, float torque, TurnDirection direction)
+        public IEnumerator Turn(TurnDirection direction, int angle)
         {
-            var prevAngles = new Queue<float>();
-
-            // store current steer angle values and set the new ones
             foreach (var wheelCollider in frontWheels)
             {
-                prevAngles.Enqueue(wheelCollider.steerAngle);
-
                 if (direction == TurnDirection.Left)
                     wheelCollider.steerAngle = turnAngle;
                 else
                     wheelCollider.steerAngle = -turnAngle;
             }
-            
-            yield return StartCoroutine(Move(time, torque)); // move the robot for a given amount of seconds
 
-            // restore previous steer angle values
-            foreach (var wheelCollider in frontWheels)
-            {
-                wheelCollider.steerAngle = prevAngles.Dequeue();
-            }
+            yield return new WaitForFixedUpdate();
         }
     }
 }

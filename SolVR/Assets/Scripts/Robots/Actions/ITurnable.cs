@@ -4,17 +4,16 @@ using Robots.Enums;
 namespace Robots.Actions
 {
     /// <summary>
-    /// An interface for a robot, which can turn.
+    /// An interface for a robot, which can turn its wheels.
     /// </summary>
     public interface ITurnable : ICommandable
     {
         /// <summary>
-        /// Turns the robot for a given amount of time with a given torque.
+        /// Turns the robots wheels in a direction to an angle around the local vertical axis.
         /// </summary>
-        /// <param name="time">The number of seconds the robot should turn for.</param>
-        /// <param name="torque">The torque applied to the robots wheels, given in Newton metres.</param>
-        /// <param name="direction">The direction in which the robot should turn.</param>
+        /// <param name="direction">The direction in which the robots wheels should turn.</param>
+        /// <param name="angle">The steer angle of the wheels around the local vertical axis.</param>
         /// <returns>IEnumerator required for a coroutine.</returns>
-        IEnumerator Turn(float time, float torque, TurnDirection direction);
+        IEnumerator Turn(TurnDirection direction, int angle);
     }
 }
