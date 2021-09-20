@@ -1,4 +1,5 @@
 using System;
+using VisualCoding.Values.Enums;
 
 namespace VisualCoding.Values.BooleanValues
 {
@@ -23,18 +24,10 @@ namespace VisualCoding.Values.BooleanValues
             return Operation switch
             {
                 RelationalOperation.Equal => leftValue.EqualTo(rightValue),
-                RelationalOperation.Less => leftValue.LessThan(rightValue),
-                RelationalOperation.Greater => leftValue.GreaterThan(rightValue),
+                RelationalOperation.LessThan => leftValue.LessThan(rightValue),
+                RelationalOperation.GreaterThan => leftValue.GreaterThan(rightValue),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-    }
-
-    /// <summary>
-    /// Enum that represents a relational operation type. 
-    /// </summary>
-    public enum RelationalOperation
-    {
-        Equal, Less, Greater
     }
 }
