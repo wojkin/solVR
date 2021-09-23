@@ -19,7 +19,18 @@ namespace VisualCoding.Execution
         // a list of execution threads responsible for executing blocks which are connected together
         private readonly List<BlockExecutionThread> _executionThreads = new List<BlockExecutionThread>();
 
-        public static bool Paused { get; private set; } // bool showing whether the execution is paused
+        /// <summary>
+        /// An enum responsible for a state of the execution.
+        /// </summary>
+        private enum ExecutionState
+        {
+            Running,
+            Paused,
+            NotRunning
+        }
+
+        // ExecutionState showing whether the execution state
+        private static ExecutionState _executionState = ExecutionState.NotRunning;
 
         // a flag showing whether execution should be paused after finishing executing the next or current block
         private static bool _pauseOnNextStep;
@@ -27,10 +38,11 @@ namespace VisualCoding.Execution
         /// <summary>
         /// Initializes execution for each start block in the scene.
         /// Finds all start blocks in the scene, creates an execution thread for each of them and starts execution.
-        /// Saves all execution threads to a list.
+        /// Saves all execution threads to a list. Sets variable responsible for showing the execution state.
         /// </summary>
-        private void Start()
+        private void Run()
         {
+            _executionState = ExecutionState.Running;
             var startBlocks = FindObjectsOfType<StartBlock>(); // find all start block components in the scene
 
             foreach (var startBlock in startBlocks)
@@ -39,15 +51,36 @@ namespace VisualCoding.Execution
                 thread.StartExecutingIfIdle();
                 _executionThreads.Add(thread);
             }
+
+            if (startBlocks.Length == 0)
+                _executionState = ExecutionState.NotRunning;
+        }
+
+        /// <summary>
+        /// Calls <c>Run</c> or <c>Resume</c> method based on the state of the execution.
+        /// </summary>
+        public void ResumeOrRun()
+        {
+            switch (_executionState)
+            {
+                case ExecutionState.NotRunning:
+                    Run();
+                    break;
+                case ExecutionState.Paused:
+                    Resume();
+                    break;
+            }
         }
 
         /// <summary>
         /// Stops execution of all threads.
+        /// Sets variable responsible for showing the execution state.
         /// </summary>
-        private void ExitAllThreads()
+        public void ExitAllThreads()
         {
             foreach (var thread in _executionThreads)
                 thread.FinishExecution();
+            _executionState = ExecutionState.NotRunning;
         }
 
         /// <summary>
@@ -57,10 +90,13 @@ namespace VisualCoding.Execution
         /// </summary>
         public void Pause()
         {
-            Paused = true;
-            _pauseOnNextStep = false;
-            robot.Pause();
-            Physics.autoSimulation = false;
+            if (_executionState == ExecutionState.Running)
+            {
+                _executionState = ExecutionState.Paused;
+                _pauseOnNextStep = false;
+                robot.Pause();
+                Physics.autoSimulation = false;
+            }
         }
 
         /// <summary>
@@ -69,9 +105,9 @@ namespace VisualCoding.Execution
         /// physics simulation. Starts block execution for all threads. The execution threads start executing blocks in
         /// the order they were initialized.
         /// </summary>
-        public void Resume()
+        private void Resume()
         {
-            Paused = false;
+            _executionState = ExecutionState.Running;
             robot.Resume();
             Physics.autoSimulation = true;
 
@@ -88,8 +124,11 @@ namespace VisualCoding.Execution
         /// </summary>
         public void NextStep()
         {
-            _pauseOnNextStep = true;
-            Resume();
+            if (_executionState == ExecutionState.Paused)
+            {
+                _pauseOnNextStep = true;
+                Resume();
+            }
         }
 
         /// <summary>
@@ -130,7 +169,7 @@ namespace VisualCoding.Execution
             {
                 while (_currentBlock != null || _finishExecution)
                 {
-                    if (Paused)
+                    if (_executionState == ExecutionState.Paused)
                         return;
 
                     if (!ExecuteBlock())
