@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using VisualCoding.Values.Enums;
 
 namespace VisualCoding.Values
@@ -8,11 +9,35 @@ namespace VisualCoding.Values
     /// </summary>
     public class TwoValueArithmeticOperation : Value
     {
-        public Value left; // value that is on the left of the operand
+
+        [SerializeField] [Tooltip("Arithmetic operation performed on right and left values.")]
+        private ArithmeticOperation operation;
         
-        public Value right; // value that is on the right of the operand
-        public ArithmeticOperation Operation { get; set; } // arithmetic operation performed on right and left values
+        [SerializeField] [Tooltip("A value that is on the left of the operand.")]
+        private Value left; 
         
+        [SerializeField] [Tooltip("A value that is on the right of the operand.")]
+        private Value right;
+
+        public ArithmeticOperation Operation
+        {
+            get => operation;
+            set => operation = value;
+        } // arithmetic operation performed on right and left values
+
+        public Value Left
+        {
+            get => left;
+            set => left = value;
+        } // value that is on the left of the operand
+
+        public Value Right
+        {
+            get => right;
+            set => right = value;
+        } // value that is on the right of the operand
+
+
         /// <summary>
         /// Calculates and returns value that is a result of arithmetic operation.
         /// </summary>
@@ -22,11 +47,10 @@ namespace VisualCoding.Values
         {
             return Operation switch
             {
-                
-                ArithmeticOperation.Addition => left.GetValue() + right.GetValue(),
-                ArithmeticOperation.Difference => left.GetValue() - right.GetValue(),
-                ArithmeticOperation.Multiplication => left.GetValue() * right.GetValue(),
-                _ => throw new ArgumentOutOfRangeException("Operation","This operation is not handled.")
+                ArithmeticOperation.Addition => Left.GetValue() + Right.GetValue(),
+                ArithmeticOperation.Difference => Left.GetValue() - Right.GetValue(),
+                ArithmeticOperation.Multiplication => Left.GetValue() * Right.GetValue(),
+                _ => throw new ArgumentOutOfRangeException("Operation", "This operation is not handled.")
             };
         }
     }

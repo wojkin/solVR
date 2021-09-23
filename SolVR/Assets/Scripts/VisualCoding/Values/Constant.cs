@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace VisualCoding.Values
 {
     /// <summary>
@@ -5,7 +7,14 @@ namespace VisualCoding.Values
     /// </summary>
     public class Constant: Value
     {
-        public dynamic Value { get; set; } // a constant value
+        [SerializeField] [Tooltip("A constant value of dynamic type.")]
+        private dynamic value;
+
+        public dynamic Value
+        {
+            get => value;
+            set => this.value = value;
+        } // a constant value
 
         /// <summary>
         /// Returns a constant value.

@@ -1,3 +1,4 @@
+using UnityEngine;
 using VisualCoding.Values.BooleanValues;
 
 namespace VisualCoding.Blocks.LogicBlocks.Loop
@@ -7,7 +8,14 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
     /// </summary>
     public class WhileBlock : LoopBlock
     {
-        public BooleanValue Condition { get; set; } // condition that is checked to determine the next block
+        [SerializeField][Tooltip("Condition that is checked to determine the next block.")]
+        private BooleanValue condition;
+
+        public BooleanValue Condition
+        {
+            get => condition;
+            set => condition = value;
+        } // condition that is checked to determine the next block
 
         /// <summary>
         /// Determines the next block by checking a condition.

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace VisualCoding.Blocks.LogicBlocks.Loop
 {
     /// <summary>
@@ -5,8 +7,15 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
     /// </summary>
     public class ForBlock : LoopBlock
     {
+        [SerializeField][Tooltip("Number of loops that will be perform.")]
+        private int numberOfLoops;
+
         // number of calls NextBlock that will be perform before it returns a block after loop end
-        public int NumberOfLoops { get; set; }
+        public int NumberOfLoops
+        {
+            get => numberOfLoops;
+            set => numberOfLoops = value;
+        }
 
         // iteration flag that shows how many times function NextBlock was called from last reset
         public int Iteration { get; private set; }

@@ -1,5 +1,6 @@
 using Robots.Commands;
 using Robots.Enums;
+using UnityEngine;
 
 namespace VisualCoding.Blocks.ActionBlocks
 {
@@ -8,8 +9,23 @@ namespace VisualCoding.Blocks.ActionBlocks
     /// </summary>
     public class TurnBlock : Block, IGetCommand
     {
-        public TurnDirection Direction { get; set; } // the direction in which the robot should turn
-        public int Angle { get; set; } // the steer angle of the wheels around the local vertical axis
+        [SerializeField] [Tooltip("The direction in which the robot should turn.")]
+        private TurnDirection direction;
+
+        [SerializeField] [Tooltip("The steer angle of the wheels around the local vertical axis.")]
+        private int angle;
+
+        public TurnDirection Direction
+        {
+            get => direction;
+            set => direction = value;
+        } // the direction in which the robot should turn
+
+        public int Angle
+        {
+            get => angle;
+            set => angle = value;
+        } // the steer angle of the wheels around the local vertical axis
 
         /// <summary>
         /// Creates and returns a turn command.

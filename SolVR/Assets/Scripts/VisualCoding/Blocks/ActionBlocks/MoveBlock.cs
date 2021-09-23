@@ -1,4 +1,5 @@
 using Robots.Commands;
+using UnityEngine;
 
 namespace VisualCoding.Blocks.ActionBlocks
 {
@@ -7,9 +8,23 @@ namespace VisualCoding.Blocks.ActionBlocks
     /// </summary>
     public class MoveBlock : Block, IGetCommand
     {
-        public float Time {get; set; } // the number of seconds move command is executed
-        
-        public float Torque {get; set; }  // the torque to the move command
+        [SerializeField] [Tooltip("Number of seconds move command is executed.")]
+        private float time;
+
+        [SerializeField] [Tooltip("The torque to the move command.")]
+        private float torque;
+
+        public float Time
+        {
+            get => time;
+            set => time = value;
+        } // the number of seconds move command is executed
+
+        public float Torque
+        {
+            get => torque;
+            set => torque = value;
+        } // the torque to the move command
 
         /// <summary>
         /// Creates and gets a move command.
