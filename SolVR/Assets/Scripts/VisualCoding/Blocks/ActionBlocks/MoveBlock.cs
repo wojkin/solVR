@@ -8,6 +8,8 @@ namespace VisualCoding.Blocks.ActionBlocks
     /// </summary>
     public class MoveBlock : Block, IGetCommand
     {
+        #region Variables
+
         [SerializeField] [Tooltip("Number of seconds move command is executed.")]
         private float time;
 
@@ -26,6 +28,10 @@ namespace VisualCoding.Blocks.ActionBlocks
             set => torque = value;
         } // the torque to the move command
 
+        #endregion
+
+        #region Custom methods
+
         /// <summary>
         /// Creates and gets a move command.
         /// </summary>
@@ -34,5 +40,7 @@ namespace VisualCoding.Blocks.ActionBlocks
         {
             return new MoveCommand(Time, Torque);
         }
+
+        #endregion
     }
 }

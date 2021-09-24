@@ -10,26 +10,23 @@ namespace UI
     /// </summary>
     public class UIPersistBetweenScenes : MonoBehaviour
     {
+        #region Variables
 
         [Tooltip("UIElement attached to the same gameObject as the UI canvas.")] [SerializeField]
         private UIElement uiElement;
-    
+
         private Canvas _worldSpaceCanvas; // canvas of the gameObject UI
-    
+
+        #endregion
+
+        #region Built-in methods
+
         /// <summary>
         /// Initializes fields.
         /// </summary>
         public void Awake()
         {
             _worldSpaceCanvas = uiElement.GetComponent<Canvas>();
-        }
-
-        /// <summary>
-        /// Hides UI element.
-        /// </summary>
-        public void Start()
-        {
-            uiElement.Hide();
         }
 
         /// <summary>
@@ -41,7 +38,16 @@ namespace UI
             CustomSceneManager.Instance.AfterLoad += AfterLoadHandler;
             CustomSceneManager.Instance.BeforeUnload += BeforeUnloadHandler;
         }
-    
+
+        /// <summary>
+        /// Hides UI element.
+        /// </summary>
+        public void Start()
+        {
+            uiElement.Hide();
+        }
+
+
         /// <summary>
         /// Unsubscribes from all previously subscribed events.
         /// </summary>
@@ -54,7 +60,11 @@ namespace UI
                 CustomSceneManager.Instance.BeforeUnload -= BeforeUnloadHandler;
             }
         }
-    
+
+        #endregion
+
+        #region Custom methods
+
         /// <summary>
         /// This function will be called before a scene is unloaded. The UI element is hidden and then
         /// moved to DDOL scene. This makes the gameObject persist between scene loads.
@@ -65,7 +75,7 @@ namespace UI
             uiElement.Hide();
             DontDestroyOnLoad(gameObject); // move the gameObject to DDOL
         }
-    
+
         /// <summary>
         /// This function will be called after a scene is loaded. The gameObject is moved from
         /// DDOL to the currently loaded scene, so it can be accessed by other scripts.
@@ -77,5 +87,7 @@ namespace UI
             SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(sceneName));
             _worldSpaceCanvas.worldCamera = Camera.main; // set the UI camera to the main camera in the loaded scene
         }
+
+        #endregion
     }
 }

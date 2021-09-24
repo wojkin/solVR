@@ -12,11 +12,17 @@ namespace UI
     /// </summary>
     public class UILevelListElement : MonoBehaviour, IUIListElement
     {
+        #region Variables
+
         [Tooltip("Level name text.")] [SerializeField]
         private TextMeshProUGUI levelName;
 
         [Tooltip("Button to load a level.")] [SerializeField]
         private Button playButton;
+
+        #endregion
+
+        #region Custom methods
 
         /// <summary>
         /// Populates the fields of a level list element.
@@ -26,11 +32,13 @@ namespace UI
         /// <param name="listElementData">ScriptableObject.Environment with data to fill UI list element.</param>
         public void Populate(ScriptableObject listElementData)
         {
-            var levelData = (Environment) listElementData;
+            var levelData = (Environment)listElementData;
             levelName.text = levelData.environmentName;
             playButton.onClick.AddListener(() =>
                 CustomSceneManager.Instance.QueueLoadScene(levelData.scene)
             );
         }
+
+        #endregion
     }
 }

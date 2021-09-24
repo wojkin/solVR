@@ -14,6 +14,7 @@ namespace Managers
     /// </summary>
     public class CustomSceneManager : Singleton<CustomSceneManager>
     {
+        #region Variables
         public delegate void SceneChange(string sceneName); // a delegate for a scene change (load or unload)
 
         public event SceneChange AfterLoad; // an event invoked after a scene was loaded
@@ -22,6 +23,9 @@ namespace Managers
         private readonly Queue<Action> _loadQueue = new Queue<Action>(); // a queue of scene load calls
         private AssetReference _lastLoadedScene;
 
+        #endregion
+
+        #region Custom methods
         /// <summary>
         /// Queues a scene load or loads it immediately if no other scene is being loaded.
         /// Checks if another scene is currently being loaded. If yes, a scene load call is added to a queue,
@@ -161,5 +165,6 @@ namespace Managers
                 _loading = false;
             }
         }
+        #endregion
     }
 }

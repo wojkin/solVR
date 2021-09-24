@@ -7,7 +7,9 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
     /// </summary>
     public class ForBlock : LoopBlock
     {
-        [SerializeField][Tooltip("Number of loops that will be perform.")]
+        #region Variables
+
+        [SerializeField] [Tooltip("Number of loops that will be perform.")]
         private int numberOfLoops;
 
         // number of calls NextBlock that will be perform before it returns a block after loop end
@@ -19,6 +21,10 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
 
         // iteration flag that shows how many times function NextBlock was called from last reset
         public int Iteration { get; private set; }
+
+        #endregion
+
+        #region Custom methods
 
         /// <summary>
         /// Initializing fields.
@@ -46,5 +52,7 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
                 return EndBlock.Next;
             }
         }
+
+        #endregion
     }
 }

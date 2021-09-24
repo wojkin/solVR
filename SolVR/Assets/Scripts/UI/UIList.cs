@@ -9,14 +9,30 @@ namespace UI
     /// </summary>
     public class UIList : MonoBehaviour
     {
-        [Tooltip("Template for a UI element in the list")]
-        [SerializeField]
+        #region Variables
+
+        [Tooltip("Template for a UI element in the list")] [SerializeField]
         private GameObject template;
-        
-        [Tooltip("List of ScriptableObjects containing data to fill the template")]
-        [SerializeField]
+
+        [Tooltip("List of ScriptableObjects containing data to fill the template")] [SerializeField]
         private List<ScriptableObject> list;
-        
+
+        #endregion
+
+        #region Built-in methods
+
+        /// <summary>
+        /// Initialization of list elements.
+        /// </summary>
+        private void Awake()
+        {
+            InitializeListElements();
+        }
+
+        #endregion
+
+        #region Custom methods
+
         /// <summary>
         /// Initialize all UI list elements based on a list of ScriptableObjects.
         /// Creates every UI element from a template, populates it with data from a ScriptableObject and shows it.
@@ -32,12 +48,6 @@ namespace UI
             }
         }
 
-        /// <summary>
-        /// Initialization of list elements.
-        /// </summary>
-        private void Awake()
-        {
-            InitializeListElements();
-        }
+        #endregion
     }
 }

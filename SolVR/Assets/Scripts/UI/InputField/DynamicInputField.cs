@@ -10,7 +10,22 @@ namespace UI.InputField
     /// </summary>
     public class DynamicInputField : DataTypeInputField<dynamic>
     {
+        #region Variables
+
         public ValueDataType Type { get; set; } // type of the data that is provided
+
+        #endregion
+
+        #region Built-in methods
+
+        /// <summary>
+        /// Subscribes to events. 
+        /// </summary>
+        private new void OnEnable()
+        {
+            base.OnEnable();
+            inputField.onValidateInput += DynamicValidate;
+        }
 
         /// <summary>
         /// Initializes input content type.
@@ -21,6 +36,20 @@ namespace UI.InputField
             SetKeyboardType();
             inputField.lineType = TMP_InputField.LineType.SingleLine;
         }
+
+
+        /// <summary>
+        /// Unsubscribes from all events. 
+        /// </summary>
+        private new void OnDisable()
+        {
+            base.OnDisable();
+            inputField.onValidateInput -= DynamicValidate;
+        }
+
+        #endregion
+
+        #region Custom methods
 
         /// <summary>
         /// Parse string to data type based on <c>ValueDataType Type</c> value.
@@ -37,15 +66,6 @@ namespace UI.InputField
                 ValueDataType.Boolean => bool.Parse(input),
                 _ => input
             };
-        }
-
-        /// <summary>
-        /// Subscribes to events. 
-        /// </summary>
-        private new void OnEnable()
-        {
-            base.OnEnable();
-            inputField.onValidateInput += DynamicValidate;
         }
 
         /// <summary>
@@ -66,19 +86,12 @@ namespace UI.InputField
                 case ValueDataType.Float:
                     return Regex.IsMatch(newInput, @"^[-]?([0-9]*\.?[0-9]*)$") ? addedChar : '\0';
                 case ValueDataType.Boolean:
-                    return Regex.IsMatch(newInput.ToLower(), @"^(true|tru|tr|[tf]|fa|fal|fals|false)?$") ? addedChar : '\0';
+                    return Regex.IsMatch(newInput.ToLower(), @"^(true|tru|tr|[tf]|fa|fal|fals|false)?$")
+                        ? addedChar
+                        : '\0';
                 default:
                     return addedChar;
             }
-        }
-
-        /// <summary>
-        /// Unsubscribes from all events. 
-        /// </summary>
-        private new void OnDisable()
-        {
-            base.OnDisable();
-            inputField.onValidateInput -= DynamicValidate;
         }
 
 
@@ -107,5 +120,7 @@ namespace UI.InputField
                     break;
             }
         }
+
+        #endregion
     }
 }

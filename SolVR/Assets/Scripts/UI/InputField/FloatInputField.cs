@@ -9,9 +9,24 @@ namespace UI.InputField
     /// </summary>
     public class FloatInputField : DataTypeInputField<float>
     {
-        [Tooltip("Flag for setting if negative values should be allowed.")]
-        [SerializeField] private bool allowNegativeValues;
-        
+        #region Variables
+
+        [Tooltip("Flag for setting if negative values should be allowed.")] [SerializeField]
+        private bool allowNegativeValues;
+
+        #endregion
+
+        #region Built-in methods
+
+        /// <summary>
+        /// Subscribes to events. 
+        /// </summary>
+        private new void OnEnable()
+        {
+            base.OnEnable();
+            inputField.onValidateInput += FloatValidate;
+        }
+
         /// <summary>
         /// Initializes input content type.
         /// </summary>
@@ -23,6 +38,19 @@ namespace UI.InputField
         }
 
         /// <summary>
+        /// Unsubscribes from all events. 
+        /// </summary>
+        private new void OnDisable()
+        {
+            base.OnDisable();
+            inputField.onValidateInput -= FloatValidate;
+        }
+
+        #endregion
+
+        #region Custom methods
+
+        /// <summary>
         /// Parse string to float.
         /// </summary>
         /// <param name="input">A string that will be parsed to float.</param>
@@ -31,16 +59,7 @@ namespace UI.InputField
         {
             return float.Parse(input);
         }
-        
-        /// <summary>
-        /// Subscribes to events. 
-        /// </summary>
-        private new void OnEnable()
-        {
-            base.OnEnable();
-            inputField.onValidateInput += FloatValidate;
-        }
-        
+
         /// <summary>
         /// Validates added character and the whole string to float schema and returns character based on result.
         /// </summary>
@@ -50,24 +69,18 @@ namespace UI.InputField
         /// <returns>Not changed char if it passes the validation or empty char if it's not.</returns>
         private char FloatValidate(string input, int charIndex, char addedChar)
         {
-            if (!allowNegativeValues && addedChar=='-') // negative values are not allowed and char is a minus
+            if (!allowNegativeValues && addedChar == '-') // negative values are not allowed and char is a minus
             {
-                addedChar = '\0';  // change it to an empty character
+                addedChar = '\0'; // change it to an empty character
             }
             else if (!Regex.IsMatch(input + addedChar, @"^[-]?([0-9]*\.?[0-9]*)$"))
             {
-                addedChar = '\0';  // change it to an empty character
+                addedChar = '\0'; // change it to an empty character
             }
+
             return addedChar;
         }
-        
-        /// <summary>
-        /// Unsubscribes from all events. 
-        /// </summary>
-        private new void OnDisable()
-        {
-            base.OnDisable();
-            inputField.onValidateInput -= FloatValidate;
-        }
+
+        #endregion
     }
 }

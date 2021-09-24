@@ -8,6 +8,8 @@ namespace VisualCoding.Blocks.LogicBlocks
     /// </summary>
     public class IfBlock : Block
     {
+        #region Variables
+
         [SerializeField] [Tooltip("Block that will be next if condition is not met.")]
         private Block @else;
 
@@ -26,6 +28,10 @@ namespace VisualCoding.Blocks.LogicBlocks
             set => condition = value;
         } // condition that is checked to determine the next block
 
+        #endregion
+
+        #region Custom methods
+
         /// <summary>
         /// Determines and returns the next block by checking a condition.
         /// </summary>
@@ -34,5 +40,7 @@ namespace VisualCoding.Blocks.LogicBlocks
         {
             return Condition.GetValue() ? Next : Else;
         }
+
+        #endregion
     }
 }
