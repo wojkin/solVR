@@ -88,6 +88,34 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139478977613498545, guid: c26a98cd68f4d724683dd567c64e20f0, type: 3}
+      propertyPath: connectedBlock.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139478977613498545, guid: c26a98cd68f4d724683dd567c64e20f0, type: 3}
+      propertyPath: connectedBlock.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139478977613498545, guid: c26a98cd68f4d724683dd567c64e20f0, type: 3}
+      propertyPath: connectedBlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8911988816459269276}
+    - target: {fileID: 5139478977613498545, guid: c26a98cd68f4d724683dd567c64e20f0, type: 3}
+      propertyPath: connectedBlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139478977613498545, guid: c26a98cd68f4d724683dd567c64e20f0, type: 3}
+      propertyPath: connectedBlock.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_Next
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139478977613498545, guid: c26a98cd68f4d724683dd567c64e20f0, type: 3}
+      propertyPath: connectedBlock.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: VisualCoding.Blocks.Block, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139478977613498545, guid: c26a98cd68f4d724683dd567c64e20f0, type: 3}
+      propertyPath: connectedBlock.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c26a98cd68f4d724683dd567c64e20f0, type: 3}
 --- !u!4 &2981926286984771527 stripped
