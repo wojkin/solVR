@@ -12,6 +12,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "GrabLeftHand",
+                    "type": "Button",
+                    "id": "711b34c5-c506-4e10-826b-6f76df6a3a49",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "GrabRightHand",
+                    "type": "Button",
+                    "id": "4d1b25f7-a317-43bf-bc7d-b1ade1b6e4ba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -47,6 +63,28 @@
                     "action": "Two Handed Manipulation",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "32bf7708-3edc-48c7-be9f-0f32bafd750c",
+                    "path": "<XRController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrabLeftHand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8b3592e-de5b-4ce8-8f7b-6259042ffaf4",
+                    "path": "<XRController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrabRightHand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

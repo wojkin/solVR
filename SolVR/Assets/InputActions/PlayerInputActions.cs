@@ -27,6 +27,22 @@ namespace InputActions
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""GrabLeftHand"",
+                    ""type"": ""Button"",
+                    ""id"": ""711b34c5-c506-4e10-826b-6f76df6a3a49"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""GrabRightHand"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d1b25f7-a317-43bf-bc7d-b1ade1b6e4ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -62,6 +78,28 @@ namespace InputActions
                     ""action"": ""Two Handed Manipulation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32bf7708-3edc-48c7-be9f-0f32bafd750c"",
+                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GrabLeftHand"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8b3592e-de5b-4ce8-8f7b-6259042ffaf4"",
+                    ""path"": ""<XRController>{RightHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GrabRightHand"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -71,6 +109,8 @@ namespace InputActions
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_TwoHandedManipulation = m_Player.FindAction("Two Handed Manipulation", throwIfNotFound: true);
+            m_Player_GrabLeftHand = m_Player.FindAction("GrabLeftHand", throwIfNotFound: true);
+            m_Player_GrabRightHand = m_Player.FindAction("GrabRightHand", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -121,11 +161,15 @@ namespace InputActions
         private readonly InputActionMap m_Player;
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_TwoHandedManipulation;
+        private readonly InputAction m_Player_GrabLeftHand;
+        private readonly InputAction m_Player_GrabRightHand;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
             public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @TwoHandedManipulation => m_Wrapper.m_Player_TwoHandedManipulation;
+            public InputAction @GrabLeftHand => m_Wrapper.m_Player_GrabLeftHand;
+            public InputAction @GrabRightHand => m_Wrapper.m_Player_GrabRightHand;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -138,6 +182,12 @@ namespace InputActions
                     @TwoHandedManipulation.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTwoHandedManipulation;
                     @TwoHandedManipulation.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTwoHandedManipulation;
                     @TwoHandedManipulation.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTwoHandedManipulation;
+                    @GrabLeftHand.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrabLeftHand;
+                    @GrabLeftHand.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrabLeftHand;
+                    @GrabLeftHand.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrabLeftHand;
+                    @GrabRightHand.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrabRightHand;
+                    @GrabRightHand.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrabRightHand;
+                    @GrabRightHand.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrabRightHand;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -145,6 +195,12 @@ namespace InputActions
                     @TwoHandedManipulation.started += instance.OnTwoHandedManipulation;
                     @TwoHandedManipulation.performed += instance.OnTwoHandedManipulation;
                     @TwoHandedManipulation.canceled += instance.OnTwoHandedManipulation;
+                    @GrabLeftHand.started += instance.OnGrabLeftHand;
+                    @GrabLeftHand.performed += instance.OnGrabLeftHand;
+                    @GrabLeftHand.canceled += instance.OnGrabLeftHand;
+                    @GrabRightHand.started += instance.OnGrabRightHand;
+                    @GrabRightHand.performed += instance.OnGrabRightHand;
+                    @GrabRightHand.canceled += instance.OnGrabRightHand;
                 }
             }
         }
@@ -152,6 +208,8 @@ namespace InputActions
         public interface IPlayerActions
         {
             void OnTwoHandedManipulation(InputAction.CallbackContext context);
+            void OnGrabLeftHand(InputAction.CallbackContext context);
+            void OnGrabRightHand(InputAction.CallbackContext context);
         }
     }
 }
