@@ -9,9 +9,14 @@ namespace ScriptableObjects
     [CreateAssetMenu(fileName = "Environment", menuName = "ScriptableObjects/Environment", order = 1)]
     public class Environment : ScriptableObject
     {
+        #region Serialized Fields
+
         // Name of the scene
         public string environmentName;
+
         // Reference to addressable scene
         public AssetReference scene;
+
+        #endregion
     }
 }

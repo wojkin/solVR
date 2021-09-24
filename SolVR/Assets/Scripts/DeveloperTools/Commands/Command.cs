@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngineInternal;
 
 namespace DeveloperTools.Commands
 {
@@ -11,8 +10,14 @@ namespace DeveloperTools.Commands
     [Serializable]
     public class Command
     {
+        #region Serialized Fields
+
         // a regex pattern representing the command. If a string is matched to this pattern the command will be executed.
         [SerializeField] protected string commandPattern;
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Executes the command.
@@ -31,5 +36,7 @@ namespace DeveloperTools.Commands
             var rx = new Regex(commandPattern);
             return rx.IsMatch(command);
         }
+
+        #endregion
     }
 }

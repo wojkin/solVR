@@ -7,14 +7,18 @@ namespace VisualCoding.Values.Enums
     /// </summary>
     public enum ArithmeticOperation
     {
-        Addition, Difference, Multiplication
+        Addition,
+        Difference,
+        Multiplication
     }
-    
+
     /// <summary>
     /// Extension to <c>ArithmeticOperation</c> enum to get matching operators to operations.
     /// </summary>
     public static class ArithmeticOperationExtensions
     {
+        #region Custom Methods
+
         /// <summary>
         /// Returns arithmetic operators based on an operation.
         /// </summary>
@@ -23,12 +27,15 @@ namespace VisualCoding.Values.Enums
         /// <exception cref="ArgumentOutOfRangeException">Exception throws then operation don't have any operator matched.</exception>
         public static string GetArithmeticOperator(this ArithmeticOperation operation)
         {
-            return operation switch {
+            return operation switch
+            {
                 ArithmeticOperation.Addition => "+",
                 ArithmeticOperation.Difference => "-",
                 ArithmeticOperation.Multiplication => "*",
                 _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
             };
         }
+
+        #endregion
     }
 }

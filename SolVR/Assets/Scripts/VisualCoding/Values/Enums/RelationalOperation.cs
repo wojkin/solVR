@@ -7,14 +7,18 @@ namespace VisualCoding.Values.Enums
     /// </summary>
     public enum RelationalOperation
     {
-        Equal, LessThan, GreaterThan
+        Equal,
+        LessThan,
+        GreaterThan
     }
-    
+
     /// <summary>
     /// Extension to <c>RelationalOperation</c> enum to get matching operators to operations.
     /// </summary>
     public static class RelationalOperationExtensions
     {
+        #region Custom Methods
+
         /// <summary>
         /// Returns relational operators based on an operation.
         /// </summary>
@@ -23,12 +27,15 @@ namespace VisualCoding.Values.Enums
         /// <exception cref="ArgumentOutOfRangeException">Exception throws then operation don't have any operator matched.</exception>
         public static string GetRelationalOperator(this RelationalOperation operation)
         {
-            return operation switch {
+            return operation switch
+            {
                 RelationalOperation.Equal => "==",
                 RelationalOperation.LessThan => "<",
                 RelationalOperation.GreaterThan => ">",
                 _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
             };
         }
+
+        #endregion
     }
 }

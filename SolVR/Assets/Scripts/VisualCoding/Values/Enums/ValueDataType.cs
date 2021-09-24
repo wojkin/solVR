@@ -5,6 +5,9 @@ namespace VisualCoding.Values.Enums
     /// </summary>
     public enum ValueDataType
     {
-        Integer, Float, String, Boolean
+        Integer,
+        Float,
+        String,
+        Boolean
     }
 }

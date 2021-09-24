@@ -7,6 +7,8 @@ namespace Patterns
     /// </summary>
     public class Singleton<T> : MonoBehaviour where T : Component
     {
+        #region Variables
+
         private static T _instance; // instance of the class
 
         // a flag representing whether the application is currently shutting down.
@@ -37,6 +39,10 @@ namespace Patterns
             }
         }
 
+        #endregion
+
+        #region Built-in Methods
+
         /// <summary>
         /// If no other instance is set, it sets this object as the instance, otherwise it destroys itself.
         /// </summary>
@@ -56,14 +62,6 @@ namespace Patterns
         }
 
         /// <summary>
-        /// Sets a shutting down flag when the application starts exiting.
-        /// </summary>
-        private void OnApplicationQuit()
-        {
-            _shuttingDown = true;
-        }
-
-        /// <summary>
         /// Sets a shutting down flag when this object is destroyed, so it doesn't recreate itself when the
         /// application is exiting.
         /// </summary>
@@ -71,5 +69,15 @@ namespace Patterns
         {
             _shuttingDown = true;
         }
+
+        /// <summary>
+        /// Sets a shutting down flag when the application starts exiting.
+        /// </summary>
+        private void OnApplicationQuit()
+        {
+            _shuttingDown = true;
+        }
+
+        #endregion
     }
 }

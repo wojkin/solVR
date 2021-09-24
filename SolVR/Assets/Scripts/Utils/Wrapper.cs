@@ -6,7 +6,13 @@ namespace Utils
     /// <typeparam name="T">The type of the struct which will be wrapped.</typeparam>
     public class Wrapper<T> where T : struct
     {
+        #region Variables
+
         public T Value; // the wrapped struct
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Initializes the wrapper.
@@ -16,5 +22,7 @@ namespace Utils
         {
             Value = value;
         }
+
+        #endregion
     }
 }

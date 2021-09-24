@@ -9,6 +9,8 @@ namespace UI.Dropdown
     /// </summary>
     public class ArithmeticOperationDropdown : EnumDropdown<ArithmeticOperation>
     {
+        #region Custom Methods
+
         /// <summary>
         /// Populates dropdown with corresponding operators of the enum values.
         /// </summary>
@@ -16,11 +18,10 @@ namespace UI.Dropdown
         {
             var enumValues = Enum.GetValues(typeof(ArithmeticOperation));
             var operators = new List<string>();
-            foreach (ArithmeticOperation enumValue in enumValues)
-            {
-                operators.Add(enumValue.GetArithmeticOperator());
-            }
+            foreach (ArithmeticOperation enumValue in enumValues) operators.Add(enumValue.GetArithmeticOperator());
             dropdown.AddOptions(operators);
         }
+
+        #endregion
     }
 }

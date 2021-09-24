@@ -7,12 +7,14 @@ namespace VisualCoding.Values
     /// </summary>
     public abstract class Value : MonoBehaviour
     {
+        #region Custom Methods
+
         /// <summary>
         /// Returns a value.
         /// </summary>
         /// <returns>A value of a type that dynamically matches the given value.</returns>
         public abstract dynamic GetValue();
-        
+
         /// <summary>
         /// Checks if this object value is less than given <c>Value</c> object's one.
         /// </summary>
@@ -42,5 +44,7 @@ namespace VisualCoding.Values
         {
             return GetValue() == rightValue.GetValue();
         }
+
+        #endregion
     }
 }

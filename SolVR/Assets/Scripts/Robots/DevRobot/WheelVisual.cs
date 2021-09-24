@@ -8,10 +8,21 @@ namespace Robots.DevRobot
     /// </summary>
     public class WheelVisual : MonoBehaviour
     {
+        #region Serialized Fields
+
         // wheel collider which position and rotation will be applied to a mesh
         [SerializeField] private WheelCollider wheelCollider;
+
+        #endregion
+
+        #region Variables
+
         // factor for the linear interpolation between current and desired transform
         private const float LerpFactor = 0.7f;
+
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Gets the position and rotation of the wheel collider and applies it to the gameobject this script is
@@ -20,11 +31,13 @@ namespace Robots.DevRobot
         void Update()
         {
             // get position and rotation
-            wheelCollider.GetWorldPose(out Vector3 targetPosition, out Quaternion targetRotation);
-            
+            wheelCollider.GetWorldPose(out var targetPosition, out var targetRotation);
+
             // apply position and rotation using lerp
             transform.position = Vector3.Lerp(transform.position, targetPosition, LerpFactor);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, LerpFactor);
         }
+
+        #endregion
     }
 }

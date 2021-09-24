@@ -2,7 +2,6 @@ using Managers;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 namespace UI
@@ -12,11 +11,17 @@ namespace UI
     /// </summary>
     public class UILevelListElement : MonoBehaviour, IUIListElement
     {
+        #region Serialized Fields
+
         [Tooltip("Level name text.")] [SerializeField]
         private TextMeshProUGUI levelName;
 
         [Tooltip("Button to load a level.")] [SerializeField]
         private Button playButton;
+
+        #endregion
+
+        #region IUIListElement Methods
 
         /// <summary>
         /// Populates the fields of a level list element.
@@ -32,5 +37,7 @@ namespace UI
                 CustomSceneManager.Instance.QueueLoadScene(levelData.scene)
             );
         }
+
+        #endregion
     }
 }

@@ -9,15 +9,20 @@ namespace VisualCoding.Values
     /// </summary>
     public class TwoValueArithmeticOperation : Value
     {
+        #region Serialized Fields
 
         [SerializeField] [Tooltip("Arithmetic operation performed on right and left values.")]
         private ArithmeticOperation operation;
-        
+
         [SerializeField] [Tooltip("A value that is on the left of the operand.")]
-        private Value left; 
-        
+        private Value left;
+
         [SerializeField] [Tooltip("A value that is on the right of the operand.")]
         private Value right;
+
+        #endregion
+
+        #region Variables
 
         public ArithmeticOperation Operation
         {
@@ -37,6 +42,9 @@ namespace VisualCoding.Values
             set => right = value;
         } // value that is on the right of the operand
 
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Calculates and returns value that is a result of arithmetic operation.
@@ -53,5 +61,7 @@ namespace VisualCoding.Values
                 _ => throw new ArgumentOutOfRangeException("Operation", "This operation is not handled.")
             };
         }
+
+        #endregion
     }
 }

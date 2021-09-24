@@ -9,6 +9,8 @@ namespace Controls.Interactions
     /// </summary>
     public class Grabber : MonoBehaviour
     {
+        #region Variables
+
         // threshold below which position of the grabbed object will be set instead of lerped
         private const float LerpDistanceThreshold = 0.01f;
         private const float GrabRadius = 0.1f; // the radius around the grabber in which objects can be grabbed
@@ -19,6 +21,10 @@ namespace Controls.Interactions
         // a coroutine responsible for smoothly moving the gameobject to the grabbers position
         private Coroutine _grabbingCoroutine;
         private State _state; // state of the grabber
+
+        #endregion
+
+        #region Nested Types
 
         /// <summary>
         /// Enum representing the state of the grabber.
@@ -33,6 +39,10 @@ namespace Controls.Interactions
             NotGrabbing
         }
 
+        #endregion
+
+        #region Built-in Methods
+
         /// <summary>
         /// If an object is grabbed, updates its position to follow the grabber.
         /// </summary>
@@ -41,6 +51,10 @@ namespace Controls.Interactions
             if (_state == State.Grabbed)
                 _grabbedObject.transform.position = transform.position;
         }
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Handler for the grab event invoked by the input handler.
@@ -109,5 +123,7 @@ namespace Controls.Interactions
             _state = State.Grabbed;
             _grabbingCoroutine = null;
         }
+
+        #endregion
     }
 }

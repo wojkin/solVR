@@ -9,11 +9,17 @@ namespace VisualCoding.Blocks.ActionBlocks
     /// </summary>
     public class TurnBlock : Block, IGetCommand
     {
+        #region Serialized Fields
+
         [SerializeField] [Tooltip("The direction in which the robot should turn.")]
         private TurnDirection direction;
 
         [SerializeField] [Tooltip("The steer angle of the wheels around the local vertical axis.")]
         private int angle;
+
+        #endregion
+
+        #region Variables
 
         public TurnDirection Direction
         {
@@ -27,6 +33,10 @@ namespace VisualCoding.Blocks.ActionBlocks
             set => angle = value;
         } // the steer angle of the wheels around the local vertical axis
 
+        #endregion
+
+        #region IGetCommand Methods
+
         /// <summary>
         /// Creates and returns a turn command.
         /// </summary>
@@ -35,5 +45,7 @@ namespace VisualCoding.Blocks.ActionBlocks
         {
             return new TurnCommand(Direction, Angle);
         }
+
+        #endregion
     }
 }

@@ -8,7 +8,13 @@ namespace Controls.Interactions
     [RequireComponent(typeof(Collider))]
     public class Grabbable : MonoBehaviour
     {
+        #region Variables
+
         public bool IsGrabbed { get; private set; } // flag showing whether the object is currently grabbed
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Function, which should be called when the object is grabbed.
@@ -27,5 +33,7 @@ namespace Controls.Interactions
         {
             IsGrabbed = false;
         }
+
+        #endregion
     }
 }

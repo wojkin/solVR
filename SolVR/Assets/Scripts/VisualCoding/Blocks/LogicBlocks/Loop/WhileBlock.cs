@@ -8,14 +8,24 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
     /// </summary>
     public class WhileBlock : LoopBlock
     {
-        [SerializeField][Tooltip("Condition that is checked to determine the next block.")]
+        #region Serialized Fields
+
+        [SerializeField] [Tooltip("Condition that is checked to determine the next block.")]
         private BooleanValue condition;
+
+        #endregion
+
+        #region Variables
 
         public BooleanValue Condition
         {
             get => condition;
             set => condition = value;
         } // condition that is checked to determine the next block
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Determines the next block by checking a condition.
@@ -24,7 +34,9 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
         /// <returns><inheritdoc /> <c>Block</c> is determine by checking the condition.</returns>
         public override Block NextBlock()
         {
-            return  Condition.GetValue() ? Next : EndBlock.Next;
+            return Condition.GetValue() ? Next : EndBlock.Next;
         }
+
+        #endregion
     }
 }

@@ -8,9 +8,16 @@ namespace Robots.Commands
     /// </summary>
     public class MoveCommand : Command<IMovable>
     {
+        #region Variables
+
         private readonly float _time; // the number of seconds the robot should move for when the command is executed.
 
         private readonly float _torque; // the torque applied to the robots wheels, when the command is executed, given
+
+        #endregion
+
+        #region Custom Methods
+
         // in Newton metres.
 
         /// <summary>
@@ -36,5 +43,7 @@ namespace Robots.Commands
             yield return robot.Move(_time, _torque);
             Logger.OnLog($"Finished moving for {_time}s at {_torque}N⋅m.");
         }
+
+        #endregion
     }
 }

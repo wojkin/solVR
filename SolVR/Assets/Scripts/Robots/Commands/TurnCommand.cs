@@ -9,8 +9,14 @@ namespace Robots.Commands
     /// </summary>
     public class TurnCommand : Command<ITurnable>
     {
+        #region Variables
+
         private readonly TurnDirection _direction; // the direction in which the robots wheels should turn
         private readonly int _angle; // the steer angle of the wheels around the local vertical axis
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// A constructor for a turn command.
@@ -33,5 +39,7 @@ namespace Robots.Commands
             yield return robot.Turn(_direction, _angle);
             Logger.OnLog($"Wheels turned {_angle} degrees {_direction.ToString()}.");
         }
+
+        #endregion
     }
 }

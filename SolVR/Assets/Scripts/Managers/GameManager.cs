@@ -7,13 +7,18 @@ namespace Managers
     /// </summary>
     public static class GameManager
     {
-        public static bool gameIsPaused; // flag showing if game is paused
+        #region Variables
 
         public delegate void PauseChange(); // a delegate for a pausing change (pause or resume)
-        
+
         public static event PauseChange OnPause; // an event invoked after the game is paused
 
         public static event PauseChange OnResume; // an event invoked after the game is resumed
+        public static bool gameIsPaused; // flag showing if game is paused
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Subscribes to all needed events.
@@ -35,7 +40,7 @@ namespace Managers
         {
             Application.Quit();
         }
-        
+
         /// <summary>
         /// Pausing the game.
         /// </summary>
@@ -55,5 +60,7 @@ namespace Managers
             gameIsPaused = false;
             OnResume?.Invoke();
         }
+
+        #endregion
     }
 }

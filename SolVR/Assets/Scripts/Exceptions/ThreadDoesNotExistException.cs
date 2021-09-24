@@ -7,6 +7,8 @@ namespace Exceptions
     /// </summary>
     public class ThreadDoesNotExistException : Exception
     {
+        #region Custom Methods
+
         public ThreadDoesNotExistException()
         {
         }
@@ -20,5 +22,7 @@ namespace Exceptions
             : base(message, inner)
         {
         }
+
+        #endregion
     }
 }

@@ -9,8 +9,14 @@ namespace UI.InputField
     /// </summary>
     public class IntegerInputField : DataTypeInputField<int>
     {
-        [Tooltip("Flag for setting if negative values should be allowed.")]
-        [SerializeField] private bool allowNegativeValues;
+        #region Serialized Fields
+
+        [Tooltip("Flag for setting if negative values should be allowed.")] [SerializeField]
+        private bool allowNegativeValues;
+
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Initializes input content type.
@@ -23,6 +29,28 @@ namespace UI.InputField
         }
 
         /// <summary>
+        /// Subscribes to events. 
+        /// </summary>
+        private new void OnEnable()
+        {
+            base.OnEnable();
+            inputField.onValidateInput += IntegerValidate;
+        }
+
+        /// <summary>
+        /// Unsubscribes from all events. 
+        /// </summary>
+        private new void OnDisable()
+        {
+            base.OnDisable();
+            inputField.onValidateInput -= IntegerValidate;
+        }
+
+        #endregion
+
+        #region Custom Methods
+
+        /// <summary>
         /// Parse string to int.
         /// </summary>
         /// <param name="input">A string that will be parsed to int.</param>
@@ -30,15 +58,6 @@ namespace UI.InputField
         protected override int Parse(string input)
         {
             return int.Parse(input);
-        }
-        
-        /// <summary>
-        /// Subscribes to events. 
-        /// </summary>
-        private new void OnEnable()
-        {
-            base.OnEnable();
-            inputField.onValidateInput += IntegerValidate;
         }
 
         /// <summary>
@@ -50,24 +69,13 @@ namespace UI.InputField
         /// <returns>Not changed char if it passes the validation or empty char if it's not.</returns>
         private char IntegerValidate(string input, int charIndex, char addedChar)
         {
-            if (!allowNegativeValues && addedChar=='-') // negative values are not allowed and char is a minus
-            {
-                addedChar = '\0';  // change it to an empty character
-            }
+            if (!allowNegativeValues && addedChar == '-') // negative values are not allowed and char is a minus
+                addedChar = '\0'; // change it to an empty character
             else if (!Regex.IsMatch(input + addedChar, @"^[-]?[0-9]*$"))
-            {
-                addedChar = '\0';  // change it to an empty character
-            }
+                addedChar = '\0'; // change it to an empty character
             return addedChar;
         }
-        
-        /// <summary>
-        /// Unsubscribes from all events. 
-        /// </summary>
-        private new void OnDisable()
-        {
-            base.OnDisable();
-            inputField.onValidateInput -= IntegerValidate;
-        }
+
+        #endregion
     }
 }

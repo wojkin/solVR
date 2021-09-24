@@ -1,6 +1,5 @@
 ﻿using System;
 using Managers;
-using UnityEngine.SceneManagement;
 
 namespace DeveloperTools.Commands
 {
@@ -10,6 +9,8 @@ namespace DeveloperTools.Commands
     [Serializable]
     public class ResetCommand : Command
     {
+        #region Custom Methods
+
         public ResetCommand()
         {
             commandPattern = "rst";
@@ -22,5 +23,7 @@ namespace DeveloperTools.Commands
         {
             CustomSceneManager.Instance.QueueReloadScene();
         }
+
+        #endregion
     }
 }

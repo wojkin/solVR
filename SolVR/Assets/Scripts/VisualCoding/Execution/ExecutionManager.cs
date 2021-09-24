@@ -14,10 +14,26 @@ namespace VisualCoding.Execution
     /// </summary>
     public class ExecutionManager : MonoBehaviour
     {
+        #region Serialized Fields
+
         [SerializeField] private Robot robot; // robot on which commands will be executed
+
+        #endregion
+
+        #region Variables
+
+        // ExecutionState showing whether the execution state
+        private static ExecutionState _executionState = ExecutionState.NotRunning;
+
+        // a flag showing whether execution should be paused after finishing executing the next or current block
+        private static bool _pauseOnNextStep;
 
         // a list of execution threads responsible for executing blocks which are connected together
         private readonly List<BlockExecutionThread> _executionThreads = new List<BlockExecutionThread>();
+
+        #endregion
+
+        #region Nested Types
 
         /// <summary>
         /// An enum responsible for a state of the execution.
@@ -29,113 +45,13 @@ namespace VisualCoding.Execution
             NotRunning
         }
 
-        // ExecutionState showing whether the execution state
-        private static ExecutionState _executionState = ExecutionState.NotRunning;
-
-        // a flag showing whether execution should be paused after finishing executing the next or current block
-        private static bool _pauseOnNextStep;
-
-        /// <summary>
-        /// Initializes execution for each start block in the scene.
-        /// Finds all start blocks in the scene, creates an execution thread for each of them and starts execution.
-        /// Saves all execution threads to a list. Sets variable responsible for showing the execution state.
-        /// </summary>
-        private void Run()
-        {
-            _executionState = ExecutionState.Running;
-            var startBlocks = FindObjectsOfType<StartBlock>(); // find all start block components in the scene
-
-            foreach (var startBlock in startBlocks)
-            {
-                var thread = new BlockExecutionThread(this, startBlock);
-                thread.StartExecutingIfIdle();
-                _executionThreads.Add(thread);
-            }
-
-            if (startBlocks.Length == 0)
-                _executionState = ExecutionState.NotRunning;
-        }
-
-        /// <summary>
-        /// Calls <c>Run</c> or <c>Resume</c> method based on the state of the execution.
-        /// </summary>
-        public void ResumeOrRun()
-        {
-            switch (_executionState)
-            {
-                case ExecutionState.NotRunning:
-                    Run();
-                    break;
-                case ExecutionState.Paused:
-                    Resume();
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Stops execution of all threads.
-        /// Sets variable responsible for showing the execution state.
-        /// </summary>
-        public void ExitAllThreads()
-        {
-            foreach (var thread in _executionThreads)
-                thread.FinishExecution();
-            _executionState = ExecutionState.NotRunning;
-        }
-
-        /// <summary>
-        /// Pauses execution of blocks.
-        /// Sets variables responsible for pausing block execution, pauses the command execution on the robot and stops
-        /// physics simulation.
-        /// </summary>
-        public void Pause()
-        {
-            if (_executionState == ExecutionState.Running)
-            {
-                _executionState = ExecutionState.Paused;
-                _pauseOnNextStep = false;
-                robot.Pause();
-                Physics.autoSimulation = false;
-            }
-        }
-
-        /// <summary>
-        /// Resumes execution of blocks.
-        /// Sets a variable responsible for pausing block execution, resumes the command execution on the robot and the
-        /// physics simulation. Starts block execution for all threads. The execution threads start executing blocks in
-        /// the order they were initialized.
-        /// </summary>
-        private void Resume()
-        {
-            _executionState = ExecutionState.Running;
-            robot.Resume();
-            Physics.autoSimulation = true;
-
-            // start block execution for all idle robot threads
-            foreach (var handler in _executionThreads)
-                handler.StartExecutingIfIdle();
-        }
-
-        /// <summary>
-        /// Advances execution of blocks until one of them finishes executing.
-        /// Sets a variable responsible for pausing execution after a block finishes execution amd resumes execution.
-        /// Blocks start execution in the order they were initialized, so an execution thread which was initialized
-        /// first will execute all its non-action blocks before a thread that was initialized later.
-        /// </summary>
-        public void NextStep()
-        {
-            if (_executionState == ExecutionState.Paused)
-            {
-                _pauseOnNextStep = true;
-                Resume();
-            }
-        }
-
         /// <summary>
         /// A class responsible for executing a series of connected blocks.
         /// </summary>
         private class BlockExecutionThread
         {
+            #region Variables
+
             private readonly int _threadId; // ID of the robot thread created for this execution thread
             private readonly ExecutionManager _manager; // execution manager, which manages this thread
 
@@ -143,6 +59,10 @@ namespace VisualCoding.Execution
 
             // a flag representing whether the thread should finish execution before executing the next block
             private bool _finishExecution;
+
+            #endregion
+
+            #region Custom Methods
 
             /// <summary>
             /// Initializes a new block execution thread.
@@ -270,6 +190,110 @@ namespace VisualCoding.Execution
             {
                 _finishExecution = true;
             }
+
+            #endregion
         }
+
+        #endregion
+
+        #region Custom Methods
+
+        /// <summary>
+        /// Initializes execution for each start block in the scene.
+        /// Finds all start blocks in the scene, creates an execution thread for each of them and starts execution.
+        /// Saves all execution threads to a list. Sets variable responsible for showing the execution state.
+        /// </summary>
+        private void Run()
+        {
+            _executionState = ExecutionState.Running;
+            var startBlocks = FindObjectsOfType<StartBlock>(); // find all start block components in the scene
+
+            foreach (var startBlock in startBlocks)
+            {
+                var thread = new BlockExecutionThread(this, startBlock);
+                thread.StartExecutingIfIdle();
+                _executionThreads.Add(thread);
+            }
+
+            if (startBlocks.Length == 0)
+                _executionState = ExecutionState.NotRunning;
+        }
+
+        /// <summary>
+        /// Calls <c>Run</c> or <c>Resume</c> method based on the state of the execution.
+        /// </summary>
+        public void ResumeOrRun()
+        {
+            switch (_executionState)
+            {
+                case ExecutionState.NotRunning:
+                    Run();
+                    break;
+                case ExecutionState.Paused:
+                    Resume();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Stops execution of all threads.
+        /// Sets variable responsible for showing the execution state.
+        /// </summary>
+        public void ExitAllThreads()
+        {
+            foreach (var thread in _executionThreads)
+                thread.FinishExecution();
+            _executionState = ExecutionState.NotRunning;
+        }
+
+        /// <summary>
+        /// Pauses execution of blocks.
+        /// Sets variables responsible for pausing block execution, pauses the command execution on the robot and stops
+        /// physics simulation.
+        /// </summary>
+        public void Pause()
+        {
+            if (_executionState == ExecutionState.Running)
+            {
+                _executionState = ExecutionState.Paused;
+                _pauseOnNextStep = false;
+                robot.Pause();
+                Physics.autoSimulation = false;
+            }
+        }
+
+        /// <summary>
+        /// Resumes execution of blocks.
+        /// Sets a variable responsible for pausing block execution, resumes the command execution on the robot and the
+        /// physics simulation. Starts block execution for all threads. The execution threads start executing blocks in
+        /// the order they were initialized.
+        /// </summary>
+        private void Resume()
+        {
+            _executionState = ExecutionState.Running;
+            robot.Resume();
+            Physics.autoSimulation = true;
+
+            // start block execution for all idle robot threads
+            foreach (var handler in _executionThreads)
+                handler.StartExecutingIfIdle();
+        }
+
+        /// <summary>
+        /// Advances execution of blocks until one of them finishes executing.
+        /// Sets a variable responsible for pausing execution after a block finishes execution amd resumes execution.
+        /// Blocks start execution in the order they were initialized, so an execution thread which was initialized
+        /// first will execute all its non-action blocks before a thread that was initialized later.
+        /// </summary>
+        public void NextStep()
+        {
+            if (_executionState == ExecutionState.Paused)
+            {
+                _pauseOnNextStep = true;
+                Resume();
+            }
+        }
+
+        #endregion
     }
 }

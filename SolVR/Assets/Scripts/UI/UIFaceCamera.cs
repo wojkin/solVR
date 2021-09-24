@@ -9,10 +9,20 @@ namespace UI
     [RequireComponent(typeof(UIElement))]
     public class UIFaceCamera : MonoBehaviour
     {
-        private UIElement _uiElement; // UIElement attached to the gameObject
+        #region Serialized Fields
 
         [Tooltip("The camera the gameObject should face.")] [SerializeField]
         private new Transform camera;
+
+        #endregion
+
+        #region Variables
+
+        private UIElement _uiElement; // UIElement attached to the gameObject
+
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Initialize fields.
@@ -44,5 +54,7 @@ namespace UI
             // interpolate between the gameObject rotation and the desired one
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.unscaledDeltaTime * 100f);
         }
+
+        #endregion
     }
 }

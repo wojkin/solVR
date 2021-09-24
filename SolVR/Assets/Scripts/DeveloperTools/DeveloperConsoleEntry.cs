@@ -9,7 +9,13 @@ namespace DeveloperTools
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class DeveloperConsoleEntry : MonoBehaviour
     {
+        #region Variables
+
         private TextMeshProUGUI _entryText; // test visible in the list
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Activates the gameobject and sets its text to a string.
@@ -26,5 +32,7 @@ namespace DeveloperTools
                 _entryText = GetComponent<TextMeshProUGUI>();
             _entryText.text = text;
         }
+
+        #endregion
     }
 }

@@ -12,6 +12,16 @@ namespace VisualCoding.Blocks.UI
     [RequireComponent(typeof(LineRenderer))]
     public class OutConnector : Grabbable
     {
+        #region Serialized Fields
+
+        // event for configuring which property will be set by this connector
+        [SerializeField] private UnityEvent<Block> connectedBlock;
+        [SerializeField] private Transform origin; // the origin of the connector
+
+        #endregion
+
+        #region Variables
+
         private const float ConnectRadius = 0.1f; // the radius within which objects can be grabbed
 
         private const float LerpFactor = 8f; // multiplier for lerping position and rotation of the grabbed object
@@ -22,13 +32,13 @@ namespace VisualCoding.Blocks.UI
         // angle below which the objects rotation should be changed directly instead of lerped
         private const float LerpAngleThreshold = 1f;
 
-        // event for configuring which property will be set by this connector
-        [SerializeField] private UnityEvent<Block> connectedBlock;
-        [SerializeField] private Transform origin; // the origin of the connector
-
         private LineRenderer _connectionVisual; // line renderer responsible for visualizing the connection
         private Transform _targetTransform; // the transform which the connector should follow
         private State _state; // state the connector is in
+
+        #endregion
+
+        #region Nested Types
 
         /// <summary>
         /// Enum representing states the connector can be in.
@@ -42,6 +52,10 @@ namespace VisualCoding.Blocks.UI
             Connected,
             Disconnected
         }
+
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Initializes the connection visual.
@@ -66,6 +80,10 @@ namespace VisualCoding.Blocks.UI
                     FollowTarget();
             }
         }
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Sets the line visual positions so the it connects the origin with the out-connector.
@@ -198,5 +216,7 @@ namespace VisualCoding.Blocks.UI
                 yield return null;
             }
         }
+
+        #endregion
     }
 }

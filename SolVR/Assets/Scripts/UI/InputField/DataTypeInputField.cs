@@ -12,10 +12,20 @@ namespace UI.InputField
     [RequireComponent(typeof(TMP_InputField))]
     public abstract class DataTypeInputField<T> : MonoBehaviour
     {
-        protected TMP_InputField inputField; // an input field that is validated
+        #region Serialized Fields
 
         [Tooltip("Event that invokes on value changed in input field.")] [SerializeField]
         protected UnityEvent<T> onInputValueChanged;
+
+        #endregion
+
+        #region Variables
+
+        protected TMP_InputField inputField; // an input field that is validated
+
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Initializes fields.
@@ -41,6 +51,10 @@ namespace UI.InputField
             inputField.onValueChanged.RemoveListener(ParseInputValueOnChange);
         }
 
+        #endregion
+
+        #region Custom Methods
+
         /// <summary>
         /// Parse string to <c>T</c> data type.
         /// </summary>
@@ -60,6 +74,7 @@ namespace UI.InputField
                 inputField.image.color = Color.white;
                 return;
             }
+
             try
             {
                 var parsedValue = Parse(value);
@@ -71,5 +86,7 @@ namespace UI.InputField
                 inputField.image.color = Color.red;
             }
         }
+
+        #endregion
     }
 }

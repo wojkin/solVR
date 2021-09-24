@@ -10,6 +10,15 @@ namespace UI
     [RequireComponent(typeof(CanvasGroup))]
     public class UIElement : MonoBehaviour
     {
+        #region Serialized Fields
+
+        [Tooltip("UI is interactable while the game is paused")] [SerializeField]
+        public bool interactableOnPause;
+
+        #endregion
+
+        #region Variables
+
         private Canvas _canvas; // Canvas attached to the gameObject
         private CanvasGroup _canvasGroup; // Canvas group attached to the gameObject
 
@@ -20,8 +29,9 @@ namespace UI
             private set => _canvas.enabled = value;
         }
 
-        [Tooltip("UI is interactable while the game is paused")] [SerializeField]
-        public bool interactableOnPause;
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Initialize fields.
@@ -56,6 +66,10 @@ namespace UI
             }
         }
 
+        #endregion
+
+        #region Custom Methods
+
         /// <summary>
         /// Set UI as interactable.
         /// </summary>
@@ -88,5 +102,7 @@ namespace UI
         {
             IsVisible = true;
         }
+
+        #endregion
     }
 }

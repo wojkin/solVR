@@ -8,6 +8,8 @@ namespace Exceptions
     /// </summary>
     public class IncompatibleCommandException : Exception
     {
+        #region Custom Methods
+
         public IncompatibleCommandException()
         {
         }
@@ -21,5 +23,7 @@ namespace Exceptions
             : base(message, inner)
         {
         }
+
+        #endregion
     }
 }

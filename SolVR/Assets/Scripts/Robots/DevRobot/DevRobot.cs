@@ -12,10 +12,16 @@ namespace Robots.DevRobot
     /// </summary>
     public class DevRobot : Robot, IMovable, ITurnable
     {
+        #region Serialized Fields
+
         [SerializeField] private WheelCollider[] frontWheels; // array containing robots' front wheels
         [SerializeField] private WheelCollider[] rearWheels; // array containing robots' rear wheels
 
         [SerializeField] private float turnAngle; // angle at which the robots' wheels should turn
+
+        #endregion
+
+        #region IMovable Methods
 
         /// <summary>
         /// A coroutine for moving a robot by applying torque to its' wheels.
@@ -40,11 +46,12 @@ namespace Robots.DevRobot
             yield return new PausableWaitForSeconds(time, IsPaused);
 
             // restore previous motor torque values
-            foreach (var wheelCollider in rearWheels)
-            {
-                wheelCollider.motorTorque = prevTorques.Dequeue();
-            }
+            foreach (var wheelCollider in rearWheels) wheelCollider.motorTorque = prevTorques.Dequeue();
         }
+
+        #endregion
+
+        #region ITurnable Methods
 
         /// <summary>
         /// A coroutine for turning the robots wheels in a direction to an angle around the local vertical axis.
@@ -57,14 +64,14 @@ namespace Robots.DevRobot
         public IEnumerator Turn(TurnDirection direction, int angle)
         {
             foreach (var wheelCollider in frontWheels)
-            {
                 if (direction == TurnDirection.Left)
                     wheelCollider.steerAngle = turnAngle;
                 else
                     wheelCollider.steerAngle = -turnAngle;
-            }
 
             yield return new WaitForFixedUpdate();
         }
+
+        #endregion
     }
 }

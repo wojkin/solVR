@@ -16,11 +16,27 @@ namespace Robots
     /// </summary>
     public class Robot : MonoBehaviour, ICommandable
     {
+        #region Variables
+
+        public delegate void ThreadStateChange(ThreadState changedTo); // a delegate for a thread state change
+
+        // dictionary containing threads created for this robot, uses thread IDs as keys
+        private readonly Dictionary<int, RobotThread> _threads = new Dictionary<int, RobotThread>();
+
+        // a flag (bool wrapped in an object) showing whether command execution should be paused
+        protected readonly Wrapper<bool> IsPaused = new Wrapper<bool>(false);
+
+        #endregion
+
+        #region Nested Types
+
         /// <summary>
         /// A class for independently executing commands on a robot.
         /// </summary>
         private class RobotThread : IDisposable
         {
+            #region Variables
+
             // event called when a thread changes its state
             public event ThreadStateChange ThreadStateChanged;
 
@@ -30,6 +46,10 @@ namespace Robots
 
             // a property showing whether the thread is currently busy
             public bool CanExecuteCommands => State == ThreadState.Idle;
+
+            #endregion
+
+            #region Custom Methods
 
             /// <summary>
             /// Initializes a new thread and sets a handler for its state change event.
@@ -42,17 +62,6 @@ namespace Robots
                 State = ThreadState.Idle;
                 CurrentlyExecuting = null;
                 ThreadStateChanged += stateChangeHandler;
-            }
-
-            /// <summary>
-            /// Implementation of the IDisposable interface.
-            /// Removes all delegates registered to the thread change event.
-            /// </summary>
-            public void Dispose()
-            {
-                if (ThreadStateChanged != null)
-                    foreach (var d in ThreadStateChanged.GetInvocationList())
-                        ThreadStateChanged -= (d as ThreadStateChange);
             }
 
             /// <summary>
@@ -82,11 +91,13 @@ namespace Robots
                     throw new ThreadUnavailableException("Cannot execute a command on a busy/blocked thread!");
 
                 // get a thread executing a command of the same type (if it exists)
-                RobotThread thread = _robot.GetThreadExecutingCommand(command);
+                var thread = _robot.GetThreadExecutingCommand(command);
 
                 // if no other thread is executing a command of the same type, execute the command
                 if (thread == null)
+                {
                     _robot.StartCoroutine(ExecuteCommandCoroutine(command));
+                }
                 else
                 {
                     // handler which will be called when the other thread finishes execution
@@ -124,15 +135,28 @@ namespace Robots
                 CurrentlyExecuting = null;
                 ChangeStateTo(ThreadState.Idle);
             }
+
+            #endregion
+
+            #region IDisposable Members
+
+            /// <summary>
+            /// Implementation of the IDisposable interface.
+            /// Removes all delegates registered to the thread change event.
+            /// </summary>
+            public void Dispose()
+            {
+                if (ThreadStateChanged != null)
+                    foreach (var d in ThreadStateChanged.GetInvocationList())
+                        ThreadStateChanged -= (d as ThreadStateChange);
+            }
+
+            #endregion
         }
 
-        public delegate void ThreadStateChange(ThreadState changedTo); // a delegate for a thread state change
+        #endregion
 
-        // dictionary containing threads created for this robot, uses thread IDs as keys
-        private readonly Dictionary<int, RobotThread> _threads = new Dictionary<int, RobotThread>();
-
-        // a flag (bool wrapped in an object) showing whether command execution should be paused
-        protected readonly Wrapper<bool> IsPaused = new Wrapper<bool>(false);
+        #region Custom Methods
 
         /// <summary>
         /// Pauses command execution by setting the pause flag to true.
@@ -172,7 +196,7 @@ namespace Robots
         /// <returns>The ID of the thread which was created.</returns>
         public int CreateThread(ThreadStateChange stateChangeHandler)
         {
-            int lowestIndex = 0;
+            var lowestIndex = 0;
 
             // check if there are any threads
             if (_threads.Count != 0)
@@ -180,11 +204,9 @@ namespace Robots
                 lowestIndex = _threads.Keys.Max() + 1; // set the lowest index to the one after the highest one
 
                 // check if there are any free indexes before the highest one
-                for (int i = 0; i < _threads.Keys.Max(); i++)
-                {
+                for (var i = 0; i < _threads.Keys.Max(); i++)
                     if (!_threads.ContainsKey(i))
                         lowestIndex = i;
-                }
             }
 
             _threads.Add(lowestIndex, new RobotThread(this, stateChangeHandler));
@@ -244,5 +266,7 @@ namespace Robots
         {
             StartCoroutine(command.Execute(this));
         }
+
+        #endregion
     }
 }

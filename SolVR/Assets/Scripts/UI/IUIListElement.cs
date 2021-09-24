@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 namespace UI
@@ -8,12 +7,15 @@ namespace UI
     /// </summary>
     public interface IUIListElement
     {
+        #region Custom Methods
+
         /// <summary>
         /// Populates the fields of a list element.
         /// Sets fields of the UI element based on provided ScriptableObject.
         /// </summary>
         /// <param name="listElementData">ScriptableObject with data to fill UI list element.</param>
         void Populate(ScriptableObject listElementData);
-        
+
+        #endregion
     }
 }

@@ -3,11 +3,17 @@
 /// </summary>
 public static class Logger
 {
+    #region Variables
+
     // a delegate for logging a message
     public delegate void Log(string message);
 
     // a message log event
     public static event Log LogEvent;
+
+    #endregion
+
+    #region Custom Methods
 
     /// <summary>
     /// Calls a log event with a given message.
@@ -17,4 +23,6 @@ public static class Logger
     {
         LogEvent?.Invoke(message);
     }
+
+    #endregion
 }

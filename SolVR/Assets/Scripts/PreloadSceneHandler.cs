@@ -8,7 +8,13 @@ using UnityEngine.AddressableAssets;
 /// </summary>
 public class PreloadSceneHandler : MonoBehaviour
 {
+    #region Serialized Fields
+
     [SerializeField] private AssetReference sceneToLoad;
+
+    #endregion
+
+    #region Built-in Methods
 
     /// <summary>
     /// Changes the name of the object it's attached to to "__app", moves itself to DDOL scene and loads another scene.
@@ -19,4 +25,6 @@ public class PreloadSceneHandler : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         CustomSceneManager.Instance.QueueLoadScene(sceneToLoad);
     }
+
+    #endregion
 }

@@ -7,14 +7,24 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
     /// </summary>
     public class LoopEndBlock : Block
     {
-        [SerializeField][Tooltip("The block that is the loop corresponding to this loop end.")]
+        #region Serialized Fields
+
+        [SerializeField] [Tooltip("The block that is the loop corresponding to this loop end.")]
         private LoopBlock loop;
+
+        #endregion
+
+        #region Variables
 
         public LoopBlock Loop
         {
             private get { return loop; }
             set { loop = value; }
         } // the loop block
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// <inheritdoc />
@@ -24,5 +34,7 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
         {
             return Loop;
         }
+
+        #endregion
     }
 }

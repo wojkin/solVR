@@ -8,22 +8,11 @@ namespace Robots.Commands.Helpers
     /// </summary>
     public class PausableWaitForSeconds : CustomYieldInstruction
     {
-        private float _timer; // the remaining number of seconds the custom yield instruction should wait for
+        #region Variables
 
         // a flag (bool wrapped in an object) showing whether the waiting should be paused
         private readonly Wrapper<bool> _isPaused;
-
-        /// <summary>
-        /// Initializes all necessary variables. 
-        /// </summary>
-        /// <param name="timer">The number of seconds the custom yield instruction should wait for.</param>
-        /// <param name="isPaused">A bool wrapped in an object used to check whether showing whether the waiting should
-        /// be paused</param>
-        public PausableWaitForSeconds(float timer, Wrapper<bool> isPaused)
-        {
-            _timer = timer;
-            _isPaused = isPaused;
-        }
+        private float _timer; // the remaining number of seconds the custom yield instruction should wait for
 
         /// <summary>
         /// Variable representing whether enough time has passed.
@@ -38,5 +27,23 @@ namespace Robots.Commands.Helpers
                 return !(_timer <= 0f);
             }
         }
+
+        #endregion
+
+        #region Custom Methods
+
+        /// <summary>
+        /// Initializes all necessary variables. 
+        /// </summary>
+        /// <param name="timer">The number of seconds the custom yield instruction should wait for.</param>
+        /// <param name="isPaused">A bool wrapped in an object used to check whether showing whether the waiting should
+        /// be paused</param>
+        public PausableWaitForSeconds(float timer, Wrapper<bool> isPaused)
+        {
+            _timer = timer;
+            _isPaused = isPaused;
+        }
+
+        #endregion
     }
 }

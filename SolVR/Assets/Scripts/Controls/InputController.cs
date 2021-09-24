@@ -11,9 +11,7 @@ namespace Controls
     /// </summary>
     public class InputController : MonoBehaviour
     {
-        private PlayerInputActions _playerInputActions; // player input action with manipulation action
-
-        private XRIDefaultInputActions _xriInputActions; // xri input action with hands positions
+        #region Serialized Fields
 
         // event invoked on TwoHandedManipulation input action started, first parameter is right hand position and
         // the second one is left hand position
@@ -28,11 +26,23 @@ namespace Controls
         public UnityEvent onGrabRightHand; // unity event for handling right hand grab action
         public UnityEvent onReleaseRightHand; // unity event for handling right hand grab action
 
+        #endregion
+
+        #region Variables
+
+        private PlayerInputActions _playerInputActions; // player input action with manipulation action
+
+        private XRIDefaultInputActions _xriInputActions; // xri input action with hands positions
+
         // flag showing if two handed manipulation is in progress, set to true after input action is started, until
         // it's canceled
         private bool _isManipulated;
         private bool _isGrabbingLeftHand; // flag showing whether left hand is currently grabbing
         private bool _isGrabbingRightHand; // flag showing whether right hand is currently grabbing
+
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Initialize fields.
@@ -41,6 +51,20 @@ namespace Controls
         {
             _playerInputActions = new PlayerInputActions();
             _xriInputActions = new XRIDefaultInputActions();
+        }
+
+        /// <summary>
+        /// Invokes onTwoHandedManipulating event, with positions of right and left hands as parameters, as long as two
+        /// handed manipulation is in progress.
+        /// </summary>
+        private void Update()
+        {
+            if (_isManipulated)
+            {
+                var rightHandPosition = _xriInputActions.XRIRightHand.Position.ReadValue<Vector3>();
+                var leftHandPosition = _xriInputActions.XRILeftHand.Position.ReadValue<Vector3>();
+                onTwoHandedManipulating?.Invoke(rightHandPosition, leftHandPosition);
+            }
         }
 
         /// <summary>
@@ -90,19 +114,9 @@ namespace Controls
             _playerInputActions.Player.GrabRightHand.Disable();
         }
 
-        /// <summary>
-        /// Invokes onTwoHandedManipulating event, with positions of right and left hands as parameters, as long as two
-        /// handed manipulation is in progress.
-        /// </summary>
-        private void Update()
-        {
-            if (_isManipulated)
-            {
-                var rightHandPosition = _xriInputActions.XRIRightHand.Position.ReadValue<Vector3>();
-                var leftHandPosition = _xriInputActions.XRILeftHand.Position.ReadValue<Vector3>();
-                onTwoHandedManipulating?.Invoke(rightHandPosition, leftHandPosition);
-            }
-        }
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Handler for after pause event.
@@ -202,5 +216,7 @@ namespace Controls
             _isGrabbingRightHand = false;
             onReleaseRightHand?.Invoke();
         }
+
+        #endregion
     }
 }

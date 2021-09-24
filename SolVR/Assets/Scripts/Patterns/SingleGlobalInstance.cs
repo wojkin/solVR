@@ -8,9 +8,15 @@ namespace Patterns
     /// </summary>
     public class SingleGlobalInstance<T> : MonoBehaviour where T : Component
     {
+        #region Variables
+
         private static T _instance;
 
         public static T Instance => _instance;
+
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Checks if any other instance of this class exists. If it doesn't it sets itself as the globally accessible
@@ -29,5 +35,7 @@ namespace Patterns
                 Destroy(gameObject); // destroy itself
             }
         }
+
+        #endregion
     }
 }

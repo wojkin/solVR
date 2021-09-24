@@ -8,6 +8,8 @@ namespace Robots.Actions
     /// </summary>
     public interface ITurnable : ICommandable
     {
+        #region Custom Methods
+
         /// <summary>
         /// Turns the robots wheels in a direction to an angle around the local vertical axis.
         /// </summary>
@@ -15,5 +17,7 @@ namespace Robots.Actions
         /// <param name="angle">The steer angle of the wheels around the local vertical axis.</param>
         /// <returns>IEnumerator required for a coroutine.</returns>
         IEnumerator Turn(TurnDirection direction, int angle);
+
+        #endregion
     }
 }

@@ -14,13 +14,19 @@ namespace Managers
     /// </summary>
     public class CustomSceneManager : Singleton<CustomSceneManager>
     {
+        #region Variables
+
         public delegate void SceneChange(string sceneName); // a delegate for a scene change (load or unload)
 
         public event SceneChange AfterLoad; // an event invoked after a scene was loaded
         public event SceneChange BeforeUnload; // an event invoked before a scene starts unloading
-        private bool _loading; // a flag representing whether a new scene is currently being loaded
         private readonly Queue<Action> _loadQueue = new Queue<Action>(); // a queue of scene load calls
+        private bool _loading; // a flag representing whether a new scene is currently being loaded
         private AssetReference _lastLoadedScene;
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Queues a scene load or loads it immediately if no other scene is being loaded.
@@ -31,13 +37,9 @@ namespace Managers
         public void QueueLoadScene(string sceneName)
         {
             if (_loading)
-            {
                 _loadQueue.Enqueue(() => { StartLoadingScene(sceneName); });
-            }
             else
-            {
                 StartLoadingScene(sceneName);
-            }
         }
 
         /// <summary>
@@ -49,15 +51,11 @@ namespace Managers
         public void QueueLoadScene(AssetReference addressableScene)
         {
             if (_loading)
-            {
                 _loadQueue.Enqueue(() => { StartLoadingScene(addressableScene); });
-            }
             else
-            {
                 StartLoadingScene(addressableScene);
-            }
         }
-        
+
         /// <summary>
         /// Queues reload of the currently loaded scene or reloads it immediately if no other scene is being loaded.
         /// Checks if another scene is currently being loaded. If yes, an addressable scene load call is added to a
@@ -68,13 +66,9 @@ namespace Managers
             if (_lastLoadedScene != null)
             {
                 if (_loading)
-                {
                     _loadQueue.Enqueue(() => { StartLoadingScene(_lastLoadedScene); });
-                }
                 else
-                {
                     StartLoadingScene(_lastLoadedScene);
-                }
             }
             else
             {
@@ -114,10 +108,7 @@ namespace Managers
         {
             // start loading a scene and wait until it finishes loading 
             var asyncLoadLevel = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-            while (!asyncLoadLevel.isDone)
-            {
-                yield return null;
-            }
+            while (!asyncLoadLevel.isDone) yield return null;
 
             FinishLoadingScene(sceneName);
         }
@@ -132,10 +123,7 @@ namespace Managers
         {
             // start loading an addressable scene and wait until it finishes loading 
             var asyncLoadLevel = Addressables.LoadSceneAsync(addressableScene);
-            while (!asyncLoadLevel.IsDone)
-            {
-                yield return null;
-            }
+            while (!asyncLoadLevel.IsDone) yield return null;
 
             _lastLoadedScene = addressableScene;
             FinishLoadingScene(asyncLoadLevel.Result.Scene.name);
@@ -153,13 +141,11 @@ namespace Managers
 
             // check if there are other scenes to load, if yes start loading the first one
             if (_loadQueue.Count > 0)
-            {
                 _loadQueue.Dequeue().Invoke();
-            }
             else
-            {
                 _loading = false;
-            }
         }
+
+        #endregion
     }
 }

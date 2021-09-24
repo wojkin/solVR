@@ -9,6 +9,8 @@ namespace UI.Dropdown
     /// </summary>
     public class RelationalOperationDropdown : EnumDropdown<RelationalOperation>
     {
+        #region Custom Methods
+
         /// <summary>
         /// Populates dropdown with corresponding operators of the enum values.
         /// </summary>
@@ -16,11 +18,10 @@ namespace UI.Dropdown
         {
             var enumValues = Enum.GetValues(typeof(RelationalOperation));
             var operators = new List<string>();
-            foreach (RelationalOperation enumValue in enumValues)
-            {
-                operators.Add(enumValue.GetRelationalOperator());
-            }
+            foreach (RelationalOperation enumValue in enumValues) operators.Add(enumValue.GetRelationalOperator());
             dropdown.AddOptions(operators);
         }
+
+        #endregion
     }
 }

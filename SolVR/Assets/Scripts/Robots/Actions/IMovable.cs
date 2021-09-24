@@ -7,6 +7,8 @@ namespace Robots.Actions
     /// </summary>
     public interface IMovable : ICommandable
     {
+        #region Custom Methods
+
         /// <summary>
         /// A coroutine which moves the robot for a given amount of time with a given torque.
         /// </summary>
@@ -14,5 +16,7 @@ namespace Robots.Actions
         /// <param name="torque">The torque applied to the robots wheels, given in Newton metres.</param>
         /// <returns>IEnumerator required for a coroutine.</returns>
         IEnumerator Move(float time, float torque);
+
+        #endregion
     }
 }

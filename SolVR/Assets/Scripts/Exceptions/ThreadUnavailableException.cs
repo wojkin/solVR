@@ -7,6 +7,8 @@ namespace Exceptions
     /// </summary>
     public class ThreadUnavailableException : Exception
     {
+        #region Custom Methods
+
         public ThreadUnavailableException()
         {
         }
@@ -20,5 +22,7 @@ namespace Exceptions
             : base(message, inner)
         {
         }
+
+        #endregion
     }
 }

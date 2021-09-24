@@ -8,13 +8,23 @@ namespace UI
     [RequireComponent(typeof(UIElement))]
     public class UIShowInFrontOfCamera : MonoBehaviour
     {
-        private UIElement _uiElement; // UIElement attached to the gameObject
+        #region Serialized Fields
 
         [Tooltip("Offset between the player and the UI object.")] [SerializeField]
         private float spawnOffset;
 
         [Tooltip("The main camera object in front of which the UI object will be displayed.")] [SerializeField]
         private new Transform camera;
+
+        #endregion
+
+        #region Variables
+
+        private UIElement _uiElement; // UIElement attached to the gameObject
+
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Initialize fields and add a listener for button input.
@@ -23,6 +33,10 @@ namespace UI
         {
             _uiElement = GetComponent<UIElement>();
         }
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Manages toggling the visibility of the UIElement.
@@ -56,5 +70,7 @@ namespace UI
 
             _uiElement.Show();
         }
+
+        #endregion
     }
 }

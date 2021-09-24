@@ -11,8 +11,9 @@ namespace DeveloperTools
     /// </summary>
     public class DeveloperConsole : SingleGlobalInstance<DeveloperConsole>
     {
-        [Header("User Interface")] 
-        [Tooltip("Content of the console scroll view.")] [SerializeField]
+        #region Serialized Fields
+
+        [Header("User Interface")] [Tooltip("Content of the console scroll view.")] [SerializeField]
         private Transform content;
 
         [Tooltip("Template for an element of the scroll view.")] [SerializeField]
@@ -21,7 +22,15 @@ namespace DeveloperTools
         [Tooltip("Input file for the commands.")] [SerializeField]
         private TMP_InputField inputField;
 
+        #endregion
+
+        #region Variables
+
         private readonly List<Command> _commands = new List<Command>(); // list of all available commands
+
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Initializes all commands.
@@ -48,6 +57,10 @@ namespace DeveloperTools
         {
             Logger.LogEvent -= Log;
         }
+
+        #endregion
+
+        #region Custom Methods
 
         /// <summary>
         /// Displays a message in a scrollable list in the developer console.
@@ -104,5 +117,7 @@ namespace DeveloperTools
                 inputField.textComponent.color = Color.red;
             }
         }
+
+        #endregion
     }
 }

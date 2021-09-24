@@ -9,6 +9,8 @@ namespace UI
     /// </summary>
     public class UIDispatcher : MonoBehaviour
     {
+        #region Custom Methods
+
         /// <summary>
         /// Exits the game.
         /// </summary>
@@ -16,7 +18,7 @@ namespace UI
         {
             GameManager.ExitGame();
         }
-        
+
         /// <summary>
         /// Loads a scene based on scene parameter in provided scriptableObject.
         /// </summary>
@@ -37,5 +39,7 @@ namespace UI
             else
                 GameManager.PauseGame();
         }
+
+        #endregion
     }
 }

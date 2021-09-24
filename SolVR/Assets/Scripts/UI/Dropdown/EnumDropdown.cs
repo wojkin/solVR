@@ -13,10 +13,20 @@ namespace UI.Dropdown
     [RequireComponent(typeof(TMP_Dropdown))]
     public abstract class EnumDropdown<TEnum> : MonoBehaviour where TEnum : Enum
     {
+        #region Serialized Fields
+
+        [Tooltip("Event that invokes on value changed in dropdown.")] [SerializeField]
+        protected UnityEvent<TEnum> onDropdownValueChanged;
+
+        #endregion
+
+        #region Variables
+
         protected TMP_Dropdown dropdown; // a dropdown that will be based on enum values
-    
-        [Tooltip("Event that invokes on value changed in dropdown.")]
-        [SerializeField] protected UnityEvent<TEnum> onDropdownValueChanged;
+
+        #endregion
+
+        #region Built-in Methods
 
         /// <summary>
         /// Initialize dropdown options.
@@ -44,6 +54,18 @@ namespace UI.Dropdown
         }
 
         /// <summary>
+        /// Unsubscribes from event. 
+        /// </summary>
+        protected void OnDisable()
+        {
+            dropdown.onValueChanged.RemoveListener(HandleDropdownChangedValue);
+        }
+
+        #endregion
+
+        #region Custom Methods
+
+        /// <summary>
         /// Populates dropdown with names of the enum values.
         /// </summary>
         protected virtual void PopulateDropdown()
@@ -58,16 +80,10 @@ namespace UI.Dropdown
         /// <param name="index">An index of selected value in dropdown.</param>
         private void HandleDropdownChangedValue(int index)
         {
-            var enumValue = (TEnum)Enum.GetValues(typeof(TEnum)).GetValue(index);
+            var enumValue = (TEnum) Enum.GetValues(typeof(TEnum)).GetValue(index);
             onDropdownValueChanged.Invoke(enumValue);
         }
 
-        /// <summary>
-        /// Unsubscribes from event. 
-        /// </summary>
-        protected void OnDisable()
-        {
-            dropdown.onValueChanged.RemoveListener(HandleDropdownChangedValue);
-        }
+        #endregion
     }
 }
