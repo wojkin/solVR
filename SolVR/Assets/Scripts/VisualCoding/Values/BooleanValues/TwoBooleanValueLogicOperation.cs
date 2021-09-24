@@ -9,8 +9,6 @@ namespace VisualCoding.Values.BooleanValues
     /// </summary>
     public class TwoBooleanValueLogicOperation : BooleanValue
     {
-        #region Variables
-
         [SerializeField] [Tooltip("Boolean value that is on the left of the logic operand.")]
         private BooleanValue left;
 
@@ -38,10 +36,6 @@ namespace VisualCoding.Values.BooleanValues
             set => operation = value;
         } // logic operation performed on right and left boolean values
 
-        #endregion
-
-        #region Custom methods
-
         /// <summary>
         /// Check and returns boolean that is a result of logic operation.
         /// </summary>
@@ -56,7 +50,5 @@ namespace VisualCoding.Values.BooleanValues
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-
-        #endregion
     }
 }

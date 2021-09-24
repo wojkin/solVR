@@ -7,8 +7,6 @@ namespace VisualCoding.Blocks
     /// </summary>
     public class Block : MonoBehaviour
     {
-        #region Variables
-
         [SerializeField] [Tooltip("A block that is connected to this block as a next one.")]
         private Block next;
 
@@ -18,10 +16,6 @@ namespace VisualCoding.Blocks
             set => next = value;
         } // a block that is connected to this block as a next one
 
-        #endregion
-
-        #region Custom methods
-
         /// <summary>
         /// Returns a block of code that should be run next.
         /// </summary>
@@ -30,7 +24,5 @@ namespace VisualCoding.Blocks
         {
             return Next;
         }
-
-        #endregion
     }
 }

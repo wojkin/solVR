@@ -13,16 +13,10 @@ namespace UI.Dropdown
     [RequireComponent(typeof(TMP_Dropdown))]
     public abstract class EnumDropdown<TEnum> : MonoBehaviour where TEnum : Enum
     {
-        #region Variables
-
         protected TMP_Dropdown dropdown; // a dropdown that will be based on enum values
-
-        [Tooltip("Event that invokes on value changed in dropdown.")] [SerializeField]
-        protected UnityEvent<TEnum> onDropdownValueChanged;
-
-        #endregion
-
-        #region Built-in methods
+    
+        [Tooltip("Event that invokes on value changed in dropdown.")]
+        [SerializeField] protected UnityEvent<TEnum> onDropdownValueChanged;
 
         /// <summary>
         /// Initialize dropdown options.
@@ -34,14 +28,6 @@ namespace UI.Dropdown
         }
 
         /// <summary>
-        /// Subscribes to event. 
-        /// </summary>
-        protected void OnEnable()
-        {
-            dropdown.onValueChanged.AddListener(HandleDropdownChangedValue);
-        }
-
-        /// <summary>
         /// Initialize dropdown selected value.
         /// </summary>
         protected void Start()
@@ -49,18 +35,13 @@ namespace UI.Dropdown
             HandleDropdownChangedValue(dropdown.value); // initial selected dropdown value
         }
 
-
         /// <summary>
-        /// Unsubscribes from event. 
+        /// Subscribes to event. 
         /// </summary>
-        protected void OnDisable()
+        protected void OnEnable()
         {
-            dropdown.onValueChanged.RemoveListener(HandleDropdownChangedValue);
+            dropdown.onValueChanged.AddListener(HandleDropdownChangedValue);
         }
-
-        #endregion
-
-        #region Custom methods
 
         /// <summary>
         /// Populates dropdown with names of the enum values.
@@ -81,6 +62,12 @@ namespace UI.Dropdown
             onDropdownValueChanged.Invoke(enumValue);
         }
 
-        #endregion
+        /// <summary>
+        /// Unsubscribes from event. 
+        /// </summary>
+        protected void OnDisable()
+        {
+            dropdown.onValueChanged.RemoveListener(HandleDropdownChangedValue);
+        }
     }
 }

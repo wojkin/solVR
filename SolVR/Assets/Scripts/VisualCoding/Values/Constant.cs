@@ -5,10 +5,8 @@ namespace VisualCoding.Values
     /// <summary>
     /// Class representing a constant value with dynamically matched type.
     /// </summary>
-    public class Constant : Value
+    public class Constant: Value
     {
-        #region Variables
-
         [SerializeField] [Tooltip("A constant value of dynamic type.")]
         private dynamic value;
 
@@ -18,10 +16,6 @@ namespace VisualCoding.Values
             set => this.value = value;
         } // a constant value
 
-        #endregion
-
-        #region Custom methods
-
         /// <summary>
         /// Returns a constant value.
         /// </summary>
@@ -30,7 +24,5 @@ namespace VisualCoding.Values
         {
             return Value;
         }
-
-        #endregion
     }
 }

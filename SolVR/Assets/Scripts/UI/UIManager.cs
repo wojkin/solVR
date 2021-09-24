@@ -7,14 +7,9 @@ namespace UI
     /// </summary>
     public class UIManager : MonoBehaviour
     {
-        #region Variables
-
-        [SerializeField] private UIElement displayed;
-
-        #endregion
-
-        #region Built-in methods
-
+        [SerializeField]
+        private UIElement displayed;
+        
         /// <summary>
         /// Shows UIElement specified in displayed parameter 
         /// </summary>
@@ -22,10 +17,6 @@ namespace UI
         {
             displayed?.Show();
         }
-
-        #endregion
-
-        #region Custom methods
 
         /// <summary>
         /// Hides already displayed UIElement and show UIElement provided as parameter
@@ -38,6 +29,5 @@ namespace UI
             displayed = element;
         }
 
-        #endregion
     }
 }

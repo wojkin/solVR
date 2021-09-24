@@ -9,8 +9,6 @@ namespace VisualCoding.Values.BooleanValues
     /// </summary>
     public class BooleanValueRelationalOperators : BooleanValue
     {
-        #region Variables
-
         [SerializeField] [Tooltip("Relational operation between on left and right boolean values.")]
         private RelationalOperation operation;
 
@@ -39,10 +37,6 @@ namespace VisualCoding.Values.BooleanValues
             set => rightValue = value;
         } // boolean value that is on the right of the relational operand
 
-        #endregion
-
-        #region Custom methods
-
         /// <summary>
         /// Check and returns boolean that is a result of relational operation.
         /// </summary>
@@ -58,7 +52,5 @@ namespace VisualCoding.Values.BooleanValues
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-
-        #endregion
     }
 }
