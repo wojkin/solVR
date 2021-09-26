@@ -383,6 +383,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ff3c57d50249b99b76ba053fc74942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  next: {fileID: 0}
+  endBlock: {fileID: 0}
+  numberOfLoops: 0
 --- !u!1 &6812453945948953406
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +684,10 @@ PrefabInstance:
       propertyPath: m_text
       value: For block
       objectReference: {fileID: 0}
+    - target: {fileID: 7863997789332308028, guid: 1aed015ba02262445ae1b730f1b36e65, type: 3}
+      propertyPath: toMove
+      value: 
+      objectReference: {fileID: 8039246273280126160}
     - target: {fileID: 8742734039067997831, guid: 1aed015ba02262445ae1b730f1b36e65, type: 3}
       propertyPath: m_Name
       value: InOutBlock

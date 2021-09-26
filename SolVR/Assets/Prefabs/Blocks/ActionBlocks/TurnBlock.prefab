@@ -1162,6 +1162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b46f80739b84b5896220a6da2c13cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  next: {fileID: 0}
+  direction: 0
+  angle: 0
 --- !u!1 &4046490217761147517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,6 +1907,10 @@ PrefabInstance:
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 7863997789332308028, guid: 1aed015ba02262445ae1b730f1b36e65, type: 3}
+      propertyPath: toMove
+      value: 
+      objectReference: {fileID: 8314125145861932681}
     - target: {fileID: 8742734039067997831, guid: 1aed015ba02262445ae1b730f1b36e65, type: 3}
       propertyPath: m_Name
       value: InOutBlock
