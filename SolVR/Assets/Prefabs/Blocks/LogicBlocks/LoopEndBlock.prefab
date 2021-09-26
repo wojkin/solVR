@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fe0044041474ad3a850f39e4cdd3bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  next: {fileID: 0}
+  loop: {fileID: 0}
 --- !u!1001 &4019977114728204699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,6 +133,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Loop End Block
       objectReference: {fileID: 0}
+    - target: {fileID: 7863997789332308028, guid: 1aed015ba02262445ae1b730f1b36e65, type: 3}
+      propertyPath: toMove
+      value: 
+      objectReference: {fileID: 8314125145861932681}
     - target: {fileID: 8742734039067997831, guid: 1aed015ba02262445ae1b730f1b36e65, type: 3}
       propertyPath: m_Name
       value: InOutBlock

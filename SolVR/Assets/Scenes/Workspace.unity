@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 242834916}
   - component: {fileID: 242834915}
   - component: {fileID: 242834914}
+  - component: {fileID: 242834918}
   m_Layer: 0
   m_Name: LeftHand Controller
   m_TagString: Untagged
@@ -710,6 +711,18 @@ MonoBehaviour:
       m_SingletonActionBindings: []
     m_Reference: {fileID: 7779212132400271959, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
+--- !u!114 &242834918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242834912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1b700229d406b469e49cd587b541b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &246171218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,6 +1397,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToRotate: {fileID: 1333565884}
   translationMultiplier: 1
+  scalingMultiplier: 1
+  rotationMultiplier: 1
 --- !u!1 &1602490764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1482,66 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onGrabLeftHand:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 242834918}
+        m_TargetAssemblyTypeName: Controls.Interactions.Grabber, Assembly-CSharp
+        m_MethodName: OnGrab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onReleaseLeftHand:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 242834918}
+        m_TargetAssemblyTypeName: Controls.Interactions.Grabber, Assembly-CSharp
+        m_MethodName: OnRelease
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onGrabRightHand:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2022492748}
+        m_TargetAssemblyTypeName: Controls.Interactions.Grabber, Assembly-CSharp
+        m_MethodName: OnGrab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onReleaseRightHand:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2022492748}
+        m_TargetAssemblyTypeName: Controls.Interactions.Grabber, Assembly-CSharp
+        m_MethodName: OnRelease
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1602490766
 Transform:
   m_ObjectHideFlags: 0
@@ -1537,6 +1612,7 @@ GameObject:
   - component: {fileID: 2022492746}
   - component: {fileID: 2022492745}
   - component: {fileID: 2022492744}
+  - component: {fileID: 2022492748}
   m_Layer: 0
   m_Name: RightHand Controller
   m_TagString: Untagged
@@ -1978,6 +2054,18 @@ MonoBehaviour:
       m_SingletonActionBindings: []
     m_Reference: {fileID: 875253871413052681, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
+--- !u!114 &2022492748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022492742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1b700229d406b469e49cd587b541b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2030548598
 GameObject:
   m_ObjectHideFlags: 0

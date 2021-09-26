@@ -49,7 +49,7 @@ namespace Controls.Interactions
         private void Update()
         {
             if (_state == State.Grabbed)
-                _grabbedObject.transform.position = transform.position;
+                _grabbedObject.toMove.position = transform.position;
         }
 
         #endregion
@@ -58,9 +58,9 @@ namespace Controls.Interactions
 
         /// <summary>
         /// Handler for the grab event invoked by the input handler.
-        /// Finds all colliders within a range of the grabber and sorts them in ascending order based on the distance
-        /// from the grabber. Finds the the first grabbable object which was attached to one of the colliders
-        /// gameobjects. Calls the grab method of this object, starts a coroutine for smoothly grabbing it and sets the
+        /// Finds all colliders within a range of the grabber and select not grabbed grabbables that are attached to the
+        /// same game objects. Sorts all grabbables in ascending order based on the distance from the grabber. Finds the
+        /// first grabbable and calls the grab method of it, starts a coroutine for smoothly grabbing it and sets the
         /// state to grabbing.
         /// </summary>
         public void OnGrab()
@@ -68,21 +68,20 @@ namespace Controls.Interactions
             // generate a list of colliders within range, sorted by the distance to the grabber
             var origin = transform.position;
             var colliders = Physics.OverlapSphere(origin, GrabRadius);
-            colliders = colliders.OrderBy(c => (origin - c.transform.position).sqrMagnitude).ToArray();
 
-            // find the first grabbable object which was attached to one of the colliders gameobjects
-            foreach (var collider in colliders)
-            {
-                var grabbable = collider.gameObject.GetComponent<Grabbable>();
-                if (grabbable != null && !grabbable.IsGrabbed)
-                {
-                    _grabbedObject = grabbable;
-                    grabbable.Grab();
-                    _grabbingCoroutine = StartCoroutine(Grab());
-                    _state = State.Grabbing;
-                    break;
-                }
-            }
+            // get all grabbable objects which ware attached to the same gameobject as collider and are not grabbed
+            var grabbables = colliders.Select(c => c.gameObject.GetComponent<Grabbable>())
+                .Where(grabbable => grabbable != null && !grabbable.IsGrabbed).ToList();
+
+            if (!grabbables.Any()) return; // no grabbable objects to grab
+
+            // get the first grabbable object after order grabbables by position
+            var closestGrabbable = grabbables.OrderBy(c => (origin - c.toMove.position).sqrMagnitude).First();
+
+            _grabbedObject = closestGrabbable;
+            closestGrabbable.Grab();
+            _grabbingCoroutine = StartCoroutine(Grab());
+            _state = State.Grabbing;
         }
 
         /// <summary>
@@ -113,9 +112,9 @@ namespace Controls.Interactions
         /// <returns>IEnumerator required for the coroutine.</returns>
         private IEnumerator Grab()
         {
-            while (Vector3.Distance(_grabbedObject.transform.position, transform.position) > LerpDistanceThreshold)
+            while (Vector3.Distance(_grabbedObject.toMove.position, transform.position) > LerpDistanceThreshold)
             {
-                _grabbedObject.transform.position = Vector3.Lerp(_grabbedObject.transform.position, transform.position,
+                _grabbedObject.toMove.position = Vector3.Lerp(_grabbedObject.toMove.position, transform.position,
                     LerpFactor * Time.deltaTime);
                 yield return null;
             }

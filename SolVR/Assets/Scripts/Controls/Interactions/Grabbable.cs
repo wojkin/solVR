@@ -8,6 +8,12 @@ namespace Controls.Interactions
     [RequireComponent(typeof(Collider))]
     public class Grabbable : MonoBehaviour
     {
+        #region Serialized Fields
+
+        [SerializeField] public Transform toMove; // the transform that will be changed to move the object
+
+        #endregion
+
         #region Variables
 
         public bool IsGrabbed { get; private set; } // flag showing whether the object is currently grabbed
