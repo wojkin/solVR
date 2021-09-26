@@ -20,7 +20,7 @@ namespace Controls.Interactions
 
         // a coroutine responsible for smoothly moving the gameobject to the grabbers position
         private Coroutine _grabbingCoroutine;
-        private State _state; // state of the grabber
+        private State _state = State.NotGrabbing; // state of the grabber
 
         #endregion
 
