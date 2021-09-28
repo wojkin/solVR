@@ -14,10 +14,14 @@ namespace Robots.DevRobot
     {
         #region Serialized Fields
 
-        [SerializeField] private WheelCollider[] frontWheels; // array containing robots' front wheels
-        [SerializeField] private WheelCollider[] rearWheels; // array containing robots' rear wheels
+        /// <summary>array containing robots' front wheels</summary>
+        [SerializeField] private WheelCollider[] frontWheels;
 
-        [SerializeField] private float turnAngle; // angle at which the robots' wheels should turn
+        /// <summary>array containing robots' rear wheels</summary>
+        [SerializeField] private WheelCollider[] rearWheels;
+
+        /// <summary>angle at which the robots' wheels should turn</summary>
+        [SerializeField] private float turnAngle;
 
         #endregion
 

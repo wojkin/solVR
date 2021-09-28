@@ -11,36 +11,42 @@ namespace VisualCoding.Values.BooleanValues
     {
         #region Serialized Fields
 
+        /// <summary>A logic operation performed on right and left boolean values.</summary>
+        [SerializeField] [Tooltip("A logic operation performed on right and left boolean values.")]
+        private LogicOperation operation;
+
+        /// <summary> Boolean value that is on the left of the logic operand.</summary>
         [SerializeField] [Tooltip("Boolean value that is on the left of the logic operand.")]
         private BooleanValue left;
 
+        /// <summary>Boolean value that is on the right of the logic operand.</summary>
         [SerializeField] [Tooltip("Boolean value that is on the right of the logic operand.")]
         private BooleanValue right;
-
-        [SerializeField] [Tooltip("A logic operation performed on right and left boolean values.")]
-        private LogicOperation operation;
 
         #endregion
 
         #region Variables
 
-        public BooleanValue Left
-        {
-            get => left;
-            set => left = value;
-        } // boolean value that is on the left of the logic operand
-
-        public BooleanValue Right
-        {
-            get => right;
-            set => right = value;
-        } // boolean value  that is on the right of the logic operand
-
+        /// <summary><inheritdoc cref="operation"/></summary>
         public LogicOperation Operation
         {
             get => operation;
             set => operation = value;
-        } // logic operation performed on right and left boolean values
+        }
+
+        /// <summary><inheritdoc cref="left"/></summary>
+        public BooleanValue Left
+        {
+            get => left;
+            set => left = value;
+        }
+
+        /// <summary><inheritdoc cref="right"/></summary>
+        public BooleanValue Right
+        {
+            get => right;
+            set => right = value;
+        }
 
         #endregion
 
@@ -50,7 +56,7 @@ namespace VisualCoding.Values.BooleanValues
         /// Check and returns boolean that is a result of logic operation.
         /// </summary>
         /// <returns>A result of logic operation on left and right boolean values.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Throws exception when <c>Operation</c> is not handled.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Throws exception when <see cref="Operation"/> is not handled.</exception>
         public override dynamic GetValue()
         {
             return Operation switch

@@ -16,12 +16,21 @@ namespace Managers
     {
         #region Variables
 
-        public delegate void SceneChange(string sceneName); // a delegate for a scene change (load or unload)
+        /// <summary>a delegate for a scene change (load or unload)</summary>
+        public delegate void SceneChange(string sceneName);
 
-        public event SceneChange AfterLoad; // an event invoked after a scene was loaded
-        public event SceneChange BeforeUnload; // an event invoked before a scene starts unloading
-        private readonly Queue<Action> _loadQueue = new Queue<Action>(); // a queue of scene load calls
-        private bool _loading; // a flag representing whether a new scene is currently being loaded
+        /// <summary>an event invoked after a scene was loaded</summary>
+        public event SceneChange AfterLoad;
+
+        /// <summary>an event invoked before a scene starts unloading</summary>
+        public event SceneChange BeforeUnload;
+
+        /// <summary>a queue of scene load calls</summary>
+        private readonly Queue<Action> _loadQueue = new Queue<Action>();
+
+        /// <summary>a flag representing whether a new scene is currently being loaded</summary>
+        private bool _loading;
+
         private AssetReference _lastLoadedScene;
 
         #endregion

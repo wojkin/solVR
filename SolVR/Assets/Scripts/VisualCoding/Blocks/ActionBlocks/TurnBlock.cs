@@ -11,9 +11,11 @@ namespace VisualCoding.Blocks.ActionBlocks
     {
         #region Serialized Fields
 
+        /// <summary>The direction in which the robot should turn.</summary>
         [SerializeField] [Tooltip("The direction in which the robot should turn.")]
         private TurnDirection direction;
 
+        /// <summary>The steer angle of the wheels around the local vertical axis.</summary>
         [SerializeField] [Tooltip("The steer angle of the wheels around the local vertical axis.")]
         private int angle;
 
@@ -21,17 +23,19 @@ namespace VisualCoding.Blocks.ActionBlocks
 
         #region Variables
 
+        /// <summary><inheritdoc cref="direction"/></summary>
         public TurnDirection Direction
         {
             get => direction;
             set => direction = value;
-        } // the direction in which the robot should turn
+        }
 
+        /// <summary><inheritdoc cref="angle"/></summary>
         public int Angle
         {
             get => angle;
             set => angle = value;
-        } // the steer angle of the wheels around the local vertical axis
+        }
 
         #endregion
 

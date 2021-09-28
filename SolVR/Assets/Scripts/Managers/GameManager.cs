@@ -9,12 +9,17 @@ namespace Managers
     {
         #region Variables
 
-        public delegate void PauseChange(); // a delegate for a pausing change (pause or resume)
+        /// <summary>a delegate for a pausing change (pause or resume)</summary>
+        public delegate void PauseChange();
 
-        public static event PauseChange OnPause; // an event invoked after the game is paused
+        /// <summary>an event invoked after the game is paused</summary>
+        public static event PauseChange OnPause;
 
-        public static event PauseChange OnResume; // an event invoked after the game is resumed
-        public static bool gameIsPaused; // flag showing if game is paused
+        /// <summary>an event invoked after the game is resumed</summary>
+        public static event PauseChange OnResume;
+
+        /// <summary>flag showing if game is paused</summary>
+        public static bool gameIsPaused;
 
         #endregion
 

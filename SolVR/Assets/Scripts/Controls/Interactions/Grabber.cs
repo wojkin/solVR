@@ -11,16 +11,23 @@ namespace Controls.Interactions
     {
         #region Variables
 
-        // threshold below which position of the grabbed object will be set instead of lerped
+        /// <summary>threshold below which position of the grabbed object will be set instead of lerped</summary>
         private const float LerpDistanceThreshold = 0.01f;
-        private const float GrabRadius = 0.1f; // the radius around the grabber in which objects can be grabbed
-        private const float LerpFactor = 15f; // multiplier for lerping position and rotation of the grabbed object
 
-        private Grabbable _grabbedObject; // the grabbed object
+        /// <summary>the radius around the grabber in which objects can be grabbed</summary>
+        private const float GrabRadius = 0.1f;
 
-        // a coroutine responsible for smoothly moving the gameobject to the grabbers position
+        /// <summary>multiplier for lerping position and rotation of the grabbed object</summary>
+        private const float LerpFactor = 15f;
+
+        /// <summary>the grabbed object</summary>
+        private Grabbable _grabbedObject;
+
+        /// <summary>a coroutine responsible for smoothly moving the gameobject to the grabbers position</summary>
         private Coroutine _grabbingCoroutine;
-        private State _state = State.NotGrabbing; // state of the grabber
+
+        /// <summary>state of the grabber</summary>
+        private State _state = State.NotGrabbing;
 
         #endregion
 

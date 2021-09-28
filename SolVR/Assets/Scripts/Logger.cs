@@ -5,10 +5,10 @@ public static class Logger
 {
     #region Variables
 
-    // a delegate for logging a message
+    /// <summary>a delegate for logging a message</summary>
     public delegate void Log(string message);
 
-    // a message log event
+    /// <summary>a message log event</summary>
     public static event Log LogEvent;
 
     #endregion

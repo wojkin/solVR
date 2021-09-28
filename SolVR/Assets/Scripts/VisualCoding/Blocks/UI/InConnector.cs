@@ -9,13 +9,15 @@ namespace VisualCoding.Blocks.UI
     {
         #region Serialized Fields
 
-        [SerializeField] private Block block; // the block to which the in-connector belongs
+        /// <summary>The block to which the in-connector belongs.</summary>
+        [SerializeField] private Block block;
 
         #endregion
 
         #region Variables
 
-        public Block Block => block; // property for accessing the block
+        /// <summary><inheritdoc cref="block"/></summary>
+        public Block Block => block;
 
         #endregion
     }

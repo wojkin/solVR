@@ -10,9 +10,11 @@ namespace VisualCoding.Blocks.ActionBlocks
     {
         #region Serialized Fields
 
+        /// <summary>Number of seconds move command is executed.</summary>
         [SerializeField] [Tooltip("Number of seconds move command is executed.")]
         private float time;
 
+        /// <summary>The torque to the move command.</summary>
         [SerializeField] [Tooltip("The torque to the move command.")]
         private float torque;
 
@@ -20,17 +22,19 @@ namespace VisualCoding.Blocks.ActionBlocks
 
         #region Variables
 
+        /// <summary><inheritdoc cref="time"/></summary>
         public float Time
         {
             get => time;
             set => time = value;
-        } // the number of seconds move command is executed
+        }
 
+        /// <summary><inheritdoc cref="torque"/></summary>
         public float Torque
         {
             get => torque;
             set => torque = value;
-        } // the torque to the move command
+        }
 
         #endregion
 

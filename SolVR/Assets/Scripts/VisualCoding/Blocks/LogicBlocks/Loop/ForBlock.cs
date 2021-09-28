@@ -9,6 +9,7 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
     {
         #region Serialized Fields
 
+        /// <summary>Number of calls NextBlock that will be perform before it returns a block after loop end.</summary>
         [SerializeField] [Tooltip("Number of loops that will be perform.")]
         private int numberOfLoops;
 
@@ -16,14 +17,14 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
 
         #region Variables
 
-        // number of calls NextBlock that will be perform before it returns a block after loop end
+        /// <summary><inheritdoc cref="numberOfLoops"/></summary>
         public int NumberOfLoops
         {
             get => numberOfLoops;
             set => numberOfLoops = value;
         }
 
-        // iteration flag that shows how many times function NextBlock was called from last reset
+        /// <summary>An iteration flag shows how many times function NextBlock was called from last reset.</summary>
         public int Iteration { get; private set; }
 
         #endregion
@@ -42,7 +43,7 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
         /// Determines the next block by checking an iteration flag if it is under the number of loops in the loop.
         /// Increases the iteration flag by one and resets it if it reaches the number of loops.
         /// </summary>
-        /// <returns><inheritdoc /> <c>Block</c> is determine by checking a number of iterations.</returns>
+        /// <returns><inheritdoc /> <see cref="Block"/> is determine by checking a number of iterations.</returns>
         public override Block NextBlock()
         {
             Iteration++;

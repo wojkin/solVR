@@ -16,19 +16,22 @@ namespace VisualCoding.Execution
     {
         #region Serialized Fields
 
-        [SerializeField] private Robot robot; // robot on which commands will be executed
+        /// <summary>robot on which commands will be executed</summary>
+        [SerializeField] private Robot robot;
 
         #endregion
 
         #region Variables
 
-        // ExecutionState showing whether the execution state
+        /// <summary>ExecutionState showing whether the execution state</summary>
         private static ExecutionState _executionState = ExecutionState.NotRunning;
 
-        // a flag showing whether execution should be paused after finishing executing the next or current block
+        /// <summary>
+        /// a flag showing whether execution should be paused after finishing executing the next or current block
+        /// </summary>
         private static bool _pauseOnNextStep;
 
-        // a list of execution threads responsible for executing blocks which are connected together
+        // <summary>a list of execution threads responsible for executing blocks which are connected together</summary>
         private readonly List<BlockExecutionThread> _executionThreads = new List<BlockExecutionThread>();
 
         #endregion
@@ -52,12 +55,18 @@ namespace VisualCoding.Execution
         {
             #region Variables
 
-            private readonly int _threadId; // ID of the robot thread created for this execution thread
-            private readonly ExecutionManager _manager; // execution manager, which manages this thread
+            /// <summary>ID of the robot thread created for this execution thread</summary>
+            private readonly int _threadId;
 
-            private Block _currentBlock; // a block which is currently being executed
+            /// <summary>execution manager, which manages this thread</summary>
+            private readonly ExecutionManager _manager;
 
-            // a flag representing whether the thread should finish execution before executing the next block
+            /// <summary>a block which is currently being executed</summary>
+            private Block _currentBlock;
+
+            ///<summary>
+            /// a flag representing whether the thread should finish execution before executing the next block
+            /// </summary> 
             private bool _finishExecution;
 
             #endregion
@@ -220,7 +229,7 @@ namespace VisualCoding.Execution
         }
 
         /// <summary>
-        /// Calls <c>Run</c> or <c>Resume</c> method based on the state of the execution.
+        /// Calls <see cref="Run"/> or <see cref="Resume"/> method based on the state of the execution.
         /// </summary>
         public void ResumeOrRun()
         {

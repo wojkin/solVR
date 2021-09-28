@@ -19,10 +19,15 @@ namespace UI
 
         #region Variables
 
-        private Canvas _canvas; // Canvas attached to the gameObject
-        private CanvasGroup _canvasGroup; // Canvas group attached to the gameObject
+        /// <summary><see cref="Canvas"/> attached to the gameObject</summary>
+        private Canvas _canvas;
 
-        // a flag showing whether the canvas is currently visible or hidden and setting canvas visibility
+        /// <summary><see cref="CanvasGroup"/> attached to the gameObject</summary>
+        private CanvasGroup _canvasGroup;
+
+        /// <summary>
+        /// a flag showing whether the canvas is currently visible or hidden and setting canvas visibility
+        /// </summary>
         public bool IsVisible
         {
             get => _canvas.enabled;

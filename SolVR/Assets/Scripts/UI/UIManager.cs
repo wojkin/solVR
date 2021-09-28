@@ -9,6 +9,7 @@ namespace UI
     {
         #region Serialized Fields
 
+        /// <summary> <see cref="UIElement"/> that is displayed on start.</summary>
         [SerializeField] private UIElement displayed;
 
         #endregion
@@ -16,7 +17,7 @@ namespace UI
         #region Built-in Methods
 
         /// <summary>
-        /// Shows UIElement specified in displayed parameter 
+        /// Shows <see cref="UIElement"/> specified in displayed parameter 
         /// </summary>
         private void Start()
         {
@@ -28,7 +29,7 @@ namespace UI
         #region Custom Methods
 
         /// <summary>
-        /// Hides already displayed UIElement and show UIElement provided as parameter
+        /// Hides already displayed <see cref="UIElement"/> and show <see cref="UIElement"/> provided as parameter.
         /// </summary>
         /// <param name="element">element to display instead of already displayed</param>
         public void ShowElement(UIElement element)

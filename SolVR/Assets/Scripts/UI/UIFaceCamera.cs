@@ -18,7 +18,8 @@ namespace UI
 
         #region Variables
 
-        private UIElement _uiElement; // UIElement attached to the gameObject
+        /// <summary><see cref="UIElement"/> attached to the gameObject</summary>
+        private UIElement _uiElement;
 
         #endregion
 

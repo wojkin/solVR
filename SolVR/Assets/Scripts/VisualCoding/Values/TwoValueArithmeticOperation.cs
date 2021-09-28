@@ -11,12 +11,15 @@ namespace VisualCoding.Values
     {
         #region Serialized Fields
 
+        /// <summary>Arithmetic operation performed on right and left values.</summary>
         [SerializeField] [Tooltip("Arithmetic operation performed on right and left values.")]
         private ArithmeticOperation operation;
 
+        /// <summary>A value that is on the left of the operand.</summary>
         [SerializeField] [Tooltip("A value that is on the left of the operand.")]
         private Value left;
 
+        /// <summary>A value that is on the right of the operand.</summary>
         [SerializeField] [Tooltip("A value that is on the right of the operand.")]
         private Value right;
 
@@ -24,23 +27,26 @@ namespace VisualCoding.Values
 
         #region Variables
 
+        /// <summary><inheritdoc cref="operation"/></summary>
         public ArithmeticOperation Operation
         {
             get => operation;
             set => operation = value;
-        } // arithmetic operation performed on right and left values
+        }
 
+        /// <summary><inheritdoc cref="left"/></summary>
         public Value Left
         {
             get => left;
             set => left = value;
-        } // value that is on the left of the operand
+        }
 
+        /// <summary><inheritdoc cref="right"/></summary>
         public Value Right
         {
             get => right;
             set => right = value;
-        } // value that is on the right of the operand
+        }
 
         #endregion
 
@@ -50,7 +56,7 @@ namespace VisualCoding.Values
         /// Calculates and returns value that is a result of arithmetic operation.
         /// </summary>
         /// <returns>A result of arithmetic operation on left and right values.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Throws exception when <c>Operation</c> is not handled.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Throws exception when <see cref="Operation"/> is not handled.</exception>
         public override dynamic GetValue()
         {
             return Operation switch

@@ -16,30 +16,30 @@ namespace VisualCoding.Values
         public abstract dynamic GetValue();
 
         /// <summary>
-        /// Checks if this object value is less than given <c>Value</c> object's one.
+        /// Checks if this object value is less than given <see cref="Value"/> object's one.
         /// </summary>
-        /// <param name="rightValue">A <c>Value</c> object that is compared to this object.</param>
-        /// <returns>A boolean that determines if value is less then given <c>rightValue</c>.</returns>
+        /// <param name="rightValue">A <see cref="Value"/> object that is compared to this object.</param>
+        /// <returns>A boolean that determines if value is less then given <see cref="rightValue"/>.</returns>
         public bool LessThan(Value rightValue)
         {
             return GetValue() < rightValue.GetValue();
         }
 
         /// <summary>
-        /// Checks if this object value is greater than given <c>Value</c> object's one.
+        /// Checks if this object value is greater than given <see cref="Value"/> object's one.
         /// </summary>
-        /// <param name="rightValue">A <c>Value</c> object that is compared to this object.</param>
-        /// <returns>A boolean that determines if value is greater then given <c>rightValue</c>.</returns>
+        /// <param name="rightValue">A <see cref="Value"/> object that is compared to this object.</param>
+        /// <returns>A boolean that determines if value is greater then given <see cref="rightValue"/>.</returns>
         public bool GreaterThan(Value rightValue)
         {
             return GetValue() > rightValue.GetValue();
         }
 
         /// <summary>
-        /// Checks if this object value is equal to given <c>Value</c> object's one.
+        /// Checks if this object value is equal to given <see cref="Value"/> object's one.
         /// </summary>
-        /// <param name="rightValue">A <c>Value</c> object that is compared to this object.</param>
-        /// <returns>A boolean that determines if value is equal to given <c>rightValue</c>.</returns>
+        /// <param name="rightValue">A <see cref="Value"/> object that is compared to this object.</param>
+        /// <returns>A boolean that determines if value is equal to given <see cref="rightValue"/>.</returns>
         public bool EqualTo(Value rightValue)
         {
             return GetValue() == rightValue.GetValue();

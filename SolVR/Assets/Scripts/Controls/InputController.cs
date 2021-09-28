@@ -13,32 +13,51 @@ namespace Controls
     {
         #region Serialized Fields
 
-        // event invoked on TwoHandedManipulation input action started, first parameter is right hand position and
-        // the second one is left hand position
+        /// <summary>
+        /// event invoked on TwoHandedManipulation input action started, first parameter is right hand position and
+        /// the second one is left hand position
+        /// </summary>
         public UnityEvent<Vector3, Vector3> onTwoHandedManipulationStarted;
 
-        // event invoked from start to cancel of TwoHandedManipulation input action, first parameter is right hand
-        // position and the second is left hand position
+        /// <summary>
+        /// event invoked from start to cancel of TwoHandedManipulation input action, first parameter is right hand
+        /// position and the second is left hand position
+        /// </summary>
         public UnityEvent<Vector3, Vector3> onTwoHandedManipulating;
 
-        public UnityEvent onGrabLeftHand; // unity event for handling left hand grab action
-        public UnityEvent onReleaseLeftHand; // unity event for handling left hand release action
-        public UnityEvent onGrabRightHand; // unity event for handling right hand grab action
-        public UnityEvent onReleaseRightHand; // unity event for handling right hand grab action
+        /// <summary>unity event for handling left hand grab action</summary>
+        public UnityEvent onGrabLeftHand;
+
+        /// <summary>unity event for handling left hand release action</summary>
+        public UnityEvent onReleaseLeftHand;
+
+        /// <summary>unity event for handling right hand grab action</summary>
+        public UnityEvent onGrabRightHand;
+
+        /// <summary>unity event for handling right hand grab action</summary>
+        public UnityEvent onReleaseRightHand;
 
         #endregion
 
         #region Variables
 
-        private PlayerInputActions _playerInputActions; // player input action with manipulation action
+        /// <summary>player input action with manipulation action</summary>
+        private PlayerInputActions _playerInputActions;
 
-        private XRIDefaultInputActions _xriInputActions; // xri input action with hands positions
+        /// <summary>xri input action with hands positions</summary>
+        private XRIDefaultInputActions _xriInputActions;
 
-        // flag showing if two handed manipulation is in progress, set to true after input action is started, until
-        // it's canceled
+        /// <summary>
+        /// flag showing if two handed manipulation is in progress, set to true after input action is started, until
+        /// it's canceled
+        /// </summary>
         private bool _isManipulated;
-        private bool _isGrabbingLeftHand; // flag showing whether left hand is currently grabbing
-        private bool _isGrabbingRightHand; // flag showing whether right hand is currently grabbing
+
+        /// <summary>flag showing whether left hand is currently grabbing</summary>
+        private bool _isGrabbingLeftHand;
+
+        /// <summary>flag showing whether right hand is currently grabbing</summary>
+        private bool _isGrabbingRightHand;
 
         #endregion
 

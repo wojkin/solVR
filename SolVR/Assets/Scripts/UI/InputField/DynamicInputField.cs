@@ -12,7 +12,8 @@ namespace UI.InputField
     {
         #region Variables
 
-        public ValueDataType Type { get; set; } // type of the data that is provided
+        /// <summary>type of the data that is provided</summary>
+        public ValueDataType Type { get; set; }
 
         #endregion
 
@@ -51,7 +52,7 @@ namespace UI.InputField
         #region Custom Methods
 
         /// <summary>
-        /// Parse string to data type based on <c>ValueDataType Type</c> value.
+        /// Parse string to data type based on <see cref="Type"/> value.
         /// </summary>
         /// <param name="input">A string that will be parsed.</param>
         /// <returns>Parsed value of string in matched type return as dynamic type.</returns>
@@ -104,7 +105,7 @@ namespace UI.InputField
         }
 
         /// <summary>
-        /// Sets keyboard type based on value of enum <c>ValueDataType Type</c>.
+        /// Sets keyboard type based on value of enum <see cref="Type"/>.
         /// </summary>
         private void SetKeyboardType()
         {

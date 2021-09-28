@@ -10,9 +10,11 @@ namespace VisualCoding.Blocks.LogicBlocks
     {
         #region Serialized Fields
 
+        /// <summary>Block that will be next if condition is not met.</summary>
         [SerializeField] [Tooltip("Block that will be next if condition is not met.")]
         private Block @else;
 
+        /// <summary>Condition that boolean value is checked to determine the next block.</summary>
         [SerializeField] [Tooltip("Condition that is checked to determine the next block.")]
         private BooleanValue condition;
 
@@ -20,17 +22,19 @@ namespace VisualCoding.Blocks.LogicBlocks
 
         #region Variables
 
+        /// <summary><inheritdoc cref="@else"/></summary>
         public Block Else
         {
             private get { return @else; }
             set { @else = value; }
-        } // block that will be returned if condition is not met
+        }
 
+        /// <summary><inheritdoc cref="condition"/></summary>
         public BooleanValue Condition
         {
             get => condition;
             set => condition = value;
-        } // condition that is checked to determine the next block
+        }
 
         #endregion
 
@@ -39,7 +43,7 @@ namespace VisualCoding.Blocks.LogicBlocks
         /// <summary>
         /// Determines and returns the next block by checking a condition.
         /// </summary>
-        /// <returns><inheritdoc /> <c>Block</c> is determine by checking the condition.</returns>
+        /// <returns><inheritdoc /> <see cref="Block"/> is determine by checking the condition.</returns>
         public override Block NextBlock()
         {
             return Condition.GetValue() ? Next : Else;

@@ -11,6 +11,7 @@ namespace UI
     {
         #region Serialized Fields
 
+        /// <summary>UIElement attached to the same gameObject as the UI canvas.</summary> 
         [Tooltip("UIElement attached to the same gameObject as the UI canvas.")] [SerializeField]
         private UIElement uiElement;
 
@@ -18,7 +19,8 @@ namespace UI
 
         #region Variables
 
-        private Canvas _worldSpaceCanvas; // canvas of the gameObject UI
+        /// <summary>canvas of the gameObject UI</summary> 
+        private Canvas _worldSpaceCanvas;
 
         #endregion
 

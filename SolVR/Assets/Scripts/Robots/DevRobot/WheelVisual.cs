@@ -10,14 +10,14 @@ namespace Robots.DevRobot
     {
         #region Serialized Fields
 
-        // wheel collider which position and rotation will be applied to a mesh
+        /// <summary>wheel collider which position and rotation will be applied to a mesh</summary>
         [SerializeField] private WheelCollider wheelCollider;
 
         #endregion
 
         #region Variables
 
-        // factor for the linear interpolation between current and desired transform
+        /// <summary>factor for the linear interpolation between current and desired transform</summary>
         private const float LerpFactor = 0.7f;
 
         #endregion

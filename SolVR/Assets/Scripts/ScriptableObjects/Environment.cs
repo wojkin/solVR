@@ -11,10 +11,11 @@ namespace ScriptableObjects
     {
         #region Serialized Fields
 
-        // Name of the scene
-        public string environmentName;
+        /// <summary>name of the scene</summary>
+        [Tooltip("Name of the scene.")] public string environmentName;
 
-        // Reference to addressable scene
+        /// <summary>reference to addressable scene</summary>
+        [Tooltip("Reference to addressable scene.")]
         public AssetReference scene;
 
         #endregion

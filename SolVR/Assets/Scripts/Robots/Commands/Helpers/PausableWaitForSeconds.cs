@@ -10,9 +10,11 @@ namespace Robots.Commands.Helpers
     {
         #region Variables
 
-        // a flag (bool wrapped in an object) showing whether the waiting should be paused
+        /// <summary>a flag (bool wrapped in an object) showing whether the waiting should be paused</summary>
         private readonly Wrapper<bool> _isPaused;
-        private float _timer; // the remaining number of seconds the custom yield instruction should wait for
+
+        /// <summary>the remaining number of seconds the custom yield instruction should wait for</summary>
+        private float _timer;
 
         /// <summary>
         /// Variable representing whether enough time has passed.

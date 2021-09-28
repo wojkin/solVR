@@ -9,18 +9,20 @@ namespace VisualCoding.Values
     {
         #region Serialized Fields
 
-        [SerializeField] [Tooltip("A constant value of dynamic type.")]
+        /// <summary>A value of <see cref="Constant"/> that has dynamic type.</summary>
+        [SerializeField] [Tooltip("A value of Constant that has dynamic type.")]
         private dynamic value;
 
         #endregion
 
         #region Variables
 
+        /// <summary><inheritdoc cref="value"/></summary>
         public dynamic Value
         {
             get => value;
             set => this.value = value;
-        } // a constant value
+        }
 
         #endregion
 

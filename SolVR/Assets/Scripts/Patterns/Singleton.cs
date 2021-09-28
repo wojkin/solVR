@@ -9,9 +9,10 @@ namespace Patterns
     {
         #region Variables
 
-        private static T _instance; // instance of the class
+        /// <summary>instance of the class</summary>
+        private static T _instance;
 
-        // a flag representing whether the application is currently shutting down.
+        /// <summary>a flag representing whether the application is currently shutting down.</summary>
         private static bool _shuttingDown = false;
 
         /// <summary>

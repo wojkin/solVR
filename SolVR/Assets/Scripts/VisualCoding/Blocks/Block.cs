@@ -9,6 +9,7 @@ namespace VisualCoding.Blocks
     {
         #region Serialized Fields
 
+        /// <summary>A block that is connected to this block as a next one.</summary>
         [SerializeField] [Tooltip("A block that is connected to this block as a next one.")]
         private Block next;
 
@@ -16,11 +17,12 @@ namespace VisualCoding.Blocks
 
         #region Variables
 
+        /// <summary><inheritdoc cref="next"/></summary>
         public Block Next
         {
             get => next;
             set => next = value;
-        } // a block that is connected to this block as a next one
+        }
 
         #endregion
 
@@ -29,7 +31,7 @@ namespace VisualCoding.Blocks
         /// <summary>
         /// Returns a block of code that should be run next.
         /// </summary>
-        /// <returns>Next <c>Block</c> that should be executed after this <c>Block</c>.</returns>
+        /// <returns>Next block that should be executed after this <see cref="Block"/>.</returns>
         public virtual Block NextBlock()
         {
             return Next;

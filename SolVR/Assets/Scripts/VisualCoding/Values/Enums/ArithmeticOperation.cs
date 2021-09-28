@@ -13,7 +13,7 @@ namespace VisualCoding.Values.Enums
     }
 
     /// <summary>
-    /// Extension to <c>ArithmeticOperation</c> enum to get matching operators to operations.
+    /// Extension to <see cref="ArithmeticOperation"/> enum to get matching operators to operations.
     /// </summary>
     public static class ArithmeticOperationExtensions
     {

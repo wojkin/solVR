@@ -21,7 +21,8 @@ namespace UI.InputField
 
         #region Variables
 
-        protected TMP_InputField inputField; // an input field that is validated
+        /// <summary>an input field that is validated</summary>
+        protected TMP_InputField inputField;
 
         #endregion
 
@@ -56,14 +57,14 @@ namespace UI.InputField
         #region Custom Methods
 
         /// <summary>
-        /// Parse string to <c>T</c> data type.
+        /// Parse string to T data type.
         /// </summary>
         /// <param name="input">A string that will be parsed to T data type.</param>
         /// <returns>Parsed value of T type.</returns>
         protected abstract T Parse(string input);
 
         /// <summary>
-        /// Parses the value to specified type and invokes <c>onInputValueChanged</c> event.
+        /// Parses the value to specified type and invokes <see cref="onInputValueChanged"/> event.
         /// Changes color of the input field based of a result of parsing input value.
         /// </summary>
         /// <param name="value">A string value that will be parsed.</param>

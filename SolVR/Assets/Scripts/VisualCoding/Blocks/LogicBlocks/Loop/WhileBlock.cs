@@ -10,6 +10,7 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
     {
         #region Serialized Fields
 
+        /// <summary>Condition that boolean value is checked to determine the next block.</summary>
         [SerializeField] [Tooltip("Condition that is checked to determine the next block.")]
         private BooleanValue condition;
 
@@ -17,11 +18,12 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
 
         #region Variables
 
+        /// <summary><inheritdoc cref="condition"/></summary>
         public BooleanValue Condition
         {
             get => condition;
             set => condition = value;
-        } // condition that is checked to determine the next block
+        }
 
         #endregion
 
@@ -31,7 +33,7 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
         /// Determines the next block by checking a condition.
         /// Returns the next block if the condition is met or returns the loop end block if it's not.
         /// </summary>
-        /// <returns><inheritdoc /> <c>Block</c> is determine by checking the condition.</returns>
+        /// <returns><inheritdoc /> <see cref="Block"/> is determine by checking the condition.</returns>
         public override Block NextBlock()
         {
             return Condition.GetValue() ? Next : EndBlock.Next;

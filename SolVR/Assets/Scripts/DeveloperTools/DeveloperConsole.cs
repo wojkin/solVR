@@ -26,7 +26,8 @@ namespace DeveloperTools
 
         #region Variables
 
-        private readonly List<Command> _commands = new List<Command>(); // list of all available commands
+        /// <summary>list of all available commands</summary>
+        private readonly List<Command> _commands = new List<Command>();
 
         #endregion
 

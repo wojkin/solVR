@@ -18,12 +18,13 @@ namespace Robots
     {
         #region Variables
 
-        public delegate void ThreadStateChange(ThreadState changedTo); // a delegate for a thread state change
+        /// <summary>a delegate for a thread state change</summary>
+        public delegate void ThreadStateChange(ThreadState changedTo);
 
-        // dictionary containing threads created for this robot, uses thread IDs as keys
+        /// <summary>dictionary containing threads created for this robot, uses thread IDs as keys</summary>
         private readonly Dictionary<int, RobotThread> _threads = new Dictionary<int, RobotThread>();
 
-        // a flag (bool wrapped in an object) showing whether command execution should be paused
+        /// <summary>a flag (bool wrapped in an object) showing whether command execution should be paused</summary>
         protected readonly Wrapper<bool> IsPaused = new Wrapper<bool>(false);
 
         #endregion
@@ -37,14 +38,19 @@ namespace Robots
         {
             #region Variables
 
-            // event called when a thread changes its state
+            /// <summary>event called when a thread changes its state</summary>
             public event ThreadStateChange ThreadStateChanged;
 
-            private readonly Robot _robot; // robot on which the thread should execute commands
-            internal ThreadState State; // state the thread is currently in
-            public ICommand CurrentlyExecuting { get; private set; } // command which is currently being executed
+            // <summary>robot on which the thread should execute commands</summary>
+            private readonly Robot _robot;
 
-            // a property showing whether the thread is currently busy
+            /// <summary>state the thread is currently in</summary>
+            internal ThreadState State;
+
+            /// <summary>command which is currently being executed</summary>
+            public ICommand CurrentlyExecuting { get; private set; }
+
+            /// <summary>a property showing whether the thread is currently busy</summary>
             public bool CanExecuteCommands => State == ThreadState.Idle;
 
             #endregion

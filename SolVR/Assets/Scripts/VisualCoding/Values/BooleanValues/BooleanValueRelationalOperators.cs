@@ -11,36 +11,42 @@ namespace VisualCoding.Values.BooleanValues
     {
         #region Serialized Fields
 
+        /// <summary>Relational operation between on left and right boolean values.</summary>
         [SerializeField] [Tooltip("Relational operation between on left and right boolean values.")]
         private RelationalOperation operation;
 
+        /// <summary>Boolean value that is on the left of the relational operand.</summary>
         [SerializeField] [Tooltip("Boolean value that is on the left of the relational operand.")]
-        private Value leftValue;
+        private Value left;
 
+        /// <summary>Boolean value that is on the right of the relational operand.</summary>
         [SerializeField] [Tooltip("Boolean value that is on the right of the relational operand.")]
-        private Value rightValue;
+        private Value right;
 
         #endregion
 
         #region Variables
 
+        /// <summary><inheritdoc cref="operation"/></summary>
         public RelationalOperation Operation
         {
             get => operation;
             set => operation = value;
-        } // relational operation between on left and right boolean values
+        }
 
-        public Value LeftValue
+        /// <summary><inheritdoc cref="left"/></summary>
+        public Value Left
         {
-            get => leftValue;
-            set => leftValue = value;
-        } // boolean value that is on the left of the relational operand
+            get => left;
+            set => left = value;
+        }
 
-        public Value RightValue
+        /// <summary><inheritdoc cref="right"/></summary>
+        public Value Right
         {
-            get => rightValue;
-            set => rightValue = value;
-        } // boolean value that is on the right of the relational operand
+            get => right;
+            set => right = value;
+        }
 
         #endregion
 
@@ -50,14 +56,14 @@ namespace VisualCoding.Values.BooleanValues
         /// Check and returns boolean that is a result of relational operation.
         /// </summary>
         /// <returns>A result of relational operation on left and right boolean values.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Throws exception when <c>Operation</c> is not handled.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Throws exception when <see cref="Operation"/> is not handled.</exception>
         public override dynamic GetValue()
         {
             return Operation switch
             {
-                RelationalOperation.Equal => LeftValue.EqualTo(RightValue),
-                RelationalOperation.LessThan => LeftValue.LessThan(RightValue),
-                RelationalOperation.GreaterThan => LeftValue.GreaterThan(RightValue),
+                RelationalOperation.Equal => Left.EqualTo(Right),
+                RelationalOperation.LessThan => Left.LessThan(Right),
+                RelationalOperation.GreaterThan => Left.GreaterThan(Right),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

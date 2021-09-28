@@ -10,9 +10,11 @@ namespace UI
     {
         #region Serialized Fields
 
+        ///<summary>Offset between the player and the UI object.</summary> 
         [Tooltip("Offset between the player and the UI object.")] [SerializeField]
         private float spawnOffset;
 
+        ///<summary>The main camera object in front of which the UI object will be displayed.</summary> 
         [Tooltip("The main camera object in front of which the UI object will be displayed.")] [SerializeField]
         private new Transform camera;
 
@@ -20,7 +22,8 @@ namespace UI
 
         #region Variables
 
-        private UIElement _uiElement; // UIElement attached to the gameObject
+        ///<summary>UIElement attached to the gameObject</summary> 
+        private UIElement _uiElement;
 
         #endregion
 

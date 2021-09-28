@@ -10,9 +10,11 @@ namespace Robots.Commands
     {
         #region Variables
 
-        private readonly float _time; // the number of seconds the robot should move for when the command is executed.
+        // <summary>the number of seconds the robot should move for when the command is executed.</summary>
+        private readonly float _time;
 
-        private readonly float _torque; // the torque applied to the robots wheels, when the command is executed, given
+        // <summary>the torque applied to the robots wheels, when the command is executed, given</summary>
+        private readonly float _torque;
 
         #endregion
 

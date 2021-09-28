@@ -13,7 +13,7 @@ namespace VisualCoding.Values.Enums
     }
 
     /// <summary>
-    /// Extension to <c>RelationalOperation</c> enum to get matching operators to operations.
+    /// Extension to <see cref="RelationalOperation"/> enum to get matching operators to operations.
     /// </summary>
     public static class RelationalOperationExtensions
     {

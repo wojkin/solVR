@@ -9,7 +9,8 @@ namespace Controls
     {
         #region Serialized Fields
 
-        public GameObject objectToRotate; // object that is manipulated
+        /// <summary>object that is manipulated</summary>
+        public GameObject objectToRotate;
 
         [Tooltip("Multiplier for translation manipulation")] [SerializeField]
         private float translationMultiplier = 1;
@@ -24,13 +25,16 @@ namespace Controls
 
         #region Variables
 
-        // difference between hand positions (vector from left to right hand) from the previous rotation event
+        /// <summary>
+        /// difference between hand positions (vector from left to right hand) from the previous rotation event
+        /// </summary>
         private Vector3 _handsPreviousPositionDifference;
 
-        // center point between hand positions from the previous translation event
+        /// <summary>center point between hand positions from the previous translation event</summary>
         private Vector3 _handsPreviousCenterPosition;
 
-        private float _handsPreviousDistance; // distance between hands from the previous scaling event
+        /// <summary>distance between hands from the previous scaling event</summary>
+        private float _handsPreviousDistance;
 
         #endregion
 

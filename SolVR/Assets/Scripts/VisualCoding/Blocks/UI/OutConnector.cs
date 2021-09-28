@@ -14,27 +14,36 @@ namespace VisualCoding.Blocks.UI
     {
         #region Serialized Fields
 
-        // event for configuring which property will be set by this connector
+        ///<summary>event for configuring which property will be set by this connector</summary> 
         [SerializeField] private UnityEvent<Block> connectedBlock;
-        [SerializeField] private Transform origin; // the origin of the connector
+
+        ///<summary>the origin of the connector</summary>
+        [SerializeField] private Transform origin;
 
         #endregion
 
         #region Variables
 
-        private const float ConnectRadius = 0.1f; // the radius within which objects can be grabbed
+        /// <summary>the radius within which objects can be grabbed</summary>
+        private const float ConnectRadius = 0.1f;
 
-        private const float LerpFactor = 8f; // multiplier for lerping position and rotation of the grabbed object
+        /// <summary>multiplier for lerping position and rotation of the grabbed object</summary>
+        private const float LerpFactor = 8f;
 
-        // distance below which the objects position should be changed directly instead of lerped
+        /// <summary>distance below which the objects position should be changed directly instead of lerped</summary>
         private const float LerpDistanceThreshold = 0.01f;
 
-        // angle below which the objects rotation should be changed directly instead of lerped
+        /// <summary>angle below which the objects rotation should be changed directly instead of lerped</summary>
         private const float LerpAngleThreshold = 1f;
 
-        private LineRenderer _connectionVisual; // line renderer responsible for visualizing the connection
-        private Transform _targetTransform; // the transform which the connector should follow
-        private State _state; // state the connector is in
+        /// <summary>line renderer responsible for visualizing the connection</summary>
+        private LineRenderer _connectionVisual;
+
+        /// <summary>the transform which the connector should follow</summary>
+        private Transform _targetTransform;
+
+        /// <summary>state the connector is in</summary>
+        private State _state;
 
         #endregion
 

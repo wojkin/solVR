@@ -10,13 +10,15 @@ namespace Controls.Interactions
     {
         #region Serialized Fields
 
-        [SerializeField] public Transform toMove; // the transform that will be changed to move the object
+        /// <summary>the transform that will be changed to move the object</summary>
+        [SerializeField] public Transform toMove;
 
         #endregion
 
         #region Variables
 
-        public bool IsGrabbed { get; private set; } // flag showing whether the object is currently grabbed
+        /// <summary>flag showing whether the object is currently grabbed</summary>
+        public bool IsGrabbed { get; private set; }
 
         #endregion
 

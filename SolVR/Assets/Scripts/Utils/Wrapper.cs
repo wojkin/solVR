@@ -8,7 +8,8 @@ namespace Utils
     {
         #region Variables
 
-        public T Value; // the wrapped struct
+        /// <summary>the wrapped struct</summary>
+        public T Value;
 
         #endregion
 

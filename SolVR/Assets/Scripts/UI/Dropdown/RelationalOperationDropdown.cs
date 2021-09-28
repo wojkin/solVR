@@ -5,7 +5,7 @@ using VisualCoding.Values.Enums;
 namespace UI.Dropdown
 {
     /// <summary>
-    /// Class handling dropdown that corresponds to a <c>RelationalOperation</c> enum.
+    /// Class handling dropdown that corresponds to a <see cref="RelationalOperation"/> enum.
     /// </summary>
     public class RelationalOperationDropdown : EnumDropdown<RelationalOperation>
     {
