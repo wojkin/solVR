@@ -87,8 +87,8 @@ namespace Controls.Interactions
 
             _grabbedObject = closestGrabbable;
             closestGrabbable.Grab();
-            _grabbingCoroutine = StartCoroutine(Grab());
             _state = State.Grabbing;
+            _grabbingCoroutine = StartCoroutine(Grab());
         }
 
         /// <summary>
