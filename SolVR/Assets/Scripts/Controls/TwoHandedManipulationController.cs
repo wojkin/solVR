@@ -9,16 +9,19 @@ namespace Controls
     {
         #region Serialized Fields
 
-        /// <summary>object that is manipulated</summary>
+        /// <summary>Object that is manipulated.</summary>
         public GameObject objectToRotate;
 
-        [Tooltip("Multiplier for translation manipulation")] [SerializeField]
+        /// <summary>Multiplier for translation manipulation.</summary>
+        [Tooltip("Multiplier for translation manipulation.")] [SerializeField]
         private float translationMultiplier = 1;
-
-        [Tooltip("Multiplier for scaling manipulation")] [SerializeField]
+        
+        /// <summary>Multiplier for scaling manipulation.</summary>
+        [Tooltip("Multiplier for scaling manipulation.")] [SerializeField]
         private float scalingMultiplier = 1;
 
-        [Tooltip("Multiplier for rotation manipulation")] [SerializeField]
+        /// <summary>Multiplier for rotation manipulation.</summary>
+        [Tooltip("Multiplier for rotation manipulation.")] [SerializeField]
         private float rotationMultiplier = 1;
 
         #endregion
@@ -26,14 +29,14 @@ namespace Controls
         #region Variables
 
         /// <summary>
-        /// difference between hand positions (vector from left to right hand) from the previous rotation event
+        /// Difference between hand positions (vector from left to right hand) from the previous rotation event.
         /// </summary>
         private Vector3 _handsPreviousPositionDifference;
 
-        /// <summary>center point between hand positions from the previous translation event</summary>
+        /// <summary>Center point between hand positions from the previous translation event.</summary>
         private Vector3 _handsPreviousCenterPosition;
 
-        /// <summary>distance between hands from the previous scaling event</summary>
+        /// <summary>Distance between hands from the previous scaling event.</summary>
         private float _handsPreviousDistance;
 
         #endregion
@@ -42,12 +45,12 @@ namespace Controls
 
         /// <summary>
         /// Sets initial state for manipulation.
-        /// Calculates difference and center point between hand positions.
         /// </summary>
         /// <param name="rightHandPosition">Position of player's right hand.</param>
         /// <param name="leftHandPosition">Position of player's left hand.</param>
         public void OnManipulationStarted(Vector3 rightHandPosition, Vector3 leftHandPosition)
         {
+            // calculate difference and center point between hand positions.
             _handsPreviousPositionDifference = rightHandPosition - leftHandPosition;
             _handsPreviousCenterPosition = (rightHandPosition + leftHandPosition) / 2;
             _handsPreviousDistance = Vector3.Distance(rightHandPosition, leftHandPosition);

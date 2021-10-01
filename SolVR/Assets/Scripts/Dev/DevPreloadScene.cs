@@ -11,11 +11,11 @@ namespace Dev
         #region Built-in Methods
 
         /// <summary>
-        /// Checks if an object named "__app" is in the scene. If it's not, the _preload scene is loaded. If the "__app"
-        /// object is already in the scene, it means that the _preload scene was loaded before.
+        /// Checks if the _preload scene should be loaded.
         /// </summary>
         private void Awake()
         {
+            // checks if an object named "__app" is in the scene, if it's not, the _preload scene is loaded
             if (GameObject.Find("__app") == null) CustomSceneManager.Instance.QueueLoadScene("_preload");
         }
 

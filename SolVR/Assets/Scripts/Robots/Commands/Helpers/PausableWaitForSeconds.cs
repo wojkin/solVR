@@ -10,23 +10,22 @@ namespace Robots.Commands.Helpers
     {
         #region Variables
 
-        /// <summary>a flag (bool wrapped in an object) showing whether the waiting should be paused</summary>
+        /// <summary>Flag (bool wrapped in an object) showing whether the waiting should be paused.</summary>
         private readonly Wrapper<bool> _isPaused;
 
-        /// <summary>the remaining number of seconds the custom yield instruction should wait for</summary>
+        /// <summary>Remaining number of seconds the custom yield instruction should wait for.</summary>
         private float _timer;
 
         /// <summary>
         /// Variable representing whether enough time has passed.
-        /// If the pause flag isn't set, reduces the timer by the number of seconds passed since the last frame. Next it
-        /// returns false if enough time has passed and true if not.
         /// </summary>
         public override bool keepWaiting
         {
             get
             {
+                // if the pause flag isn't set, reduce the timer by the number of seconds passed since the last frame
                 if (!_isPaused.Value) _timer -= Time.deltaTime;
-                return !(_timer <= 0f);
+                return !(_timer <= 0f); // return false if enough time has passed and true if not
             }
         }
 

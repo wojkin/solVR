@@ -14,49 +14,49 @@ namespace Controls
         #region Serialized Fields
 
         /// <summary>
-        /// event invoked on TwoHandedManipulation input action started, first parameter is right hand position and
-        /// the second one is left hand position
+        /// Event invoked on TwoHandedManipulation input action started, first parameter is right hand position and
+        /// the second one is left hand position.
         /// </summary>
         public UnityEvent<Vector3, Vector3> onTwoHandedManipulationStarted;
 
         /// <summary>
-        /// event invoked from start to cancel of TwoHandedManipulation input action, first parameter is right hand
-        /// position and the second is left hand position
+        /// Event invoked from start to cancel of TwoHandedManipulation input action, first parameter is right hand
+        /// position and the second is left hand position.
         /// </summary>
         public UnityEvent<Vector3, Vector3> onTwoHandedManipulating;
 
-        /// <summary>unity event for handling left hand grab action</summary>
+        /// <summary>Unity event for handling left hand grab action.</summary>
         public UnityEvent onGrabLeftHand;
 
-        /// <summary>unity event for handling left hand release action</summary>
+        /// <summary>Unity event for handling left hand release action.</summary>
         public UnityEvent onReleaseLeftHand;
 
-        /// <summary>unity event for handling right hand grab action</summary>
+        /// <summary>Unity event for handling right hand grab action.</summary>
         public UnityEvent onGrabRightHand;
 
-        /// <summary>unity event for handling right hand grab action</summary>
+        /// <summary>Unity event for handling right hand grab action.</summary>
         public UnityEvent onReleaseRightHand;
 
         #endregion
 
         #region Variables
 
-        /// <summary>player input action with manipulation action</summary>
+        /// <summary>Player input action with manipulation action.</summary>
         private PlayerInputActions _playerInputActions;
 
-        /// <summary>xri input action with hands positions</summary>
+        /// <summary>XRI input action with hands positions.</summary>
         private XRIDefaultInputActions _xriInputActions;
 
         /// <summary>
-        /// flag showing if two handed manipulation is in progress, set to true after input action is started, until
-        /// it's canceled
+        /// Flag showing if two handed manipulation is in progress, set to true after input action is started, until
+        /// it's canceled.
         /// </summary>
         private bool _isManipulated;
 
-        /// <summary>flag showing whether left hand is currently grabbing</summary>
+        /// <summary>Flag showing whether left hand is currently grabbing.</summary>
         private bool _isGrabbingLeftHand;
 
-        /// <summary>flag showing whether right hand is currently grabbing</summary>
+        /// <summary>Flag showing whether right hand is currently grabbing.</summary>
         private bool _isGrabbingRightHand;
 
         #endregion
@@ -139,12 +139,12 @@ namespace Controls
 
         /// <summary>
         /// Handler for after pause event.
-        /// Sets manipulating and grabbing flags to false and invokes release events if grabbing was in progress.
         /// </summary>
         private void OnPause()
         {
             _isManipulated = false;
 
+            // invoke release events if grabbing was in progress
             if (_isGrabbingLeftHand)
             {
                 onReleaseLeftHand?.Invoke();
@@ -160,7 +160,6 @@ namespace Controls
 
         /// <summary>
         /// Handler for started event of TwoHandedManipulation input action.
-        /// Invokes onTwoHandedManipulationStarted event with positions of right and left hands as parameters.
         /// </summary>
         /// <param name="context">Input action event callback context, required for handling input action event.</param>
         private void OnTwoHandedManipulationStarted(InputAction.CallbackContext context)
@@ -170,19 +169,18 @@ namespace Controls
             var rightHandPosition = _xriInputActions.XRIRightHand.Position.ReadValue<Vector3>();
             var leftHandPosition = _xriInputActions.XRILeftHand.Position.ReadValue<Vector3>();
             _isManipulated = true;
+            // invoke onTwoHandedManipulationStarted event with positions of right and left hands as parameters
             onTwoHandedManipulationStarted?.Invoke(rightHandPosition, leftHandPosition);
         }
 
         /// <summary>
         /// Handler for canceled event of TwoHandedManipulation input action.
-        /// Sets manipulating flag to false.
         /// </summary>
         /// <param name="context">Input action event callback context, required for handling input action event.</param>
         private void OnTwoHandedManipulationCanceled(InputAction.CallbackContext context) => _isManipulated = false;
 
         /// <summary>
         /// Handler for the start event of the left hand grab input action.
-        /// If the game isn't paused sets the left hand grabbing flag to true and invokes left hand grab event.
         /// </summary>
         /// <param name="context">Input action event callback context, required for handling input action event.</param>
         private void OnGrabLeftHandStarted(InputAction.CallbackContext context)
@@ -196,7 +194,6 @@ namespace Controls
 
         /// <summary>
         /// Handler for the cancelled event of the left hand grab input action.
-        /// If the game isn't paused sets the left hand grabbing flag to false and invokes left hand release event.
         /// </summary>
         /// <param name="context">Input action event callback context, required for handling input action event.</param>
         private void OnGrabLeftHandCancelled(InputAction.CallbackContext context)
@@ -210,7 +207,6 @@ namespace Controls
 
         /// <summary>
         /// Handler for the start event of the right hand grab input action.
-        /// If the game isn't paused sets the right hand grabbing flag to true and invokes right hand grab event.
         /// </summary>
         /// <param name="context">Input action event callback context, required for handling input action event.</param>
         private void OnGrabRightHandStarted(InputAction.CallbackContext context)
@@ -224,7 +220,6 @@ namespace Controls
 
         /// <summary>
         /// Handler for the cancelled event of the right hand grab input action.
-        /// If the game isn't paused sets the right hand grabbing flag to false and invokes right hand release event.
         /// </summary>
         /// <param name="context">Input action event callback context, required for handling input action event.</param>
         private void OnGrabRightHandCancelled(InputAction.CallbackContext context)

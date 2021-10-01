@@ -11,22 +11,22 @@ namespace Controls.Interactions
     {
         #region Variables
 
-        /// <summary>threshold below which position of the grabbed object will be set instead of lerped</summary>
+        /// <summary>Threshold below which position of the grabbed object will be set instead of lerped.</summary>
         private const float LerpDistanceThreshold = 0.01f;
 
-        /// <summary>the radius around the grabber in which objects can be grabbed</summary>
+        /// <summary>Radius around the grabber in which objects can be grabbed.</summary>
         private const float GrabRadius = 0.1f;
 
-        /// <summary>multiplier for lerping position and rotation of the grabbed object</summary>
+        /// <summary>Multiplier for lerping position and rotation of the grabbed object.</summary>
         private const float LerpFactor = 15f;
 
-        /// <summary>the grabbed object</summary>
+        /// <summary>Grabbed object.</summary>
         private Grabbable _grabbedObject;
 
-        /// <summary>a coroutine responsible for smoothly moving the gameobject to the grabbers position</summary>
+        /// <summary>Coroutine responsible for smoothly moving the gameobject to the grabbers position.</summary>
         private Coroutine _grabbingCoroutine;
 
-        /// <summary>state of the grabber</summary>
+        /// <summary>State of the grabber.</summary>
         private State _state = State.NotGrabbing;
 
         #endregion
@@ -35,10 +35,12 @@ namespace Controls.Interactions
 
         /// <summary>
         /// Enum representing the state of the grabber.
-        /// Grabbing - a grabbed object is smoothly moving to the grabbers position.
-        /// Grabbed - an object is grabbed and is following the grabbers position.
-        /// NotGrabbing - no object is currently grabbed.
         /// </summary>
+        /// <remarks>
+        /// Grabbing - a grabbed object is smoothly moving to the grabbers position.<br/>
+        /// Grabbed - an object is grabbed and is following the grabbers position.<br/>
+        /// NotGrabbing - no object is currently grabbed.
+        /// </remarks>
         private enum State
         {
             Grabbing,
@@ -65,10 +67,6 @@ namespace Controls.Interactions
 
         /// <summary>
         /// Handler for the grab event invoked by the input handler.
-        /// Finds all colliders within a range of the grabber and select not grabbed grabbables that are attached to the
-        /// same game objects. Sorts all grabbables in ascending order based on the distance from the grabber. Finds the
-        /// first grabbable and calls the grab method of it, starts a coroutine for smoothly grabbing it and sets the
-        /// state to grabbing.
         /// </summary>
         public void OnGrab()
         {
@@ -85,6 +83,7 @@ namespace Controls.Interactions
             // get the first grabbable object after order grabbables by position
             var closestGrabbable = grabbables.OrderBy(c => (origin - c.toMove.position).sqrMagnitude).First();
 
+            // start grabbing the object
             _grabbedObject = closestGrabbable;
             closestGrabbable.Grab();
             _state = State.Grabbing;
@@ -93,9 +92,6 @@ namespace Controls.Interactions
 
         /// <summary>
         /// Handler for the release event invoked by the input handler.
-        /// If the grabber is in the grabbing state, the grabbing coroutine is stopped. If it is in the grabbing or
-        /// grabbed state the release method of the grabbed object is called, the grabbed object is set to null and the
-        /// state is changed to not grabbing.
         /// </summary>
         public void OnRelease()
         {
@@ -113,12 +109,12 @@ namespace Controls.Interactions
 
         /// <summary>
         /// A coroutine for smoothly grabbing an object.
-        /// Lerps the connectors position between the current position and grabber position until the distance is above
-        /// the distance threshold. When finished, sets the state to grabbed and the grabbing coroutine to null.
         /// </summary>
         /// <returns>IEnumerator required for the coroutine.</returns>
         private IEnumerator Grab()
         {
+            // lerp the connectors' positions between the current position and grabber position until the distance is
+            // above the distance threshold
             while (Vector3.Distance(_grabbedObject.toMove.position, transform.position) > LerpDistanceThreshold)
             {
                 _grabbedObject.toMove.position = Vector3.Lerp(_grabbedObject.toMove.position, transform.position,

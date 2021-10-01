@@ -9,17 +9,14 @@ namespace Patterns
     {
         #region Variables
 
-        /// <summary>instance of the class</summary>
+        /// <summary>Instance of the class.</summary>
         private static T _instance;
 
-        /// <summary>a flag representing whether the application is currently shutting down.</summary>
-        private static bool _shuttingDown = false;
+        /// <summary>Flag representing whether the application is currently shutting down.</summary>
+        private static bool _shuttingDown;
 
         /// <summary>
-        /// A globally accessible instance of the class. If there is no instance of the class already set,
-        /// then it searches for an existing one. If none is found, it creates a new one. If the game is being closed
-        /// then no instance is returned. This is to avoid memory errors when the instance of a singleton is referenced
-        /// in e.g. other objects OnDisable() methods, which are called when closing the application.
+        /// A globally accessible instance of the class. Creates a new instance if it doesn't exist.
         /// </summary>
         public static T Instance
         {
@@ -45,7 +42,7 @@ namespace Patterns
         #region Built-in Methods
 
         /// <summary>
-        /// If no other instance is set, it sets this object as the instance, otherwise it destroys itself.
+        /// Makes sure only one instance exists.
         /// </summary>
         public virtual void Awake()
         {

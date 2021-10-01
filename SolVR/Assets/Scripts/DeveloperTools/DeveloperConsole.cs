@@ -13,12 +13,15 @@ namespace DeveloperTools
     {
         #region Serialized Fields
 
+        /// <summary>Content of the console scroll view.</summary>
         [Header("User Interface")] [Tooltip("Content of the console scroll view.")] [SerializeField]
         private Transform content;
 
+        /// <summary>Template for an element of the scroll view.</summary>
         [Tooltip("Template for an element of the scroll view.")] [SerializeField]
         private GameObject listEntryTemplate;
 
+        /// <summary>Input file for the commands.</summary>
         [Tooltip("Input file for the commands.")] [SerializeField]
         private TMP_InputField inputField;
 
@@ -26,7 +29,7 @@ namespace DeveloperTools
 
         #region Variables
 
-        /// <summary>list of all available commands</summary>
+        /// <summary>List of all available commands.</summary>
         private readonly List<Command> _commands = new List<Command>();
 
         #endregion
@@ -47,7 +50,6 @@ namespace DeveloperTools
         /// </summary>
         private void OnEnable()
         {
-            // subscribe to an message log event
             Logger.LogEvent += Log;
         }
 
@@ -92,8 +94,7 @@ namespace DeveloperTools
         }
 
         /// <summary>
-        /// Tries to execute a string from an input filed as a commend. If the string matches a pattern of any command
-        /// it's executed, otherwise the text color changes to red and no command is executed.
+        /// Tries to execute a string from an input filed as a command.
         /// </summary>
         public void TryExecuteCommand()
         {

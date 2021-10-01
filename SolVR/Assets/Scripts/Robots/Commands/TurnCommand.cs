@@ -11,10 +11,10 @@ namespace Robots.Commands
     {
         #region Variables
 
-        // <summary>the direction in which the robots wheels should turn</summary>
+        // <summary>Direction in which the robots wheels should turn.</summary>
         private readonly TurnDirection _direction;
 
-        /// <summary>the steer angle of the wheels around the local vertical axis</summary>
+        /// <summary>Steer angle of the wheels around the local vertical axis.</summary>
         private readonly int _angle;
 
         #endregion

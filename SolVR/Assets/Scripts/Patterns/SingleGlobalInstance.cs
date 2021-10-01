@@ -3,15 +3,17 @@ using UnityEngine;
 namespace Patterns
 {
     /// <summary>
-    /// A base class for all classes which need to have only a single instance and be globally accessible. Unlike a
-    /// singleton it doesn't create a new instance when no other instance exists.
+    /// A base class for all classes which need to have only a single instance and be globally accessible.
     /// </summary>
+    /// <remarks>Unlike a singleton it doesn't create a new instance when no other instance exists.</remarks>
     public class SingleGlobalInstance<T> : MonoBehaviour where T : Component
     {
         #region Variables
 
+        /// <summary>Instance of the class.</summary>
         private static T _instance;
 
+        /// <summary>A globally accessible instance of the class.</summary>
         public static T Instance => _instance;
 
         #endregion
@@ -19,8 +21,7 @@ namespace Patterns
         #region Built-in Methods
 
         /// <summary>
-        /// Checks if any other instance of this class exists. If it doesn't it sets itself as the globally accessible
-        /// instance, otherwise it destroys itself.
+        /// Makes sure only one instance exists.
         /// </summary>
         public virtual void Awake()
         {

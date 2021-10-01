@@ -8,29 +8,28 @@ using UnityEngine.SceneManagement;
 namespace Managers
 {
     /// <summary>
-    /// Class for loading and unloading scenes.
-    /// Keeps a queue of scenes to load, so that when a scene load is requested before the previous one has finished,
-    /// they don't collide. Provides events for performing actions before and after scene load.
+    /// Class for loading and unloading scenes. Provides events for performing actions before and after scene load.
     /// </summary>
     public class CustomSceneManager : Singleton<CustomSceneManager>
     {
         #region Variables
 
-        /// <summary>a delegate for a scene change (load or unload)</summary>
+        /// <summary>Delegate for a scene change (load or unload).</summary>
         public delegate void SceneChange(string sceneName);
 
-        /// <summary>an event invoked after a scene was loaded</summary>
+        /// <summary>Event invoked after a scene was loaded.</summary>
         public event SceneChange AfterLoad;
 
-        /// <summary>an event invoked before a scene starts unloading</summary>
+        /// <summary>Event invoked before a scene starts unloading.</summary>
         public event SceneChange BeforeUnload;
 
-        /// <summary>a queue of scene load calls</summary>
+        /// <summary>Queue of scene load calls.</summary>
         private readonly Queue<Action> _loadQueue = new Queue<Action>();
 
-        /// <summary>a flag representing whether a new scene is currently being loaded</summary>
+        /// <summary>Flag representing whether a new scene is currently being loaded.</summary>
         private bool _loading;
 
+        /// <summary>Previously loaded scene.</summary>
         private AssetReference _lastLoadedScene;
 
         #endregion
@@ -39,43 +38,37 @@ namespace Managers
 
         /// <summary>
         /// Queues a scene load or loads it immediately if no other scene is being loaded.
-        /// Checks if another scene is currently being loaded. If yes, a scene load call is added to a queue,
-        /// otherwise the scene starts loading.
         /// </summary>
         /// <param name="sceneName">Name of the scene to load.</param>
         public void QueueLoadScene(string sceneName)
         {
             if (_loading)
-                _loadQueue.Enqueue(() => { StartLoadingScene(sceneName); });
+                _loadQueue.Enqueue(() => { StartLoadingScene(sceneName); }); // add load call to queue
             else
-                StartLoadingScene(sceneName);
+                StartLoadingScene(sceneName); // start loading scene
         }
 
         /// <summary>
         /// Queues a scene load or loads it immediately if no other scene is being loaded.
-        /// Checks if another scene is currently being loaded. If yes, an addressable scene load call is added to a
-        /// queue, otherwise the scene starts loading.
         /// </summary>
         /// <param name="addressableScene">AssetReference of the scene to load.</param>
         public void QueueLoadScene(AssetReference addressableScene)
         {
             if (_loading)
-                _loadQueue.Enqueue(() => { StartLoadingScene(addressableScene); });
+                _loadQueue.Enqueue(() => { StartLoadingScene(addressableScene); }); // add load call to queue
             else
                 StartLoadingScene(addressableScene);
         }
 
         /// <summary>
         /// Queues reload of the currently loaded scene or reloads it immediately if no other scene is being loaded.
-        /// Checks if another scene is currently being loaded. If yes, an addressable scene load call is added to a
-        /// queue, otherwise the scene starts loading.
         /// </summary>
         public void QueueReloadScene()
         {
             if (_lastLoadedScene != null)
             {
                 if (_loading)
-                    _loadQueue.Enqueue(() => { StartLoadingScene(_lastLoadedScene); });
+                    _loadQueue.Enqueue(() => { StartLoadingScene(_lastLoadedScene); }); // add load call to queue
                 else
                     StartLoadingScene(_lastLoadedScene);
             }
@@ -109,8 +102,6 @@ namespace Managers
 
         /// <summary>
         /// A coroutine for loading a scene.
-        /// Starts an asynchronous operation, which loads a scene, waits until it finishes and invokes a method for
-        /// finishing loading a scene.
         /// </summary>
         /// <param name="sceneName">Name of the scene to load.</param>
         private IEnumerator LoadSceneAsync(string sceneName)
@@ -124,8 +115,6 @@ namespace Managers
 
         /// <summary>
         /// A coroutine for loading an addressable scene.
-        /// Starts an asynchronous operation, which loads an addressable scene, waits until it finishes and invokes a
-        /// a method for finishing loading a scene.
         /// </summary>
         /// <param name="addressableScene">AssetReference of the scene to load.</param>
         private IEnumerator LoadSceneAsync(AssetReference addressableScene)
@@ -140,8 +129,6 @@ namespace Managers
 
         /// <summary>
         /// Method for finishing the loading of a scene.
-        /// First, an after-load event is invoked. If there are other scene load calls in the queue, the first one is
-        /// invoked. This happens when a scene load was requested while another scene was still being loaded.
         /// </summary>
         /// <param name="sceneName">Name of the scene which just finished loading.</param>
         private void FinishLoadingScene(string sceneName)

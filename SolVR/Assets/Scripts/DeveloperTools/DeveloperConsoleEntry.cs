@@ -11,7 +11,7 @@ namespace DeveloperTools
     {
         #region Variables
 
-        /// <summary>test visible in the list</summary>
+        /// <summary>Text visible in the list.</summary>
         private TextMeshProUGUI _entryText;
 
         #endregion

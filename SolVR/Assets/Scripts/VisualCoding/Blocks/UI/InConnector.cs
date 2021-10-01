@@ -16,7 +16,7 @@ namespace VisualCoding.Blocks.UI
 
         #region Variables
 
-        /// <summary><inheritdoc cref="block"/></summary>
+        /// <summary>Property for accessing the block.</summary>
         public Block Block => block;
 
         #endregion

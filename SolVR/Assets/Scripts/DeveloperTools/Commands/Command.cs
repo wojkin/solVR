@@ -13,8 +13,8 @@ namespace DeveloperTools.Commands
         #region Serialized Fields
 
         /// <summary>
-        /// A regex pattern representing the command.
-        /// If a string is matched to this pattern the command will be executed.
+        /// A regex pattern representing the command. If a string is matched to this pattern the command will be
+        /// executed.
         /// </summary>
         [SerializeField] protected string commandPattern;
 

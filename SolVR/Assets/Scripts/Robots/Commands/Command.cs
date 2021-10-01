@@ -7,7 +7,7 @@ namespace Robots.Commands
     /// <summary>
     /// A base class for all commands which can be executed by robots.
     /// </summary>
-    /// <typeparam name="T">A robot class implementing the ICommandable interface.</typeparam>
+    /// <typeparam name="T">A robot class implementing the <see cref="ICommandable"/> interface.</typeparam>
     public abstract class Command<T> : ICommand where T : ICommandable
     {
         #region Custom Methods
@@ -26,8 +26,6 @@ namespace Robots.Commands
 
         /// <summary>
         /// A coroutine which executes a command on a robot.
-        /// If the robot can execute this command a function from a derived command class is executed. If the robot
-        /// can't execute this command an exception is thrown.
         /// </summary>
         /// <param name="robot">The robot on which the command will be executed.</param>
         /// <returns>IEnumerator required for a coroutine.</returns>
@@ -37,10 +35,12 @@ namespace Robots.Commands
         {
             if (robot is T typedRobot)
             {
+                // if the robot can execute this command a function from a derived command class is executed
                 yield return Execute(typedRobot);
             }
             else
             {
+                // if the robot can't execute this command an exception is thrown
                 Logger.OnLog("Unsupported command!");
                 throw new IncompatibleCommandException();
             }

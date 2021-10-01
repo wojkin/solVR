@@ -12,19 +12,19 @@ using Utils;
 namespace Robots
 {
     /// <summary>
-    /// A base class for all robots, which can execute commands.
+    /// Base class for all robots, which can execute commands.
     /// </summary>
     public class Robot : MonoBehaviour, ICommandable
     {
         #region Variables
 
-        /// <summary>a delegate for a thread state change</summary>
+        /// <summary>Delegate for a thread state change.</summary>
         public delegate void ThreadStateChange(ThreadState changedTo);
 
-        /// <summary>dictionary containing threads created for this robot, uses thread IDs as keys</summary>
+        /// <summary>Dictionary containing threads created for this robot, uses thread IDs as keys.</summary>
         private readonly Dictionary<int, RobotThread> _threads = new Dictionary<int, RobotThread>();
 
-        /// <summary>a flag (bool wrapped in an object) showing whether command execution should be paused</summary>
+        /// <summary>Flag (bool wrapped in an object) showing whether command execution should be paused.</summary>
         protected readonly Wrapper<bool> IsPaused = new Wrapper<bool>(false);
 
         #endregion
@@ -32,25 +32,25 @@ namespace Robots
         #region Nested Types
 
         /// <summary>
-        /// A class for independently executing commands on a robot.
+        /// Class for independently executing commands on a robot.
         /// </summary>
         private class RobotThread : IDisposable
         {
             #region Variables
 
-            /// <summary>event called when a thread changes its state</summary>
+            /// <summary>Event called when a thread changes its state.</summary>
             public event ThreadStateChange ThreadStateChanged;
 
-            // <summary>robot on which the thread should execute commands</summary>
+            // <summary>Robot on which the thread should execute commands.</summary>
             private readonly Robot _robot;
 
-            /// <summary>state the thread is currently in</summary>
+            /// <summary>State the thread is currently in.</summary>
             internal ThreadState State;
 
-            /// <summary>command which is currently being executed</summary>
+            /// <summary>Command which is currently being executed.</summary>
             public ICommand CurrentlyExecuting { get; private set; }
 
-            /// <summary>a property showing whether the thread is currently busy</summary>
+            /// <summary>Property showing whether the thread is currently busy.</summary>
             public bool CanExecuteCommands => State == ThreadState.Idle;
 
             #endregion
@@ -82,10 +82,6 @@ namespace Robots
 
             /// <summary>
             /// Starts a coroutine which executes a command.
-            /// Checks if the thread can execute a command, if no, throws an exception. If it can, checks if any other
-            /// thread is executing a command of the same type. If yes, then this function will be called again when it
-            /// finishes execution. The threads' state is changed. If no other thread was executing a command of the
-            /// same type then a coroutine executing the command is started.
             /// </summary>
             /// <param name="command">The command which will be executed.</param>
             /// <exception cref="ThreadUnavailableException">Exception thrown when this thread can't execute a command
@@ -127,7 +123,6 @@ namespace Robots
 
             /// <summary>
             /// A coroutine for executing a command.
-            /// Executes a given command and changes the threads' state.
             /// </summary>
             /// <param name="command">The command which will be executed.</param>
             /// <returns>IEnumerator required for a coroutine.</returns>
@@ -147,7 +142,6 @@ namespace Robots
             #region IDisposable Members
 
             /// <summary>
-            /// Implementation of the IDisposable interface.
             /// Removes all delegates registered to the thread change event.
             /// </summary>
             public void Dispose()
@@ -195,16 +189,14 @@ namespace Robots
         }
 
         /// <summary>
-        /// Creates a new thread and returns its' ID.
-        /// Checks if there are any threads, if yes searches for the lowest free index not used by those threads. If
-        /// there are no threads, then the id of the new one is set to 0.
+        /// Creates a new thread and returns it's unique ID.
         /// </summary>
         /// <returns>The ID of the thread which was created.</returns>
         public int CreateThread(ThreadStateChange stateChangeHandler)
         {
             var lowestIndex = 0;
 
-            // check if there are any threads
+            // check if there are any threads, if yes search for the lowest free index not used by those threads
             if (_threads.Count != 0)
             {
                 lowestIndex = _threads.Keys.Max() + 1; // set the lowest index to the one after the highest one
@@ -221,8 +213,6 @@ namespace Robots
 
         /// <summary>
         /// Deletes a thread.
-        /// Checks if a thread can be deleted and if yes, disposes of it and removes it from the dictionary. If the
-        /// thread is busy an exception is thrown.
         /// </summary>
         /// <param name="threadId">ID of the thread to be deleted.</param>
         /// <exception cref="ThreadUnavailableException">Exception thrown when the thread to be deleted is executing a
@@ -230,6 +220,7 @@ namespace Robots
         /// </exception>
         public void DeleteThread(int threadId)
         {
+            // if the thread can't be deleted, throw an exception
             if (!_threads[threadId].CanExecuteCommands)
                 throw new ThreadUnavailableException("Cannot delete a busy/blocked thread!");
 
@@ -263,9 +254,11 @@ namespace Robots
 
         /// <summary>
         /// Executes a command.
+        /// </summary>
+        /// <remarks>
         /// Start's a coroutine executing a command independently of other commands. If a command is executed using this
         /// function then it's state of execution will be unknown.
-        /// </summary>
+        /// </remarks>
         /// <param name="command">The command which will be executed.</param>
         /// <returns>IEnumerator required for a coroutine.</returns>
         public void ExecuteCommandInBackground(ICommand command)

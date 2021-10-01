@@ -14,35 +14,35 @@ namespace VisualCoding.Blocks.UI
     {
         #region Serialized Fields
 
-        ///<summary>event for configuring which property will be set by this connector</summary> 
+        /// <summary>Event for configuring which property will be set by this connector.</summary> 
         [SerializeField] private UnityEvent<Block> connectedBlock;
 
-        ///<summary>the origin of the connector</summary>
+        /// <summary>Origin of the connector.</summary>
         [SerializeField] private Transform origin;
 
         #endregion
 
         #region Variables
 
-        /// <summary>the radius within which objects can be grabbed</summary>
+        /// <summary>Radius within which objects can be grabbed.</summary>
         private const float ConnectRadius = 0.1f;
 
-        /// <summary>multiplier for lerping position and rotation of the grabbed object</summary>
+        /// <summary>Multiplier for lerping position and rotation of the grabbed object.</summary>
         private const float LerpFactor = 8f;
 
-        /// <summary>distance below which the objects position should be changed directly instead of lerped</summary>
+        /// <summary>Distance below which the objects position should be changed directly instead of lerped.</summary>
         private const float LerpDistanceThreshold = 0.01f;
 
-        /// <summary>angle below which the objects rotation should be changed directly instead of lerped</summary>
+        /// <summary>Angle below which the objects rotation should be changed directly instead of lerped.</summary>
         private const float LerpAngleThreshold = 1f;
 
-        /// <summary>line renderer responsible for visualizing the connection</summary>
+        /// <summary>Line renderer responsible for visualizing the connection.</summary>
         private LineRenderer _connectionVisual;
 
-        /// <summary>the transform which the connector should follow</summary>
+        /// <summary>Transform which the connector should follow.</summary>
         private Transform _targetTransform;
 
-        /// <summary>state the connector is in</summary>
+        /// <summary>State the connector is in.</summary>
         private State _state;
 
         #endregion
@@ -51,10 +51,12 @@ namespace VisualCoding.Blocks.UI
 
         /// <summary>
         /// Enum representing states the connector can be in.
-        /// Resting - the connector is at it's origin.
-        /// Connected - the connector is connected to anthers block in-connector.
-        /// Disconnected - the connector is neither Resting or Connected.
         /// </summary>
+        /// <remarks>
+        /// Resting - the connector is at it's origin.<br/>
+        /// Connected - the connector is connected to anthers block in-connector.<br/>
+        /// Disconnected - the connector is neither Resting or Connected.
+        /// </remarks>
         private enum State
         {
             Resting,
@@ -77,14 +79,14 @@ namespace VisualCoding.Blocks.UI
 
         /// <summary>
         /// Sets line connection positions and object position if needed.
-        /// If the connector is not resting (either connected or disconnected), its line connection positions are
-        /// updated. If it's connected, its position is updated to follow the in-connector its connected to.
         /// </summary>
         private void Update()
         {
+            // if the connector is not resting (either connected or disconnected), updated it's line connection positions
             if (_state != State.Resting)
             {
                 SetConnectionPositions();
+                // if it's connected, update it's position to follow the in-connector it's connected to
                 if (_state == State.Connected)
                     FollowTarget();
             }
@@ -93,37 +95,16 @@ namespace VisualCoding.Blocks.UI
         #endregion
 
         #region Custom Methods
-
-        /// <summary>
-        /// Sets the line visual positions so the it connects the origin with the out-connector.
-        /// </summary>
-        private void SetConnectionPositions()
-        {
-            _connectionVisual.SetPosition(0, origin.position);
-            _connectionVisual.SetPosition(1, transform.position);
-        }
-
-        /// <summary>
-        /// Updates the connector position and rotation so it follows its target.
-        /// </summary>
-        private void FollowTarget()
-        {
-            transform.position = _targetTransform.position;
-            transform.rotation = _targetTransform.rotation;
-        }
-
+        
         /// <summary>
         /// This method handles grabbing of the connector.
-        /// If the connector was connected, the connected block is set to null. If it wasn't connected (it was
-        /// Resting), the connection visual is enabled. The state is changed to Disconnected and the base method is
-        /// called.
         /// </summary>
         public override void Grab()
         {
             if (_state == State.Connected)
-                connectedBlock.Invoke(null);
+                connectedBlock.Invoke(null); // if the connector was connected, set the connected block to null
             else
-                _connectionVisual.enabled = true;
+                _connectionVisual.enabled = true; // If it wasn't connected, enable the connection visual
 
             _state = State.Disconnected;
             base.Grab();
@@ -145,10 +126,25 @@ namespace VisualCoding.Blocks.UI
         }
 
         /// <summary>
+        /// Sets the line visual positions so the it connects the origin with the out-connector.
+        /// </summary>
+        private void SetConnectionPositions()
+        {
+            _connectionVisual.SetPosition(0, origin.position);
+            _connectionVisual.SetPosition(1, transform.position);
+        }
+
+        /// <summary>
+        /// Updates the connector position and rotation so it follows its target.
+        /// </summary>
+        private void FollowTarget()
+        {
+            transform.position = _targetTransform.position;
+            transform.rotation = _targetTransform.rotation;
+        }
+
+        /// <summary>
         /// Searches for the closest in-connector in range and returns it.
-        /// Finds all colliders within a range of the connector and sorts them in ascending order based on the distance
-        /// from the connector. Finds the the first in-connector which was attached to one of the colliders gameobjects.
-        /// If no in-connector was found, it returns null.
         /// </summary>
         /// <returns>The closest in-connector within range or null if no in-connector was found.</returns>
         private InConnector ClosestInConnector()
@@ -171,8 +167,6 @@ namespace VisualCoding.Blocks.UI
 
         /// <summary>
         /// A coroutine for smoothly returning the connector to its origin.
-        /// Sets the target transform to the connectors origin. Starts the coroutine for reaching the target. When its
-        /// finished it sets the state to resting, disables the connection visual and calls the base method.
         /// </summary>
         /// <returns>IEnumerator required for the coroutine.</returns>
         private IEnumerator WindBack()
@@ -188,9 +182,6 @@ namespace VisualCoding.Blocks.UI
 
         /// <summary>
         /// A coroutine for smoothly connecting the connector to an in-connector.
-        /// Sets the connectors target to the in-connectors transform. Starts the coroutine for reaching the target.
-        /// When its finished it sets the state to connected, sets the connected block to the in-connectors block and
-        /// calls the base method.
         /// </summary>
         /// <param name="inConnector">The in-connector to which the out-connector will be connected.</param>
         /// <returns>IEnumerator required for the coroutine.</returns>
@@ -207,12 +198,12 @@ namespace VisualCoding.Blocks.UI
 
         /// <summary>
         /// A coroutine for smoothly reaching a target.
-        /// Lerps the connectors position and rotation between their current and target values until
-        /// both the distance and angle to the target are below thresholds.
         /// </summary>
         /// <returns>IEnumerator required for the coroutine.</returns>
         private IEnumerator ReachTarget()
         {
+            // lerps the connectors position and rotation between their current and target values until both the
+            // distance and angle to the target are below thresholds
             while (Vector3.Distance(transform.position, _targetTransform.position) > LerpDistanceThreshold ||
                    Quaternion.Angle(transform.rotation, _targetTransform.rotation) > LerpAngleThreshold)
             {

@@ -14,13 +14,13 @@ namespace Robots.DevRobot
     {
         #region Serialized Fields
 
-        /// <summary>array containing robots' front wheels</summary>
+        /// <summary>Array containing robots' front wheels.</summary>
         [SerializeField] private WheelCollider[] frontWheels;
 
-        /// <summary>array containing robots' rear wheels</summary>
+        /// <summary>Array containing robots' rear wheels.</summary>
         [SerializeField] private WheelCollider[] rearWheels;
 
-        /// <summary>angle at which the robots' wheels should turn</summary>
+        /// <summary>Angle at which the robots' wheels should turn.</summary>
         [SerializeField] private float turnAngle;
 
         #endregion
@@ -29,8 +29,6 @@ namespace Robots.DevRobot
 
         /// <summary>
         /// A coroutine for moving a robot by applying torque to its' wheels.
-        /// Sets rear wheels motor torque to a given value and changes it back to the previous value after a given
-        /// amount of seconds.
         /// </summary>
         /// <param name="time">The number of seconds the robot should move for.</param>
         /// <param name="torque">The torque applied to the robots wheels, given in Newton metres.</param>
@@ -59,20 +57,20 @@ namespace Robots.DevRobot
 
         /// <summary>
         /// A coroutine for turning the robots wheels in a direction to an angle around the local vertical axis.
-        /// Sets front wheels steer angle to a given value and wait for the next fixed update (so the wheel collider
-        /// updates itself based on the new value).
         /// </summary>
         /// <param name="direction">The direction in which the robot should turn.</param>
         /// <param name="angle">The steer angle of the wheel colliders around the local vertical axis.</param>
         /// <returns>IEnumerator required for a coroutine.</returns>
         public IEnumerator Turn(TurnDirection direction, int angle)
         {
+            // set front wheels steer angle to a given
             foreach (var wheelCollider in frontWheels)
                 if (direction == TurnDirection.Left)
                     wheelCollider.steerAngle = turnAngle;
                 else
                     wheelCollider.steerAngle = -turnAngle;
 
+            // wait for the next fixed update (so the wheel collider updates itself based on the new value)
             yield return new WaitForFixedUpdate();
         }
 

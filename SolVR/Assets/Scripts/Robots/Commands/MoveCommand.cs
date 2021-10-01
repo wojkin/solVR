@@ -10,17 +10,15 @@ namespace Robots.Commands
     {
         #region Variables
 
-        // <summary>the number of seconds the robot should move for when the command is executed.</summary>
+        // <summary>Number of seconds the robot should move for when the command is executed.</summary>
         private readonly float _time;
 
-        // <summary>the torque applied to the robots wheels, when the command is executed, given</summary>
+        // <summary>Torque applied to the robots wheels, when the command is executed, given in Newton metres.</summary>
         private readonly float _torque;
 
         #endregion
 
         #region Custom Methods
-
-        // in Newton metres.
 
         /// <summary>
         /// A constructor for a move command.
