@@ -1,4 +1,5 @@
 using System.Collections;
+using DeveloperTools;
 using Robots.Actions;
 using Robots.Enums;
 
@@ -40,7 +41,7 @@ namespace Robots.Commands
         protected override IEnumerator Execute(ITurnable robot)
         {
             yield return robot.Turn(_direction, _angle);
-            Logger.OnLog($"Wheels turned {_angle} degrees {_direction.ToString()}.");
+            Logger.Log($"Wheels turned {_angle} degrees {_direction.ToString()}.");
         }
 
         #endregion

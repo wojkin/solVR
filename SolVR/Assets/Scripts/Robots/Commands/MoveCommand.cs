@@ -1,4 +1,5 @@
 using System.Collections;
+using DeveloperTools;
 using Robots.Actions;
 
 namespace Robots.Commands
@@ -39,9 +40,9 @@ namespace Robots.Commands
         /// <returns>IEnumerator required for a coroutine.</returns>
         protected override IEnumerator Execute(IMovable robot)
         {
-            Logger.OnLog($"Started moving for {_time}s at {_torque}N⋅m.");
+            Logger.Log($"Started moving for {_time}s at {_torque}N⋅m.");
             yield return robot.Move(_time, _torque);
-            Logger.OnLog($"Finished moving for {_time}s at {_torque}N⋅m.");
+            Logger.Log($"Finished moving for {_time}s at {_torque}N⋅m.");
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DeveloperTools;
 using Patterns;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -74,7 +75,7 @@ namespace Managers
             }
             else
             {
-                Logger.OnLog("Cannot reload a scene! No scene was loaded using Addressables yet.");
+                Logger.Log("Cannot reload a scene! No scene was loaded using Addressables yet.");
             }
         }
 
