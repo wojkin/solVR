@@ -80,7 +80,7 @@ namespace VisualCoding.Blocks.UI
         /// <summary>
         /// Sets line connection positions and object position if needed.
         /// </summary>
-        private void Update()
+        private void LateUpdate()
         {
             // if the connector is not resting (either connected or disconnected), updated it's line connection positions
             if (_state != State.Resting)
