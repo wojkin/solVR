@@ -1,4 +1,5 @@
 using System.Collections;
+using DeveloperTools;
 using Exceptions;
 using Robots.Actions;
 
@@ -41,7 +42,7 @@ namespace Robots.Commands
             else
             {
                 // if the robot can't execute this command an exception is thrown
-                Logger.OnLog("Unsupported command!");
+                Logger.Log("Unsupported command!");
                 throw new IncompatibleCommandException();
             }
         }
