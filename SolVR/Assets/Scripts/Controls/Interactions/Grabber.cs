@@ -29,6 +29,10 @@ namespace Controls.Interactions
         /// <summary>State of the grabber.</summary>
         private State _state = State.NotGrabbing;
 
+        /// <summary>Property for calculating target position for the grabbed object.</summary>
+        private Vector3 TargetPosition =>
+            transform.position + _grabbedObject.toMove.position - _grabbedObject.transform.position;
+
         #endregion
 
         #region Nested Types
@@ -58,7 +62,7 @@ namespace Controls.Interactions
         private void Update()
         {
             if (_state == State.Grabbed)
-                _grabbedObject.toMove.position = transform.position;
+                _grabbedObject.toMove.position = TargetPosition;
         }
 
         #endregion
@@ -115,9 +119,9 @@ namespace Controls.Interactions
         {
             // lerp the connectors' positions between the current position and grabber position until the distance is
             // above the distance threshold
-            while (Vector3.Distance(_grabbedObject.toMove.position, transform.position) > LerpDistanceThreshold)
+            while (Vector3.Distance(_grabbedObject.toMove.position, TargetPosition) > LerpDistanceThreshold)
             {
-                _grabbedObject.toMove.position = Vector3.Lerp(_grabbedObject.toMove.position, transform.position,
+                _grabbedObject.toMove.position = Vector3.Lerp(_grabbedObject.toMove.position, TargetPosition,
                     LerpFactor * Time.deltaTime);
                 yield return null;
             }
