@@ -26,7 +26,7 @@ namespace UI
         private CanvasGroup _canvasGroup;
 
         /// <summary>
-        /// a flag showing whether the canvas is currently visible or hidden and setting canvas visibility
+        /// A flag showing whether the canvas is currently visible or hidden and setting canvas visibility.
         /// </summary>
         public bool IsVisible
         {

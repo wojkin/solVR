@@ -100,7 +100,7 @@ namespace VisualCoding.Execution
                     if (!ExecuteBlock())
                         return;
                 }
-                
+
                 // if there is no block to execute or the finish execution flag is set this thread is deleted
                 DeleteThread();
             }
@@ -196,7 +196,7 @@ namespace VisualCoding.Execution
         #endregion
 
         #region Custom Methods
-        
+
         /// <summary>
         /// Advances execution of blocks until one of them finishes executing.
         /// </summary>
@@ -248,7 +248,7 @@ namespace VisualCoding.Execution
                 Physics.autoSimulation = false;
             }
         }
-        
+
         /// <summary>
         /// Initializes execution for each start block in the scene.
         /// </summary>

@@ -8,6 +8,8 @@ namespace DeveloperTools
     /// </summary>
     public class UnityConsoleLogger : Singleton<UnityConsoleLogger>
     {
+        #region Built-in Methods
+
         /// <summary>
         /// Subscribes Unity Console log method to <see cref="Logger"/> event.
         /// </summary>
@@ -23,5 +25,7 @@ namespace DeveloperTools
         {
             Logger.LogEvent -= Debug.Log;
         }
+
+        #endregion
     }
 }

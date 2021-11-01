@@ -81,7 +81,7 @@ namespace UI.Dropdown
         /// <param name="index">An index of selected value in dropdown.</param>
         private void HandleDropdownChangedValue(int index)
         {
-            var enumValue = (TEnum)Enum.GetValues(typeof(TEnum)).GetValue(index);
+            var enumValue = (TEnum) Enum.GetValues(typeof(TEnum)).GetValue(index);
             onDropdownValueChanged.Invoke(enumValue);
         }
 

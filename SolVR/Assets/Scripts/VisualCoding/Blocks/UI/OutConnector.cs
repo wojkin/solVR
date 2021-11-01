@@ -95,7 +95,7 @@ namespace VisualCoding.Blocks.UI
         #endregion
 
         #region Custom Methods
-        
+
         /// <summary>
         /// This method handles grabbing of the connector.
         /// </summary>

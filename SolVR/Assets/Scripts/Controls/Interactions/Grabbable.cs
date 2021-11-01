@@ -25,18 +25,22 @@ namespace Controls.Interactions
         #region Custom Methods
 
         /// <summary>
-        /// Function, which should be called when the object is grabbed.
-        /// Sets the grabbed flag to true. Should be overriden for any extra grab functionality.
+        /// Function called when the object is grabbed.
         /// </summary>
+        /// <remarks>
+        /// Should be overriden for any extra grab functionality.
+        /// </remarks>
         public virtual void Grab()
         {
             IsGrabbed = true;
         }
 
         /// <summary>
-        /// Function, which should be called when the object is released.
-        /// Sets the grabbed flag to false. Should be overriden for any extra release functionality.
+        /// Function called when the object is released.
         /// </summary>
+        /// <remarks>
+        /// Should be overriden for any extra release functionality.
+        /// </remarks>
         public virtual void Release()
         {
             IsGrabbed = false;

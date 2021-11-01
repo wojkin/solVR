@@ -15,7 +15,7 @@ namespace Controls
         /// <summary>Multiplier for translation manipulation.</summary>
         [Tooltip("Multiplier for translation manipulation.")] [SerializeField]
         private float translationMultiplier = 1;
-        
+
         /// <summary>Multiplier for scaling manipulation.</summary>
         [Tooltip("Multiplier for scaling manipulation.")] [SerializeField]
         private float scalingMultiplier = 1;
