@@ -18,7 +18,7 @@ namespace Controls.Interactions
         private const float GrabRadius = 0.1f;
 
         /// <summary>Multiplier for lerping position and rotation of the grabbed object.</summary>
-        private const float LerpFactor = 15f;
+        private const float LerpFactor = 20f;
 
         /// <summary>Grabbed object.</summary>
         private Grabbable _grabbedObject;
@@ -28,6 +28,19 @@ namespace Controls.Interactions
 
         /// <summary>State of the grabber.</summary>
         private State _state = State.NotGrabbing;
+
+        /// <summary>Initial rotation of grabbed object used for target rotation calculations.</summary>
+        private Quaternion _initialGrabbedObjectRotation;
+
+        /// <summary>Initial forward direction of grabber used for target rotation calculations.</summary>
+        private Vector3 _initialGrabberForward;
+
+        /// <summary>Flattened forward direction used for target rotation calculations.</summary>
+        private Vector3 FlattenedForward => new Vector3(transform.forward.x, 0, transform.forward.z);
+
+        /// <summary>Property for calculating target rotation for the grabbed object.</summary>
+        private Quaternion TargetRotation => _initialGrabbedObjectRotation *
+                                             Quaternion.FromToRotation(_initialGrabberForward, FlattenedForward);
 
         /// <summary>Property for calculating target position for the grabbed object.</summary>
         private Vector3 TargetPosition =>
@@ -57,12 +70,16 @@ namespace Controls.Interactions
         #region Built-in Methods
 
         /// <summary>
-        /// If an object is grabbed, updates its position to follow the grabber.
+        /// If an object is grabbed, updates its position and optionally rotation to follow the grabber.
         /// </summary>
         private void Update()
         {
             if (_state == State.Grabbed)
+            {
                 _grabbedObject.toMove.position = TargetPosition;
+                if (_grabbedObject.rotate)
+                    _grabbedObject.toMove.rotation = TargetRotation;
+            }
         }
 
         #endregion
@@ -89,7 +106,16 @@ namespace Controls.Interactions
 
             // start grabbing the object
             _grabbedObject = closestGrabbable;
-            closestGrabbable.Grab();
+
+            // if grabbed object should be rotated save grabbed object's rotation and grabber direction
+            if (_grabbedObject.rotate)
+            {
+                _initialGrabbedObjectRotation = _grabbedObject.toMove.rotation;
+                _initialGrabberForward = transform.forward;
+                _initialGrabberForward.y = 0; // flatten saved forward direction
+            }
+
+            _grabbedObject.Grab();
             _state = State.Grabbing;
             _grabbingCoroutine = StartCoroutine(Grab());
         }
@@ -121,8 +147,13 @@ namespace Controls.Interactions
             // above the distance threshold
             while (Vector3.Distance(_grabbedObject.toMove.position, TargetPosition) > LerpDistanceThreshold)
             {
+                // move grabbed object
                 _grabbedObject.toMove.position = Vector3.Lerp(_grabbedObject.toMove.position, TargetPosition,
                     LerpFactor * Time.deltaTime);
+
+                // if rotate flag is set, rotate grabbed object
+                if (_grabbedObject.rotate)
+                    _grabbedObject.toMove.rotation = TargetRotation;
                 yield return null;
             }
 
