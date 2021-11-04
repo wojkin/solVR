@@ -15,6 +15,10 @@ namespace VisualCoding.Toolbox
     {
         #region Serialized Fields
 
+        /// <summary>Parent transform for all new blocks.</summary>
+        [SerializeField]
+        private Transform blockParent;
+
         /// <summary>List of block data for blocks available in the toolbox.</summary>
         [SerializeField]
         private List<BlockData> blockData;
@@ -43,14 +47,19 @@ namespace VisualCoding.Toolbox
 
         /// <summary>Count of all blocks.</summary>
         private int _blockCount;
+
         /// <summary>Count of currently displayed blocks.</summary>
         private int _displayCount;
+
         /// <summary>ID of the first displayed block.</summary>
         private int _firstBlockId;
+
         /// <summary>Maximum size a block can have on any dimension.</summary>
         private float _maxBlockSize;
+
         /// <summary>Action assigned to the left button.</summary>
         private UnityAction _leftBtnAction;
+
         /// <summary>Action assigned to the right button.</summary>
         private UnityAction _rightBtnAction;
 
@@ -195,6 +204,7 @@ namespace VisualCoding.Toolbox
             var placeable = block.AddComponent<PlaceableBlock>();
             placeable.blockData = data;
             placeable.toMove = block.transform;
+            placeable.parent = blockParent;
 
             placeable.BlockPlaced += PlaceHandler; // register a handler for block placed event
         }

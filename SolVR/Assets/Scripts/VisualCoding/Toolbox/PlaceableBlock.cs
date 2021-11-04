@@ -14,6 +14,9 @@ namespace VisualCoding.Toolbox
         /// <summary>Data of the placed block.</summary>
         public BlockData blockData;
 
+        /// <summary>Parent for the placed block.</summary>
+        public Transform parent;
+
         #endregion
 
         #region Variables
@@ -40,9 +43,9 @@ namespace VisualCoding.Toolbox
         {
             BlockPlaced?.Invoke(blockData, gameObject); // invoke the block placed event
 
-            // instantiate a block and set it's position, rotation and scale
+            // instantiate a block under a parent and set it's position, rotation and scale
             var position = transform.position;
-            var block = Instantiate(blockData.Prefab, position, Quaternion.identity);
+            var block = Instantiate(blockData.Prefab, position, Quaternion.identity, parent);
             var lookPos = Camera.main.transform.position - position;
             lookPos.y = 0;
             block.transform.rotation = Quaternion.LookRotation(-lookPos);

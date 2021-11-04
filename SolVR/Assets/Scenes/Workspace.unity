@@ -1752,6 +1752,10 @@ PrefabInstance:
       value: Toolbox
       objectReference: {fileID: 0}
     - target: {fileID: 5017567076692212152, guid: 822423793aed0304698a990569c7251d, type: 3}
+      propertyPath: blockParent
+      value: 
+      objectReference: {fileID: 1333565885}
+    - target: {fileID: 5017567076692212152, guid: 822423793aed0304698a990569c7251d, type: 3}
       propertyPath: blocks.Array.size
       value: 5
       objectReference: {fileID: 0}
