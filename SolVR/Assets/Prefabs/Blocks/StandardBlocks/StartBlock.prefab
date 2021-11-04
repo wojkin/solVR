@@ -117,6 +117,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1340206671190633111}
     m_Modifications:
     - target: {fileID: 1930600846736973657, guid: 1fbecb66d6389aa468730aeafbcf29d2, type: 3}
+      propertyPath: rotate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930600846736973657, guid: 1fbecb66d6389aa468730aeafbcf29d2, type: 3}
       propertyPath: toMove
       value: 
       objectReference: {fileID: 1340206671190633111}

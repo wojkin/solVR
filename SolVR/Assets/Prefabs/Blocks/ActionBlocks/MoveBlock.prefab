@@ -1735,6 +1735,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4278987310988619346, guid: 6d90b18cba1f7a54689b2a77a56f3e0b, type: 3}
+      propertyPath: rotate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4278987310988619346, guid: 6d90b18cba1f7a54689b2a77a56f3e0b, type: 3}
       propertyPath: toMove
       value: 
       objectReference: {fileID: 1617129642796741052}
