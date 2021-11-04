@@ -1635,6 +1635,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  XRRigTransform: {fileID: 268584192}
 --- !u!4 &1602490766
 Transform:
   m_ObjectHideFlags: 0

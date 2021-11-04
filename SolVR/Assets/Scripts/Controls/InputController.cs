@@ -37,6 +37,9 @@ namespace Controls
         /// <summary>Unity event for handling right hand grab action.</summary>
         public UnityEvent onReleaseRightHand;
 
+        /// <summary>XR Rig object transform.</summary>
+        public Transform XRRigTransform;
+
         #endregion
 
         #region Variables
@@ -58,6 +61,12 @@ namespace Controls
 
         /// <summary>Flag showing whether right hand is currently grabbing.</summary>
         private bool _isGrabbingRightHand;
+        
+        /// <summary>Right hand position accounted for XR Rig's offset from scene center.</summary>
+        private Vector3 RightHandPosition => _xriInputActions.XRIRightHand.Position.ReadValue<Vector3>() + XRRigTransform.position;
+        
+        /// <summary>Left hand position accounted for XR Rig's offset from scene center.</summary>
+        private Vector3 LeftHandPosition => _xriInputActions.XRILeftHand.Position.ReadValue<Vector3>() + XRRigTransform.position;
 
         #endregion
 
@@ -79,11 +88,7 @@ namespace Controls
         private void Update()
         {
             if (_isManipulated)
-            {
-                var rightHandPosition = _xriInputActions.XRIRightHand.Position.ReadValue<Vector3>();
-                var leftHandPosition = _xriInputActions.XRILeftHand.Position.ReadValue<Vector3>();
-                onTwoHandedManipulating?.Invoke(rightHandPosition, leftHandPosition);
-            }
+                onTwoHandedManipulating?.Invoke(RightHandPosition, LeftHandPosition);
         }
 
         /// <summary>
@@ -124,13 +129,6 @@ namespace Controls
 
             _playerInputActions.Player.GrabRightHand.started -= OnGrabRightHandStarted;
             _playerInputActions.Player.GrabRightHand.canceled -= OnGrabRightHandCancelled;
-
-            _xriInputActions.XRIRightHand.Position.Disable();
-            _xriInputActions.XRILeftHand.Position.Disable();
-
-            _playerInputActions.Player.TwoHandedManipulation.Disable();
-            _playerInputActions.Player.GrabLeftHand.Disable();
-            _playerInputActions.Player.GrabRightHand.Disable();
         }
 
         #endregion
@@ -166,11 +164,9 @@ namespace Controls
         {
             if (GameManager.gameIsPaused)
                 return;
-            var rightHandPosition = _xriInputActions.XRIRightHand.Position.ReadValue<Vector3>();
-            var leftHandPosition = _xriInputActions.XRILeftHand.Position.ReadValue<Vector3>();
             _isManipulated = true;
             // invoke onTwoHandedManipulationStarted event with positions of right and left hands as parameters
-            onTwoHandedManipulationStarted?.Invoke(rightHandPosition, leftHandPosition);
+            onTwoHandedManipulationStarted?.Invoke(RightHandPosition, LeftHandPosition);
         }
 
         /// <summary>

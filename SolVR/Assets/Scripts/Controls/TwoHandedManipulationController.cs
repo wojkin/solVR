@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Controls
@@ -72,9 +73,9 @@ namespace Controls
 
             // rotation matrix from last to new hands position difference
             var fromToRotation = Quaternion.FromToRotation(handsPreviousPositionDifference, handsPositionDifference);
-            var rotation = objectToRotate.transform.rotation;
-            var rotated = rotation * fromToRotation;
-            objectToRotate.transform.rotation = Quaternion.SlerpUnclamped(rotation, rotated, rotationMultiplier);
+            // center point between right and left hand positions
+            var center = (rightHandPosition + leftHandPosition) / 2;
+            RotateAroundByQuaternion(center, fromToRotation);
         }
 
         /// <summary>
@@ -107,7 +108,33 @@ namespace Controls
             objectToRotate.transform.localScale *= scale;
             _handsPreviousDistance = handsDistance; // update last distance between two hand positions
         }
-
+        
+        /// <summary>
+        /// Rotates specified object around a pivot by a rotation quaternion.
+        /// </summary>
+        /// <param name="pivot">Point to rotate around.</param>
+        /// <param name="rotation">Quaternion by which object will be rotated.</param>
+        private void RotateAroundByQuaternion(Vector3 pivot, Quaternion rotation)
+        {
+            var objectRotation = objectToRotate.transform.rotation;
+            var objectPosition = objectToRotate.transform.position;
+            
+            // rotated object's rotation, without scaling with the multiplier.
+            var desiredRotation = objectRotation * rotation;
+            // rotation scaled with the multiplier.
+            var rotationMultiplied = Quaternion
+                .SlerpUnclamped(objectRotation, desiredRotation, rotationMultiplier);
+           
+            // position, without scaling with the multiplier, of object after rotation
+            var desiredPosition = rotation * (objectPosition - pivot) + pivot; 
+            // vector delta which of with position should be moved, without scaling with multiplier.
+            var positionDelta = desiredPosition - objectPosition;
+            
+            objectToRotate.transform.rotation = rotationMultiplied;
+            // moving object's position by scaled delta position vector
+            objectToRotate.transform.position += positionDelta * rotationMultiplier; 
+        }
+        
         #endregion
     }
 }
