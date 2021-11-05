@@ -36,7 +36,7 @@ namespace Controls.Interactions
         private Vector3 _initialGrabberForward;
 
         /// <summary>Flattened forward direction used for target rotation calculations.</summary>
-        private Vector3 FlattenedForward => new Vector3(transform.forward.x, 0, transform.forward.z);
+        private Vector3 FlattenedForward => Vector3.ProjectOnPlane(transform.forward, Vector3.up);
 
         /// <summary>Property for calculating target rotation for the grabbed object.</summary>
         private Quaternion TargetRotation => _initialGrabbedObjectRotation *
@@ -111,8 +111,8 @@ namespace Controls.Interactions
             if (_grabbedObject.rotate)
             {
                 _initialGrabbedObjectRotation = _grabbedObject.toMove.rotation;
-                _initialGrabberForward = transform.forward;
-                _initialGrabberForward.y = 0; // flatten saved forward direction
+                // get flattened forward direction
+                _initialGrabberForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
             }
 
             _grabbedObject.Grab();
