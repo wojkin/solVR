@@ -67,6 +67,8 @@ crashlytics-build.properties
 
 # Packed Addressables
 /SolVR/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+/SolVR/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/Windows.meta
+/SolVR/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/Android.meta
 
 # Temporary auto-generated Android Assets
 /SolVR/[Aa]ssets/[Ss]treamingAssets/aa.meta
