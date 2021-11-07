@@ -57,7 +57,7 @@ namespace VisualCoding.Values.BooleanValues
         /// </summary>
         /// <returns>A result of relational operation on left and right boolean values.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Throws exception when <see cref="Operation"/> is not handled.</exception>
-        public override dynamic GetValue()
+        public override bool GetValue()
         {
             return Operation switch
             {

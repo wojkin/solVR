@@ -6,6 +6,7 @@ namespace VisualCoding.Values.Enums
     public enum LogicOperation
     {
         And,
-        Or
+        Or,
+        Equal
     }
 }
