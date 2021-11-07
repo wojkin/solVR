@@ -7,7 +7,7 @@ namespace VisualCoding.Values
     /// <summary>
     /// Class representing value as a result of a arithmetic operation on two values.
     /// </summary>
-    public class TwoValueArithmeticOperation : Value
+    public class TwoNumericValueArithmeticOperation : NumericValue
     {
         #region Serialized Fields
 
@@ -17,11 +17,11 @@ namespace VisualCoding.Values
 
         /// <summary>A value that is on the left of the operand.</summary>
         [SerializeField] [Tooltip("A value that is on the left of the operand.")]
-        private Value left;
+        private NumericValue left;
 
         /// <summary>A value that is on the right of the operand.</summary>
         [SerializeField] [Tooltip("A value that is on the right of the operand.")]
-        private Value right;
+        private NumericValue right;
 
         #endregion
 
@@ -35,14 +35,14 @@ namespace VisualCoding.Values
         }
 
         /// <summary><inheritdoc cref="left"/></summary>
-        public Value Left
+        public NumericValue Left
         {
             get => left;
             set => left = value;
         }
 
         /// <summary><inheritdoc cref="right"/></summary>
-        public Value Right
+        public NumericValue Right
         {
             get => right;
             set => right = value;
@@ -57,7 +57,7 @@ namespace VisualCoding.Values
         /// </summary>
         /// <returns>A result of arithmetic operation on left and right values.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Throws exception when <see cref="Operation"/> is not handled.</exception>
-        public override dynamic GetValue()
+        public override float GetValue()
         {
             return Operation switch
             {

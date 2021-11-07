@@ -3,22 +3,22 @@ using UnityEngine;
 namespace VisualCoding.Values
 {
     /// <summary>
-    /// Class representing a constant value with dynamically matched type.
+    /// Class representing a constant value with numeric type.
     /// </summary>
-    public class Constant : Value
+    public class ConstantNumericValue : NumericValue
     {
         #region Serialized Fields
 
-        /// <summary>A value of <see cref="Constant"/> that has dynamic type.</summary>
-        [SerializeField] [Tooltip("A value of Constant that has dynamic type.")]
-        private dynamic value;
+        /// <summary>A value of <see cref="ConstantNumericValue"/> that has numeric type.</summary>
+        [SerializeField] [Tooltip("A value of Constant that has numeric type.")]
+        private float value;
 
         #endregion
 
         #region Variables
 
         /// <summary><inheritdoc cref="value"/></summary>
-        public dynamic Value
+        public float Value
         {
             get => value;
             set => this.value = value;
@@ -32,7 +32,7 @@ namespace VisualCoding.Values
         /// Returns a constant value.
         /// </summary>
         /// <returns>A dynamic constant value that is represented by this class object.</returns>
-        public override dynamic GetValue()
+        public override float GetValue()
         {
             return Value;
         }

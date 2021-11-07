@@ -16,12 +16,12 @@ namespace VisualCoding.Values.BooleanValues
         private RelationalOperation operation;
 
         /// <summary>Boolean value that is on the left of the relational operand.</summary>
-        [SerializeField] [Tooltip("Boolean value that is on the left of the relational operand.")]
-        private Value left;
+        [SerializeField] [Tooltip("Numeric value that is on the left of the relational operand.")]
+        private NumericValue left;
 
         /// <summary>Boolean value that is on the right of the relational operand.</summary>
-        [SerializeField] [Tooltip("Boolean value that is on the right of the relational operand.")]
-        private Value right;
+        [SerializeField] [Tooltip("Numeric value that is on the right of the relational operand.")]
+        private NumericValue right;
 
         #endregion
 
@@ -35,14 +35,14 @@ namespace VisualCoding.Values.BooleanValues
         }
 
         /// <summary><inheritdoc cref="left"/></summary>
-        public Value Left
+        public NumericValue Left
         {
             get => left;
             set => left = value;
         }
 
         /// <summary><inheritdoc cref="right"/></summary>
-        public Value Right
+        public NumericValue Right
         {
             get => right;
             set => right = value;
@@ -57,7 +57,7 @@ namespace VisualCoding.Values.BooleanValues
         /// </summary>
         /// <returns>A result of relational operation on left and right boolean values.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Throws exception when <see cref="Operation"/> is not handled.</exception>
-        public override dynamic GetValue()
+        public override bool GetValue()
         {
             return Operation switch
             {
