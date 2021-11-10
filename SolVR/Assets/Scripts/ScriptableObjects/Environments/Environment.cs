@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace ScriptableObjects
+namespace ScriptableObjects.Environments
 {
     /// <summary>
     /// Stores information about a scene as <see cref="ScriptableObject"/>.

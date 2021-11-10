@@ -1,4 +1,4 @@
-using ScriptableObjects;
+using ScriptableObjects.TaskDescriptions;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,12 +7,9 @@ namespace Tasks.TaskFailures
     /// <summary>
     /// Class representing condition that fails task when it's met.
     /// </summary>
-    public abstract class TaskFailure : MonoBehaviour
+    public abstract class TaskFailure : MonoBehaviour, ITaskCondition
     {
         #region Serialized Fields
-
-        /// <summary>Unity event which will be invoked when failure condition is met.</summary>
-        public UnityEvent failed = new UnityEvent();
 
         /// <summary>Task failure description with text information what means this task failure.</summary>
         [SerializeField] [Tooltip("Task failure description with text information what means this task failure.")]
@@ -22,11 +19,11 @@ namespace Tasks.TaskFailures
 
         #region Variables
 
-        /// <summary>Task failure state flag representing if <see cref="failed"/> event was called.</summary>
-        public bool IsFailed { get; private set; }
+        /// <summary>Unity event which will be invoked when failure condition is met.</summary>
+        private UnityEvent _failed = new UnityEvent();
 
-        /// <summary><inheritdoc cref="description"/></summary>
-        public TaskFailureDescription Description => description;
+        /// <summary>Task failure state flag representing if <see cref="_failed"/> event was called.</summary>
+        public bool IsFailed { get; private set; }
 
         #endregion
 
@@ -45,13 +42,35 @@ namespace Tasks.TaskFailures
         #region Custom Methods
 
         /// <summary>
-        /// Invokes <see cref="failed"/> event and sets flag <see cref="IsFailed"/> to true.
+        /// Invokes <see cref="_failed"/> event and sets flag <see cref="IsFailed"/> to true.
         /// </summary>
-        public void OnFailed()
+        protected void OnFailed()
         {
             IsFailed = true;
-            failed.Invoke();
+            _failed.Invoke();
         }
+
+        #endregion
+
+        #region ITaskCondition Methods
+
+        /// <summary>
+        /// Getter for <see cref="description"/>
+        /// </summary>
+        /// <returns>Task failure's description.</returns>
+        public ITaskConditionDescription GetTaskConditionDescription() => description;
+
+        /// <summary>
+        /// Subscribes <see cref="listener"/> to <see cref="_failed"/> event.
+        /// </summary>
+        /// <param name="listener"><inheritdoc/></param>
+        public void AddListener(UnityAction listener) => _failed.AddListener(listener);
+
+        /// <summary>
+        /// Unsubscribes <see cref="listener"/> to <see cref="_failed"/> event.
+        /// </summary>
+        /// <param name="listener"><inheritdoc/></param>
+        public void RemoveListener(UnityAction listener) => _failed.RemoveListener(listener);
 
         #endregion
     }

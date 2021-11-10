@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UI
+namespace UI.List
 {
     /// <summary>
     /// Class for a list containing UI elements.
-    /// Creates UI elements based on a list of ScriptableObjects and displays them in a specific template. 
+    /// Creates UI elements based on a list of objects and displays them in a specific template. 
     /// </summary>
     public class UIList : MonoBehaviour
     {
@@ -15,9 +15,9 @@ namespace UI
         [Tooltip("Template for a UI element in the list")] [SerializeField]
         private GameObject template;
 
-        /// <summary>List of <see cref="ScriptableObject"/>s containing data to fill the template.</summary>
-        [Tooltip("List of ScriptableObjects containing data to fill the template")] [SerializeField]
-        private List<ScriptableObject> list;
+        /// <summary>List of objects containing data to fill the template.</summary>
+        [Tooltip("List of objects containing data to fill the template")] [SerializeField]
+        private List<Object> list;
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace UI
         /// Replaces current list elements with new ones.
         /// </summary>
         /// <param name="newList">New data to be displayed.</param>
-        public void ChangeListElements(List<ScriptableObject> newList)
+        public void ChangeListElements(List<Object> newList)
         {
             Clear();
             list = newList;
@@ -54,7 +54,7 @@ namespace UI
         }
 
         /// <summary>
-        /// Initialize all UI list elements based on a list of ScriptableObjects.
+        /// Initialize all UI list elements based on a <see cref="list"/>.
         /// </summary>
         private void DisplayListElements()
         {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using ScriptableObjects;
+using ScriptableObjects.TaskDescriptions;
 using Tasks.TaskConditions;
 using Tasks.TaskFailures;
 using UnityEngine;
@@ -56,25 +56,25 @@ namespace Tasks
         /// <summary>
         /// Subscribes to all needed events.
         /// </summary>
-        void OnEnable()
+        private void OnEnable()
         {
             completed.AddListener(() => State = TaskCompletionState.Completed);
             failed.AddListener(() => State = TaskCompletionState.Failed);
-            foreach (var condition in conditions) condition.completed.AddListener(OnTaskConditionCompleted);
+            foreach (var condition in conditions) condition.AddListener(OnTaskConditionCompleted);
 
-            foreach (var failure in failures) failure.failed.AddListener(OnTaskFailureFailed);
+            foreach (var failure in failures) failure.AddListener(OnTaskFailureFailed);
         }
 
         /// <summary>
         /// Unsubscribes from all previously subscribed events.
         /// </summary>
-        void OnDisable()
+        private void OnDisable()
         {
             completed.RemoveAllListeners();
             failed.RemoveAllListeners();
-            foreach (var condition in conditions) condition.completed.RemoveListener(OnTaskConditionCompleted);
+            foreach (var condition in conditions) condition.RemoveListener(OnTaskConditionCompleted);
 
-            foreach (var failure in failures) failure.failed.RemoveListener(OnTaskFailureFailed);
+            foreach (var failure in failures) failure.RemoveListener(OnTaskFailureFailed);
         }
 
         #endregion

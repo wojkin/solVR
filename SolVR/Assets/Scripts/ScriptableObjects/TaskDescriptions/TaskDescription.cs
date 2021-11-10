@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace ScriptableObjects.TaskDescriptions
 {
     /// <summary>
     /// Stores information about a task as scriptable object.

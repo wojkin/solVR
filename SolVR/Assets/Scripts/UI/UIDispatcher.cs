@@ -1,5 +1,5 @@
 using Managers;
-using ScriptableObjects;
+using ScriptableObjects.Environments;
 using UnityEngine;
 
 namespace UI
