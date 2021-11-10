@@ -166,9 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38824eb6c4e4df2a8d88635d3307ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  failed:
-    m_PersistentCalls:
-      m_Calls: []
   description: {fileID: 11400000, guid: 698b41adb0aabe4418caec7c51792b75, type: 2}
   robot: {fileID: 1909284064}
 --- !u!1 &622089096
@@ -1323,12 +1320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54c8ea310f4471ab7cb0cfbcf223ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  completed:
-    m_PersistentCalls:
-      m_Calls: []
   description: {fileID: 11400000, guid: fe87727da8cc7ed43aa3ec45979ac699, type: 2}
-  destination: {fileID: 0}
+  destination: {fileID: 1395176982}
   robotPosition: {fileID: 1395176982}
+  minDistance: 1
 --- !u!1 &1210313227
 GameObject:
   m_ObjectHideFlags: 0
