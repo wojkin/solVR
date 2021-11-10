@@ -31,7 +31,7 @@ namespace UI
         /// <param name="listElementData">ScriptableObject.Environment with data to fill UI list element.</param>
         public void Populate(ScriptableObject listElementData)
         {
-            var levelData = (Environment) listElementData;
+            var levelData = (Level) listElementData;
             levelName.text = levelData.environmentName;
             playButton.onClick.AddListener(() =>
                 CustomSceneManager.Instance.QueueLoadScene(levelData.scene)

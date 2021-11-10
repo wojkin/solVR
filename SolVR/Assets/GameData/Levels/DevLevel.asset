@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc115c35fb1c30439896e8304cc0a90, type: 3}
-  m_Name: PlaymodeLevel
+  m_Script: {fileID: 11500000, guid: b842f5bfb48748fbbadb79711f0a2667, type: 3}
+  m_Name: DevLevel
   m_EditorClassIdentifier: 
-  environmentName: Playmode
+  environmentName: Dev level
   scene:
-    m_AssetGUID: ea5d96752bda9f148bcfd374f9426073
+    m_AssetGUID: 612fe6fab491ddb41a76a07726f58b43
     m_SubObjectName: 
     m_SubObjectType: 
+  levelTaskDescription: {fileID: 0}
