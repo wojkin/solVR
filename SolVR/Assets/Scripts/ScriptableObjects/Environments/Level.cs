@@ -1,6 +1,7 @@
+using ScriptableObjects.TaskDescriptions;
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace ScriptableObjects.Environments
 {
     /// <summary>
     /// Stores information about a level as scriptable object.

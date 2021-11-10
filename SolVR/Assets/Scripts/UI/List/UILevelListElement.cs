@@ -1,5 +1,5 @@
 using Managers;
-using ScriptableObjects;
+using ScriptableObjects.Environments;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,7 +31,7 @@ namespace UI.List
         /// <param name="listElementData">ScriptableObject.Environment with data to fill UI list element.</param>
         public void Populate(Object listElementData)
         {
-            var levelData = (Level) listElementData;
+            var levelData = (Level)listElementData;
             levelName.text = levelData.environmentName;
             playButton.onClick.AddListener(() =>
                 CustomSceneManager.Instance.QueueLoadScene(levelData.scene)
