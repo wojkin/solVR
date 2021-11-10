@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace UI
+namespace UI.List
 {
     /// <summary>
     /// Class representing an element of a <see cref="UIList"/> displaying block names.
@@ -22,7 +22,7 @@ namespace UI
         /// <inheritdoc/>
         /// </summary>
         /// <param name="listElementData"><see cref="BlockData"/> used to populate the list element.</param>
-        public void Populate(ScriptableObject listElementData)
+        public void Populate(Object listElementData)
         {
             var blockData = (BlockData) listElementData;
             text.text = blockData.BlockName;

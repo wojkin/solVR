@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using ScriptableObjects;
 using UI;
+using UI.List;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace VisualCoding.Toolbox
 {
@@ -244,7 +246,7 @@ namespace VisualCoding.Toolbox
             var lastBlockId = Math.Min(_firstBlockId + _displayCount, _blockCount);
 
             // initialize a list for storing data of displayed blocks 
-            var displayedBlockData = new List<ScriptableObject>();
+            var displayedBlockData = new List<Object>();
 
             // display each block and store it's data
             for (var i = _firstBlockId; i < lastBlockId; i++)
