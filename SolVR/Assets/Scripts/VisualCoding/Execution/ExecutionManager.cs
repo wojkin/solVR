@@ -87,19 +87,27 @@ namespace VisualCoding.Execution
             }
 
             /// <summary>
-            /// Executes blocks in a loop until any of the stop conditions is met.
+            /// A coroutine for executing blocks in a loop until any of the stop conditions is met.
             /// </summary>
-            private void ExecuteBlocks()
+            private IEnumerator ExecuteBlocks()
             {
                 while (_currentBlock != null && !_finishExecution)
                 {
                     // if the execution manager is paused or an action block is executed the execution stops
                     if (_executionState == ExecutionState.Paused)
-                        return;
+                        yield break;
 
                     if (!ExecuteBlock())
-                        return;
+                        yield break;
+
+                    // wait for next frame before continuing execution
+                    // this is so that an infinite loop of blocks doesn't freeze the game by running in a single frame
+                    yield return null;
                 }
+
+                // wait for next frame before deleting this thread
+                // this is so that deleting threads doesn't happen on the same frame as running them
+                yield return null;
 
                 // if there is no block to execute or the finish execution flag is set this thread is deleted
                 DeleteThread();
@@ -168,7 +176,7 @@ namespace VisualCoding.Execution
                 {
                     _currentBlock = _currentBlock.NextBlock();
                     PauseIfPauseOnNextStep();
-                    ExecuteBlocks();
+                    _manager.StartCoroutine(ExecuteBlocks());
                 }
             }
 
@@ -179,7 +187,7 @@ namespace VisualCoding.Execution
             {
                 // if the robot thread is not idle it means that it still has a command to execute
                 if (_manager.robot.GetThreadState(_threadId) == ThreadState.Idle)
-                    ExecuteBlocks();
+                    _manager.StartCoroutine(ExecuteBlocks());
             }
 
             /// <summary>
