@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VisualCoding.Blocks.UI
+namespace VisualCoding.Blocks.Connectors
 {
     /// <summary>
     /// A class representing an in-connector of a block.
