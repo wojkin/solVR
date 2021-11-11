@@ -4,10 +4,10 @@ using Controls.Interactions;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace VisualCoding.Blocks.UI
+namespace VisualCoding.Blocks.Connectors
 {
     /// <summary>
-    /// A class representing the out-connector of a block, responsible for connecting and visualizing the connection.
+    /// A class representing the out-connector of a block.
     /// </summary>
     [RequireComponent(typeof(LineRenderer))]
     public class OutConnector : Grabbable
@@ -35,9 +35,6 @@ namespace VisualCoding.Blocks.UI
 
         /// <summary>Angle below which the objects rotation should be changed directly instead of lerped.</summary>
         private const float LerpAngleThreshold = 1f;
-
-        /// <summary>Line renderer responsible for visualizing the connection.</summary>
-        private LineRenderer _connectionVisual;
 
         /// <summary>Transform which the connector should follow.</summary>
         private Transform _targetTransform;
@@ -69,27 +66,15 @@ namespace VisualCoding.Blocks.UI
         #region Built-in Methods
 
         /// <summary>
-        /// Initializes the connection visual.
-        /// </summary>
-        private void Start()
-        {
-            _connectionVisual = GetComponent<LineRenderer>();
-            _connectionVisual.enabled = false;
-        }
-
-        /// <summary>
-        /// Sets line connection positions and object position if needed.
+        /// Sets the connector position if needed.
         /// </summary>
         private void LateUpdate()
         {
             // if the connector is not resting (either connected or disconnected), updated it's line connection positions
             if (_state != State.Resting)
-            {
-                SetConnectionPositions();
                 // if it's connected, update it's position to follow the in-connector it's connected to
                 if (_state == State.Connected)
                     FollowTarget();
-            }
         }
 
         #endregion
@@ -103,22 +88,19 @@ namespace VisualCoding.Blocks.UI
         {
             if (_state == State.Connected)
                 connectedBlock.Invoke(null); // if the connector was connected, set the connected block to null
-            else
-                _connectionVisual.enabled = true; // If it wasn't connected, enable the connection visual
 
             _state = State.Disconnected;
             base.Grab();
         }
 
         /// <summary>
-        /// This method handles releasing of the connector.
-        /// Searches for the nearest in-connector in range. If it was found, starts the connecting coroutine, otherwise
-        /// starts the wind back coroutine.
+        /// Handles releasing of the connector.
         /// </summary>
         public override void Release()
         {
-            var inConnector = ClosestInConnector();
+            var inConnector = ClosestInConnector(); // search for the nearest in-connector in range
 
+            // if found, start the connecting coroutine, otherwise start the wind back coroutine
             if (inConnector != null)
                 StartCoroutine(Connect(inConnector));
             else
@@ -126,16 +108,7 @@ namespace VisualCoding.Blocks.UI
         }
 
         /// <summary>
-        /// Sets the line visual positions so the it connects the origin with the out-connector.
-        /// </summary>
-        private void SetConnectionPositions()
-        {
-            _connectionVisual.SetPosition(0, origin.position);
-            _connectionVisual.SetPosition(1, transform.position);
-        }
-
-        /// <summary>
-        /// Updates the connector position and rotation so it follows its target.
+        /// Updates the connector position and rotation so it follows it's target.
         /// </summary>
         private void FollowTarget()
         {
@@ -150,9 +123,9 @@ namespace VisualCoding.Blocks.UI
         private InConnector ClosestInConnector()
         {
             // generate a list of colliders within range, sorted by the distance to the connector
-            var origin = transform.position;
-            var colliders = Physics.OverlapSphere(origin, ConnectRadius);
-            colliders = colliders.OrderBy(c => (origin - c.transform.position).sqrMagnitude).ToArray();
+            var searchOrigin = transform.position;
+            var colliders = Physics.OverlapSphere(searchOrigin, ConnectRadius);
+            colliders = colliders.OrderBy(c => (searchOrigin - c.transform.position).sqrMagnitude).ToArray();
 
             // find the first in-connector which was attached to one of the colliders gameobjects
             foreach (var collider in colliders)
@@ -176,7 +149,6 @@ namespace VisualCoding.Blocks.UI
             yield return ReachTarget();
 
             _state = State.Resting;
-            _connectionVisual.enabled = false;
             base.Release();
         }
 

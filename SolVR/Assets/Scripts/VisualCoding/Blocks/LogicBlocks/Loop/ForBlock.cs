@@ -3,19 +3,25 @@ using UnityEngine;
 namespace VisualCoding.Blocks.LogicBlocks.Loop
 {
     /// <summary>
-    /// Class representing a block that is a for loop.
+    /// Class representing a for loop block.
     /// </summary>
     public class ForBlock : LoopBlock
     {
         #region Serialized Fields
 
-        /// <summary>Number of calls NextBlock that will be perform before it returns a block after loop end.</summary>
-        [SerializeField] [Tooltip("Number of loops that will be perform.")]
+        /// <summary>Number of times the blocks inside the loop will be executed.</summary>
+        [SerializeField] [Tooltip("Number of loops that will be performed.")]
         private int numberOfLoops;
 
         #endregion
 
         #region Variables
+
+        /// <summary>Delegate for <see cref="ForBlock.IterationChanged"/> event.</summary>
+        public delegate void IterationChangedHandler(int iteration);
+
+        /// <summary>Event invoked when the current count of iterations changes.</summary>
+        public event IterationChangedHandler IterationChanged;
 
         /// <summary><inheritdoc cref="numberOfLoops"/></summary>
         public int NumberOfLoops
@@ -24,38 +30,37 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
             set => numberOfLoops = value;
         }
 
-        /// <summary>An iteration flag shows how many times function NextBlock was called from last reset.</summary>
-        public int Iteration { get; private set; }
+        /// <summary>An iteration counter showing how many iterations of the loop were completed. If the loop is not
+        /// running the iteration count is zero.</summary>
+        private int Iteration { get; set; }
 
         #endregion
 
         #region Custom Methods
 
         /// <summary>
-        /// Initializing fields.
+        /// Determines the next block by checking if the iteration counter is below the target number of loops.
+        /// Increases the iteration counter by one and resets it if it reaches the target number of loops.
         /// </summary>
-        private ForBlock()
-        {
-            Iteration = 0;
-        }
-
-        /// <summary>
-        /// Determines the next block by checking an iteration flag if it is under the number of loops in the loop.
-        /// Increases the iteration flag by one and resets it if it reaches the number of loops.
-        /// </summary>
-        /// <returns><inheritdoc /> <see cref="Block"/> is determine by checking a number of iterations.</returns>
+        /// <returns><inheritdoc /> <see cref="Block"/> is determined by checking if the target number of iterations has
+        /// been reached.</returns>
         public override Block NextBlock()
         {
-            Iteration++;
-            if (Iteration <= NumberOfLoops)
+            Block nextBlock;
+
+            if (Iteration < NumberOfLoops)
             {
-                return Next;
+                Iteration++;
+                nextBlock = Next;
             }
             else
             {
                 Iteration = 0;
-                return EndBlock.Next;
+                nextBlock = EndBlock.Next;
             }
+
+            IterationChanged?.Invoke(Iteration);
+            return nextBlock;
         }
 
         #endregion

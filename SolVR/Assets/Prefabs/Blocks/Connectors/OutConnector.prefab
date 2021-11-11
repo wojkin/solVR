@@ -125,10 +125,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toMove: {fileID: 6419193684781774639}
+  rotate: 0
   connectedBlock:
     m_PersistentCalls:
       m_Calls: []
   origin: {fileID: 6620297053137811979}
+--- !u!114 &7894034202476114347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258308585209942886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 319eb3ae9eb98b1468ea8c0a9a26d8ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 6620297053137811979}
 --- !u!1 &4617804576114658327
 GameObject:
   m_ObjectHideFlags: 0
