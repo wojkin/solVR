@@ -536,6 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fa30575be344449a2851ae683180d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockParent: {fileID: 0}
   blockData: []
   displayTransforms:
   - {fileID: 2347986316991756850}
@@ -1177,6 +1178,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0183041bb5a6c2741b523f587eb86c71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0183041bb5a6c2741b523f587eb86c71, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 0183041bb5a6c2741b523f587eb86c71, type: 3}
