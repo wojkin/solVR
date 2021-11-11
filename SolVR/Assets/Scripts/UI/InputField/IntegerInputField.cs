@@ -52,13 +52,14 @@ namespace UI.InputField
         #region Custom Methods
 
         /// <summary>
-        /// Parse string to int.
+        /// Try to parse string to int.
         /// </summary>
         /// <param name="input">A string that will be parsed to int.</param>
-        /// <returns>Parsed value of string in int type.</returns>
-        protected override int Parse(string input)
+        /// <param name="parsed">An int that is a parsed string.</param>
+        /// <returns><inheritdoc/></returns>
+        protected override bool TryParse(string input, out int parsed)
         {
-            return int.Parse(input);
+            return int.TryParse(input, out parsed);
         }
 
         /// <summary>
@@ -75,6 +76,16 @@ namespace UI.InputField
             else if (!Regex.IsMatch(input + addedChar, @"^[-]?[0-9]*$"))
                 addedChar = '\0'; // change it to an empty character
             return addedChar;
+        }
+
+        /// <inheritdoc/>
+        public override bool TrySetInputValue(int value)
+        {
+            if (!allowNegativeValues && value < 0)
+                return false;
+
+            inputField.text = value.ToString();
+            return true;
         }
 
         #endregion

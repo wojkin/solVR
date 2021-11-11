@@ -51,13 +51,14 @@ namespace UI.InputField
         #region Custom Methods
 
         /// <summary>
-        /// Parse string to float.
+        /// Try to parse string to float.
         /// </summary>
         /// <param name="input">A string that will be parsed to float.</param>
-        /// <returns>Parsed value of string in float type.</returns>
-        protected override float Parse(string input)
+        /// <param name="parsed">A float that is a parsed string.</param>
+        /// <returns><inheritdoc/></returns>
+        protected override bool TryParse(string input, out float parsed)
         {
-            return float.Parse(input);
+            return float.TryParse(input, out parsed);
         }
 
         /// <summary>
@@ -74,6 +75,16 @@ namespace UI.InputField
             else if (!Regex.IsMatch(input + addedChar, @"^[-]?([0-9]*\.?[0-9]*)$"))
                 addedChar = '\0'; // change it to an empty character
             return addedChar;
+        }
+
+        /// <inheritdoc/>
+        public override bool TrySetInputValue(float value)
+        {
+            if (!allowNegativeValues && value < 0)
+                return false;
+
+            inputField.text = value.ToString();
+            return true;
         }
 
         #endregion
