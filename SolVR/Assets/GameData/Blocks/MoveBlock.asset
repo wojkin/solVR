@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856a6bc9520b4d7429c82c727591ecde, type: 3}
   m_Name: MoveBlock
   m_EditorClassIdentifier: 
-  blockName: Move Block
+  blockName: Move Robot
   previewPrefab: {fileID: 1800827030547903556, guid: 3d40d9eb18b659a4392ec6f92311c4fe, type: 3}
   prefab: {fileID: 5919792571760923456, guid: 01e3fb89d94428f4ea04c4b754de4bbf, type: 3}
