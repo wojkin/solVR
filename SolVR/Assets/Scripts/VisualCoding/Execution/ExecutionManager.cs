@@ -135,7 +135,7 @@ namespace VisualCoding.Execution
                 // check if the current block is an end block
                 if (_currentBlock.GetType() == typeof(EndBlock))
                 {
-                    _manager.ExitAllThreads();
+                    _manager.StopExecution();
                     return false;
                 }
 
@@ -236,7 +236,7 @@ namespace VisualCoding.Execution
         /// <summary>
         /// Stops execution of all threads.
         /// </summary>
-        public void ExitAllThreads()
+        public void StopExecution()
         {
             foreach (var thread in _executionThreads)
                 thread.FinishExecution();
