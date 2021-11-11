@@ -61,12 +61,14 @@ namespace Controls
 
         /// <summary>Flag showing whether right hand is currently grabbing.</summary>
         private bool _isGrabbingRightHand;
-        
+
         /// <summary>Right hand position accounted for XR Rig's offset from scene center.</summary>
-        private Vector3 RightHandPosition => _xriInputActions.XRIRightHand.Position.ReadValue<Vector3>() + XRRigTransform.position;
-        
+        private Vector3 RightHandPosition =>
+            _xriInputActions.XRIRightHand.Position.ReadValue<Vector3>() + XRRigTransform.position;
+
         /// <summary>Left hand position accounted for XR Rig's offset from scene center.</summary>
-        private Vector3 LeftHandPosition => _xriInputActions.XRILeftHand.Position.ReadValue<Vector3>() + XRRigTransform.position;
+        private Vector3 LeftHandPosition =>
+            _xriInputActions.XRILeftHand.Position.ReadValue<Vector3>() + XRRigTransform.position;
 
         #endregion
 

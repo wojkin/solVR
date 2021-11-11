@@ -27,6 +27,18 @@ namespace UI.List
 
         #endregion
 
+        #region Built-in Methods
+
+        /// <summary>
+        /// Unsubscribes from previously subscribed events.
+        /// </summary>
+        private void OnDestroy()
+        {
+            _taskCondition?.RemoveListener(SetConditionMetState);
+        }
+
+        #endregion
+
         #region Custom Methods
 
         /// <summary>
@@ -43,14 +55,6 @@ namespace UI.List
         private void SetConditionMetState()
         {
             state.text = _taskCondition.GetTaskConditionDescription().GetConditionMetStateMessage();
-        }
-
-        /// <summary>
-        /// Unsubscribes from previously subscribed events.
-        /// </summary>
-        private void OnDestroy()
-        {
-            _taskCondition?.RemoveListener(SetConditionMetState);
         }
 
         #endregion

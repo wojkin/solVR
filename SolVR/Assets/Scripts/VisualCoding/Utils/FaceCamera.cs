@@ -12,6 +12,7 @@ namespace VisualCoding.Utils
 
         /// <summary>Multiplier for lerping the rotation of the gameobject.</summary>
         private const float LerpFactor = 0.5f;
+
         /// <summary>Transform of a camera which should be faced.</summary>
         private Transform _camera;
 

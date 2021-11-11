@@ -24,7 +24,7 @@ namespace UI.List
         /// <param name="listElementData"><see cref="BlockData"/> used to populate the list element.</param>
         public void Populate(Object listElementData)
         {
-            var blockData = (BlockData) listElementData;
+            var blockData = (BlockData)listElementData;
             text.text = blockData.BlockName;
         }
 

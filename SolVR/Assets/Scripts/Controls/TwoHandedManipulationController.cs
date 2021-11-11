@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Controls
@@ -108,7 +107,7 @@ namespace Controls
             objectToRotate.transform.localScale *= scale;
             _handsPreviousDistance = handsDistance; // update last distance between two hand positions
         }
-        
+
         /// <summary>
         /// Rotates specified object around a pivot by a rotation quaternion.
         /// </summary>
@@ -118,23 +117,23 @@ namespace Controls
         {
             var objectRotation = objectToRotate.transform.rotation;
             var objectPosition = objectToRotate.transform.position;
-            
+
             // rotated object's rotation, without scaling with the multiplier.
             var desiredRotation = objectRotation * rotation;
             // rotation scaled with the multiplier.
             var rotationMultiplied = Quaternion
                 .SlerpUnclamped(objectRotation, desiredRotation, rotationMultiplier);
-           
+
             // position, without scaling with the multiplier, of object after rotation
-            var desiredPosition = rotation * (objectPosition - pivot) + pivot; 
+            var desiredPosition = rotation * (objectPosition - pivot) + pivot;
             // vector delta which of with position should be moved, without scaling with multiplier.
             var positionDelta = desiredPosition - objectPosition;
-            
+
             objectToRotate.transform.rotation = rotationMultiplied;
             // moving object's position by scaled delta position vector
-            objectToRotate.transform.position += positionDelta * rotationMultiplier; 
+            objectToRotate.transform.position += positionDelta * rotationMultiplier;
         }
-        
+
         #endregion
     }
 }

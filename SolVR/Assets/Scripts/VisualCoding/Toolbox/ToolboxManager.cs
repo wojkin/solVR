@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using ScriptableObjects;
-using UI;
 using UI.List;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,22 +17,20 @@ namespace VisualCoding.Toolbox
         #region Serialized Fields
 
         /// <summary>Parent transform for all new blocks.</summary>
-        [SerializeField]
-        private Transform blockParent;
+        [SerializeField] private Transform blockParent;
 
         /// <summary>List of block data for blocks available in the toolbox.</summary>
-        [SerializeField]
-        private List<BlockData> blockData;
+        [SerializeField] private List<BlockData> blockData;
 
         /// <summary>Positions at which the blocks can be displayed.</summary>
-        [SerializeField]
-        private List<Transform> displayTransforms;
+        [SerializeField] private List<Transform> displayTransforms;
 
         /// <summary>Descriptions of currently displayed blocks.</summary>
         [SerializeField] private UIList blockDescriptions;
 
         /// <summary>Button for shifting displayed blocks to the left.</summary>
         [SerializeField] private Button leftBtn;
+
         /// <summary>Button for shifting displayed blocks to the right.</summary>
         [SerializeField] private Button rightBtn;
 

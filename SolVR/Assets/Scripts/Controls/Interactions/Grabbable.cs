@@ -12,6 +12,7 @@ namespace Controls.Interactions
 
         /// <summary>The transform that will be changed to move the object.</summary>
         [SerializeField] public Transform toMove;
+
         [SerializeField] public bool rotate;
 
         #endregion
