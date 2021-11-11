@@ -91,7 +91,7 @@ namespace VisualCoding.Execution
             /// </summary>
             private void ExecuteBlocks()
             {
-                while (_currentBlock != null || _finishExecution)
+                while (_currentBlock != null && !_finishExecution)
                 {
                     // if the execution manager is paused or an action block is executed the execution stops
                     if (_executionState == ExecutionState.Paused)
