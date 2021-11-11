@@ -722,12 +722,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8481415773478667224}
-        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UI.UIDispatcher, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: acd03951cfff56e459e056b8907ef31b, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.Environment, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.Environments.Environment,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
