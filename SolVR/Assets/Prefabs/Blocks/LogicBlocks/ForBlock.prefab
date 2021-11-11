@@ -335,12 +335,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455787482452222007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e9c0b554935adb439f1d11ab7e68ef9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a6e2efb39d04038869c627c7e69fbcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   incrementButton: {fileID: 8238076673575561398}
   decrementButton: {fileID: 539776753493150808}
-  allowNegativeValues: 0
 --- !u!1 &2862337911543925956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,6 +1754,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3589964340009970734, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889089973424408800, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5672744115095748966, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
       propertyPath: m_text
       value: Repeat
@@ -1865,6 +1872,10 @@ PrefabInstance:
     - target: {fileID: 129084991040830707, guid: d508bb0e22aa8524a9932576438c8dd6, type: 3}
       propertyPath: m_Name
       value: Geometry
+      objectReference: {fileID: 0}
+    - target: {fileID: 129084991040830707, guid: d508bb0e22aa8524a9932576438c8dd6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 756968336820201033, guid: d508bb0e22aa8524a9932576438c8dd6, type: 3}
       propertyPath: m_RootOrder
@@ -2070,6 +2081,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Handle
       objectReference: {fileID: 0}
+    - target: {fileID: 8094263913867880796, guid: 6d90b18cba1f7a54689b2a77a56f3e0b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d90b18cba1f7a54689b2a77a56f3e0b, type: 3}
 --- !u!4 &187196766469764476 stripped
@@ -2087,6 +2102,10 @@ PrefabInstance:
     - target: {fileID: 4047931915487606853, guid: de71776158e0cca4ca9e60d17ea7f1eb, type: 3}
       propertyPath: m_Name
       value: InConnector
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047931915487606853, guid: de71776158e0cca4ca9e60d17ea7f1eb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5285626690783705701, guid: de71776158e0cca4ca9e60d17ea7f1eb, type: 3}
       propertyPath: m_RootOrder
