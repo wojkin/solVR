@@ -11,6 +11,7 @@ namespace UI.InputField
     {
         #region Serialized Fields
 
+        /// <summary>Flag showing if negative values are be allowed.</summary>
         [Tooltip("Flag for setting if negative values should be allowed.")] [SerializeField]
         private bool allowNegativeValues;
 
