@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Robots;
 using Robots.Enums;
 using UnityEngine;
@@ -119,7 +121,7 @@ namespace VisualCoding.Execution
             private void DeleteThread()
             {
                 _manager.robot.DeleteThread(_threadId); // delete the robot thread created for this thread
-                _manager._executionThreads.Remove(this); // remove itself from the list in the execution manager
+                _manager.DeleteThread(this); // deletes itself in the execution manager
             }
 
             /// <summary>
@@ -240,7 +242,7 @@ namespace VisualCoding.Execution
         {
             foreach (var thread in _executionThreads)
                 thread.FinishExecution();
-            _executionState = ExecutionState.NotRunning;
+            ResetExecution();
         }
 
         /// <summary>
@@ -255,6 +257,18 @@ namespace VisualCoding.Execution
                 robot.Pause();
                 Physics.autoSimulation = false;
             }
+        }
+
+        /// <summary>
+        /// Resets the state of execution manager so that execution can start again.
+        /// </summary>
+        private void ResetExecution()
+        {
+            if (_executionState == ExecutionState.Paused)
+                robot.Resume();
+            _pauseOnNextStep = false;
+            Physics.autoSimulation = true;
+            _executionState = ExecutionState.NotRunning;
         }
 
         /// <summary>
@@ -290,6 +304,18 @@ namespace VisualCoding.Execution
             // start block execution for all idle robot threads
             foreach (var handler in _executionThreads)
                 handler.StartExecutingIfIdle();
+        }
+
+        /// <summary>
+        /// Deletes a <see cref="BlockExecutionThread"/> and resets execution if it was the last one.
+        /// </summary>
+        /// <param name="thread"><see cref="BlockExecutionThread"/> to be deleted.</param>
+        private void DeleteThread(BlockExecutionThread thread)
+        {
+            _executionThreads.Remove(thread);
+
+            if (!_executionThreads.Any())
+                ResetExecution();
         }
 
         #endregion
