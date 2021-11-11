@@ -12,6 +12,11 @@ namespace ScriptableObjects.TaskDescriptions
         #region Serialized Fields
 
         /// <summary>
+        /// Name of the task.
+        /// </summary>
+        [Tooltip("Name of the task.")] public string taskName;
+
+        /// <summary>
         /// Description of the task.
         /// </summary>
         [Tooltip("Description of the task.")] [TextArea]

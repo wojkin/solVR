@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aeb58193e224af89fd787085df92760, type: 3}
   m_Name: TaskDescription
   m_EditorClassIdentifier: Assembly-CSharp:ScriptableObjects:TaskDescription
+  taskName: Drive to the route
   description: Drive from strat point to marked destination point.
   conditions:
   - {fileID: 11400000, guid: fe87727da8cc7ed43aa3ec45979ac699, type: 2}
