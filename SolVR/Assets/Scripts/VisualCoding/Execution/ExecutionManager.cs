@@ -7,6 +7,7 @@ using UnityEngine;
 using VisualCoding.Blocks;
 using VisualCoding.Blocks.ActionBlocks;
 using VisualCoding.Blocks.LogicBlocks;
+using VisualCoding.Execution.Enums;
 
 namespace VisualCoding.Execution
 {
@@ -24,6 +25,27 @@ namespace VisualCoding.Execution
         #endregion
 
         #region Variables
+
+        /// <summary>Delegate for a thread step event.</summary>
+        public delegate void ThreadStepHandler(int threadId, Block block);
+
+        /// <summary>Delegate for a thread lifecycle event.</summary>
+        public delegate void ThreadEventHandler(int threadId);
+
+        /// <summary>Delegate for a thread state change event.</summary>
+        public delegate void ThreadStateChangeHandler(int threadId, BlockThreadState state);
+
+        /// <summary>Event raised when a <see cref="BlockExecutionThread"/> advances to a new block.</summary>
+        public event ThreadStepHandler ThreadStep;
+
+        /// <summary>Event raised when a <see cref="BlockExecutionThread"/> is created.</summary>
+        public event ThreadEventHandler ThreadCreated;
+
+        /// <summary>Event raised when a <see cref="BlockExecutionThread"/> is deleted.</summary>
+        public event ThreadEventHandler ThreadDeleted;
+
+        /// <summary>Event raised when a <see cref="BlockExecutionThread"/> starts or tops running.</summary>
+        public event ThreadStateChangeHandler ThreadStateChanged;
 
         /// <summary>ExecutionState showing whether the execution state.</summary>
         private static ExecutionState _executionState = ExecutionState.NotRunning;
@@ -86,6 +108,7 @@ namespace VisualCoding.Execution
                 _threadId = manager.robot.CreateThread(StateChangeHandler);
                 _manager = manager;
                 _currentBlock = currentBlock;
+                _manager.ThreadCreated?.Invoke(_threadId); // invoke thread created event
             }
 
             /// <summary>
@@ -122,6 +145,17 @@ namespace VisualCoding.Execution
             {
                 _manager.robot.DeleteThread(_threadId); // delete the robot thread created for this thread
                 _manager.DeleteThread(this); // deletes itself in the execution manager
+                _manager.ThreadDeleted?.Invoke(_threadId); // invoke thread deleted event
+            }
+
+            /// <summary>
+            /// Advances execution by one block.
+            /// </summary>
+            private void AdvanceBlock()
+            {
+                _currentBlock = _currentBlock.NextBlock();
+                _manager.ThreadStep?.Invoke(_threadId, _currentBlock); // invoked the thread step event
+                PauseIfPauseOnNextStep(); // check if the execution should paused
             }
 
             /// <summary>
@@ -137,7 +171,7 @@ namespace VisualCoding.Execution
                 // check if the current block is an end block
                 if (_currentBlock.GetType() == typeof(EndBlock))
                 {
-                    _manager.StopExecution();
+                    DeleteThread();
                     return false;
                 }
 
@@ -150,8 +184,7 @@ namespace VisualCoding.Execution
                 }
 
                 // if the current block wasn't an end or an action block, then set the current block to the next one
-                _currentBlock = _currentBlock.NextBlock();
-                PauseIfPauseOnNextStep(); // check if the execution should paused
+                AdvanceBlock();
                 return true;
             }
 
@@ -173,12 +206,21 @@ namespace VisualCoding.Execution
             /// <param name="changedTo">State to which the robot thread changed to.</param>
             private void StateChangeHandler(ThreadState changedTo)
             {
-                // state change to idle means that the robot finished a command and that block execution should resume
-                if (changedTo == ThreadState.Idle)
+                switch (changedTo)
                 {
-                    _currentBlock = _currentBlock.NextBlock();
-                    PauseIfPauseOnNextStep();
-                    _manager.StartCoroutine(ExecuteBlocks());
+                    // state change to idle means that the robot finished a command and that block execution should resume
+                    case ThreadState.Idle:
+                        AdvanceBlock();
+                        _manager.StartCoroutine(ExecuteBlocks());
+                        break;
+                    case ThreadState.Blocked:
+                        // invoke thread state change event with the stopped state
+                        _manager.ThreadStateChanged(_threadId, BlockThreadState.Stopped);
+                        break;
+                    case ThreadState.Executing:
+                        // invoke thread state change event with the running state
+                        _manager.ThreadStateChanged(_threadId, BlockThreadState.Running);
+                        break;
                 }
             }
 

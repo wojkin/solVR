@@ -21,26 +21,26 @@ MonoBehaviour:
     m_Address: Assets/Scenes/Playmode.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 60b0d7065afa42149a6607d433ca2722
     m_Address: Assets/Scenes/Workspace.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 612fe6fab491ddb41a76a07726f58b43
     m_Address: Assets/Scenes/DevScene.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: ff1f098a30e1ebe4da4972fbff80f9dd
     m_Address: Assets/Scenes/MainMenu.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+  - m_GUID: 81ecfa55bacbef94fac0cef6bcacd137
+    m_Address: Assets/GameData/Levels/DriveRouteLevel/DriveRoute.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b745d9ea977a2bc4abdb0c0899699f27
+    m_Address: Assets/GameData/Levels/DevLevel.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9ea93900863fa0149b6d0193265d063c, type: 2}
   m_SchemaSet:
