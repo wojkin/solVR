@@ -95,9 +95,9 @@ namespace Controls.Interactions
             var origin = transform.position;
             var colliders = Physics.OverlapSphere(origin, GrabRadius);
 
-            // get all grabbable objects which ware attached to the same gameobject as collider and are not grabbed
+            // get all grabbable objects which ware attached to the same gameobject as collider and can be grabbed
             var grabbables = colliders.Select(c => c.gameObject.GetComponent<Grabbable>())
-                .Where(grabbable => grabbable != null && !grabbable.IsGrabbed).ToList();
+                .Where(grabbable => grabbable != null && grabbable.CanBeGrabbed).ToList();
 
             if (!grabbables.Any()) return; // no grabbable objects to grab
 
@@ -115,7 +115,7 @@ namespace Controls.Interactions
                 _initialGrabberForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
             }
 
-            _grabbedObject.Grab();
+            _grabbedObject.Grab(StopGrabbing);
             _state = State.Grabbing;
             _grabbingCoroutine = StartCoroutine(Grab());
         }
@@ -125,16 +125,27 @@ namespace Controls.Interactions
         /// </summary>
         public void OnRelease()
         {
-            if (_state != State.NotGrabbing)
-            {
-                if (_state == State.Grabbing)
-                    StopCoroutine(_grabbingCoroutine); // stop the grabbing coroutine
+            // if the method was run when the grabber wasn't grabbing, don't do anything
+            if (_state == State.NotGrabbing) return;
 
-                // release the grabbed object
-                _grabbedObject.Release();
-                _grabbedObject = null;
-                _state = State.NotGrabbing;
-            }
+            // release the grabbed object
+            _grabbedObject.Release();
+
+            StopGrabbing();
+        }
+
+        /// <summary>
+        /// Stops grabbing an object.
+        /// </summary>
+        /// <remarks>Releasing of the grabbed object must be handled separately.</remarks>
+        private void StopGrabbing()
+        {
+            // if currently in the process of grabbing, stop the grabbing coroutine
+            if (_state == State.Grabbing)
+                StopCoroutine(_grabbingCoroutine);
+
+            _grabbedObject = null;
+            _state = State.NotGrabbing;
         }
 
         /// <summary>

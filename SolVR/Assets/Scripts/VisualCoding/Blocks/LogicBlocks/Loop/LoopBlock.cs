@@ -25,5 +25,17 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
         }
 
         #endregion
+
+        #region Built-in Methods
+
+        /// <summary>
+        /// Destroy this loop's <see cref="endBlock"/>.
+        /// </summary>
+        private void OnDestroy()
+        {
+            Destroy(endBlock.gameObject);
+        }
+
+        #endregion
     }
 }
