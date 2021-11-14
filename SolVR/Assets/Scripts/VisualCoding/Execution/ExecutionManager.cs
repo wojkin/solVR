@@ -8,6 +8,7 @@ using VisualCoding.Blocks;
 using VisualCoding.Blocks.ActionBlocks;
 using VisualCoding.Blocks.LogicBlocks;
 using VisualCoding.Execution.Enums;
+using Logger = DeveloperTools.Logger;
 
 namespace VisualCoding.Execution
 {
@@ -109,6 +110,7 @@ namespace VisualCoding.Execution
                 _manager = manager;
                 _currentBlock = currentBlock;
                 _manager.ThreadCreated?.Invoke(_threadId); // invoke thread created event
+                Logger.Log($"Block execution thread {_threadId} created.");
             }
 
             /// <summary>
@@ -149,6 +151,7 @@ namespace VisualCoding.Execution
                 _manager.robot.DeleteThread(_threadId); // delete the robot thread created for this thread
                 _manager.DeleteThread(this); // deletes itself in the execution manager
                 _manager.ThreadDeleted?.Invoke(_threadId); // invoke thread deleted event
+                Logger.Log($"Block execution thread {_threadId} deleted.");
             }
 
             /// <summary>
@@ -164,8 +167,8 @@ namespace VisualCoding.Execution
             /// Handles executing of the current block.
             /// </summary>
             /// <remarks>
-            /// If a command block is executed, then the execution will continue, when the robot thread changes its
-            /// state to idle.
+            /// If a command block is executed, then the execution will resume, when the robot thread changes its state
+            /// to idle.
             /// </remarks>
             /// <returns>A bool showing whether execution should continue.</returns>
             private bool ExecuteBlock()
@@ -173,6 +176,7 @@ namespace VisualCoding.Execution
                 // check if the current block is an end block
                 if (_currentBlock.GetType() == typeof(EndBlock))
                 {
+                    Logger.Log($"Block execution thread {_threadId} reached end block. Stopping execution!");
                     _manager.StopExecution();
                     return true;
                 }
