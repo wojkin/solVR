@@ -42,6 +42,15 @@ namespace VisualCoding.Blocks.Connectors
         /// <summary>State the connector is in.</summary>
         private State _state;
 
+        /// <summary><see cref="InConnector"/> this connector is connected to.</summary>
+        private InConnector _connectedTo;
+
+        /// <summary>Coroutine responsible for smoothly connecting to an <see cref="InConnector"/>.</summary>
+        private Coroutine _connectingCoroutine;
+
+        /// <summary><inheritdoc/></summary>
+        public override bool CanBeGrabbed => base.CanBeGrabbed && _state != State.Disconnected;
+
         #endregion
 
         #region Nested Types
@@ -77,6 +86,17 @@ namespace VisualCoding.Blocks.Connectors
                     FollowTarget();
         }
 
+        /// <summary>
+        /// Disconnects the connector if it was connected.
+        /// </summary>
+        protected override void OnDestroy()
+        {
+            if (_state == State.Connected)
+                _connectedTo.Disconnect(this);
+
+            base.OnDestroy();
+        }
+
         #endregion
 
         #region Custom Methods
@@ -84,13 +104,18 @@ namespace VisualCoding.Blocks.Connectors
         /// <summary>
         /// This method handles grabbing of the connector.
         /// </summary>
-        public override void Grab()
+        /// <param name="destroyedHandler"><inheritdoc/></param>
+        public override void Grab(OnGrabbableDestroyedHandler destroyedHandler)
         {
+            // if connected, set the connected block to null and disconnect from the in-connector
             if (_state == State.Connected)
-                connectedBlock.Invoke(null); // if the connector was connected, set the connected block to null
+            {
+                connectedBlock.Invoke(null);
+                _connectedTo.Disconnect(this);
+            }
 
             _state = State.Disconnected;
-            base.Grab();
+            base.Grab(destroyedHandler);
         }
 
         /// <summary>
@@ -100,11 +125,34 @@ namespace VisualCoding.Blocks.Connectors
         {
             var inConnector = ClosestInConnector(); // search for the nearest in-connector in range
 
-            // if found, start the connecting coroutine, otherwise start the wind back coroutine
+            // if found, register the connection and start connecting smoothly, otherwise start winding back
             if (inConnector != null)
-                StartCoroutine(Connect(inConnector));
+            {
+                _connectedTo = inConnector;
+                inConnector.Connect(this, InConnectorDestroyedHandler);
+                _connectingCoroutine = StartCoroutine(Connect(inConnector));
+            }
             else
+            {
                 StartCoroutine(WindBack());
+            }
+
+            base.Release();
+        }
+
+        /// <summary>
+        /// Handler for the on destroyed event of the connected <see cref="InConnector"/>.
+        /// </summary>
+        private void InConnectorDestroyedHandler()
+        {
+            // stop the connecting coroutine if it was running
+            if (_connectingCoroutine != null)
+                StopCoroutine(_connectingCoroutine);
+
+            // disconnect and wind back
+            _state = State.Disconnected;
+            connectedBlock.Invoke(null);
+            StartCoroutine(WindBack());
         }
 
         /// <summary>
@@ -149,7 +197,6 @@ namespace VisualCoding.Blocks.Connectors
             yield return ReachTarget();
 
             _state = State.Resting;
-            base.Release();
         }
 
         /// <summary>
@@ -165,7 +212,7 @@ namespace VisualCoding.Blocks.Connectors
 
             _state = State.Connected;
             connectedBlock.Invoke(inConnector.Block);
-            base.Release();
+            _connectingCoroutine = null;
         }
 
         /// <summary>

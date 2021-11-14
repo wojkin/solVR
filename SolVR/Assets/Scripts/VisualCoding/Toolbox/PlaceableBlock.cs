@@ -32,10 +32,11 @@ namespace VisualCoding.Toolbox
         #region Custom Methods
 
         /// <summary><inheritdoc/></summary>
-        public override void Grab()
+        /// <param name="destroyedHandler"><inheritdoc/></param>
+        public override void Grab(OnGrabbableDestroyedHandler destroyedHandler)
         {
             transform.SetParent(null);
-            base.Grab();
+            base.Grab(destroyedHandler);
         }
 
         /// <summary><inheritdoc/></summary>
