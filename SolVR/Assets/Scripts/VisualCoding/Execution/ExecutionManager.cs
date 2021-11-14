@@ -118,6 +118,9 @@ namespace VisualCoding.Execution
             {
                 while (_currentBlock != null && !_finishExecution)
                 {
+                    // invoke the thread step event
+                    _manager.ThreadStep?.Invoke(_threadId, _currentBlock);
+
                     // if the execution manager is paused or an action block is executed the execution stops
                     if (_executionState == ExecutionState.Paused)
                         yield break;
@@ -154,7 +157,6 @@ namespace VisualCoding.Execution
             private void AdvanceBlock()
             {
                 _currentBlock = _currentBlock.NextBlock();
-                _manager.ThreadStep?.Invoke(_threadId, _currentBlock); // invoked the thread step event
                 PauseIfPauseOnNextStep(); // check if the execution should paused
             }
 
