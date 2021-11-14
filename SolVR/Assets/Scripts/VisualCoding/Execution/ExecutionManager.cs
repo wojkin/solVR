@@ -173,8 +173,8 @@ namespace VisualCoding.Execution
                 // check if the current block is an end block
                 if (_currentBlock.GetType() == typeof(EndBlock))
                 {
-                    DeleteThread();
-                    return false;
+                    _manager.StopExecution();
+                    return true;
                 }
 
                 // check if the current block is an action block
