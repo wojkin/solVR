@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8169013138740841442}
   - component: {fileID: 590531947389112120}
   m_Layer: 0
-  m_Name: DevelopmentRobot
+  m_Name: DevRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
