@@ -1760,6 +1760,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1617129642796741052}
     m_Modifications:
+    - target: {fileID: 1982517587081288283, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
+      propertyPath: blockToRemove
+      value: 
+      objectReference: {fileID: 791900054308681527}
     - target: {fileID: 3589964340009970734, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
       propertyPath: m_Name
       value: BlockCanvas
@@ -1806,7 +1810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7178785007276499556, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 130
+      value: 133.91998
       objectReference: {fileID: 0}
     - target: {fileID: 7178785007276499556, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1855,6 +1859,10 @@ PrefabInstance:
     - target: {fileID: 7178785007276499556, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873900423232018107, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
