@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
-using VisualCoding.Values.Enums;
+using VisualScripting.Values.Enums;
 
-namespace VisualCoding.Values.BooleanValues
+namespace VisualScripting.Values.BooleanValues
 {
     /// <summary>
     /// Class representing boolean value as a result of a relational operation on two boolean values.

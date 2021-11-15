@@ -1,6 +1,6 @@
 using Robots.Commands;
 
-namespace VisualCoding.Blocks.ActionBlocks
+namespace VisualScripting.Blocks.ActionBlocks
 {
     /// <summary>
     /// Interface for getting a command.

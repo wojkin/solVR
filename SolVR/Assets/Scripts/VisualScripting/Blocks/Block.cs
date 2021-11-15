@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VisualCoding.Blocks
+namespace VisualScripting.Blocks
 {
     /// <summary>
     /// Class representing a block of code.

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VisualCoding.Toolbox
+namespace VisualScripting.Toolbox
 {
     public class BlockExpander : MonoBehaviour
     {

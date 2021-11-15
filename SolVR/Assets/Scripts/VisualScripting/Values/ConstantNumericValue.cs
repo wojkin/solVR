@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VisualCoding.Values
+namespace VisualScripting.Values
 {
     /// <summary>
     /// Class representing a constant value with numeric type.

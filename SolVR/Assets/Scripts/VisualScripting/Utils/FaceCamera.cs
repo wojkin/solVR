@@ -1,7 +1,7 @@
 using Managers;
 using UnityEngine;
 
-namespace VisualCoding.Utils
+namespace VisualScripting.Utils
 {
     /// <summary>
     /// Component responsible for making sure an object is facing the camera.

@@ -3,7 +3,7 @@ using Robots.Enums;
 using UnityEngine;
 using Utils.ValueInRange;
 
-namespace VisualCoding.Blocks.ActionBlocks
+namespace VisualScripting.Blocks.ActionBlocks
 {
     /// <summary>
     /// Class representing a turn block which creates a turn command.

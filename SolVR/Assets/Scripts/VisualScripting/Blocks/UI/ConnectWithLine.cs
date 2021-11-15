@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VisualCoding.Blocks.UI
+namespace VisualScripting.Blocks.UI
 {
     /// <summary>
     /// Component for connecting two objects with a line.

@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
-using VisualCoding.Execution.Enums;
+using VisualScripting.Execution.Enums;
 
-namespace VisualCoding.Debugging
+namespace VisualScripting.Debugging
 {
     /// <summary>
     /// Component for managing a debugging marker which appears above a currently executing block.

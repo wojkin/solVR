@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace VisualCoding.Toolbox
+namespace VisualScripting.Toolbox
 {
     /// <summary>
     /// Manager for the toolbox responsible for initializing and displaying blocks.

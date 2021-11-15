@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
-using VisualCoding.Blocks.LogicBlocks.Loop;
+using VisualScripting.Blocks.LogicBlocks.Loop;
 
-namespace VisualCoding.Blocks.UI
+namespace VisualScripting.Blocks.UI
 {
     /// <summary>
     /// Component for displaying <see cref="ForBlock"/> iteration count on a TMP text filed.

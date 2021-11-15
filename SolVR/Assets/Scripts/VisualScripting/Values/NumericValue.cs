@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace VisualCoding.Values
+namespace VisualScripting.Values
 {
     /// <summary>
     /// Class representing value of numeric type.

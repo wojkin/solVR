@@ -2,7 +2,7 @@ using Robots.Commands;
 using UnityEngine;
 using Utils.ValueInRange;
 
-namespace VisualCoding.Blocks.ActionBlocks
+namespace VisualScripting.Blocks.ActionBlocks
 {
     /// <summary>
     /// Class representing a block and creating a move command.

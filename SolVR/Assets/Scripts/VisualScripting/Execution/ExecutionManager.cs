@@ -4,13 +4,13 @@ using System.Linq;
 using Robots;
 using Robots.Enums;
 using UnityEngine;
-using VisualCoding.Blocks;
-using VisualCoding.Blocks.ActionBlocks;
-using VisualCoding.Blocks.LogicBlocks;
-using VisualCoding.Execution.Enums;
+using VisualScripting.Blocks;
+using VisualScripting.Blocks.ActionBlocks;
+using VisualScripting.Blocks.LogicBlocks;
+using VisualScripting.Execution.Enums;
 using Logger = DeveloperTools.Logger;
 
-namespace VisualCoding.Execution
+namespace VisualScripting.Execution
 {
     /// <summary>
     /// Class responsible for executing all blocks in a scene on a given robot. Assumes that all blocks and connections

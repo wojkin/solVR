@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
-using VisualCoding.Values.Enums;
+using VisualScripting.Values.Enums;
 
-namespace VisualCoding.Values
+namespace VisualScripting.Values
 {
     /// <summary>
     /// Class representing value as a result of a arithmetic operation on two values.

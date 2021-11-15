@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VisualCoding.Values.BooleanValues
+namespace VisualScripting.Values.BooleanValues
 {
     /// <summary>
     /// Class representing boolean value.

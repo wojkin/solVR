@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils.ValueInRange;
 
-namespace VisualCoding.Blocks.LogicBlocks.Loop
+namespace VisualScripting.Blocks.LogicBlocks.Loop
 {
     /// <summary>
     /// Class representing a for loop block.

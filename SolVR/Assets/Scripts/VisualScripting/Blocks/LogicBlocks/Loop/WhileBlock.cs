@@ -1,7 +1,7 @@
 using UnityEngine;
-using VisualCoding.Values.BooleanValues;
+using VisualScripting.Values.BooleanValues;
 
-namespace VisualCoding.Blocks.LogicBlocks.Loop
+namespace VisualScripting.Blocks.LogicBlocks.Loop
 {
     /// <summary>
     /// Class representing a block that is a while loop.

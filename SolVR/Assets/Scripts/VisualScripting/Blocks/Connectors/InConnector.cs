@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VisualCoding.Blocks.Connectors
+namespace VisualScripting.Blocks.Connectors
 {
     /// <summary>
     /// A class representing an in-connector of a block.

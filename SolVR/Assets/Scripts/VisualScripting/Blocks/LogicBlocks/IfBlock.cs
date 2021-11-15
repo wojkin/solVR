@@ -1,7 +1,7 @@
 using UnityEngine;
-using VisualCoding.Values.BooleanValues;
+using VisualScripting.Values.BooleanValues;
 
-namespace VisualCoding.Blocks.LogicBlocks
+namespace VisualScripting.Blocks.LogicBlocks
 {
     /// <summary>
     /// Class representing block that determines next block based on condition.

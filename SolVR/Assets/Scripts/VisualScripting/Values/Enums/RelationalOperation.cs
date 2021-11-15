@@ -1,6 +1,6 @@
 using System;
 
-namespace VisualCoding.Values.Enums
+namespace VisualScripting.Values.Enums
 {
     /// <summary>
     /// Enum that represents a relational operation type. 

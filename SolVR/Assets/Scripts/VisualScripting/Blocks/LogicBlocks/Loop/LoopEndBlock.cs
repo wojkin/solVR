@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VisualCoding.Blocks.LogicBlocks.Loop
+namespace VisualScripting.Blocks.LogicBlocks.Loop
 {
     /// <summary>
     /// Class representing a block that is an end of the loop.

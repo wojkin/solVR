@@ -4,7 +4,7 @@ using Controls.Interactions;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace VisualCoding.Blocks.Connectors
+namespace VisualScripting.Blocks.Connectors
 {
     /// <summary>
     /// A class representing the out-connector of a block.

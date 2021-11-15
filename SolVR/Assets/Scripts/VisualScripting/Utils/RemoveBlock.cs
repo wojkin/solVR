@@ -1,7 +1,7 @@
 using UnityEngine;
-using VisualCoding.Blocks;
+using VisualScripting.Blocks;
 
-namespace VisualCoding.Utils
+namespace VisualScripting.Utils
 {
     /// <summary>
     /// Component for removing a <see cref="Block"/> by a method call.

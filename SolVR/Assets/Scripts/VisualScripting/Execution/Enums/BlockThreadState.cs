@@ -1,4 +1,4 @@
-﻿namespace VisualCoding.Execution.Enums
+﻿namespace VisualScripting.Execution.Enums
 {
     /// <summary>
     /// Enum representing the state of a block execution thread.

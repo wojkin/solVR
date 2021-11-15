@@ -2,7 +2,7 @@
 using ScriptableObjects;
 using UnityEngine;
 
-namespace VisualCoding.Toolbox
+namespace VisualScripting.Toolbox
 {
     /// <summary>
     /// A class representing a preview block which can be grabbed and placed in the scene.

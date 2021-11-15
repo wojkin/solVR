@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
-using VisualCoding.Blocks;
-using VisualCoding.Execution;
-using VisualCoding.Execution.Enums;
+using VisualScripting.Blocks;
+using VisualScripting.Execution;
+using VisualScripting.Execution.Enums;
 
-namespace VisualCoding.Debugging
+namespace VisualScripting.Debugging
 {
     /// <summary>
     /// Class responsible for visualizing the execution of blocks by managing debug markers.
