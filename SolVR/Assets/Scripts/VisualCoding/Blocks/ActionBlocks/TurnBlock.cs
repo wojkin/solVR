@@ -1,6 +1,7 @@
 using Robots.Commands;
 using Robots.Enums;
 using UnityEngine;
+using Utils.ValueInRange;
 
 namespace VisualCoding.Blocks.ActionBlocks
 {
@@ -15,9 +16,9 @@ namespace VisualCoding.Blocks.ActionBlocks
         [SerializeField] [Tooltip("The direction in which the robot should turn.")]
         private TurnDirection direction;
 
-        /// <summary>The steer angle of the wheels around the local vertical axis.</summary>
-        [SerializeField] [Tooltip("The steer angle of the wheels around the local vertical axis.")]
-        private int angle;
+        /// <summary>The steer angle of the wheels around the local vertical axis in range.</summary>
+        [SerializeField] [Tooltip("The steer angle of the wheels around the local vertical axis in range.")]
+        public ValueInRange<int> angle;
 
         #endregion
 
@@ -33,8 +34,20 @@ namespace VisualCoding.Blocks.ActionBlocks
         /// <summary><inheritdoc cref="angle"/></summary>
         public int Angle
         {
-            get => angle;
-            set => angle = value;
+            get => angle.Value;
+            set => angle.Value = value;
+        }
+
+        #endregion
+
+        #region Built-in Methods
+
+        /// <summary>
+        /// Initialize fields.
+        /// </summary>
+        public void Start()
+        {
+            angle.Initialize();
         }
 
         #endregion
