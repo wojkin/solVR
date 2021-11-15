@@ -1,5 +1,6 @@
 using Robots.Commands;
 using UnityEngine;
+using Utils.ValueInRange;
 
 namespace VisualCoding.Blocks.ActionBlocks
 {
@@ -12,11 +13,11 @@ namespace VisualCoding.Blocks.ActionBlocks
 
         /// <summary>Number of seconds move command is executed.</summary>
         [SerializeField] [Tooltip("Number of seconds move command is executed.")]
-        private float time;
+        private ValueInRange<float> time;
 
         /// <summary>The torque to the move command.</summary>
         [SerializeField] [Tooltip("The torque to the move command.")]
-        private float torque;
+        private ValueInRange<float> torque;
 
         #endregion
 
@@ -25,15 +26,28 @@ namespace VisualCoding.Blocks.ActionBlocks
         /// <summary><inheritdoc cref="time"/></summary>
         public float Time
         {
-            get => time;
-            set => time = value;
+            get => time.Value;
+            set => time.Value = value;
         }
 
         /// <summary><inheritdoc cref="torque"/></summary>
         public float Torque
         {
-            get => torque;
-            set => torque = value;
+            get => torque.Value;
+            set => torque.Value = value;
+        }
+
+        #endregion
+
+        #region Built-in Methods
+
+        /// <summary>
+        /// Initialize fields.
+        /// </summary>
+        private void Start()
+        {
+            time.Initialize();
+            torque.Initialize();
         }
 
         #endregion

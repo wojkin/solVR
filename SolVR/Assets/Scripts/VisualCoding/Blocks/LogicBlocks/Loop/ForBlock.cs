@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils.ValueInRange;
 
 namespace VisualCoding.Blocks.LogicBlocks.Loop
 {
@@ -11,7 +12,7 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
 
         /// <summary>Number of times the blocks inside the loop will be executed.</summary>
         [SerializeField] [Tooltip("Number of loops that will be performed.")]
-        private int numberOfLoops;
+        private ValueInRange<int> numberOfLoops;
 
         #endregion
 
@@ -26,13 +27,25 @@ namespace VisualCoding.Blocks.LogicBlocks.Loop
         /// <summary><inheritdoc cref="numberOfLoops"/></summary>
         public int NumberOfLoops
         {
-            get => numberOfLoops;
-            set => numberOfLoops = value;
+            get => numberOfLoops.Value;
+            set => numberOfLoops.Value = value;
         }
 
         /// <summary>An iteration counter showing how many iterations of the loop were completed. If the loop is not
         /// running the iteration count is zero.</summary>
         private int Iteration { get; set; }
+
+        #endregion
+
+        #region Built-in Methods
+
+        /// <summary>
+        /// Initialize fields.
+        /// </summary>
+        private void Start()
+        {
+            numberOfLoops.Initialize();
+        }
 
         #endregion
 

@@ -1,7 +1,7 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using Logger = DeveloperTools.Logger;
 
 namespace UI.InputField
 {
@@ -60,8 +60,9 @@ namespace UI.InputField
         /// Parse string to T data type.
         /// </summary>
         /// <param name="input">A string that will be parsed to T data type.</param>
-        /// <returns>Parsed value of T type.</returns>
-        protected abstract T Parse(string input);
+        /// <param name="parsed">A T value that is a parsed string.</param>
+        /// <returns>A boolean representation of parsing success.</returns>
+        protected abstract bool TryParse(string input, out T parsed);
 
         /// <summary>
         /// Parses the value to specified type and invokes <see cref="onInputValueChanged"/> event.
@@ -76,16 +77,37 @@ namespace UI.InputField
                 return;
             }
 
-            try
+            if (TryParse(value, out var parsedValue))
             {
-                var parsedValue = Parse(value);
                 onInputValueChanged.Invoke(parsedValue);
                 inputField.image.color = Color.white;
             }
-            catch (FormatException)
+            else
             {
                 inputField.image.color = Color.red;
             }
+        }
+
+        /// <summary>
+        /// Setter for input field text.
+        /// </summary>
+        /// <param name="value">New value that will be set to input field text.</param>
+        /// <returns>A boolean, true if value was set, otherwise false.</returns>
+        public void SetInputValue(T value)
+        {
+            inputField.text = value.ToString();
+        }
+
+
+        /// <summary>
+        /// Getter for input field text.
+        /// </summary>
+        /// <returns>A T value in input field.</returns>
+        public T GetInputValue()
+        {
+            if (!TryParse(inputField.text, out var value))
+                Logger.Log($"Can't parse input field content to {typeof(T)} type.");
+            return value;
         }
 
         #endregion

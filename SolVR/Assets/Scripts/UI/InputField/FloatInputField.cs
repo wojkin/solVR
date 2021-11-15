@@ -51,13 +51,14 @@ namespace UI.InputField
         #region Custom Methods
 
         /// <summary>
-        /// Parse string to float.
+        /// Try to parse string to float.
         /// </summary>
         /// <param name="input">A string that will be parsed to float.</param>
-        /// <returns>Parsed value of string in float type.</returns>
-        protected override float Parse(string input)
+        /// <param name="parsed">A float that is a parsed string.</param>
+        /// <returns><inheritdoc/></returns>
+        protected override bool TryParse(string input, out float parsed)
         {
-            return float.Parse(input);
+            return float.TryParse(input, out parsed);
         }
 
         /// <summary>
