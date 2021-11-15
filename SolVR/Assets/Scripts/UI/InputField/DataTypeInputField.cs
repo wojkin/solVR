@@ -93,10 +93,9 @@ namespace UI.InputField
         /// </summary>
         /// <param name="value">New value that will be set to input field text.</param>
         /// <returns>A boolean, true if value was set, otherwise false.</returns>
-        public virtual bool TrySetInputValue(T value)
+        public void SetInputValue(T value)
         {
             inputField.text = value.ToString();
-            return true;
         }
 
 

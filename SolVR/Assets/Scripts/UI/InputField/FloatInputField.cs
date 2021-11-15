@@ -77,16 +77,6 @@ namespace UI.InputField
             return addedChar;
         }
 
-        /// <inheritdoc/>
-        public override bool TrySetInputValue(float value)
-        {
-            if (!allowNegativeValues && value < 0)
-                return false;
-
-            inputField.text = value.ToString();
-            return true;
-        }
-
         #endregion
     }
 }

@@ -72,7 +72,7 @@ namespace UI.InputField.IncrementInputField
             try
             {
                 T incremented = (dynamic)_dataTypeInputField.GetInputValue() + 1;
-                _dataTypeInputField.TrySetInputValue(incremented);
+                _dataTypeInputField.SetInputValue(incremented);
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
@@ -88,7 +88,7 @@ namespace UI.InputField.IncrementInputField
             try
             {
                 T decremented = (dynamic)_dataTypeInputField.GetInputValue() - 1;
-                _dataTypeInputField.TrySetInputValue(decremented);
+                _dataTypeInputField.SetInputValue(decremented);
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
