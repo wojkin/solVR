@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using DeveloperTools;
 using Patterns;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
+using Logger = DeveloperTools.Logger;
 
 namespace Managers
 {
@@ -40,18 +40,6 @@ namespace Managers
         /// <summary>
         /// Queues a scene load or loads it immediately if no other scene is being loaded.
         /// </summary>
-        /// <param name="sceneName">Name of the scene to load.</param>
-        public void QueueLoadScene(string sceneName)
-        {
-            if (_loading)
-                _loadQueue.Enqueue(() => { StartLoadingScene(sceneName); }); // add load call to queue
-            else
-                StartLoadingScene(sceneName); // start loading scene
-        }
-
-        /// <summary>
-        /// Queues a scene load or loads it immediately if no other scene is being loaded.
-        /// </summary>
         /// <param name="addressableScene">AssetReference of the scene to load.</param>
         public void QueueLoadScene(AssetReference addressableScene)
         {
@@ -80,17 +68,6 @@ namespace Managers
         }
 
         /// <summary>
-        /// Invokes a before-unload event and start a scene load coroutine.
-        /// </summary>
-        /// <param name="sceneName">Name of the scene to load.</param>
-        private void StartLoadingScene(string sceneName)
-        {
-            _loading = true;
-            BeforeUnload?.Invoke(SceneManager.GetActiveScene().name);
-            StartCoroutine(LoadSceneAsync(sceneName));
-        }
-
-        /// <summary>
         /// Invokes a before-unload event and start an addressable scene load coroutine.
         /// </summary>
         /// <param name="addressableScene">AssetReference of the scene to load.</param>
@@ -99,19 +76,6 @@ namespace Managers
             _loading = true;
             BeforeUnload?.Invoke(SceneManager.GetActiveScene().name);
             StartCoroutine(LoadSceneAsync(addressableScene));
-        }
-
-        /// <summary>
-        /// A coroutine for loading a scene.
-        /// </summary>
-        /// <param name="sceneName">Name of the scene to load.</param>
-        private IEnumerator LoadSceneAsync(string sceneName)
-        {
-            // start loading a scene and wait until it finishes loading 
-            var asyncLoadLevel = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-            while (!asyncLoadLevel.isDone) yield return null;
-
-            FinishLoadingScene(sceneName);
         }
 
         /// <summary>
