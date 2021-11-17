@@ -71,7 +71,7 @@ namespace Controls.Interactions
         {
             // remove all listeners from the on destroyed event
             foreach (var d in OnGrabbableDestroyed.GetInvocationList())
-                OnGrabbableDestroyed -= (OnGrabbableDestroyedHandler) d;
+                OnGrabbableDestroyed -= (OnGrabbableDestroyedHandler)d;
 
             _isGrabbed = false;
         }
