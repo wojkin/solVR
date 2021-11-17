@@ -1139,6 +1139,7 @@ GameObject:
   - component: {fileID: 811602820}
   - component: {fileID: 811602819}
   - component: {fileID: 811602823}
+  - component: {fileID: 811602824}
   m_Layer: 0
   m_Name: LeftHand Controller
   m_TagString: Untagged
@@ -1593,6 +1594,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be1b700229d406b469e49cd587b541b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grab:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 811602824}
+        m_TargetAssemblyTypeName: Controls.Interactions.XRInteractorUIInteractionManager,
+          Assembly-CSharp
+        m_MethodName: DisableUIInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  stoppedGrabbing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 811602824}
+        m_TargetAssemblyTypeName: Controls.Interactions.XRInteractorUIInteractionManager,
+          Assembly-CSharp
+        m_MethodName: EnableUIInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &811602824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811602817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8520b46dcf564260b9ebef5079708ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xrInteractorLineVisual: {fileID: 811602819}
 --- !u!1 &817162236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2302,6 +2348,7 @@ GameObject:
   - component: {fileID: 1217751127}
   - component: {fileID: 1217751126}
   - component: {fileID: 1217751130}
+  - component: {fileID: 1217751131}
   m_Layer: 0
   m_Name: RightHand Controller
   m_TagString: Untagged
@@ -2756,6 +2803,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be1b700229d406b469e49cd587b541b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grab:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1217751131}
+        m_TargetAssemblyTypeName: Controls.Interactions.XRInteractorUIInteractionManager,
+          Assembly-CSharp
+        m_MethodName: DisableUIInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  stoppedGrabbing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1217751131}
+        m_TargetAssemblyTypeName: Controls.Interactions.XRInteractorUIInteractionManager,
+          Assembly-CSharp
+        m_MethodName: EnableUIInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1217751131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217751124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8520b46dcf564260b9ebef5079708ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xrInteractorLineVisual: {fileID: 1217751126}
 --- !u!1 &1252004307
 GameObject:
   m_ObjectHideFlags: 0
