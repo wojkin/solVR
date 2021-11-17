@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace Controls.Interactions
 {
     /// <summary>
     /// A class for grabbing objects with a grabbable component attached to them.
     /// </summary>
+    [RequireComponent(typeof(XRRayInteractor))]
+    [RequireComponent(typeof(XRInteractorLineVisual))]
     public class Grabber : MonoBehaviour
     {
         #region Variables
@@ -34,6 +38,12 @@ namespace Controls.Interactions
 
         /// <summary>Initial forward direction of grabber used for target rotation calculations.</summary>
         private Vector3 _initialGrabberForward;
+
+        /// <summary>Reference to XR Ray interactor component on this gameObject.</summary>
+        private XRRayInteractor _xrRayInteractor;
+        
+        /// <summary>Component that visualize <see cref="_xrRayInteractor"/> as line.</summary>
+        private XRInteractorLineVisual _xrInteractorLineVisual;
 
         /// <summary>Flattened forward direction used for target rotation calculations.</summary>
         private Vector3 FlattenedForward => Vector3.ProjectOnPlane(transform.forward, Vector3.up);
@@ -68,6 +78,15 @@ namespace Controls.Interactions
         #endregion
 
         #region Built-in Methods
+
+        /// <summary>
+        /// Initialize XR interactor fields.
+        /// </summary>
+        private void Start()
+        {
+            _xrRayInteractor = GetComponent<XRRayInteractor>();
+            _xrInteractorLineVisual = GetComponent<XRInteractorLineVisual>();
+        }
 
         /// <summary>
         /// If an object is grabbed, updates its position and optionally rotation to follow the grabber.
@@ -146,6 +165,10 @@ namespace Controls.Interactions
 
             _grabbedObject = null;
             _state = State.NotGrabbing;
+            
+            // enable interaction with ui and pointer visualization
+            _xrInteractorLineVisual.enabled = true;
+            _xrRayInteractor.enableUIInteraction = true;
         }
 
         /// <summary>
@@ -154,6 +177,10 @@ namespace Controls.Interactions
         /// <returns>IEnumerator required for the coroutine.</returns>
         private IEnumerator Grab()
         {
+            // disable interaction with ui and pointer visualization
+            _xrInteractorLineVisual.enabled = false;
+            _xrRayInteractor.enableUIInteraction = false;
+            
             // lerp the connectors' positions between the current position and grabber position until the distance is
             // above the distance threshold
             while (Vector3.Distance(_grabbedObject.toMove.position, TargetPosition) > LerpDistanceThreshold)
