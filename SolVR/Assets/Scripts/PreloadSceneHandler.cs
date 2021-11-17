@@ -1,6 +1,7 @@
 ﻿using Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// This class should be attached to an object in the _preload scene. It acts as a sign that a _preload scene was
@@ -23,7 +24,7 @@ public class PreloadSceneHandler : MonoBehaviour
     {
         name = "__app";
         DontDestroyOnLoad(gameObject);
-        CustomSceneManager.Instance.QueueLoadScene(sceneToLoad);
+        CustomSceneManager.Instance.QueueLoadScene(sceneToLoad, LoadSceneMode.Single);
     }
 
     #endregion

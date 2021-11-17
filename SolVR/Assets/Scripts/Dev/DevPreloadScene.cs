@@ -1,5 +1,5 @@
-﻿using Managers;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Dev
 {
@@ -16,7 +16,7 @@ namespace Dev
         private void Awake()
         {
             // checks if an object named "__app" is in the scene, if it's not, the _preload scene is loaded
-            if (GameObject.Find("__app") == null) CustomSceneManager.Instance.QueueLoadScene("_preload");
+            if (GameObject.Find("__app") == null) SceneManager.LoadScene("_preload", LoadSceneMode.Single);
         }
 
         #endregion

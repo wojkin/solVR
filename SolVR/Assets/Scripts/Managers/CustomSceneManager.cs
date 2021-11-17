@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DeveloperTools;
 using Patterns;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 namespace Managers
@@ -24,54 +25,89 @@ namespace Managers
         /// <summary>Event invoked before a scene starts unloading.</summary>
         public event SceneChange BeforeUnload;
 
+        /// <summary>Addressable name of the level base scene.</summary>
+        private const string LevelBaseAddressableName = "_levelBase";
+
         /// <summary>Queue of scene load calls.</summary>
         private readonly Queue<Action> _loadQueue = new Queue<Action>();
+        private AssetReference _levelBase;
 
         /// <summary>Flag representing whether a new scene is currently being loaded.</summary>
-        private bool _loading;
+        private bool _busy;
 
-        /// <summary>Previously loaded scene.</summary>
+        /// <summary><see cref="AssetReference"/> of the previously loaded scene.</summary>
         private AssetReference _lastLoadedScene;
+        
+        /// <summary><see cref="SceneInstance"/> of the previously loaded scene.</summary>
+        private SceneInstance _lastLoadedSceneInstance;
+        
+        /// <summary><see cref="LoadSceneMode"/> used to load the previously loaded scene.</summary>
+        private LoadSceneMode _lastMode;
+
+        #endregion
+
+        #region Built-in Methods
+
+        /// <summary>
+        /// Gets <see cref="AssetReference"/> to the level base scene.
+        /// </summary>
+        public override void Awake()
+        {
+            base.Awake();
+            _levelBase = new AssetReference(LevelBaseAddressableName);
+        }
 
         #endregion
 
         #region Custom Methods
 
         /// <summary>
-        /// Queues a scene load or loads it immediately if no other scene is being loaded.
+        /// Queues a level load or loads it immediately if the manager is not busy.
         /// </summary>
-        /// <param name="sceneName">Name of the scene to load.</param>
-        public void QueueLoadScene(string sceneName)
+        /// <param name="addressableLevelScene"><see cref="AssetReference"/> to the level scene.</param>
+        public void QueueLoadLevel(AssetReference addressableLevelScene)
         {
-            if (_loading)
-                _loadQueue.Enqueue(() => { StartLoadingScene(sceneName); }); // add load call to queue
-            else
-                StartLoadingScene(sceneName); // start loading scene
+            QueueLoadScene(_levelBase, LoadSceneMode.Single); // queue loading of the level base scene
+            QueueLoadScene(addressableLevelScene, LoadSceneMode.Additive); // queue additive loading of the level scene
         }
 
         /// <summary>
-        /// Queues a scene load or loads it immediately if no other scene is being loaded.
+        /// Queues a scene load or loads it immediately if the manager is not busy.
         /// </summary>
-        /// <param name="addressableScene">AssetReference of the scene to load.</param>
-        public void QueueLoadScene(AssetReference addressableScene)
+        /// <param name="addressableScene"><see cref="AssetReference"/> to the scene to load.</param>
+        /// <param name="mode"><see cref="LoadSceneMode"/> to use when loading the scene.</param>
+        public void QueueLoadScene(AssetReference addressableScene, LoadSceneMode mode)
         {
-            if (_loading)
-                _loadQueue.Enqueue(() => { StartLoadingScene(addressableScene); }); // add load call to queue
+            if (_busy)
+                _loadQueue.Enqueue(() => { StartLoadingScene(addressableScene, mode); }); // add load call to queue
             else
-                StartLoadingScene(addressableScene);
+                StartLoadingScene(addressableScene, mode);
         }
 
         /// <summary>
-        /// Queues reload of the currently loaded scene or reloads it immediately if no other scene is being loaded.
+        /// Queues reload of the currently loaded scene or reloads it immediately if the manager is not busy.
         /// </summary>
         public void QueueReloadScene()
         {
             if (_lastLoadedScene != null)
             {
-                if (_loading)
-                    _loadQueue.Enqueue(() => { StartLoadingScene(_lastLoadedScene); }); // add load call to queue
+                if (_busy)
+                {
+                    // if scene was loaded additively add unload call to queue
+                    if (_lastMode == LoadSceneMode.Additive)
+                        _loadQueue.Enqueue(() => { StartUnloadingScene(_lastLoadedSceneInstance); });
+
+                    // add load call to queue
+                    _loadQueue.Enqueue(() => { StartLoadingScene(_lastLoadedScene, _lastMode); });
+                }
                 else
-                    StartLoadingScene(_lastLoadedScene);
+                {
+                    // if scene was loaded additively unload it first
+                    if (_lastMode == LoadSceneMode.Additive)
+                        StartUnloadingScene(_lastLoadedSceneInstance);
+
+                    StartLoadingScene(_lastLoadedScene, _lastMode); // load scene
+                }
             }
             else
             {
@@ -80,67 +116,77 @@ namespace Managers
         }
 
         /// <summary>
-        /// Invokes a before-unload event and start a scene load coroutine.
+        /// Initializes unloading of a scene.
         /// </summary>
-        /// <param name="sceneName">Name of the scene to load.</param>
-        private void StartLoadingScene(string sceneName)
+        /// <param name="sceneInstance">Instance fo the scene to unload.</param>
+        private void StartUnloadingScene(SceneInstance sceneInstance)
         {
-            _loading = true;
+            _busy = true;
             BeforeUnload?.Invoke(SceneManager.GetActiveScene().name);
-            StartCoroutine(LoadSceneAsync(sceneName));
+            StartCoroutine(UnloadSceneAsync(sceneInstance));
         }
 
         /// <summary>
-        /// Invokes a before-unload event and start an addressable scene load coroutine.
+        /// Initializes loading of a scene.
         /// </summary>
-        /// <param name="addressableScene">AssetReference of the scene to load.</param>
-        private void StartLoadingScene(AssetReference addressableScene)
+        /// <param name="addressableScene"><see cref="AssetReference"/> to the scene to load.</param>
+        /// <param name="mode"><see cref="LoadSceneMode"/> to use when loading the scene.</param>
+        private void StartLoadingScene(AssetReference addressableScene, LoadSceneMode mode)
         {
-            _loading = true;
-            BeforeUnload?.Invoke(SceneManager.GetActiveScene().name);
-            StartCoroutine(LoadSceneAsync(addressableScene));
-        }
+            _busy = true;
 
-        /// <summary>
-        /// A coroutine for loading a scene.
-        /// </summary>
-        /// <param name="sceneName">Name of the scene to load.</param>
-        private IEnumerator LoadSceneAsync(string sceneName)
-        {
-            // start loading a scene and wait until it finishes loading 
-            var asyncLoadLevel = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-            while (!asyncLoadLevel.isDone) yield return null;
+            // invoke the before unload event, because loading a scene using the single mode unloads all other scenes
+            if (mode == LoadSceneMode.Single)
+                BeforeUnload?.Invoke(SceneManager.GetActiveScene().name);
 
-            FinishLoadingScene(sceneName);
+            StartCoroutine(LoadSceneAsync(addressableScene, mode));
         }
 
         /// <summary>
         /// A coroutine for loading an addressable scene.
         /// </summary>
-        /// <param name="addressableScene">AssetReference of the scene to load.</param>
-        private IEnumerator LoadSceneAsync(AssetReference addressableScene)
+        /// <param name="addressableScene"><see cref="AssetReference"/> to the scene to load.</param>
+        /// <param name="mode"><see cref="LoadSceneMode"/> to use when loading the scene.</param>
+        /// <returns><see cref="IEnumerator"/> required for the coroutine.</returns>
+        private IEnumerator LoadSceneAsync(AssetReference addressableScene, LoadSceneMode mode)
         {
             // start loading an addressable scene and wait until it finishes loading 
-            var asyncLoadLevel = Addressables.LoadSceneAsync(addressableScene);
+            var asyncLoadLevel = Addressables.LoadSceneAsync(addressableScene, mode);
             while (!asyncLoadLevel.IsDone) yield return null;
 
+            // save data about the last loaded scene
             _lastLoadedScene = addressableScene;
-            FinishLoadingScene(asyncLoadLevel.Result.Scene.name);
+            _lastLoadedSceneInstance = asyncLoadLevel.Result;
+            _lastMode = mode;
+
+            AfterLoad?.Invoke(_lastLoadedSceneInstance.Scene.name); // invoke the after-load event
+
+            ProcessQueue();
         }
 
         /// <summary>
-        /// Method for finishing the loading of a scene.
+        /// A coroutine for unloading an addressable scene.
         /// </summary>
-        /// <param name="sceneName">Name of the scene which just finished loading.</param>
-        private void FinishLoadingScene(string sceneName)
+        /// <param name="sceneInstance">Instance of the scene to unload.</param>
+        /// <returns><see cref="IEnumerator"/> required for the coroutine.</returns>
+        private IEnumerator UnloadSceneAsync(SceneInstance sceneInstance)
         {
-            AfterLoad?.Invoke(sceneName); // invoke the after-load event
+            var asyncUnloadLevel = Addressables.UnloadSceneAsync(sceneInstance);
+            while (!asyncUnloadLevel.IsDone) yield return null;
 
-            // check if there are other scenes to load, if yes start loading the first one
+            ProcessQueue();
+        }
+
+
+        /// <summary>
+        /// Checks if there are other actions in the queue, if yes start executing the first one.
+        /// </summary>
+        private void ProcessQueue()
+        {
             if (_loadQueue.Count > 0)
                 _loadQueue.Dequeue().Invoke();
             else
-                _loading = false;
+                _busy = false;
         }
 
         #endregion

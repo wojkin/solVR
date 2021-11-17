@@ -1,3 +1,4 @@
+using Levels;
 using Managers;
 using ScriptableObjects.Environments;
 using TMPro;
@@ -7,17 +8,19 @@ using UnityEngine.UI;
 namespace UI.List
 {
     /// <summary>
-    /// Class for UI element in levels' list. Contains name of the level and button to load it.
+    /// Class for an element of a level list.
     /// </summary>
     public class UILevelListElement : MonoBehaviour, IUIListElement
     {
         #region Serialized Fields
 
+        /// <summary>Text component for displaying the level's name.</summary>
         [Tooltip("Level name text.")] [SerializeField]
         private TextMeshProUGUI levelName;
 
+        /// <summary>Button for loading the level.</summary>
         [Tooltip("Button to load a level.")] [SerializeField]
-        private Button playButton;
+        private Button loadLevelButton;
 
         #endregion
 
@@ -25,17 +28,18 @@ namespace UI.List
 
         /// <summary>
         /// Populates the fields of a level list element.
-        /// Sets levelName filed with listElementData.environmentName and
-        /// adds loading level on button onClick event based on listElementData.scene.
         /// </summary>
-        /// <param name="listElementData">ScriptableObject.Environment with data to fill UI list element.</param>
+        /// <param name="listElementData"><see cref="Environment"/> with data to fill UI list element.</param>
         public void Populate(Object listElementData)
         {
-            var levelData = (Level)listElementData;
-            levelName.text = levelData.environmentName;
-            playButton.onClick.AddListener(() =>
-                CustomSceneManager.Instance.QueueLoadScene(levelData.scene)
-            );
+            var levelData = (Level) listElementData;
+            
+            levelName.text = levelData.environmentName; // set the level name
+
+            // add on click listener for persistently storing blocks available in the level
+            loadLevelButton.onClick.AddListener(() => PersistentLevelData.Instance.blockData = levelData.blocks);
+            // add on click listener for loading the level
+            loadLevelButton.onClick.AddListener(() => CustomSceneManager.Instance.QueueLoadLevel(levelData.scene));
         }
 
         #endregion

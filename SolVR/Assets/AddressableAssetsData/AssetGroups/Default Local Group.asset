@@ -41,6 +41,18 @@ MonoBehaviour:
     m_Address: Assets/GameData/Levels/DevLevel.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 701e5757dd60e2147851752ac5d8e23c
+    m_Address: Assets/Scenes/TestLevel.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a1bfe2728eddbfc4d9a771abe7a28656
+    m_Address: _levelBase
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ebf90795702b7a144aa2a9f6542bedca
+    m_Address: Assets/GameData/Levels/TestLevel.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9ea93900863fa0149b6d0193265d063c, type: 2}
   m_SchemaSet:
