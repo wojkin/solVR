@@ -1747,7 +1747,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1437560858}
   m_HandleRect: {fileID: 1437560857}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2091,6 +2091,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -2379,7 +2380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelName: {fileID: 345706934}
-  playButton: {fileID: 1168833788}
+  loadLevelButton: {fileID: 1168833788}
 --- !u!1 &1168833786
 GameObject:
   m_ObjectHideFlags: 0
@@ -3501,6 +3502,7 @@ MonoBehaviour:
   list:
   - {fileID: 11400000, guid: b745d9ea977a2bc4abdb0c0899699f27, type: 2}
   - {fileID: 11400000, guid: 81ecfa55bacbef94fac0cef6bcacd137, type: 2}
+  - {fileID: 11400000, guid: ebf90795702b7a144aa2a9f6542bedca, type: 2}
 --- !u!114 &1885667452
 MonoBehaviour:
   m_ObjectHideFlags: 0
