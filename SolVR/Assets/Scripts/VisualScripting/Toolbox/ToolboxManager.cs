@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Levels;
 using ScriptableObjects;
 using UI.List;
 using UnityEngine;
@@ -18,9 +19,6 @@ namespace VisualScripting.Toolbox
 
         /// <summary>Parent transform for all new blocks.</summary>
         [SerializeField] private Transform blockParent;
-
-        /// <summary>List of block data for blocks available in the toolbox.</summary>
-        [SerializeField] private List<BlockData> blockData;
 
         /// <summary>Positions at which the blocks can be displayed.</summary>
         [SerializeField] private List<Transform> displayTransforms;
@@ -43,6 +41,9 @@ namespace VisualScripting.Toolbox
 
         /// <summary>List of currently displayed blocks.</summary>
         private readonly List<GameObject> _displayedBlocks = new List<GameObject>();
+
+        /// <summary>List of block data for blocks available in the toolbox.</summary>
+        private List<BlockData> _blockData;
 
         /// <summary>Count of all blocks.</summary>
         private int _blockCount;
@@ -71,7 +72,8 @@ namespace VisualScripting.Toolbox
         /// </summary>
         private void Start()
         {
-            _blockCount = blockData.Count;
+            _blockData = PersistentLevelData.Instance.blockData;
+            _blockCount = _blockData.Count;
             _displayCount = displayTransforms.Count;
             _maxBlockSize = CalcSmallestDist();
             InitializeBlocks();
@@ -145,7 +147,7 @@ namespace VisualScripting.Toolbox
         /// </summary>
         private void InitializeBlocks()
         {
-            foreach (var block in blockData)
+            foreach (var block in _blockData)
                 InitializeBlock(block);
         }
 
@@ -249,7 +251,7 @@ namespace VisualScripting.Toolbox
             for (var i = _firstBlockId; i < lastBlockId; i++)
             {
                 DisplayAtPosition(positionId, i);
-                displayedBlockData.Add(blockData[i]);
+                displayedBlockData.Add(_blockData[i]);
                 positionId++;
             }
 
