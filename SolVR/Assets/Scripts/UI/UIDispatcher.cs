@@ -1,6 +1,7 @@
 using Managers;
 using ScriptableObjects.Environments;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -20,13 +21,20 @@ namespace UI
         }
 
         /// <summary>
-        /// Loads a scene based on scene parameter in provided scriptableObject.
+        /// Loads a scene based on the provided <see cref="Environment"/>.
         /// </summary>
-        /// <param name="scriptableObject">Scriptable object of Environment type
-        /// with specified scene parameter as reference to addressable scene.</param>
+        /// <param name="scriptableObject"><see cref="Environment"/> with specified scene parameter.</param>
         public void LoadScene(Environment scriptableObject)
         {
-            CustomSceneManager.Instance.QueueLoadScene(scriptableObject.scene);
+            CustomSceneManager.Instance.QueueLoadScene(scriptableObject.scene, LoadSceneMode.Single);
+        }
+
+        /// <summary>
+        /// Reloads the currently loaded scene.
+        /// </summary>
+        public void ReloadScene()
+        {
+            CustomSceneManager.Instance.QueueReloadScene();
         }
 
         /// <summary>
