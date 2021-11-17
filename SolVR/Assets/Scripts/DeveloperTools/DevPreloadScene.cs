@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Dev
+namespace DeveloperTools
 {
     ///<summary>
     /// Class for managing the loading of the _preload scene.
