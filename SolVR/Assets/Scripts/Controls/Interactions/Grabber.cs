@@ -12,12 +12,12 @@ namespace Controls.Interactions
     {
         #region Serialized Fields
 
-        /// <summary>An event that invokes listeners when grabber grabs a grabbable object.</summary>
-        [Tooltip("An event that invokes listeners when grabber grabs a grabbable object.")] [SerializeField]
+        /// <summary>An event invoked when grabber grabs a grabbable object.</summary>
+        [Tooltip("An event invoked when grabber grabs a grabbable object.")] [SerializeField]
         private UnityEvent grab;
 
-        /// <summary>An event that invokes listeners when grabber stops grabbing the grabbable object.</summary>
-        [Tooltip("An event that invokes listeners when grabber stops grabbing the grabbable object.")] [SerializeField]
+        /// <summary>An event invoked when grabber stops grabbing the grabbable object.</summary>
+        [Tooltip("An event invoked when grabber stops grabbing the grabbable object.")] [SerializeField]
         private UnityEvent stoppedGrabbing;
 
         #endregion

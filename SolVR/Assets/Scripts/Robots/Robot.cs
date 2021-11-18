@@ -181,8 +181,10 @@ namespace Robots
         /// <returns>Thread which executes a command of this type or null.</returns>
         private RobotThread GetThreadExecutingCommand(ICommand command)
         {
+            var commandType = command.GetType();
+
             foreach (var thread in _threads.Values)
-                if (thread.CurrentlyExecuting != null && command.GetType() == thread.CurrentlyExecuting.GetType())
+                if (thread.CurrentlyExecuting != null && commandType == thread.CurrentlyExecuting.GetType())
                     return thread;
 
             return null;
@@ -204,7 +206,10 @@ namespace Robots
                 // check if there are any free indexes before the highest one
                 for (var i = 0; i < _threads.Keys.Max(); i++)
                     if (!_threads.ContainsKey(i))
+                    {
                         lowestIndex = i;
+                        break;
+                    }
             }
 
             _threads.Add(lowestIndex, new RobotThread(this, stateChangeHandler));
