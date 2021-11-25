@@ -92,7 +92,7 @@ namespace VisualScripting.Blocks.Connectors
         protected override void OnDestroy()
         {
             if (_state == State.Connected)
-                _connectedTo.Disconnect(this);
+                _connectedTo.Disconnect();
 
             base.OnDestroy();
         }
@@ -111,7 +111,7 @@ namespace VisualScripting.Blocks.Connectors
             if (_state == State.Connected)
             {
                 connectedBlock.Invoke(null);
-                _connectedTo.Disconnect(this);
+                _connectedTo.Disconnect();
             }
 
             _state = State.Disconnected;
@@ -129,7 +129,7 @@ namespace VisualScripting.Blocks.Connectors
             if (inConnector != null)
             {
                 _connectedTo = inConnector;
-                inConnector.Connect(this, InConnectorDestroyedHandler);
+                inConnector.Connect(this, Disconnect);
                 _connectingCoroutine = StartCoroutine(Connect(inConnector));
             }
             else
@@ -143,7 +143,7 @@ namespace VisualScripting.Blocks.Connectors
         /// <summary>
         /// Handler for the on destroyed event of the connected <see cref="InConnector"/>.
         /// </summary>
-        private void InConnectorDestroyedHandler()
+        public void Disconnect()
         {
             // stop the connecting coroutine if it was running
             if (_connectingCoroutine != null)

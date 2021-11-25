@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace VisualScripting.Blocks.Connectors
@@ -17,15 +16,14 @@ namespace VisualScripting.Blocks.Connectors
 
         #region Variables
 
-        /// <summary>Delegate for a connector destroyed even handler.</summary>
+        /// <summary>Delegate for a connector destroyed handler.</summary>
         public delegate void ConnectorDestroyedHandler();
 
-        /// <summary>Event raised when the in connector is destroyed.</summary>
-        private event ConnectorDestroyedHandler ConnectorDestroyed;
+        /// <summary>Instance of the <see cref="ConnectorDestroyedHandler"/> delegate.</summary>
+        private ConnectorDestroyedHandler _connectorDestroyed;
 
-        /// <summary>Dictionary storing the connected <see cref="OutConnector"/>s as keys and their connector destroyed
-        /// event handlers as values.</summary>
-        private Dictionary<OutConnector, ConnectorDestroyedHandler> _connected;
+        /// <summary>Connected <see cref="OutConnector"/>.</summary>
+        private OutConnector _connected;
 
         /// <summary>Property for accessing the block.</summary>
         public Block Block => block;
@@ -35,19 +33,11 @@ namespace VisualScripting.Blocks.Connectors
         #region Built-in Methods
 
         /// <summary>
-        /// Initializes variables.
-        /// </summary>
-        private void Awake()
-        {
-            _connected = new Dictionary<OutConnector, ConnectorDestroyedHandler>();
-        }
-
-        /// <summary>
-        /// Invokes the connector destroyed event, notifying <see cref="OutConnector"/>s connected to this connector.
+        /// Invokes the connector destroyed handler of the connected <see cref="OutConnector"/>.
         /// </summary>
         private void OnDestroy()
         {
-            ConnectorDestroyed?.Invoke();
+            _connectorDestroyed?.Invoke();
         }
 
         #endregion
@@ -58,21 +48,24 @@ namespace VisualScripting.Blocks.Connectors
         /// Method for connecting an <see cref="OutConnector"/>.
         /// </summary>
         /// <param name="connector"><see cref="OutConnector"/> to be connected.</param>
-        /// <param name="destroyHandler">Handler for the <see cref="ConnectorDestroyed"/> event.</param>
+        /// <param name="destroyHandler">Handler for the <see cref="_connectorDestroyed"/> event.</param>
         public void Connect(OutConnector connector, ConnectorDestroyedHandler destroyHandler)
         {
-            _connected.Add(connector, destroyHandler);
-            ConnectorDestroyed += destroyHandler;
+            // if a connector was already connected, disconnect it
+            if(_connected != null)
+                _connected.Disconnect();
+            
+            _connected = connector;
+            _connectorDestroyed = destroyHandler;
         }
 
         /// <summary>
         /// Method for disconnecting an <see cref="OutConnector"/>.
         /// </summary>
-        /// <param name="connector"><see cref="OutConnector"/> to be disconnected.</param>
-        public void Disconnect(OutConnector connector)
+        public void Disconnect()
         {
-            ConnectorDestroyed -= _connected[connector];
-            _connected.Remove(connector);
+            _connectorDestroyed = null;
+            _connected = null;
         }
 
         #endregion
