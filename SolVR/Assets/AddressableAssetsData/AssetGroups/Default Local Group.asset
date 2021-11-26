@@ -45,6 +45,14 @@ MonoBehaviour:
     m_Address: Assets/GameData/Levels/TestLevel.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: af68129dbfd41a14c8e1fcd754cad0fb
+    m_Address: Assets/Scenes/FallingBlocks.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 55d47d118c018844084178dfe4f92dcb
+    m_Address: Assets/GameData/Levels/FallingBlocks/FallingBlocks.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9ea93900863fa0149b6d0193265d063c, type: 2}
   m_SchemaSet:
