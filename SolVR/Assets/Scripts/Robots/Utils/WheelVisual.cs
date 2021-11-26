@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Robots.DevRobot
+namespace Robots.Utils
 {
     /// <summary>
     /// A class for rotating a wheel mesh to match a wheel colliders rotation and position.
