@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Levels;
 using Tasks;
 using TMPro;
 using UI.List;
@@ -19,9 +20,6 @@ namespace UI
         /// <summary>Text for displaying the task description.</summary>
         [SerializeField] private TextMeshProUGUI description;
 
-        /// <summary>Task data to display as texts and lists.</summary>
-        [SerializeField] private Task task;
-
         /// <summary>UI list for displaying task failure conditions.</summary>
         [SerializeField] private UIList failures;
 
@@ -33,19 +31,33 @@ namespace UI
         #region Built-in Methods
 
         /// <summary>
-        /// Initialise fields.
+        /// Subscribes to needed event.
         /// </summary>
-        private void Awake()
+        private void OnEnable()
         {
-            taskName.text = task.Description.taskName;
-            description.text = task.Description.description;
+            PersistentLevelData.Instance.DataInitialized += InitializeTaskData;
         }
 
         /// <summary>
-        /// Initialize UI lists' elements.
+        /// Unsubscribes from previously subscribed event.
         /// </summary>
-        private void Start()
+        private void OnDisable()
         {
+            PersistentLevelData.Instance.DataInitialized -= InitializeTaskData;
+        }
+
+        #endregion
+
+        #region Custom Methods
+
+        /// <summary>
+        /// Initialise fields and UI lists' elements dependent on level <see cref="PersistentLevelData"/>.
+        /// </summary>
+        private void InitializeTaskData()
+        {
+            var task = PersistentLevelData.Instance.task;
+            taskName.text = task.Description.taskName;
+            description.text = task.Description.description;
             failures.ChangeListElements(new List<Object>(task.failures));
             conditions.ChangeListElements(new List<Object>(task.conditions));
         }
