@@ -3282,6 +3282,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 78e392df6dedb1f4fa19baac349fd54d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 664c4a9b9e36c7f4c86bb28dcd56049d, type: 2}
     - target: {fileID: 919132149155446097, guid: 78e392df6dedb1f4fa19baac349fd54d, type: 3}
       propertyPath: m_Name
       value: TaskPanel
