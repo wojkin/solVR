@@ -1,4 +1,5 @@
 ﻿using Robots;
+using Tasks;
 using UnityEngine;
 
 namespace Levels
@@ -11,8 +12,10 @@ namespace Levels
         #region Serialized Fields
 
         /// <summary>Robot in the level.</summary>
-        [SerializeField]
-        private Robot robot;
+        [SerializeField] private Robot robot;
+
+        /// <summary>Task in the level.</summary>
+        [SerializeField] private Task task;
 
         #endregion
 
@@ -24,6 +27,8 @@ namespace Levels
         private void Awake()
         {
             PersistentLevelData.Instance.robot = robot;
+            PersistentLevelData.Instance.task = task;
+            PersistentLevelData.Instance.LevelDataInitialized();
         }
 
         #endregion
