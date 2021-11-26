@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 8521112768343470238}
   - component: {fileID: 1879420890572574877}
   - component: {fileID: 1528195051855816482}
+  - component: {fileID: 7607725118312470072}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -476,6 +477,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template: {fileID: 3600630872016824317}
   list: []
+--- !u!225 &7607725118312470072
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086243823312276303}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &3440594660215153948
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +550,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockParent: {fileID: 0}
-  blockData: []
   displayTransforms:
   - {fileID: 2347986316991756850}
   - {fileID: 8073621355232219535}
