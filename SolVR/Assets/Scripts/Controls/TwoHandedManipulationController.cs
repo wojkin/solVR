@@ -10,7 +10,7 @@ namespace Controls
         #region Serialized Fields
 
         /// <summary>Object that is manipulated.</summary>
-        public GameObject objectToRotate;
+        public GameObject objectToManipulate;
 
         /// <summary>Multiplier for translation manipulation.</summary>
         [Tooltip("Multiplier for translation manipulation.")] [SerializeField]
@@ -54,6 +54,7 @@ namespace Controls
             _handsPreviousPositionDifference = rightHandPosition - leftHandPosition;
             _handsPreviousCenterPosition = (rightHandPosition + leftHandPosition) / 2;
             _handsPreviousDistance = Vector3.Distance(rightHandPosition, leftHandPosition);
+            TranslateManipulatedObjectToCenterPointOfChildren();
         }
 
         /// <summary>
@@ -86,12 +87,12 @@ namespace Controls
         {
             var handsCenter = (rightHandPosition + leftHandPosition) / 2;
             var translation = handsCenter - _handsPreviousCenterPosition;
-            var position = objectToRotate.transform.position;
+            var position = objectToManipulate.transform.position;
             var distance = (position - handsCenter).magnitude; // distance between rotated objects and hands
             // multiplier based on distance from object and translation multiplier
             var multiplier = (1 + distance) * translationMultiplier;
             position += translation * multiplier;
-            objectToRotate.transform.position = position;
+            objectToManipulate.transform.position = position;
             _handsPreviousCenterPosition = handsCenter; // update last center between two hand positions
         }
 
@@ -104,7 +105,7 @@ namespace Controls
         {
             var handsDistance = Vector3.Distance(rightHandPosition, leftHandPosition);
             var scale = (handsDistance / _handsPreviousDistance - 1) * scalingMultiplier + 1;
-            objectToRotate.transform.localScale *= scale;
+            objectToManipulate.transform.localScale *= scale;
             _handsPreviousDistance = handsDistance; // update last distance between two hand positions
         }
 
@@ -115,8 +116,8 @@ namespace Controls
         /// <param name="rotation">Quaternion by which object will be rotated.</param>
         private void RotateAroundByQuaternion(Vector3 pivot, Quaternion rotation)
         {
-            var objectRotation = objectToRotate.transform.rotation;
-            var objectPosition = objectToRotate.transform.position;
+            var objectRotation = objectToManipulate.transform.rotation;
+            var objectPosition = objectToManipulate.transform.position;
 
             // rotated object's rotation, without scaling with the multiplier.
             var desiredRotation = objectRotation * rotation;
@@ -129,9 +130,52 @@ namespace Controls
             // vector delta which of with position should be moved, without scaling with multiplier.
             var positionDelta = desiredPosition - objectPosition;
 
-            objectToRotate.transform.rotation = rotationMultiplied;
+            objectToManipulate.transform.rotation = rotationMultiplied;
             // moving object's position by scaled delta position vector
-            objectToRotate.transform.position += positionDelta * rotationMultiplier;
+            objectToManipulate.transform.position += positionDelta * rotationMultiplier;
+        }
+
+        /// <summary>
+        /// Gets the middle of positions of all <see cref="parent"/>'s children.
+        /// </summary>
+        /// <param name="parent">Transform of a parent which middle point is calculated.</param>
+        /// <returns></returns>
+        private static Vector3 GetCenterPointOfChildren(Transform parent)
+        {
+            if (parent.childCount == 0) return parent.position;
+            var totalPoint = Vector3.zero;
+            for (var id = 0; id < parent.childCount; id++)
+            {
+                var childPosition = parent.GetChild(id).transform.position;
+                totalPoint.x += childPosition.x;
+                totalPoint.y += childPosition.y;
+                totalPoint.z += childPosition.z;
+            }
+
+            return totalPoint / parent.childCount;
+        }
+
+        /// <summary>
+        /// Changes position of all  <see cref="parent"/>'s children by given <see cref="vector"/>.
+        /// </summary>
+        /// <param name="parent">Transform of a parent which children's position is modified.</param>
+        /// <param name="vector">Vector by which objects are transformed.</param>
+        private static void TranslateChildrenByVector(Transform parent, Vector3 vector)
+        {
+            for (var id = 0; id < parent.childCount; id++) parent.GetChild(id).transform.position += vector;
+        }
+
+        /// <summary>
+        /// Translates <see cref="objectToManipulate"/> on position which is in the middle of positions of all its
+        /// children.
+        /// </summary>
+        private void TranslateManipulatedObjectToCenterPointOfChildren()
+        {
+            var parent = objectToManipulate.transform;
+            var center = GetCenterPointOfChildren(parent);
+            var transformVector = parent.position - center;
+            parent.position = center;
+            TranslateChildrenByVector(parent, transformVector);
         }
 
         #endregion

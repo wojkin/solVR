@@ -641,10 +641,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ec0ca27ad64461a6d10f8b301500f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToRotate: {fileID: 1637946359}
+  objectToManipulate: {fileID: 1637946359}
   translationMultiplier: 1
-  scalingMultiplier: 0.5
-  rotationMultiplier: 1.5
+  scalingMultiplier: 1
+  rotationMultiplier: 1
 --- !u!4 &1637946361
 Transform:
   m_ObjectHideFlags: 0
