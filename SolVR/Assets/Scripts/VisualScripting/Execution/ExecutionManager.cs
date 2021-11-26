@@ -250,6 +250,26 @@ namespace VisualScripting.Execution
 
         #endregion
 
+        #region Built-in Methods
+
+        /// <summary>
+        /// Subscribes to needed event.
+        /// </summary>
+        private void OnEnable()
+        {
+            PersistentLevelData.Instance.DataInitialized += SetRobot;
+        }
+
+        /// <summary>
+        /// Unsubscribes from previously subscribed event.
+        /// </summary>
+        private void OnDisable()
+        {
+            PersistentLevelData.Instance.DataInitialized -= SetRobot;
+        }
+
+        #endregion
+
         #region Custom Methods
 
         /// <summary>
@@ -316,13 +336,13 @@ namespace VisualScripting.Execution
             _executionState = ExecutionState.NotRunning;
         }
 
+        private void SetRobot() => _robot = PersistentLevelData.Instance.robot;
+
         /// <summary>
         /// Initializes execution for each start block in the scene.
         /// </summary>
         private void Run()
         {
-            _robot = PersistentLevelData.Instance.robot;
-
             _executionState = ExecutionState.Running;
             var startBlocks = FindObjectsOfType<StartBlock>(); // find all start block components in the scene
 
