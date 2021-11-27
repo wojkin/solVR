@@ -25,10 +25,6 @@ MonoBehaviour:
     m_Address: Assets/Scenes/MainMenu.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 81ecfa55bacbef94fac0cef6bcacd137
-    m_Address: Assets/GameData/Levels/DriveRouteLevel/DriveRoute.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: b745d9ea977a2bc4abdb0c0899699f27
     m_Address: Assets/GameData/Levels/DevLevel.asset
     m_ReadOnly: 0
@@ -67,6 +63,18 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: acd03951cfff56e459e056b8907ef31b
     m_Address: Assets/GameData/Environments/MainMenu.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1907692f9b2ef4a439f4f74cf4c79c75
+    m_Address: Assets/GameData/Levels/FallingBlocks/Task/TaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c84d0bac8003836428171a4396deae44
+    m_Address: Assets/GameData/Levels/FallingBlocks/Task/ReachPointDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 14d399238e260224c935e41386bbd4d7
+    m_Address: Assets/GameData/Levels/FallingBlocks/Task/FailureOnAnyBoxFall.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
