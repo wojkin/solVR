@@ -274,19 +274,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6937674015726230284}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: VisualScripting.Execution.ExecutionManager, Assembly-CSharp
-        m_MethodName: Pause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &4231995217956902270
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,19 +620,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8973528748713914067}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: VisualScripting.Execution.ExecutionManager, Assembly-CSharp
-        m_MethodName: ResumeOrRun
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6799766725040566878
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,19 +741,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8783035090428261656}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: VisualScripting.Execution.ExecutionManager, Assembly-CSharp
-        m_MethodName: StopExecution
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7855768115029877465
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +758,7 @@ GameObject:
   - component: {fileID: 7758584843558352620}
   - component: {fileID: 6874230536880007898}
   - component: {fileID: 651398894224151841}
+  - component: {fileID: 49832423}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -938,6 +903,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableOnPause: 0
+--- !u!114 &49832423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7855768115029877465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7530e1dfc5ab6d408c879040951eba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  executionManager: {fileID: 0}
+  run: {fileID: 8712524140354076505}
+  stop: {fileID: 4713273272894336685}
+  pause: {fileID: 549930667511757296}
+  nextStep: {fileID: 1186644807199681649}
 --- !u!1 &8710990578930671580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,19 +1086,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6123258092787755761}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: VisualScripting.Execution.ExecutionManager, Assembly-CSharp
-        m_MethodName: NextStep
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1001 &947950759154594622
 PrefabInstance:
   m_ObjectHideFlags: 0
