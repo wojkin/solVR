@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 8000214123851305701}
   - component: {fileID: 2316608473243376141}
   - component: {fileID: 783121657566016753}
+  - component: {fileID: 2205415196991059837}
+  - component: {fileID: 3566143532406619493}
   m_Layer: 0
   m_Name: BlockCanvas
   m_TagString: Untagged
@@ -84,7 +86,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &8000214123851305701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +135,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53e9f7f43cf36441a18f21f51a758ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &2205415196991059837
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589964340009970734}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &3566143532406619493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589964340009970734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450e45367677c9849b334a43089ea0c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableOnPause: 0
 --- !u!1 &4020768460537749754
 GameObject:
   m_ObjectHideFlags: 0

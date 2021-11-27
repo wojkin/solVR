@@ -32,12 +32,12 @@ namespace UI.List
         /// <param name="listElementData"><see cref="Environment"/> with data to fill UI list element.</param>
         public void Populate(Object listElementData)
         {
-            var levelData = (Level) listElementData;
-            
+            var levelData = (Level)listElementData;
+
             levelName.text = levelData.environmentName; // set the level name
 
-            // add on click listener for persistently storing blocks available in the level
-            loadLevelButton.onClick.AddListener(() => PersistentLevelData.Instance.blockData = levelData.blocks);
+            // add on click listener for persistently storing the level data
+            loadLevelButton.onClick.AddListener(() => PersistentLevelData.Instance.SetLevelData(levelData));
             // add on click listener for loading the level
             loadLevelButton.onClick.AddListener(() => CustomSceneManager.Instance.QueueLoadLevel(levelData.scene));
         }

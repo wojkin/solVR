@@ -35,7 +35,7 @@ namespace UI
         /// </summary>
         private void OnEnable()
         {
-            PersistentLevelData.Instance.DataInitialized += InitializeTaskData;
+            PersistentLevelData.Instance.LevelLoaded += InitializeTaskData;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace UI
         /// </summary>
         private void OnDisable()
         {
-            PersistentLevelData.Instance.DataInitialized -= InitializeTaskData;
+            if (PersistentLevelData.Instance != null) PersistentLevelData.Instance.LevelLoaded -= InitializeTaskData;
         }
 
         #endregion
@@ -55,7 +55,7 @@ namespace UI
         /// </summary>
         private void InitializeTaskData()
         {
-            var task = PersistentLevelData.Instance.task;
+            var task = PersistentLevelData.Instance.Task;
             taskName.text = task.Description.taskName;
             description.text = task.Description.description;
             failures.ChangeListElements(new List<Object>(task.failures));

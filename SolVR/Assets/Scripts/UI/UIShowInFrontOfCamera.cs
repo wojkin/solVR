@@ -63,7 +63,7 @@ namespace UI
         /// <summary>
         /// Makes gameObject visible in front of the camera.
         /// </summary>
-        private void Show()
+        public void Show()
         {
             if (camera == null)
                 camera = Camera.main.gameObject.transform; // find the main camera object if it's null

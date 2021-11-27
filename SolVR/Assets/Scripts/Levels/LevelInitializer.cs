@@ -22,13 +22,11 @@ namespace Levels
         #region Built-in Methods
 
         /// <summary>
-        /// Pass all data to <see cref="PersistentLevelData"/>.
+        /// Pass all data to <see cref="PersistentLevelData"/> on level initialize.
         /// </summary>
-        private void Awake()
+        private void Start()
         {
-            PersistentLevelData.Instance.robot = robot;
-            PersistentLevelData.Instance.task = task;
-            PersistentLevelData.Instance.LevelDataInitialized();
+            PersistentLevelData.Instance.OnLevelLoad(robot, task);
         }
 
         #endregion
