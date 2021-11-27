@@ -12,13 +12,13 @@ namespace ScriptableObjects.Environments
     {
         #region Serialized Fields
 
-        /// <summary>Description of task on the level.</summary>
-        [Tooltip("Description of task on the level.")]
-        public TaskDescription levelTaskDescription;
-
         /// <summary>List of blocks available in the level.</summary>
         [Tooltip("Blocks available in the level.")]
         public List<BlockData> blocks;
+
+        /// <summary>The nest level after this one.</summary>
+        [Tooltip("The nest level after this one.")]
+        public Level nextLevel;
 
         #endregion
     }
