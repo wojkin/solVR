@@ -30,6 +30,9 @@ namespace VisualScripting.Execution
         /// <summary>Delegate for a thread state change event.</summary>
         public delegate void ThreadStateChangeHandler(int threadId, BlockThreadState state);
 
+        /// <summary>Delegate for a execution finish event.</summary>
+        public delegate void ExecutionFinishHandler();
+
         /// <summary>Event raised when a <see cref="BlockExecutionThread"/> advances to a new block.</summary>
         public event ThreadStepHandler ThreadStep;
 
@@ -41,6 +44,9 @@ namespace VisualScripting.Execution
 
         /// <summary>Event raised when a <see cref="BlockExecutionThread"/> starts or tops running.</summary>
         public event ThreadStateChangeHandler ThreadStateChanged;
+
+        /// <summary>Event raised when the execution finishes. </summary>
+        public event ExecutionFinishHandler ExecutionEnded;
 
         /// <summary>ExecutionState showing whether the execution state.</summary>
         private static ExecutionState _executionState = ExecutionState.NotRunning;
@@ -307,7 +313,6 @@ namespace VisualScripting.Execution
         {
             foreach (var thread in _executionThreads)
                 thread.FinishExecution();
-            ResetExecution();
         }
 
         /// <summary>
@@ -329,11 +334,13 @@ namespace VisualScripting.Execution
         /// </summary>
         private void ResetExecution()
         {
+            if (_executionState == ExecutionState.NotRunning) return;
             if (_executionState == ExecutionState.Paused)
                 _robot.Resume();
             _pauseOnNextStep = false;
             Physics.autoSimulation = true;
             _executionState = ExecutionState.NotRunning;
+            ExecutionEnded?.Invoke();
         }
 
         private void SetRobot() => _robot = PersistentLevelData.Instance.Robot;
@@ -355,7 +362,10 @@ namespace VisualScripting.Execution
             }
 
             if (startBlocks.Length == 0)
+            {
                 _executionState = ExecutionState.NotRunning;
+                ExecutionEnded?.Invoke();
+            }
         }
 
         /// <summary>
