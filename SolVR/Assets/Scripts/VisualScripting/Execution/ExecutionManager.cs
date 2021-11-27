@@ -257,7 +257,7 @@ namespace VisualScripting.Execution
         /// </summary>
         private void OnEnable()
         {
-            PersistentLevelData.Instance.DataInitialized += SetRobot;
+            PersistentLevelData.Instance.LevelLoaded += SetRobot;
         }
 
         /// <summary>
@@ -265,7 +265,7 @@ namespace VisualScripting.Execution
         /// </summary>
         private void OnDisable()
         {
-            PersistentLevelData.Instance.DataInitialized -= SetRobot;
+            if (PersistentLevelData.Instance != null) PersistentLevelData.Instance.LevelLoaded -= SetRobot;
         }
 
         #endregion
@@ -336,7 +336,7 @@ namespace VisualScripting.Execution
             _executionState = ExecutionState.NotRunning;
         }
 
-        private void SetRobot() => _robot = PersistentLevelData.Instance.robot;
+        private void SetRobot() => _robot = PersistentLevelData.Instance.Robot;
 
         /// <summary>
         /// Initializes execution for each start block in the scene.
