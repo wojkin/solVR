@@ -20,16 +20,6 @@ namespace ScriptableObjects.TaskDescriptions
 
         #endregion
 
-        #region Variables
-
-        /// <summary>Default message for task condition state</summary>
-        private const string DefaultStateMessage = "No failure";
-
-        /// <summary>Message for task condition state, when condition is met.</summary>
-        private const string ConditionMetStateMessage = "Failed";
-
-        #endregion
-
         #region ITaskConditionDescription Methods
 
         /// <summary>
@@ -37,12 +27,6 @@ namespace ScriptableObjects.TaskDescriptions
         /// </summary>
         /// <returns><inheritdoc/></returns>
         public string GetDescription() => description;
-
-        /// <inheritdoc />
-        public string GetDefaultStateMessage() => DefaultStateMessage;
-
-        /// <inheritdoc />
-        public string GetConditionMetStateMessage() => ConditionMetStateMessage;
 
         #endregion
     }

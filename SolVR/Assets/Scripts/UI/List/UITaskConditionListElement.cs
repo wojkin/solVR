@@ -2,6 +2,7 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.List
 {
@@ -12,8 +13,8 @@ namespace UI.List
     {
         #region Serialized Fields
 
-        /// <summary>Text for displaying the task condition state.</summary>
-        [SerializeField] private TextMeshProUGUI state;
+        /// <summary>Image for displaying the task condition state.</summary>
+        [SerializeField] private Image stateImage;
 
         /// <summary>Text for displaying the task condition description.</summary>
         [SerializeField] private TextMeshProUGUI description;
@@ -42,19 +43,19 @@ namespace UI.List
         #region Custom Methods
 
         /// <summary>
-        /// Sets <see cref="state"/> text to default message.
+        /// Sets <see cref="stateImage"/> to disabled hide image.
         /// </summary>
         private void SetDefaultState()
         {
-            state.text = _taskCondition.GetTaskConditionDescription().GetDefaultStateMessage();
+            stateImage.enabled = false;
         }
 
         /// <summary>
-        /// Sets <see cref="state"/> text to condition met message.
+        /// Sets <see cref="stateImage"/> to enabled to display image with state information.
         /// </summary>
         private void SetConditionMetState()
         {
-            state.text = _taskCondition.GetTaskConditionDescription().GetConditionMetStateMessage();
+            stateImage.enabled = true;
         }
 
         #endregion
