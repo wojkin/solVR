@@ -255,7 +255,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5031848163169076614}
         m_TargetAssemblyTypeName: UI.UIDispatcher, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 2
@@ -280,9 +280,6 @@ GameObject:
   - component: {fileID: 5816284644594473910}
   - component: {fileID: 344946803312553133}
   - component: {fileID: 5855396497266097378}
-  - component: {fileID: 5719338100687652784}
-  - component: {fileID: 4043495777723442147}
-  - component: {fileID: 4596983195339978322}
   m_Layer: 0
   m_Name: TryAgain
   m_TagString: Untagged
@@ -392,9 +389,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5031848163169076614}
         m_TargetAssemblyTypeName: UI.UIDispatcher, Assembly-CSharp
-        m_MethodName: TogglePauseGame
+        m_MethodName: ReloadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -416,52 +413,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!223 &5719338100687652784
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198150661764389882}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!225 &4043495777723442147
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198150661764389882}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!114 &4596983195339978322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198150661764389882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 450e45367677c9849b334a43089ea0c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableOnPause: 1
 --- !u!1 &1352818174333446904
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,6 +611,7 @@ GameObject:
   - component: {fileID: 7805728650734863157}
   - component: {fileID: 7484393621355749860}
   - component: {fileID: 7326030845326769541}
+  - component: {fileID: 5031848163169076614}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -805,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97bad9b51844ed1a0b321431698560f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnOffset: 1
+  spawnOffset: 0.3
   camera: {fileID: 0}
 --- !u!225 &7484393621355749860
 CanvasGroup:
@@ -832,9 +784,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelResult: {fileID: 5100551392431995175}
-  noNextLevel: {fileID: 0}
   tryAgain: {fileID: 5855396497266097378}
   nextLevel: {fileID: 2458058989637058517}
+--- !u!114 &5031848163169076614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737868621776349906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc90862c66d5477396b67a8f80c26b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2915529571928360131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,20 +1131,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9168381772900139079}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.UIDispatcher, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.Environments.Environment,
-            Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6470469393156422169
 GameObject:
   m_ObjectHideFlags: 0
