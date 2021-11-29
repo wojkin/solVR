@@ -105,6 +105,18 @@ MonoBehaviour:
     m_Address: Assets/GameData/Levels/TargetPractice/TargetPractice.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 275fbcc87adde194a94963ab209eef19
+    m_Address: Assets/Scenes/DrivingAndShooting.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f407ca50576da7e4dae5e2f7da09d842
+    m_Address: Assets/GameData/Levels/DrivingAndShooting/Task/TaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 86f42f719ef142e4c9a31165cf9853f9
+    m_Address: Assets/GameData/Levels/DrivingAndShooting/DrivingAndShootingLevel.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9ea93900863fa0149b6d0193265d063c, type: 2}
   m_SchemaSet:
