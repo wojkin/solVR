@@ -19,7 +19,7 @@ namespace UI.Slider
         #region Custom Methods
 
         /// <summary>
-        /// Invokes <see cref="onSliderValueChanged"/> event with parsed integer value from float.
+        /// Invokes <see cref="SliderInRange{T}.onSliderValueChanged"/> event with parsed integer value from float.
         /// </summary>
         /// <param name="value">Value that will be parsed.</param>
         protected override void InvokeSliderParsedValueOnChange(float value)
