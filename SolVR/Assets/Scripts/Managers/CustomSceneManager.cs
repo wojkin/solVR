@@ -30,6 +30,7 @@ namespace Managers
 
         /// <summary>Queue of scene load calls.</summary>
         private readonly Queue<Action> _loadQueue = new Queue<Action>();
+
         private AssetReference _levelBase;
 
         /// <summary>Flag representing whether a new scene is currently being loaded.</summary>
@@ -37,10 +38,10 @@ namespace Managers
 
         /// <summary><see cref="AssetReference"/> of the previously loaded scene.</summary>
         private AssetReference _lastLoadedScene;
-        
+
         /// <summary><see cref="SceneInstance"/> of the previously loaded scene.</summary>
         private SceneInstance _lastLoadedSceneInstance;
-        
+
         /// <summary><see cref="LoadSceneMode"/> used to load the previously loaded scene.</summary>
         private LoadSceneMode _lastMode;
 

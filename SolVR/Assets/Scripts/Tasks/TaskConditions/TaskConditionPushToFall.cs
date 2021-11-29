@@ -48,7 +48,7 @@ namespace Tasks.TaskConditions
         {
             collided.CollidedWithGround -= OnFell; // unsubscribe from this object
             boxCollisionsWithGround.Remove(collided);
-            if(boxCollisionsWithGround.Count == 0)
+            if (boxCollisionsWithGround.Count == 0)
                 OnCompleted();
         }
 

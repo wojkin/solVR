@@ -14,8 +14,7 @@ namespace VisualScripting.Blocks.UI
         /// <summary>
         /// Block which iteration count will be displayed.
         /// </summary>
-        [SerializeField]
-        private ForBlock forBlock;
+        [SerializeField] private ForBlock forBlock;
 
         #endregion
 

@@ -52,9 +52,9 @@ namespace VisualScripting.Blocks.Connectors
         public void Connect(OutConnector connector, ConnectorDestroyedHandler destroyHandler)
         {
             // if a connector was already connected, disconnect it
-            if(_connected != null)
+            if (_connected != null)
                 _connected.Disconnect();
-            
+
             _connected = connector;
             _connectorDestroyed = destroyHandler;
         }

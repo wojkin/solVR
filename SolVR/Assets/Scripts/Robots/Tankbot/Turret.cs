@@ -20,8 +20,10 @@ namespace Robots.Tankbot
 
         /// <summary>Force applied to bullets when shooting.</summary>
         private const float BulletForce = 10f;
+
         /// <summary>Rotation speed of the turret in degrees per second.</summary>
         private const float RotationSpeed = 90f;
+
         /// <summary>Tolerance for turret angle.</summary>
         private const float AngleTolerance = 0.001f;
 

@@ -37,7 +37,7 @@ namespace UI
 
         /// <summary>Message displayed if level is failed.</summary>
         private const string LevelFailedMessage = "Level failed!";
-        
+
         /// <summary>UI with level completion state, that will show in front of camera.</summary>
         private UIShowInFrontOfCamera _uiShowInFrontOfCamera;
 

@@ -23,7 +23,7 @@ namespace Levels
 
         /// <summary>Robot available in the level.</summary>
         [SerializeField] private Robot robot;
-        
+
         /// <summary>Task available in the level.</summary>
         [SerializeField] private Task task;
 
@@ -43,7 +43,7 @@ namespace Levels
             get => robot;
             private set => robot = value;
         }
-        
+
         /// <summary><inheritdoc cref="task"/></summary>
         public Task Task
         {
@@ -64,7 +64,7 @@ namespace Levels
             Task = task;
             LevelLoaded?.Invoke();
         }
-        
+
         /// <summary>
         /// Sets level data.
         /// </summary>
