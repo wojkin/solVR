@@ -8,7 +8,7 @@ namespace VisualScripting.Execution
     /// Class responsible for managing <see cref="Interactable"/> objects to be not interactable while
     /// script is executing.
     /// </summary>
-    public class NotInteractableOnExecutionManager : MonoBehaviour
+    public class InteractableManager : MonoBehaviour
     {
         #region Serialized Fields
 
