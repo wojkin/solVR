@@ -30,8 +30,11 @@ namespace VisualScripting.Execution
         /// <summary>Delegate for a thread state change event.</summary>
         public delegate void ThreadStateChangeHandler(int threadId, BlockThreadState state);
 
-        /// <summary>Delegate for a execution finish event.</summary>
-        public delegate void ExecutionFinishHandler();
+        /// <summary>
+        /// Delegate for a <see cref="ExecutionManager.ExecutionEnded"/>,
+        /// <see cref="ExecutionManager.ExecutionResumed"/> and <see cref="ExecutionManager.ExecutionStarted" /> events.
+        /// </summary>
+        public delegate void ExecutionHandler();
 
         /// <summary>Event raised when a <see cref="BlockExecutionThread"/> advances to a new block.</summary>
         public event ThreadStepHandler ThreadStep;
@@ -46,7 +49,13 @@ namespace VisualScripting.Execution
         public event ThreadStateChangeHandler ThreadStateChanged;
 
         /// <summary>Event raised when the execution finishes. </summary>
-        public event ExecutionFinishHandler ExecutionEnded;
+        public event ExecutionHandler ExecutionEnded;
+
+        /// <summary>Event raised when the execution starts. </summary>
+        public event ExecutionHandler ExecutionStarted;
+
+        /// <summary>Event raised when the execution resumes. </summary>
+        public event ExecutionHandler ExecutionResumed;
 
         /// <summary>ExecutionState showing whether the execution state.</summary>
         private static ExecutionState _executionState = ExecutionState.NotRunning;
@@ -362,10 +371,9 @@ namespace VisualScripting.Execution
             }
 
             if (startBlocks.Length == 0)
-            {
                 _executionState = ExecutionState.NotRunning;
-                ExecutionEnded?.Invoke();
-            }
+            else
+                ExecutionStarted?.Invoke();
         }
 
         /// <summary>
@@ -381,6 +389,7 @@ namespace VisualScripting.Execution
             // start block execution for all idle robot threads
             foreach (var handler in _executionThreads)
                 handler.StartExecutingIfIdle();
+            ExecutionResumed?.Invoke();
         }
 
         /// <summary>
