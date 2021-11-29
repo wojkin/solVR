@@ -86,6 +86,7 @@ namespace VisualScripting.Blocks.LogicBlocks.Loop
         public void Reset()
         {
             Iteration = 0;
+            IterationChanged?.Invoke(Iteration);
         }
 
         #endregion

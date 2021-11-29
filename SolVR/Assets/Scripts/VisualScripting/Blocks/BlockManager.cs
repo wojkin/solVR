@@ -38,8 +38,11 @@ namespace VisualScripting.Blocks
         /// </summary>
         private void ResetBlocks()
         {
-            IEnumerable<IResettable> blocksToReset = GetComponentsInChildren<IResettable>();
-            foreach (var block in blocksToReset) block.Reset();
+            foreach (Transform block in transform)
+            {
+                IResettable blockToReset = block.GetComponent<IResettable>();
+                blockToReset?.Reset();
+            }
         }
 
         #endregion
