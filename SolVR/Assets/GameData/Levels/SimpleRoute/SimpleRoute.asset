@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b842f5bfb48748fbbadb79711f0a2667, type: 3}
   m_Name: SimpleRoute
   m_EditorClassIdentifier: 
-  environmentName: Follow The Path
+  environmentName: Basics
   scene:
     m_AssetGUID: 43dbd935208d92a47872ef56d9a5f34d
     m_SubObjectName: 

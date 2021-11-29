@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TaskDescription
   m_EditorClassIdentifier: 
   taskName: Knock over all the boxes!
-  description: Knock over all the boxes. Try shooting and driving at the same time!
+  description: Shoot all the boxes. Try shooting and driving at the same time!
   conditions: []
   failure: []

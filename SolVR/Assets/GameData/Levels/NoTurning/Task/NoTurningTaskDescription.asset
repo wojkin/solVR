@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aeb58193e224af89fd787085df92760, type: 3}
   m_Name: NoTurningTaskDescription
   m_EditorClassIdentifier: 
-  taskName: 
-  description: Knock over all the boxes.
+  taskName: No Turning!
+  description: Shoot all the boxes. No turing allowed!
   conditions: []
   failure: []

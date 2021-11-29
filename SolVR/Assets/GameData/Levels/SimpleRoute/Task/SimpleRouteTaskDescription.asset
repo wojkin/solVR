@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aeb58193e224af89fd787085df92760, type: 3}
   m_Name: SimpleRouteTaskDescription
   m_EditorClassIdentifier: 
-  taskName: Drive through the corridor
-  description: Reach the red X.
+  taskName: Drive Through The Corridor
+  description: Reach the big red X.
   conditions:
   - {fileID: 11400000, guid: 8541e8e2d2b8aaa4d9e57a7e3b429ec2, type: 2}
   failure: []

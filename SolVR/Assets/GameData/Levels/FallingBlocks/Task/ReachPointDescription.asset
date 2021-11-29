@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb5792f0da943589bfc2fb7544f8cc3, type: 3}
   m_Name: ReachPointDescription
   m_EditorClassIdentifier: 
-  description: Reach the destination red X.
+  description: Reach the red X.
