@@ -1,12 +1,13 @@
 using UnityEngine;
 using Utils.ValueInRange;
+using VisualScripting.Blocks.Properties;
 
 namespace VisualScripting.Blocks.LogicBlocks.Loop
 {
     /// <summary>
     /// Class representing a for loop block.
     /// </summary>
-    public class ForBlock : LoopBlock
+    public class ForBlock : LoopBlock, IResettable
     {
         #region Serialized Fields
 
@@ -68,12 +69,23 @@ namespace VisualScripting.Blocks.LogicBlocks.Loop
             }
             else
             {
-                Iteration = 0;
                 nextBlock = EndBlock.Next;
             }
 
             IterationChanged?.Invoke(Iteration);
             return nextBlock;
+        }
+
+        #endregion
+
+        #region IResettable Methods
+
+        /// <summary>
+        /// Resets <see cref="Iteration"/> counter.
+        /// </summary>
+        public void Reset()
+        {
+            Iteration = 0;
         }
 
         #endregion
