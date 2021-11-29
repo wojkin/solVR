@@ -53,10 +53,6 @@ MonoBehaviour:
     m_Address: Assets/GameData/Levels/DriveRouteLevel/Tasks/TaskDescription.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 698b41adb0aabe4418caec7c51792b75
-    m_Address: Assets/GameData/Levels/DriveRouteLevel/Tasks/TaskFailures/FailureOnCrushDescription.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: fe87727da8cc7ed43aa3ec45979ac699
     m_Address: Assets/GameData/Levels/DriveRouteLevel/Tasks/TaskConditions/ReachPointDescription.asset
     m_ReadOnly: 0

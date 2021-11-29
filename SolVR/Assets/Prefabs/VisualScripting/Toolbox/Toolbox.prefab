@@ -500,6 +500,7 @@ GameObject:
   - component: {fileID: 1174479740133461400}
   - component: {fileID: 4595670480442491695}
   - component: {fileID: 5017567076692212152}
+  - component: {fileID: 8989921441308370194}
   m_Layer: 0
   m_Name: Toolbox
   m_TagString: Untagged
@@ -557,6 +558,20 @@ MonoBehaviour:
   blockDescriptions: {fileID: 1528195051855816482}
   leftBtn: {fileID: 3947091959114005356}
   rightBtn: {fileID: 944174530099495890}
+--- !u!114 &8989921441308370194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3440594660215153948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddae1ca522914e0f9dbb29825ef08bb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactables: []
+  findInteractablesInChildren: 1
 --- !u!1 &3600630872016824317
 GameObject:
   m_ObjectHideFlags: 0

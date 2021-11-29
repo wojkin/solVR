@@ -28,7 +28,7 @@ namespace Levels
         /// Task that represent what needs to be completed to complete the level.
         /// </summary>
         private Task _task;
-        
+
         /// <summary>
         /// The next level that will be accessible after completing this level.
         /// </summary>
@@ -93,7 +93,7 @@ namespace Levels
         }
 
         /// <summary>
-        /// Depends on state of the task shows result as menu or reloads the level.
+        /// Depends on state of the task shows result menu.
         /// </summary>
         private void LevelEnded()
         {
@@ -102,11 +102,8 @@ namespace Levels
                 case TaskCompletionState.Completed:
                     levelCompletionUI.ShowResult(true);
                     break;
-                case TaskCompletionState.Failed:
-                    levelCompletionUI.ShowResult(false);
-                    break;
                 default:
-                    CustomSceneManager.Instance.QueueReloadScene();
+                    levelCompletionUI.ShowResult(false);
                     break;
             }
         }
