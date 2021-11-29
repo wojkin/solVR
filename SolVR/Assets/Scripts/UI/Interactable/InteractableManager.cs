@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using UI.Interactable;
 using UnityEngine;
+using VisualScripting.Execution;
 
-namespace VisualScripting.Execution
+namespace UI.Interactable
 {
     /// <summary>
     /// Class responsible for managing <see cref="Interactable"/> objects to be not interactable while
