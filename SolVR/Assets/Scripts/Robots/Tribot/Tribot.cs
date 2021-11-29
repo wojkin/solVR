@@ -71,7 +71,7 @@ namespace Robots.Tribot
         public IEnumerator Turn(TurnDirection direction, int angle)
         {
             // calculate the target signed angle
-            var targetAngle = direction == TurnDirection.Left ? angle : -angle;
+            var targetAngle = direction == TurnDirection.Left ? -angle : angle;
             // calculate the sign for changing the angle (based on whether it should increase or decrease)
             var directionSign = frontWheel.steerAngle < targetAngle ? 1f : -1f;
 
