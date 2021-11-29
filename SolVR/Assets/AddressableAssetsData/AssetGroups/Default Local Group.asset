@@ -77,6 +77,22 @@ MonoBehaviour:
     m_Address: Assets/GameData/Levels/FallingBlocks/Task/FailureOnAnyBoxFall.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 43dbd935208d92a47872ef56d9a5f34d
+    m_Address: Assets/Scenes/SimpleRoute.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0f37b5ae4b0f2544ca5d8050e33428d8
+    m_Address: Assets/GameData/Levels/SimpleRoute/SimpleRoute.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 45061dbe68318db41bc7a88607e3c795
+    m_Address: Assets/GameData/Levels/SimpleRoute/Task/SimpleRouteTaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8541e8e2d2b8aaa4d9e57a7e3b429ec2
+    m_Address: Assets/GameData/Levels/SimpleRoute/Task/ReachPointDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9ea93900863fa0149b6d0193265d063c, type: 2}
   m_SchemaSet:
