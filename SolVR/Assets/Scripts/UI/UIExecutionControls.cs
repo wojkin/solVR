@@ -66,8 +66,8 @@ namespace UI
             pause.onClick.RemoveListener(OnPause);
             nextStep.onClick.RemoveListener(executionManager.NextStep);
             executionManager.ExecutionStarted -= OnExecutionRunning;
-            executionManager.ExecutionResumed += OnExecutionRunning;
-            executionManager.ExecutionEnded += SetAllNotInteractable;
+            executionManager.ExecutionResumed -= OnExecutionRunning;
+            executionManager.ExecutionEnded -= SetAllNotInteractable;
         }
 
         #endregion
