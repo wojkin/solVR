@@ -8,7 +8,7 @@ namespace Tasks.TaskFailures
     /// <inheritdoc/>
     /// Class fails task if any of <see cref="boxCollisionsWithGround"/> will have collision with ground.
     /// </summary>
-    public class TaskFailureOnFall : TaskFailure
+    public class TaskFailureOnFell : TaskFailure
     {
         #region Serialized Fields
 
@@ -44,7 +44,7 @@ namespace Tasks.TaskFailures
         /// Calls <see cref="TaskFailure.OnFailed"/> and
         /// unsubscribes from previously subscribed collision with ground event if task failure failed.
         /// </summary>
-        private void OnFell()
+        private void OnFell(CollisionWithGround collided)
         {
             OnFailed();
             UnsubscribeFromCollisions(); // Only one object fell is needed to fail the task.

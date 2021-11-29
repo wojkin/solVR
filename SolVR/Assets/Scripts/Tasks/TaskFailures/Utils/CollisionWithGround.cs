@@ -10,7 +10,7 @@ namespace Tasks.TaskFailures.Utils
         #region Variables
 
         /// <summary>A delegate for collide with ground.</summary>
-        public delegate void CollideWithGround();
+        public delegate void CollideWithGround(CollisionWithGround collided);
 
         /// <summary>An event invoked on object collision with ground.</summary>
         public event CollideWithGround CollidedWithGround;
@@ -25,7 +25,7 @@ namespace Tasks.TaskFailures.Utils
         /// <param name="other">The object with which gameObject collided</param>
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.tag.Equals("Ground")) CollidedWithGround?.Invoke();
+            if (other.gameObject.tag.Equals("Ground")) CollidedWithGround?.Invoke(this);
         }
 
         #endregion
