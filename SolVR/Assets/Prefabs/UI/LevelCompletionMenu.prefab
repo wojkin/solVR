@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97bad9b51844ed1a0b321431698560f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnOffset: 0.3
+  spawnOffset: 0.5
   camera: {fileID: 0}
 --- !u!225 &7484393621355749860
 CanvasGroup:
