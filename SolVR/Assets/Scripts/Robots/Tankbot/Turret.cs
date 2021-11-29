@@ -32,12 +32,21 @@ namespace Robots.Tankbot
         /// <summary>
         /// Coroutine for rotating the turret to an angle.
         /// </summary>
-        /// <param name="targetAngle">Angle the turret will be rotated to.</param>
+        /// <param name="targetAngle">Angle the turret will be rotated to. Negative values represent left direction and
+        /// positive right.</param>
         /// <returns><see cref="IEnumerator"/> required for a coroutine.</returns>
         public IEnumerator Rotate(float targetAngle)
         {
+            // convert local rotation to angle with negative and positive values for left and right
+            var localZRotation = transform.localRotation.eulerAngles.z;
+            var currentAngle = localZRotation < 180 ? localZRotation : localZRotation - 360;
+
             // calculate the sign for changing the angle (based on whether it should increase or decrease)
-            float directionSign = transform.localRotation.eulerAngles.z > targetAngle ? -1 : 1;
+            float directionSign = currentAngle > targetAngle ? -1 : 1;
+
+            // convert target angle to turret's local rotation
+            if (targetAngle < 0)
+                targetAngle += 360;
 
             // rotate the turret until it reaches the target angle
             while (Math.Abs(transform.localRotation.eulerAngles.z - targetAngle) > AngleTolerance)
