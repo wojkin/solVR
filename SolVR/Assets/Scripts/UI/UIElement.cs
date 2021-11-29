@@ -12,12 +12,18 @@ namespace UI
     {
         #region Serialized Fields
 
-        [Tooltip("UI is interactable while the game is paused")] [SerializeField]
+        /// <summary>
+        /// Boolean representing whether the object is interactable while the game is paused.
+        /// </summary>
+        [Tooltip("Boolean representing whether the object is interactable while the game is paused.")] [SerializeField]
         public bool interactableOnPause;
 
         #endregion
 
         #region Variables
+
+        /// <summary> Boolean representing whether the object is interactable.</summary>
+        private bool _interactable;
 
         /// <summary><see cref="Canvas"/> attached to the gameObject</summary>
         private Canvas _canvas;
@@ -34,6 +40,19 @@ namespace UI
             private set => _canvas.enabled = value;
         }
 
+        /// <summary>
+        /// <inheritdoc cref="_interactable"/>
+        /// </summary>
+        public bool Interactable
+        {
+            get => _interactable;
+            set
+            {
+                _interactable = value;
+                _canvasGroup.interactable = value;
+            }
+        }
+
         #endregion
 
         #region Built-in Methods
@@ -45,6 +64,7 @@ namespace UI
         {
             _canvas = GetComponent<Canvas>();
             _canvasGroup = GetComponent<CanvasGroup>();
+            _interactable = _canvasGroup.interactable;
         }
 
         /// <summary>
@@ -55,7 +75,7 @@ namespace UI
             if (!interactableOnPause) // if should be not interactable on pausing the game subscribe to events
             {
                 GameManager.OnPause += SetNotInteractive;
-                GameManager.OnResume += SetInteractable;
+                GameManager.OnResume += SetInteractive;
             }
         }
 
@@ -67,7 +87,7 @@ namespace UI
             if (!interactableOnPause) // if should be not interactable on pausing the game unsubscribe from events
             {
                 GameManager.OnPause -= SetNotInteractive;
-                GameManager.OnResume -= SetInteractable;
+                GameManager.OnResume -= SetInteractive;
             }
         }
 
@@ -76,12 +96,14 @@ namespace UI
         #region Custom Methods
 
         /// <summary>
-        /// Set UI as interactable.
+        /// Set UI canvas as interactable if UI was interactable before.
         /// </summary>
-        private void SetInteractable()
+        private void SetInteractive()
         {
-            _canvasGroup.interactable = true;
+            if (_interactable)
+                _canvasGroup.interactable = true;
         }
+
 
         /// <summary>
         /// Set UI as not interactable.
