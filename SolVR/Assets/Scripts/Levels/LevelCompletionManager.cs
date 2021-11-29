@@ -37,6 +37,8 @@ namespace Levels
         /// The next level that will be accessible after completing this level.
         /// </summary>
         private Level _nextLevel;
+        
+        public bool StoppedByUser { get; set; }
 
         #endregion
 
@@ -60,7 +62,7 @@ namespace Levels
         /// </summary>
         private void OnEnable()
         {
-            PersistentLevelData.Instance.LevelLoaded += InitializeTaskData;
+            PersistentLevelData.Instance.LevelLoaded += InitializeData;
             executionManager.ExecutionEnded += LevelEnded;
         }
 
@@ -70,7 +72,7 @@ namespace Levels
         private void OnDisable()
         {
             executionManager.ExecutionEnded -= LevelEnded;
-            if (PersistentLevelData.Instance != null) PersistentLevelData.Instance.LevelLoaded -= InitializeTaskData;
+            if (PersistentLevelData.Instance != null) PersistentLevelData.Instance.LevelLoaded -= InitializeData;
         }
 
         #endregion
@@ -89,9 +91,10 @@ namespace Levels
         /// <summary>
         /// Initialize task and add stopping the execution on task completed/failed. 
         /// </summary>
-        private void InitializeTaskData()
+        private void InitializeData()
         {
             _task = PersistentLevelData.Instance.Task;
+            StoppedByUser = false;
             _task.completed.AddListener(executionManager.StopExecution);
             _task.failed.AddListener(executionManager.StopExecution);
         }
@@ -121,7 +124,10 @@ namespace Levels
         /// </summary>
         private void LevelEnded()
         {
-            StartCoroutine(DisplayingStatus());
+            if(StoppedByUser)
+                CustomSceneManager.Instance.QueueReloadScene();
+            else
+                StartCoroutine(DisplayingStatus());
         }
 
         #endregion

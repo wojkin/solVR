@@ -243,7 +243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4713273272894336685, guid: d2874db3eb559c647adfc56147beb68c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4713273272894336685, guid: d2874db3eb559c647adfc56147beb68c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -260,7 +260,7 @@ PrefabInstance:
     - target: {fileID: 4713273272894336685, guid: d2874db3eb559c647adfc56147beb68c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2037145261}
+      objectReference: {fileID: 1092274887}
     - target: {fileID: 4713273272894336685, guid: d2874db3eb559c647adfc56147beb68c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -283,7 +283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4713273272894336685, guid: d2874db3eb559c647adfc56147beb68c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetInteractive
+      value: set_StoppedByUser
       objectReference: {fileID: 0}
     - target: {fileID: 4713273272894336685, guid: d2874db3eb559c647adfc56147beb68c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -295,8 +295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4713273272894336685, guid: d2874db3eb559c647adfc56147beb68c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UI.Interactable.InteractableOfType`1[[Controls.Interactions.Grabbable,
-        Assembly-CSharp
+      value: Levels.LevelCompletionManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4713273272894336685, guid: d2874db3eb559c647adfc56147beb68c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -654,6 +653,17 @@ PrefabInstance:
       objectReference: {fileID: 665407872}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a47e5651ec186d8448082341de50ad96, type: 3}
+--- !u!114 &1092274887 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2803388630959869933, guid: a47e5651ec186d8448082341de50ad96, type: 3}
+  m_PrefabInstance: {fileID: 1092274886}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539267a41c7fb58449f829fa8a0a12a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1506574506
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c85b29258ef40e989465e2e2aaf795a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  executionManager: {fileID: 1506574508}
 --- !u!1 &1869859673
 GameObject:
   m_ObjectHideFlags: 0
