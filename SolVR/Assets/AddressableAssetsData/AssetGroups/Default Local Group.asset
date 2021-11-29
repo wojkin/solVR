@@ -49,14 +49,6 @@ MonoBehaviour:
     m_Address: Assets/GameData/Levels/FallingBlocks/FallingBlocks.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 32a840093d712394d87dc1743273cc3c
-    m_Address: Assets/GameData/Levels/DriveRouteLevel/Tasks/TaskDescription.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: fe87727da8cc7ed43aa3ec45979ac699
-    m_Address: Assets/GameData/Levels/DriveRouteLevel/Tasks/TaskConditions/ReachPointDescription.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: acd03951cfff56e459e056b8907ef31b
     m_Address: Assets/GameData/Environments/MainMenu.asset
     m_ReadOnly: 0
@@ -123,6 +115,18 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 8e0aab8cfd07c444e908f3ed6b2a423a
     m_Address: Assets/GameData/Levels/NoTurning/Task/NoTurningTaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 21ccc901f8272294b8b8918a91643a63
+    m_Address: Assets/GameData/Levels/TargetPractice/Task/ShootLeftTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1f938bc5b041db348855b59676f93dd2
+    m_Address: Assets/GameData/Levels/TargetPractice/Task/ShootMiddleTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 004f30858671561448397845ddcb3045
+    m_Address: Assets/GameData/Levels/TargetPractice/Task/ShootRightTargetCondition.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
