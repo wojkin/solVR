@@ -11,7 +11,7 @@ namespace Robots.DevRobot
     /// <summary>
     /// A class representing a development robot, which has four wheels and can move and turn.
     /// </summary>
-    public class DevRobot : Robot, IMovable, ITurnable, ICrashable
+    public class DevRobot : Robot, IMovable, ITurnable
     {
         #region Serialized Fields
 
@@ -30,36 +30,6 @@ namespace Robots.DevRobot
 
         /// <summary>Unity event, which invokes listeners when car's crashed.</summary>
         private UnityEvent _crashed = new UnityEvent();
-
-        #endregion
-
-        #region ICrashable Methods
-
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        /// <param name="invokeOnCrush"><inheritdoc/></param>
-        public void AddListenerOnCrash(UnityAction invokeOnCrush)
-        {
-            _crashed.AddListener(invokeOnCrush);
-        }
-
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        /// <param name="invokeOnCrush"><inheritdoc/></param>
-        public void RemoveListenerOnCrash(UnityAction invokeOnCrush)
-        {
-            _crashed.RemoveListener(invokeOnCrush);
-        }
-
-        /// <summary>
-        /// <inheritdoc/> It invokes <see cref="_crashed"/> event.
-        /// </summary>
-        public void Crash()
-        {
-            _crashed.Invoke();
-        }
 
         #endregion
 
