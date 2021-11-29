@@ -129,6 +129,30 @@ MonoBehaviour:
     m_Address: Assets/GameData/Levels/TargetPractice/Task/ShootRightTargetCondition.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: c658e007ddd72364ba0f5b4716105200
+    m_Address: Assets/GameData/Levels/DrivingAndShooting/Task/ShootLeftTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 98d55ef0e6d45be418fb0cc619e82e69
+    m_Address: Assets/GameData/Levels/DrivingAndShooting/Task/ShootMiddleTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 670771982351f7c48bd48a71aa7d86e3
+    m_Address: Assets/GameData/Levels/DrivingAndShooting/Task/ShootRightTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0beacb31324ee0f46b2e3f3b6f01a88d
+    m_Address: Assets/GameData/Levels/NoTurning/Task/TaskConditions/ShootMiddleTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 62365fbad7364144bb0f7a7a072a59fd
+    m_Address: Assets/GameData/Levels/NoTurning/Task/TaskConditions/ShootRightTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3ab225d16161d3c40b47e1e1abeae6e5
+    m_Address: Assets/GameData/Levels/NoTurning/Task/TaskConditions/ShootLeftTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9ea93900863fa0149b6d0193265d063c, type: 2}
   m_SchemaSet:
