@@ -1,3 +1,4 @@
+using System.Collections;
 using Managers;
 using ScriptableObjects.Environments;
 using Tasks;
@@ -23,6 +24,9 @@ namespace Levels
         #endregion
 
         #region Variables
+
+        /// <summary> Delay after execution ended to display level completion.</summary>
+        private const float TimeDelay = 2;
 
         /// <summary>
         /// Task that represent what needs to be completed to complete the level.
@@ -93,10 +97,13 @@ namespace Levels
         }
 
         /// <summary>
-        /// Depends on state of the task shows result menu.
+        /// Coroutine for displaying level menu after time delay. 
         /// </summary>
-        private void LevelEnded()
+        IEnumerator DisplayingStatus()
         {
+            // wait for tasks to complete
+            yield return new WaitForSeconds(TimeDelay);
+
             switch (_task.State)
             {
                 case TaskCompletionState.Completed:
@@ -106,6 +113,15 @@ namespace Levels
                     levelCompletionUI.ShowResult(false);
                     break;
             }
+        }
+
+
+        /// <summary>
+        /// Depends on state of the task shows result menu after time.
+        /// </summary>
+        private void LevelEnded()
+        {
+            StartCoroutine(DisplayingStatus());
         }
 
         #endregion
