@@ -5,7 +5,7 @@ using Utils.ValueInRange;
 namespace VisualScripting.Blocks.ActionBlocks
 {
     /// <summary>
-    /// Class representing a block and creating a move command.
+    /// Class representing a move block responsible for creating <see cref="MoveCommand"/>s.
     /// </summary>
     public class MoveBlock : Block, IGetCommand
     {
@@ -55,9 +55,9 @@ namespace VisualScripting.Blocks.ActionBlocks
         #region IGetCommand Methods
 
         /// <summary>
-        /// Creates and gets a move command.
+        /// Creates and returns a new <see cref="MoveCommand"/>.
         /// </summary>
-        /// <returns>A created MoveCommand with time and torque given as constructor parameters.</returns>
+        /// <returns><see cref="MoveCommand"/> with parameters based on block configuration.</returns>
         public ICommand GetCommand()
         {
             return new MoveCommand(Time, Torque);
