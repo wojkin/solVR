@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 856a6bc9520b4d7429c82c727591ecde, type: 3}
+  m_Name: RotateWeaponBlock
+  m_EditorClassIdentifier: 
+  blockName: Rotate Turret
+  previewPrefab: {fileID: 6758259956650428482, guid: 93bf884f4286bcd499d6b550955426f9, type: 3}
+  prefab: {fileID: 9134936300516054208, guid: 31f3c563e794dda4f9b034bcabf1f101, type: 3}
