@@ -93,6 +93,18 @@ MonoBehaviour:
     m_Address: Assets/GameData/Levels/SimpleRoute/Task/ReachPointDescription.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5e2dc4bf1ea5eb847a89be964f2f66c1
+    m_Address: Assets/Scenes/TargetPractice.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 32ab77290d0e1024a9b64887e3e1d2d9
+    m_Address: Assets/GameData/Levels/TargetPractice/Task/TaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9eb3c6bbfd8274541afd220146957978
+    m_Address: Assets/GameData/Levels/TargetPractice/TargetPractice.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9ea93900863fa0149b6d0193265d063c, type: 2}
   m_SchemaSet:
