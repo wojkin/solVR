@@ -1,4 +1,5 @@
 using Robots.Commands;
+using Robots.Enums;
 using UnityEngine;
 using Utils.ValueInRange;
 
@@ -10,6 +11,10 @@ namespace VisualScripting.Blocks.ActionBlocks
     public class RotateWeaponBlock : Block, IGetCommand
     {
         #region Serialized Fields
+        
+        /// <summary>The direction in which the weapon should turn.</summary>
+        [SerializeField] [Tooltip("The direction in which the weapon should turn.")]
+        private TurnDirection direction;
 
         /// <summary>Angle to which robot's weapon should be turned.</summary>
         [SerializeField] [Tooltip("Angle to which robot's weapon should be turned.")]
@@ -18,6 +23,13 @@ namespace VisualScripting.Blocks.ActionBlocks
         #endregion
 
         #region Variables
+        
+        /// <summary><inheritdoc cref="direction"/></summary>
+        public TurnDirection Direction
+        {
+            get => direction;
+            set => direction = value;
+        }
 
         /// <summary><inheritdoc cref="angle"/></summary>
         public float Angle
@@ -45,10 +57,12 @@ namespace VisualScripting.Blocks.ActionBlocks
         /// <summary>
         /// Creates and returns a new <see cref="RotateWeaponCommand"/>.
         /// </summary>
-        /// <returns><see cref="RotateWeaponCommand"/> with parameters based on block configuration.</returns>
+        /// <returns><see cref="RotateWeaponCommand"/> with angle parameter translated from angle and direction on block
+        /// configuration.</returns>
         public ICommand GetCommand()
         {
-            return new RotateWeaponCommand(Angle);
+            float angle360 = Direction == TurnDirection.Left ? -1 * Angle : Angle;
+            return new RotateWeaponCommand(angle360);
         }
 
         #endregion

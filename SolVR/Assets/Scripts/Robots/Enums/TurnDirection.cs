@@ -1,7 +1,7 @@
 namespace Robots.Enums
 {
     /// <summary>
-    /// Enum representing direction in which a robot can turn.
+    /// Enum representing direction of turn turn.
     /// </summary>
     public enum TurnDirection
     {
