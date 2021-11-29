@@ -329,6 +329,7 @@ namespace VisualScripting.Execution
                     break;
                 case ExecutionState.Paused:
                     Resume();
+                    ExecutionResumed?.Invoke();
                     break;
             }
         }
@@ -422,7 +423,6 @@ namespace VisualScripting.Execution
             // start block execution for all idle robot threads
             foreach (var handler in _executionThreads)
                 handler.StartExecutingIfIdle();
-            ExecutionResumed?.Invoke();
         }
 
         /// <summary>
