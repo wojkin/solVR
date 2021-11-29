@@ -8,6 +8,7 @@ namespace UI.Interactable
     public class InteractableGrabbables : InteractableOfType<Grabbable>
     {
         #region Custom Methods
+
         /// <summary>
         /// <inheritdoc/>.
         /// </summary>

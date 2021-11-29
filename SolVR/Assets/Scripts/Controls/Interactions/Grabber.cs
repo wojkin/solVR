@@ -160,7 +160,7 @@ namespace Controls.Interactions
 
             _grabbedObject = null;
             _state = State.NotGrabbing;
-            
+
             stoppedGrabbing.Invoke();
         }
 

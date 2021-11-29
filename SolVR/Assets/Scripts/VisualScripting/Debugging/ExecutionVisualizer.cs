@@ -16,14 +16,12 @@ namespace VisualScripting.Debugging
         /// <summary>
         /// <see cref="ExecutionManager"/> which execution should be visualized.
         /// </summary>
-        [SerializeField]
-        private ExecutionManager executionManager;
+        [SerializeField] private ExecutionManager executionManager;
 
         /// <summary>
         /// Prefab of a debug marker.
         /// </summary>
-        [SerializeField]
-        private GameObject debugMarkerPrefab;
+        [SerializeField] private GameObject debugMarkerPrefab;
 
         #endregion
 

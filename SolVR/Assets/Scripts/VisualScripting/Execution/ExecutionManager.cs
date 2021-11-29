@@ -23,9 +23,6 @@ namespace VisualScripting.Execution
     {
         #region Variables
 
-        /// <summary>Flag showing whether coroutines executed by the execution manager should be paused.</summary>
-        private readonly Wrapper<bool> _pauseCoroutines = new Wrapper<bool>(false);
-
         /// <summary>Delegate for a thread step event.</summary>
         public delegate void ThreadStepHandler(int threadId, Block block);
 
@@ -69,6 +66,9 @@ namespace VisualScripting.Execution
         /// Flag showing whether execution should be paused after finishing executing the next or current block.
         /// </summary>
         private static bool _pauseOnNextStep;
+
+        /// <summary>Flag showing whether coroutines executed by the execution manager should be paused.</summary>
+        private readonly Wrapper<bool> _pauseCoroutines = new Wrapper<bool>(false);
 
         /// <summary>List of execution threads responsible for executing blocks which are connected together.</summary>
         private readonly List<BlockExecutionThread> _executionThreads = new List<BlockExecutionThread>();

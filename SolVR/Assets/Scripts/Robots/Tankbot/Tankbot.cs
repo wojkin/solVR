@@ -33,6 +33,7 @@ namespace Robots.Tankbot
 
         ///<summary>Speed at which wheels change steer angle in degrees per second.</summary>
         private const float TurnSpeed = 180f;
+
         ///<summary>Tolerance for reaching the target steer angle.</summary>
         private const float AngleTolerance = 0.001f;
 

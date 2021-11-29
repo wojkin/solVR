@@ -14,14 +14,15 @@ namespace UI.Interactable
         /// <summary>
         /// List of objects to trigger setting interactable.
         /// </summary>
-        [Tooltip("List of objects to trigger setting interactable.")]
-        [SerializeField] private List<T> interactables;
+        [Tooltip("List of objects to trigger setting interactable.")] [SerializeField]
+        private List<T> interactables;
 
         /// <summary>
         /// Flag representing whether the object should look for first level children with <see cref="T"/> type.
         /// </summary>
         [Tooltip("Flag representing whether the object should look for first level children with corresponding type.")]
-        [SerializeField] private bool findInteractablesInChildren;
+        [SerializeField]
+        private bool findInteractablesInChildren;
 
         #endregion
 

@@ -5,6 +5,8 @@ namespace UI.Slider
     /// </summary>
     public class SliderInFloatRange : SliderInRange<float>
     {
+        #region Custom Methods
+
         /// <summary>
         /// Invokes <see cref="SliderInRange{T}.onSliderValueChanged"/> event with float.
         /// </summary>
@@ -13,5 +15,7 @@ namespace UI.Slider
         {
             onSliderValueChanged.Invoke(value);
         }
+
+        #endregion
     }
 }

@@ -11,7 +11,7 @@ namespace VisualScripting.Blocks.ActionBlocks
     public class RotateWeaponBlock : Block, IGetCommand
     {
         #region Serialized Fields
-        
+
         /// <summary>The direction in which the weapon should turn.</summary>
         [SerializeField] [Tooltip("The direction in which the weapon should turn.")]
         private TurnDirection direction;
@@ -23,7 +23,7 @@ namespace VisualScripting.Blocks.ActionBlocks
         #endregion
 
         #region Variables
-        
+
         /// <summary><inheritdoc cref="direction"/></summary>
         public TurnDirection Direction
         {
@@ -61,7 +61,7 @@ namespace VisualScripting.Blocks.ActionBlocks
         /// configuration.</returns>
         public ICommand GetCommand()
         {
-            float angle360 = Direction == TurnDirection.Left ? -1 * Angle : Angle;
+            var angle360 = Direction == TurnDirection.Left ? -1 * Angle : Angle;
             return new RotateWeaponCommand(angle360);
         }
 

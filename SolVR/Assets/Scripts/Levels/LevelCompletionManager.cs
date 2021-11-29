@@ -37,7 +37,7 @@ namespace Levels
         /// The next level that will be accessible after completing this level.
         /// </summary>
         private Level _nextLevel;
-        
+
         public bool StoppedByUser { get; set; }
 
         #endregion
@@ -124,7 +124,7 @@ namespace Levels
         /// </summary>
         private void LevelEnded()
         {
-            if(StoppedByUser)
+            if (StoppedByUser)
                 CustomSceneManager.Instance.QueueReloadScene();
             else
                 StartCoroutine(DisplayingStatus());

@@ -13,21 +13,28 @@ namespace VisualScripting.Debugging
 
         /// <summary>Distance above the block center where the marker should appear.</summary>
         private const float VerticalMarkerOffset = 0.4f;
+
         /// <summary>Lerp factor for moving the marker between blocks.</summary>
         private const float MoveLerpFactor = 40f;
+
         /// <summary>Lerp factor for scaling the marker down before deleting it.</summary>
         private const float ScaleLerpFactor = 10f;
+
         /// <summary>Scale below which the marker doesn't need to be scaled down and can be destroyed.</summary>
         private const float DestroyScale = 0.01f;
+
         /// <summary>Color representing the running state.</summary>
         private readonly Color _runningColor = Color.green;
+
         /// <summary>Color representing the stopped state.</summary>
         private readonly Color _stoppedColor = Color.red;
 
         /// <summary>Renderer component of the marker.</summary>
         private Renderer _renderer;
+
         /// <summary>Point light of the marker.</summary>
         private Light _pointLight;
+
         /// <summary>Transform of the target block.</summary>
         private Transform _targetBlock;
 
