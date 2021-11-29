@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Levels;
 using Robots;
+using Robots.Commands.Helpers;
 using Robots.Enums;
 using UnityEngine;
+using Utils;
 using VisualScripting.Blocks;
 using VisualScripting.Blocks.ActionBlocks;
 using VisualScripting.Blocks.LogicBlocks;
@@ -20,6 +22,9 @@ namespace VisualScripting.Execution
     public class ExecutionManager : MonoBehaviour
     {
         #region Variables
+
+        /// <summary>Flag showing whether coroutines executed by the execution manager should be paused.</summary>
+        private readonly Wrapper<bool> _pauseCoroutines = new Wrapper<bool>(false);
 
         /// <summary>Delegate for a thread step event.</summary>
         public delegate void ThreadStepHandler(int threadId, Block block);
@@ -92,10 +97,11 @@ namespace VisualScripting.Execution
             /// <summary>Block which is currently being executed.</summary>
             private Block _currentBlock;
 
-            ///<summary>
-            /// Flag representing whether the thread should finish execution before executing the next block.
-            /// </summary> 
+            ///<summary>Flag representing whether the thread should finish execution before executing the next block.</summary> 
             private bool _finishExecution;
+
+            /// <summary>Variable for controlling whether executing blocks in a loop should continue.</summary>
+            private bool _executeNextBlock;
 
             #endregion
 
@@ -130,17 +136,13 @@ namespace VisualScripting.Execution
                     if (_executionState == ExecutionState.Paused)
                         yield break;
 
-                    if (!ExecuteBlock())
+                    yield return ExecuteBlock(); // execute current block
+
+                    // command execution can complete and execution can be resumed before this if statement is executed
+                    // because of this execute next block flag can't be changed outside of execute block method
+                    if (!_executeNextBlock)
                         yield break;
-
-                    // wait for next frame before continuing execution
-                    // this is so that an infinite loop of blocks doesn't freeze the game by running in a single frame
-                    yield return null;
                 }
-
-                // wait for next frame before deleting this thread
-                // this is so that deleting threads doesn't happen on the same frame as running them
-                yield return null;
 
                 // if there is no block to execute or the finish execution flag is set this thread is deleted
                 DeleteThread();
@@ -167,34 +169,43 @@ namespace VisualScripting.Execution
             }
 
             /// <summary>
-            /// Handles executing of the current block.
+            /// Coroutine for handling the execution of the current block.
             /// </summary>
             /// <remarks>
-            /// If a command block is executed, then the execution will resume, when the robot thread changes its state
-            /// to idle.
+            /// Because the method will always take at least a frame to execute there is no need to worry about
+            /// executing too many blocks in a single frame or stopping execution in the same frame it has begun
+            /// (this would remove threads from list while iterating over it).
             /// </remarks>
-            /// <returns>A bool showing whether execution should continue.</returns>
-            private bool ExecuteBlock()
+            /// <returns><see cref="IEnumerator"/> required for the coroutine.</returns>
+            private IEnumerator ExecuteBlock()
             {
-                // check if the current block is an end block
-                if (_currentBlock.GetType() == typeof(EndBlock))
+                switch (_currentBlock)
                 {
-                    Logger.Log($"Block execution thread {_threadId} reached end block. Stopping execution!");
-                    _manager.StopExecution();
-                    return true;
+                    case EndBlock _:
+                        // in case of an end block stop execution and set the execute next block flag to true so the t
+                        // thread  will be deleted during the next execution loop iteration
+                        _manager.StopExecution();
+                        _executeNextBlock = true;
+                        break;
+                    case WaitBlock waitBlock:
+                        // in case of a wait block wait and then continue execution
+                        yield return new PausableWaitForSeconds(waitBlock.Time, _manager._pauseCoroutines);
+                        AdvanceBlock();
+                        _executeNextBlock = true;
+                        break;
+                    case IGetCommand actionBlock:
+                        // in case of an action block execute the command and stop execution
+                        // the execution will resume after the command is completed
+                        var command = actionBlock.GetCommand();
+                        _manager._robot.ExecuteCommandOnThread(_threadId, command);
+                        _executeNextBlock = false;
+                        break;
+                    default:
+                        // in case of any other block continue execution
+                        AdvanceBlock();
+                        _executeNextBlock = true;
+                        break;
                 }
-
-                // check if the current block is an action block
-                if (_currentBlock is IGetCommand actionBlock)
-                {
-                    var command = actionBlock.GetCommand();
-                    _manager._robot.ExecuteCommandOnThread(_threadId, command);
-                    return false;
-                }
-
-                // if the current block wasn't an end or an action block, then set the current block to the next one
-                AdvanceBlock();
-                return true;
             }
 
             /// <summary>
@@ -322,6 +333,7 @@ namespace VisualScripting.Execution
         {
             if (_executionState == ExecutionState.Running)
             {
+                _pauseCoroutines.Value = true;
                 _executionState = ExecutionState.Paused;
                 _pauseOnNextStep = false;
                 _robot.Pause();
@@ -336,7 +348,11 @@ namespace VisualScripting.Execution
         {
             if (_executionState == ExecutionState.NotRunning) return;
             if (_executionState == ExecutionState.Paused)
+            {
                 _robot.Resume();
+                _pauseCoroutines.Value = false;
+            }
+
             _pauseOnNextStep = false;
             Physics.autoSimulation = true;
             _executionState = ExecutionState.NotRunning;
@@ -374,6 +390,7 @@ namespace VisualScripting.Execution
         /// <remarks>The execution threads start executing in the order they were initialized.</remarks>
         private void Resume()
         {
+            _pauseCoroutines.Value = false;
             _executionState = ExecutionState.Running;
             _robot.Resume();
             Physics.autoSimulation = true;
