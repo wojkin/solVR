@@ -1812,7 +1812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5672744115095748966, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
       propertyPath: m_text
-      value: Turn Block
+      value: Turn
       objectReference: {fileID: 0}
     - target: {fileID: 5672744115095748966, guid: 0a3dc498de97a144a85580c4b1afbcf8, type: 3}
       propertyPath: m_fontColor.b
