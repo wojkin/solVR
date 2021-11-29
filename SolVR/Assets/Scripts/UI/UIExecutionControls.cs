@@ -45,10 +45,12 @@ namespace UI
         private void OnEnable()
         {
             PersistentLevelData.Instance.LevelLoaded += SetOnlyRunInteractable;
-            run.onClick.AddListener(OnRun);
+            run.onClick.AddListener(executionManager.ResumeOrRun);
             stop.onClick.AddListener(OnStop);
             pause.onClick.AddListener(OnPause);
             nextStep.onClick.AddListener(executionManager.NextStep);
+            executionManager.ExecutionStarted += OnExecutionRunning;
+            executionManager.ExecutionResumed += OnExecutionRunning;
         }
 
         /// <summary>
@@ -56,11 +58,14 @@ namespace UI
         /// </summary>
         private void OnDisable()
         {
-            if (PersistentLevelData.Instance != null) PersistentLevelData.Instance.LevelLoaded -= SetOnlyRunInteractable;
-            run.onClick.RemoveListener(OnRun);
+            if (PersistentLevelData.Instance != null)
+                PersistentLevelData.Instance.LevelLoaded -= SetOnlyRunInteractable;
+            run.onClick.RemoveListener(executionManager.ResumeOrRun);
             stop.onClick.RemoveListener(OnStop);
             pause.onClick.RemoveListener(OnPause);
             nextStep.onClick.RemoveListener(executionManager.NextStep);
+            executionManager.ExecutionStarted -= OnExecutionRunning;
+            executionManager.ExecutionResumed += OnExecutionRunning;
         }
 
         #endregion
@@ -90,17 +95,15 @@ namespace UI
         }
 
         /// <summary>
-        /// On run button click action.
+        /// On running execution.
         /// Sets only stop and pause buttons to interactable.
-        /// Calls execution manager method to run or resume the script.
         /// </summary>
-        private void OnRun()
+        private void OnExecutionRunning()
         {
             run.interactable = false;
             stop.interactable = true;
             pause.interactable = true;
             nextStep.interactable = false;
-            executionManager.ResumeOrRun();
         }
 
         /// <summary>
