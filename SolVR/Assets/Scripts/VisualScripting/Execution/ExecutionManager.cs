@@ -402,7 +402,7 @@ namespace VisualScripting.Execution
                 _executionThreads.Add(thread);
             }
 
-            if (startBlocks.Any())
+            if (!startBlocks.Any())
                 _executionState = ExecutionState.NotRunning;
             else
                 ExecutionStarted?.Invoke();
