@@ -113,6 +113,18 @@ MonoBehaviour:
     m_Address: Assets/GameData/Levels/DrivingAndShooting/DrivingAndShootingLevel.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 30e6d85dd120c3342a6ae11ddbcd4d24
+    m_Address: Assets/Scenes/NoTurning.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cf40c892290804f4e92bc23f984201a0
+    m_Address: Assets/GameData/Levels/NoTurning/NoTurningLevel.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8e0aab8cfd07c444e908f3ed6b2a423a
+    m_Address: Assets/GameData/Levels/NoTurning/Task/NoTurningTaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9ea93900863fa0149b6d0193265d063c, type: 2}
   m_SchemaSet:
