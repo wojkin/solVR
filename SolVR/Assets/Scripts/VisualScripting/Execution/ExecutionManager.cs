@@ -21,10 +21,14 @@ namespace VisualScripting.Execution
     /// </summary>
     public class ExecutionManager : MonoBehaviour
     {
-        #region Variables
+        #region Serialized Fields
 
-        /// <summary>Flag showing whether coroutines executed by the execution manager should be paused.</summary>
-        private readonly Wrapper<bool> _pauseCoroutines = new Wrapper<bool>(false);
+        /// <summary>Parent transform of all blocks.</summary>
+        [SerializeField] private Transform blocksRoot;
+
+        #endregion
+
+        #region Variables
 
         /// <summary>Delegate for a thread step event.</summary>
         public delegate void ThreadStepHandler(int threadId, Block block);
@@ -69,6 +73,9 @@ namespace VisualScripting.Execution
         /// Flag showing whether execution should be paused after finishing executing the next or current block.
         /// </summary>
         private static bool _pauseOnNextStep;
+
+        /// <summary>Flag showing whether coroutines executed by the execution manager should be paused.</summary>
+        private readonly Wrapper<bool> _pauseCoroutines = new Wrapper<bool>(false);
 
         /// <summary>List of execution threads responsible for executing blocks which are connected together.</summary>
         private readonly List<BlockExecutionThread> _executionThreads = new List<BlockExecutionThread>();
@@ -376,7 +383,16 @@ namespace VisualScripting.Execution
         private void Run()
         {
             _executionState = ExecutionState.Running;
-            var startBlocks = FindObjectsOfType<StartBlock>(); // find all start block components in the scene
+
+            // find all start blocks under the blocks root transform
+            var startBlocks = new List<StartBlock>();
+
+            foreach (Transform child in blocksRoot)
+            {
+                var startBlock = child.GetComponent<StartBlock>();
+                if (startBlock != null)
+                    startBlocks.Add(startBlock);
+            }
 
             // create an execution thread and initialize execution for each of them
             foreach (var startBlock in startBlocks)
@@ -386,7 +402,7 @@ namespace VisualScripting.Execution
                 _executionThreads.Add(thread);
             }
 
-            if (startBlocks.Length == 0)
+            if (startBlocks.Any())
                 _executionState = ExecutionState.NotRunning;
             else
                 ExecutionStarted?.Invoke();
