@@ -30,7 +30,10 @@ namespace Controls.Interactions
         private bool _isGrabbed;
 
         /// <summary>Property for checking whether the object can be grabbed.</summary>
-        public virtual bool CanBeGrabbed => !_isGrabbed;
+        public virtual bool CanBeGrabbed => !_isGrabbed && Interactable;
+
+        /// <summary>Flag representing whether the object is interactable.</summary>
+        public bool Interactable { get; set; } = true;
 
         #endregion
 
