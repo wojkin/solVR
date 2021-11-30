@@ -257,20 +257,6 @@ namespace Robots
             _threads[threadId].ExecuteCommand(command);
         }
 
-        /// <summary>
-        /// Executes a command.
-        /// </summary>
-        /// <remarks>
-        /// Start's a coroutine executing a command independently of other commands. If a command is executed using this
-        /// function then it's state of execution will be unknown.
-        /// </remarks>
-        /// <param name="command">The command which will be executed.</param>
-        /// <returns>IEnumerator required for a coroutine.</returns>
-        public void ExecuteCommandInBackground(ICommand command)
-        {
-            StartCoroutine(command.Execute(this));
-        }
-
         #endregion
     }
 }
