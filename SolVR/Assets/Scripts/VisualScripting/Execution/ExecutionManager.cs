@@ -119,6 +119,9 @@ namespace VisualScripting.Execution
             /// <summary>Variable for controlling whether executing blocks in a loop should continue.</summary>
             private bool _executeNextBlock;
 
+            /// <summary>Flag showing whether the thread is waiting because of executing a wait block.</summary>
+            private bool _waiting;
+
             #endregion
 
             #region Custom Methods
@@ -205,7 +208,9 @@ namespace VisualScripting.Execution
                         break;
                     case WaitBlock waitBlock:
                         // in case of a wait block wait and then continue execution
+                        _waiting = true;
                         yield return new PausableWaitForSeconds(waitBlock.Time, _manager._pauseCoroutines);
+                        _waiting = false;
                         AdvanceBlock();
                         _executeNextBlock = true;
                         break;
@@ -266,7 +271,8 @@ namespace VisualScripting.Execution
             internal void StartExecutingIfIdle()
             {
                 // if the robot thread is not idle it means that it still has a command to execute
-                if (_manager._robot.GetThreadState(_threadId) == ThreadState.Idle)
+                // don't start execution if it's already running, but waiting because of a wait block
+                if (_manager._robot.GetThreadState(_threadId) == ThreadState.Idle && !_waiting)
                     _manager.StartCoroutine(ExecuteBlocks());
             }
 
