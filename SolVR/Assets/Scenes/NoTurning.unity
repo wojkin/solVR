@@ -508,7 +508,10 @@ MonoBehaviour:
   failed:
     m_PersistentCalls:
       m_Calls: []
-  conditions: []
+  conditions:
+  - {fileID: 2114733401}
+  - {fileID: 1083297817}
+  - {fileID: 563913895}
   failures: []
   description: {fileID: 11400000, guid: 8e0aab8cfd07c444e908f3ed6b2a423a, type: 2}
 --- !u!4 &1258402113
