@@ -28,7 +28,7 @@ namespace Controls.Interactions
         private const float LerpDistanceThreshold = 0.01f;
 
         /// <summary>Radius around the grabber in which objects can be grabbed.</summary>
-        private const float GrabRadius = 0.1f;
+        private const float GrabRadius = 0.07f;
 
         /// <summary>Multiplier for lerping position and rotation of the grabbed object.</summary>
         private const float LerpFactor = 20f;
