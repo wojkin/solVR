@@ -124,7 +124,7 @@ namespace VisualScripting.Toolbox
         /// <param name="blockToReplace">Block in the pool to replace.</param>
         private void InitializeBlock(BlockData data, GameObject blockToReplace = null)
         {
-            // instantiate the block toolbox prefab 
+            // instantiate the block preview prefab 
             var instantiatedBlock = Instantiate(data.PreviewPrefab, gameObject.transform);
 
             // set the scale so the block fits in the toolbox

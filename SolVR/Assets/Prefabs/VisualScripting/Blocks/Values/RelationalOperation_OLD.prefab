@@ -760,7 +760,7 @@ MonoBehaviour:
       - m_Target: {fileID: 3219955654334655852}
         m_TargetAssemblyTypeName: VisualCoding.Values.BooleanValues.BooleanValueRelationalOperators,
           Assembly-CSharp
-        m_MethodName: set_Operation
+        m_MethodName: set_Operator
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

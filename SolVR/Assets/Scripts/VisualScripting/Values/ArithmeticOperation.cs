@@ -1,19 +1,18 @@
 using System;
 using UnityEngine;
-using VisualScripting.Values.Enums;
 
 namespace VisualScripting.Values
 {
     /// <summary>
     /// Class representing value as a result of a arithmetic operation on two values.
     /// </summary>
-    public class TwoNumericValueArithmeticOperation : NumericValue
+    public class ArithmeticOperation : NumericValue
     {
         #region Serialized Fields
 
         /// <summary>Arithmetic operation performed on right and left values.</summary>
         [SerializeField] [Tooltip("Arithmetic operation performed on right and left values.")]
-        private ArithmeticOperation operation;
+        private Enums.ArithmeticOperator @operator;
 
         /// <summary>A value that is on the left of the operand.</summary>
         [SerializeField] [Tooltip("A value that is on the left of the operand.")]
@@ -27,11 +26,11 @@ namespace VisualScripting.Values
 
         #region Variables
 
-        /// <summary><inheritdoc cref="operation"/></summary>
-        public ArithmeticOperation Operation
+        /// <summary><inheritdoc cref="operator"/></summary>
+        public Enums.ArithmeticOperator Operator
         {
-            get => operation;
-            set => operation = value;
+            get => @operator;
+            set => @operator = value;
         }
 
         /// <summary><inheritdoc cref="left"/></summary>
@@ -56,15 +55,15 @@ namespace VisualScripting.Values
         /// Calculates and returns value that is a result of arithmetic operation.
         /// </summary>
         /// <returns>A result of arithmetic operation on left and right values.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Throws exception when <see cref="Operation"/> is not handled.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Throws exception when <see cref="Operator"/> is not handled.</exception>
         public override float GetValue()
         {
-            return Operation switch
+            return Operator switch
             {
-                ArithmeticOperation.Addition => Left.GetValue() + Right.GetValue(),
-                ArithmeticOperation.Difference => Left.GetValue() - Right.GetValue(),
-                ArithmeticOperation.Multiplication => Left.GetValue() * Right.GetValue(),
-                _ => throw new ArgumentOutOfRangeException("Operation", "This operation is not handled.")
+                Enums.ArithmeticOperator.Addition => left.GetValue() + right.GetValue(),
+                Enums.ArithmeticOperator.Difference => left.GetValue() - right.GetValue(),
+                Enums.ArithmeticOperator.Multiplication => left.GetValue() * right.GetValue(),
+                _ => throw new ArgumentOutOfRangeException(Operator.ToString(), "This operation is not handled.")
             };
         }
 

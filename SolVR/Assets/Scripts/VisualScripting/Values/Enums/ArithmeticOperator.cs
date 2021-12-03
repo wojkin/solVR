@@ -5,7 +5,7 @@ namespace VisualScripting.Values.Enums
     /// <summary>
     /// Enum that represents an arithmetic operation type. 
     /// </summary>
-    public enum ArithmeticOperation
+    public enum ArithmeticOperator
     {
         Addition,
         Difference,
@@ -13,7 +13,7 @@ namespace VisualScripting.Values.Enums
     }
 
     /// <summary>
-    /// Extension to <see cref="ArithmeticOperation"/> enum to get matching operators to operations.
+    /// Extension to <see cref="ArithmeticOperator"/> enum to get matching operators to operations.
     /// </summary>
     public static class ArithmeticOperationExtensions
     {
@@ -22,17 +22,17 @@ namespace VisualScripting.Values.Enums
         /// <summary>
         /// Returns arithmetic operators based on an operation.
         /// </summary>
-        /// <param name="operation">Arithmetic operation that is matched to operator.</param>
+        /// <param name="operatorn">Arithmetic operation that is matched to operator.</param>
         /// <returns>A string that is an operator that represents arithmetic operation.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Exception throws then operation don't have any operator matched.</exception>
-        public static string GetArithmeticOperator(this ArithmeticOperation operation)
+        public static string GetArithmeticOperator(this ArithmeticOperator @operator)
         {
-            return operation switch
+            return @operator switch
             {
-                ArithmeticOperation.Addition => "+",
-                ArithmeticOperation.Difference => "-",
-                ArithmeticOperation.Multiplication => "*",
-                _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
+                ArithmeticOperator.Addition => "+",
+                ArithmeticOperator.Difference => "-",
+                ArithmeticOperator.Multiplication => "*",
+                _ => throw new ArgumentOutOfRangeException(nameof(@operator), @operator, null)
             };
         }
 
