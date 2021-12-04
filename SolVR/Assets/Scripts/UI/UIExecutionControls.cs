@@ -130,7 +130,7 @@ namespace UI
             stop.interactable = false;
             run.interactable = true;
             nextStep.interactable = true;
-            executionManager.Pause();
+            executionManager.PauseExecution();
         }
 
         #endregion
