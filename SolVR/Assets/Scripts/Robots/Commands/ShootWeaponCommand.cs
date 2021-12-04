@@ -15,7 +15,7 @@ namespace Robots.Commands
         /// </summary>
         /// <param name="robot">The robot, which weapon will be shot.</param>
         /// <returns><see cref="IEnumerator"/> required for a coroutine.</returns>
-        protected override IEnumerator Execute(IShootableWeapon robot)
+        protected override IEnumerator TypedExecute(IShootableWeapon robot)
         {
             yield return robot.ShootWeapon();
         }

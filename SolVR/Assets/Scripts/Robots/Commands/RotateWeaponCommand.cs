@@ -31,7 +31,7 @@ namespace Robots.Commands
         /// </summary>
         /// <param name="robot">The robot, which weapon will be rotated.</param>
         /// <returns><see cref="IEnumerator"/> required for a coroutine.</returns>
-        protected override IEnumerator Execute(IRotatableWeapon robot)
+        protected override IEnumerator TypedExecute(IRotatableWeapon robot)
         {
             yield return robot.RotateWeapon(_angle);
         }

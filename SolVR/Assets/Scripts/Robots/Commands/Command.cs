@@ -19,7 +19,7 @@ namespace Robots.Commands
         /// </summary>
         /// <param name="robot">The robot on which the command will be executed.</param>
         /// <returns>IEnumerator required for a coroutine.</returns>
-        protected abstract IEnumerator Execute(T robot);
+        protected abstract IEnumerator TypedExecute(T robot);
 
         #endregion
 
@@ -32,12 +32,12 @@ namespace Robots.Commands
         /// <returns>IEnumerator required for a coroutine.</returns>
         /// <exception cref="IncompatibleCommandException">An exception thrown when the robot can't execute the command
         /// (it doesn't implement the required interface).</exception>
-        IEnumerator ICommand.Execute(ICommandable robot)
+        public IEnumerator Execute(ICommandable robot)
         {
             if (robot is T typedRobot)
             {
                 // if the robot can execute this command a function from a derived command class is executed
-                yield return Execute(typedRobot);
+                yield return TypedExecute(typedRobot);
             }
             else
             {

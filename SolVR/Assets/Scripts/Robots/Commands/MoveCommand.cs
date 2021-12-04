@@ -38,7 +38,7 @@ namespace Robots.Commands
         /// </summary>
         /// <param name="robot">The robot, which will be moved.</param>
         /// <returns>IEnumerator required for a coroutine.</returns>
-        protected override IEnumerator Execute(IMovable robot)
+        protected override IEnumerator TypedExecute(IMovable robot)
         {
             Logger.Log($"Started moving for {_time}s at {_torque}N⋅m.");
             yield return robot.Move(_time, _torque);

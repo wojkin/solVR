@@ -38,7 +38,7 @@ namespace Robots.Commands
         /// </summary>
         /// <param name="robot">The robot, which wheels will be turned.</param>
         /// <returns>IEnumerator required for a coroutine.</returns>
-        protected override IEnumerator Execute(ITurnable robot)
+        protected override IEnumerator TypedExecute(ITurnable robot)
         {
             yield return robot.Turn(_direction, _angle);
             Logger.Log($"Wheels turned {_angle} degrees {_direction.ToString()}.");
