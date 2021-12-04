@@ -7,25 +7,6 @@ namespace Robots.Tankbot
     /// </summary>
     public class Bullet : MonoBehaviour
     {
-        #region Variables
-
-        /// <summary>Time after which the bullet will be destroyed.</summary>
-        private const float TimeInScene = 10f;
-
-        #endregion
-
-        #region Built-in Methods
-
-        /// <summary>
-        /// Initiates the destruction of the bullet.
-        /// </summary>
-        private void Awake()
-        {
-            Destroy(gameObject, TimeInScene);
-        }
-
-        #endregion
-
         #region Custom Methods
 
         /// <summary>
