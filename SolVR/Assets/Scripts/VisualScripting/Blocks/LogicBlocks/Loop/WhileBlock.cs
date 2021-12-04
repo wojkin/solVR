@@ -36,7 +36,7 @@ namespace VisualScripting.Blocks.LogicBlocks.Loop
         /// <returns><inheritdoc /> <see cref="Block"/> is determine by checking the condition.</returns>
         public override Block NextBlock()
         {
-            return Condition.GetValue() ? Next : EndBlock.Next;
+            return Condition.GetValue() ? Next : LoopEnd.Next;
         }
 
         #endregion

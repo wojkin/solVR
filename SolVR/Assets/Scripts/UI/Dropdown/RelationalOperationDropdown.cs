@@ -5,9 +5,9 @@ using VisualScripting.Values.Enums;
 namespace UI.Dropdown
 {
     /// <summary>
-    /// Class handling dropdown that corresponds to a <see cref="RelationalOperation"/> enum.
+    /// Class handling dropdown that corresponds to a <see cref="RelationalOperator"/> enum.
     /// </summary>
-    public class RelationalOperationDropdown : EnumDropdown<RelationalOperation>
+    public class RelationalOperationDropdown : EnumDropdown<RelationalOperator>
     {
         #region Custom Methods
 
@@ -16,9 +16,9 @@ namespace UI.Dropdown
         /// </summary>
         protected override void PopulateDropdown()
         {
-            var enumValues = Enum.GetValues(typeof(RelationalOperation));
+            var enumValues = Enum.GetValues(typeof(RelationalOperator));
             var operators = new List<string>();
-            foreach (RelationalOperation enumValue in enumValues) operators.Add(enumValue.GetRelationalOperator());
+            foreach (RelationalOperator enumValue in enumValues) operators.Add(enumValue.GetRelationalOperator());
             dropdown.AddOptions(operators);
         }
 

@@ -34,7 +34,7 @@ namespace VisualScripting.Blocks.LogicBlocks.Loop
 
         /// <summary>An iteration counter showing how many iterations of the loop were completed. If the loop is not
         /// running the iteration count is zero.</summary>
-        private int Iteration { get; set; }
+        private int _iteration;
 
         #endregion
 
@@ -60,20 +60,11 @@ namespace VisualScripting.Blocks.LogicBlocks.Loop
         /// been reached.</returns>
         public override Block NextBlock()
         {
-            Block nextBlock;
+            if (_iteration >= NumberOfLoops) return LoopEnd.Next;
+            _iteration++;
+            IterationChanged?.Invoke(_iteration);
+            return Next;
 
-            if (Iteration < NumberOfLoops)
-            {
-                Iteration++;
-                nextBlock = Next;
-            }
-            else
-            {
-                nextBlock = EndBlock.Next;
-            }
-
-            IterationChanged?.Invoke(Iteration);
-            return nextBlock;
         }
 
         #endregion
@@ -81,12 +72,12 @@ namespace VisualScripting.Blocks.LogicBlocks.Loop
         #region IResettable Methods
 
         /// <summary>
-        /// Resets <see cref="Iteration"/> counter.
+        /// Resets <see cref="_iteration"/> counter.
         /// </summary>
         public void Reset()
         {
-            Iteration = 0;
-            IterationChanged?.Invoke(Iteration);
+            _iteration = 0;
+            IterationChanged?.Invoke(_iteration);
         }
 
         #endregion

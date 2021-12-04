@@ -1,19 +1,18 @@
 using System;
 using UnityEngine;
-using VisualScripting.Values.Enums;
 
 namespace VisualScripting.Values.BooleanValues
 {
     /// <summary>
     /// Class representing boolean value as a result of a logic operation on two boolean values.
     /// </summary>
-    public class TwoBooleanValueLogicOperation : BooleanValue
+    public class LogicOperation : BooleanValue
     {
         #region Serialized Fields
 
         /// <summary>A logic operation performed on right and left boolean values.</summary>
         [SerializeField] [Tooltip("A logic operation performed on right and left boolean values.")]
-        private LogicOperation operation;
+        private Enums.LogicOperator @operator;
 
         /// <summary> Boolean value that is on the left of the logic operand.</summary>
         [SerializeField] [Tooltip("Boolean value that is on the left of the logic operand.")]
@@ -27,11 +26,11 @@ namespace VisualScripting.Values.BooleanValues
 
         #region Variables
 
-        /// <summary><inheritdoc cref="operation"/></summary>
-        public LogicOperation Operation
+        /// <summary><inheritdoc cref="operator"/></summary>
+        public Enums.LogicOperator Operator
         {
-            get => operation;
-            set => operation = value;
+            get => @operator;
+            set => @operator = value;
         }
 
         /// <summary><inheritdoc cref="left"/></summary>
@@ -56,15 +55,15 @@ namespace VisualScripting.Values.BooleanValues
         /// Check and returns boolean that is a result of logic operation.
         /// </summary>
         /// <returns>A result of logic operation on left and right boolean values.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Throws exception when <see cref="Operation"/> is not handled.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Throws exception when <see cref="Operator"/> is not handled.</exception>
         public override bool GetValue()
         {
-            return Operation switch
+            return Operator switch
             {
-                LogicOperation.And => Left.GetValue() && Right.GetValue(),
-                LogicOperation.Or => Left.GetValue() || Right.GetValue(),
-                LogicOperation.Equal => Left.GetValue() == Right.GetValue(),
-                _ => throw new ArgumentOutOfRangeException()
+                Enums.LogicOperator.And => left.GetValue() && right.GetValue(),
+                Enums.LogicOperator.Or => left.GetValue() || right.GetValue(),
+                Enums.LogicOperator.Equal => left.GetValue() == right.GetValue(),
+                _ => throw new ArgumentOutOfRangeException(Operator.ToString(), "This operation is not handled.")
             };
         }
 

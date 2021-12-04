@@ -5,7 +5,7 @@ namespace VisualScripting.Values.Enums
     /// <summary>
     /// Enum that represents a relational operation type. 
     /// </summary>
-    public enum RelationalOperation
+    public enum RelationalOperator
     {
         Equal,
         LessThan,
@@ -13,26 +13,26 @@ namespace VisualScripting.Values.Enums
     }
 
     /// <summary>
-    /// Extension to <see cref="RelationalOperation"/> enum to get matching operators to operations.
+    /// Extension to <see cref="RelationalOperator"/> enum to get matching operators to operations.
     /// </summary>
-    public static class RelationalOperationExtensions
+    public static class RelationalOperatorExtensions
     {
         #region Custom Methods
 
         /// <summary>
         /// Returns relational operators based on an operation.
         /// </summary>
-        /// <param name="operation">Relational operation that is matched to operator.</param>
+        /// <param name="operatorn">Relational operation that is matched to operator.</param>
         /// <returns>A string that is an operator that represents relational operation.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Exception throws then operation don't have any operator matched.</exception>
-        public static string GetRelationalOperator(this RelationalOperation operation)
+        public static string GetRelationalOperator(this RelationalOperator @operator)
         {
-            return operation switch
+            return @operator switch
             {
-                RelationalOperation.Equal => "==",
-                RelationalOperation.LessThan => "<",
-                RelationalOperation.GreaterThan => ">",
-                _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
+                RelationalOperator.Equal => "==",
+                RelationalOperator.LessThan => "<",
+                RelationalOperator.GreaterThan => ">",
+                _ => throw new ArgumentOutOfRangeException(nameof(@operator), @operator, null)
             };
         }
 
