@@ -14,7 +14,7 @@ namespace Robots
     /// <summary>
     /// Base class for all robots, which can execute commands.
     /// </summary>
-    public class Robot : MonoBehaviour, ICommandable
+    public abstract class Robot : MonoBehaviour, ICommandable
     {
         #region Variables
 
