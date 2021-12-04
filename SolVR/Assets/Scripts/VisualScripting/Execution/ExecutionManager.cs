@@ -10,6 +10,7 @@ using Utils;
 using VisualScripting.Blocks;
 using VisualScripting.Blocks.ActionBlocks;
 using VisualScripting.Blocks.LogicBlocks;
+using VisualScripting.Blocks.SpecialBlocks;
 using VisualScripting.Execution.Enums;
 using Logger = DeveloperTools.Logger;
 

@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using Utils.ValueInRange;
 
-namespace VisualScripting.Blocks.LogicBlocks
+namespace VisualScripting.Blocks.SpecialBlocks
 {
+    /// <summary>
+    /// Class representing a block that pauses thread execution for a given time.
+    /// </summary>
     public class WaitBlock : Block
     {
         #region Serialized Fields
