@@ -102,7 +102,7 @@ namespace Robots
                 }
                 else
                 {
-                    // handler which will be called when the other thread finishes execution
+                    // handler which will be called when the blocking thread finishes execution
                     void FinishedExecutingHandler(ThreadState state)
                     {
                         // check if the thread has finished execution
