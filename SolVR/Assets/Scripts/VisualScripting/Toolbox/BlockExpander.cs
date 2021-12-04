@@ -4,6 +4,9 @@ using VisualScripting.Blocks;
 
 namespace VisualScripting.Toolbox
 {
+    /// <summary>
+    /// Component for expanding a block after spawning it from toolbox. 
+    /// </summary>
     public class BlockExpander : MonoBehaviour
     {
         #region Variables

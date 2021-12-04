@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Robots.Tankbot
 {
+    /// <summary>
+    /// Class representing a turret, which can rotate and shoot.
+    /// </summary>
     public class Turret : MonoBehaviour
     {
         #region Serialized Fields
