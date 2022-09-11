@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 4b1652a4894b1c34da78ec89ba29631e
+  m_SerializeEntries:
+  - m_GUID: 612fe6fab491ddb41a76a07726f58b43
+    m_Address: Assets/Scenes/DevScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ff1f098a30e1ebe4da4972fbff80f9dd
+    m_Address: Assets/Scenes/MainMenu.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b745d9ea977a2bc4abdb0c0899699f27
+    m_Address: Assets/GameData/Levels/DevLevel.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 701e5757dd60e2147851752ac5d8e23c
+    m_Address: Assets/Scenes/TestLevel.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a1bfe2728eddbfc4d9a771abe7a28656
+    m_Address: _levelBase
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ebf90795702b7a144aa2a9f6542bedca
+    m_Address: Assets/GameData/Levels/TestLevel.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: af68129dbfd41a14c8e1fcd754cad0fb
+    m_Address: Assets/Scenes/FallingBlocks.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 55d47d118c018844084178dfe4f92dcb
+    m_Address: Assets/GameData/Levels/FallingBlocks/FallingBlocks.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: acd03951cfff56e459e056b8907ef31b
+    m_Address: Assets/GameData/Environments/MainMenu.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1907692f9b2ef4a439f4f74cf4c79c75
+    m_Address: Assets/GameData/Levels/FallingBlocks/Task/TaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c84d0bac8003836428171a4396deae44
+    m_Address: Assets/GameData/Levels/FallingBlocks/Task/ReachPointDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 14d399238e260224c935e41386bbd4d7
+    m_Address: Assets/GameData/Levels/FallingBlocks/Task/FailureOnAnyBoxFall.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 43dbd935208d92a47872ef56d9a5f34d
+    m_Address: Assets/Scenes/SimpleRoute.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0f37b5ae4b0f2544ca5d8050e33428d8
+    m_Address: Assets/GameData/Levels/SimpleRoute/SimpleRoute.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 45061dbe68318db41bc7a88607e3c795
+    m_Address: Assets/GameData/Levels/SimpleRoute/Task/SimpleRouteTaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8541e8e2d2b8aaa4d9e57a7e3b429ec2
+    m_Address: Assets/GameData/Levels/SimpleRoute/Task/ReachPointDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5e2dc4bf1ea5eb847a89be964f2f66c1
+    m_Address: Assets/Scenes/TargetPractice.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 32ab77290d0e1024a9b64887e3e1d2d9
+    m_Address: Assets/GameData/Levels/TargetPractice/Task/TaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9eb3c6bbfd8274541afd220146957978
+    m_Address: Assets/GameData/Levels/TargetPractice/TargetPractice.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 275fbcc87adde194a94963ab209eef19
+    m_Address: Assets/Scenes/DrivingAndShooting.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f407ca50576da7e4dae5e2f7da09d842
+    m_Address: Assets/GameData/Levels/DrivingAndShooting/Task/TaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 86f42f719ef142e4c9a31165cf9853f9
+    m_Address: Assets/GameData/Levels/DrivingAndShooting/DrivingAndShootingLevel.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 30e6d85dd120c3342a6ae11ddbcd4d24
+    m_Address: Assets/Scenes/NoTurning.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cf40c892290804f4e92bc23f984201a0
+    m_Address: Assets/GameData/Levels/NoTurning/NoTurningLevel.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8e0aab8cfd07c444e908f3ed6b2a423a
+    m_Address: Assets/GameData/Levels/NoTurning/Task/NoTurningTaskDescription.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 21ccc901f8272294b8b8918a91643a63
+    m_Address: Assets/GameData/Levels/TargetPractice/Task/ShootLeftTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1f938bc5b041db348855b59676f93dd2
+    m_Address: Assets/GameData/Levels/TargetPractice/Task/ShootMiddleTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 004f30858671561448397845ddcb3045
+    m_Address: Assets/GameData/Levels/TargetPractice/Task/ShootRightTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c658e007ddd72364ba0f5b4716105200
+    m_Address: Assets/GameData/Levels/DrivingAndShooting/Task/ShootLeftTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 98d55ef0e6d45be418fb0cc619e82e69
+    m_Address: Assets/GameData/Levels/DrivingAndShooting/Task/ShootMiddleTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 670771982351f7c48bd48a71aa7d86e3
+    m_Address: Assets/GameData/Levels/DrivingAndShooting/Task/ShootRightTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0beacb31324ee0f46b2e3f3b6f01a88d
+    m_Address: Assets/GameData/Levels/NoTurning/Task/TaskConditions/ShootMiddleTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 62365fbad7364144bb0f7a7a072a59fd
+    m_Address: Assets/GameData/Levels/NoTurning/Task/TaskConditions/ShootRightTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3ab225d16161d3c40b47e1e1abeae6e5
+    m_Address: Assets/GameData/Levels/NoTurning/Task/TaskConditions/ShootLeftTargetCondition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9ea93900863fa0149b6d0193265d063c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ba1ad87ccf9051245ab6029120121b32, type: 2}
+    - {fileID: 11400000, guid: 0d30af372c7bbf04291744e3596dfcf3, type: 2}

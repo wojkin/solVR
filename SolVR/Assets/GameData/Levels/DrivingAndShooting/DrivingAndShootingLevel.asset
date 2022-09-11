@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b842f5bfb48748fbbadb79711f0a2667, type: 3}
+  m_Name: DrivingAndShootingLevel
+  m_EditorClassIdentifier: 
+  environmentName: Drive And Shoot
+  scene:
+    m_AssetGUID: 275fbcc87adde194a94963ab209eef19
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  blocks:
+  - {fileID: 11400000, guid: f94060c74ab85a54db65036c2bfcd35a, type: 2}
+  - {fileID: 11400000, guid: 965d212654088504ab80b9ba4a626a59, type: 2}
+  - {fileID: 11400000, guid: 8af0538e36d8af443985fff586a88193, type: 2}
+  - {fileID: 11400000, guid: 545e397553290c24680b4b3b5f5ed300, type: 2}
+  - {fileID: 11400000, guid: d604bf63db3799c498025132454594a2, type: 2}
+  - {fileID: 11400000, guid: 0b6258dc5aa336b4a94c679f52c85b41, type: 2}
+  - {fileID: 11400000, guid: 0f67166a489374943b9273d83551a2aa, type: 2}
+  - {fileID: 11400000, guid: bae2affcaf2d30e41a3bf37aa11c0809, type: 2}
+  nextLevel: {fileID: 0}
